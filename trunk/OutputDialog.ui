@@ -1,0 +1,895 @@
+<ui version="4.0" >
+ <author>Øystein Monsrud Arneson</author>
+ <class>OutputDialog</class>
+ <widget class="QDialog" name="OutputDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1089</width>
+    <height>446</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Output</string>
+  </property>
+  <layout class="QGridLayout" >
+   <property name="margin" >
+    <number>9</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item row="4" column="0" colspan="2" >
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" >
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="prefixLineEdit" />
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0" colspan="2" >
+    <widget class="QToolBox" name="toolBox" >
+     <property name="currentIndex" >
+      <number>5</number>
+     </property>
+     <widget class="QWidget" name="seismicPage" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>372</width>
+        <height>82</height>
+       </rect>
+      </property>
+      <attribute name="label" >
+       <string>Seismic output</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item row="0" column="0" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" >
+           <property name="margin" >
+            <number>0</number>
+           </property>
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="domainLabel" >
+             <property name="text" >
+              <string>Domain of output</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="seismicCubeLabel" >
+             <property name="text" >
+              <string>Seismic cubes</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" >
+           <property name="margin" >
+            <number>0</number>
+           </property>
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="domainDepthCheckBox" >
+               <property name="text" >
+                <string>Depth</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="domainTimeCheckBox" >
+               <property name="text" >
+                <string>Time</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="seismicOriginalCheckBox" >
+               <property name="text" >
+                <string>Original</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="seismicSyntheticCheckBox" >
+               <property name="text" >
+                <string>Synthetic</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="seismicResidualCheckBox" >
+               <property name="text" >
+                <string>Residual</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="elasticParametersPage" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>287</width>
+        <height>178</height>
+       </rect>
+      </property>
+      <attribute name="label" >
+       <string>Elastic parameters</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item row="4" column="1" >
+        <widget class="QCheckBox" name="muRhoCheckBox" >
+         <property name="text" >
+          <string>μρ</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QCheckBox" name="vpVsRatioCheckBox" >
+         <property name="text" >
+          <string>Vp/Vs ratio</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QCheckBox" name="lameLamCheckBox" >
+         <property name="toolTip" >
+          <string>Lamé's first parameter</string>
+         </property>
+         <property name="text" >
+          <string>λ</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QCheckBox" name="aiCheckBox" >
+         <property name="toolTip" >
+          <string>Acoustic Impedance</string>
+         </property>
+         <property name="text" >
+          <string>AI</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QCheckBox" name="vsCheckBox" >
+         <property name="text" >
+          <string>Vs</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" >
+        <widget class="QCheckBox" name="vpCheckBox" >
+         <property name="text" >
+          <string>Vp</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QCheckBox" name="poissonRatioCheckBox" >
+         <property name="text" >
+          <string>Poisson ratio</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" >
+        <widget class="QCheckBox" name="densityCheckBox" >
+         <property name="text" >
+          <string>Density</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QCheckBox" name="siCheckBox" >
+         <property name="toolTip" >
+          <string>Shear impedance</string>
+         </property>
+         <property name="text" >
+          <string>SI</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" >
+        <widget class="QCheckBox" name="lambdaRhoCheckBox" >
+         <property name="text" >
+          <string>λρ</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <widget class="QCheckBox" name="lameMuCheckBox" >
+         <property name="toolTip" >
+          <string>Shear modulus</string>
+         </property>
+         <property name="text" >
+          <string>μ</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="backgroundPage" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>492</width>
+        <height>94</height>
+       </rect>
+      </property>
+      <attribute name="label" >
+       <string>Background</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item row="1" column="0" >
+        <widget class="QCheckBox" name="extraGridsCheckBox" >
+         <property name="text" >
+          <string>Estimated background files, extra grids</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" >
+        <widget class="QCheckBox" name="backgroundCheckBox" >
+         <property name="text" >
+          <string>Background</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QCheckBox" name="backgroundTrendCheckBox" >
+         <property name="text" >
+          <string>Background trend</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QCheckBox" name="backgroundTrend1DCheckBox" >
+         <property name="text" >
+          <string>Background trend as 1D curve</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="wellPage" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>359</width>
+        <height>68</height>
+       </rect>
+      </property>
+      <attribute name="label" >
+       <string>Well output</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item row="1" column="1" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="wellCheckBox" >
+           <property name="toolTip" >
+            <string>Following original sampling density</string>
+           </property>
+           <property name="text" >
+            <string>Original sampled wells</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="blockedWellCheckBox" >
+           <property name="toolTip" >
+            <string>Sampled to internal grid resolution</string>
+           </property>
+           <property name="text" >
+            <string>Blocked wells</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="wellFileLabel" >
+         <property name="text" >
+          <string>Well files</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="waveletPage" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>458</width>
+        <height>68</height>
+       </rect>
+      </property>
+      <attribute name="label" >
+       <string>Wavelet output</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item row="1" column="1" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="waveletWellCheckBox" >
+           <property name="text" >
+            <string>Well wavelets</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="waveletGlobalCheckBox" >
+           <property name="text" >
+            <string>Global wavelets</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="waveletLocalCheckBox" >
+           <property name="text" >
+            <string>Local wavelets</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="waveletFileLabel" >
+         <property name="text" >
+          <string>Wavelet files</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="otherPage" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1055</width>
+        <height>118</height>
+       </rect>
+      </property>
+      <attribute name="label" >
+       <string>Other output</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item row="3" column="1" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="priorCorrelationCheckBox" >
+           <property name="text" >
+            <string>Prior correlations</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="localNoiseCheckBox" >
+           <property name="text" >
+            <string>local noise</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="outputOtherLabel" >
+         <property name="text" >
+          <string>Other output</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="faciesProbabilitiesCheckBox" >
+           <property name="text" >
+            <string>Facies Probabilities</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="faciesProbabilitiesUndefinedCheckBox" >
+           <property name="toolTip" >
+            <string>When combination of elastic parameters do not match any facies, those will be estimated as undefined.</string>
+           </property>
+           <property name="text" >
+            <string>Facies probabilities with undefined facies</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="timeDepthCheckBox" >
+           <property name="text" >
+            <string>Time to depth velocity</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="correlationsCheckBox" >
+           <property name="toolTip" >
+            <string>Posterior correlations between Vp, Vs and density after inversion</string>
+           </property>
+           <property name="text" >
+            <string>Posterior correlations</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>16</width>
+             <height>22</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="parametersOtherLabel" >
+         <property name="text" >
+          <string>Other parameters</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <widget class="QLabel" name="prefixLabel" >
+     <property name="text" >
+      <string>Files prefix for output</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QLabel" name="xmlFilenameLabel" >
+     <property name="toolTip" >
+      <string>&lt;qt>Name of the crava input file. The file is saved in the output directory.</string>
+     </property>
+     <property name="text" >
+      <string>Input  xml-filename</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="xmlFilenameLineEdit" >
+       <property name="toolTip" >
+        <string>&lt;qt>Name of the crava input file. The file is saved in the output directory.</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1" >
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="outputDirectoryLineEdit" >
+       <property name="toolTip" >
+        <string>&lt;qt>Root directory for output files.</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="outputDirectoryBrowsePushButton" >
+       <property name="toolTip" >
+        <string>&lt;qt>Root directory for output files.</string>
+       </property>
+       <property name="text" >
+        <string>Browse...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>511</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0" >
+    <widget class="QLabel" name="outputDirectoryLabel" >
+     <property name="toolTip" >
+      <string>&lt;qt>Root directory for output files.</string>
+     </property>
+     <property name="text" >
+      <string>&lt;qt>Output directory</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>outputDirectoryLineEdit</tabstop>
+  <tabstop>outputDirectoryBrowsePushButton</tabstop>
+  <tabstop>xmlFilenameLineEdit</tabstop>
+  <tabstop>prefixLineEdit</tabstop>
+  <tabstop>domainDepthCheckBox</tabstop>
+  <tabstop>domainTimeCheckBox</tabstop>
+  <tabstop>seismicOriginalCheckBox</tabstop>
+  <tabstop>seismicSyntheticCheckBox</tabstop>
+  <tabstop>seismicResidualCheckBox</tabstop>
+  <tabstop>vpCheckBox</tabstop>
+  <tabstop>vsCheckBox</tabstop>
+  <tabstop>densityCheckBox</tabstop>
+  <tabstop>aiCheckBox</tabstop>
+  <tabstop>siCheckBox</tabstop>
+  <tabstop>poissonRatioCheckBox</tabstop>
+  <tabstop>vpVsRatioCheckBox</tabstop>
+  <tabstop>lameLamCheckBox</tabstop>
+  <tabstop>lameMuCheckBox</tabstop>
+  <tabstop>lambdaRhoCheckBox</tabstop>
+  <tabstop>muRhoCheckBox</tabstop>
+  <tabstop>backgroundCheckBox</tabstop>
+  <tabstop>backgroundTrendCheckBox</tabstop>
+  <tabstop>extraGridsCheckBox</tabstop>
+  <tabstop>backgroundTrend1DCheckBox</tabstop>
+  <tabstop>wellCheckBox</tabstop>
+  <tabstop>blockedWellCheckBox</tabstop>
+  <tabstop>waveletWellCheckBox</tabstop>
+  <tabstop>waveletGlobalCheckBox</tabstop>
+  <tabstop>waveletLocalCheckBox</tabstop>
+  <tabstop>faciesProbabilitiesCheckBox</tabstop>
+  <tabstop>faciesProbabilitiesUndefinedCheckBox</tabstop>
+  <tabstop>timeDepthCheckBox</tabstop>
+  <tabstop>correlationsCheckBox</tabstop>
+  <tabstop>priorCorrelationCheckBox</tabstop>
+  <tabstop>localNoiseCheckBox</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources>
+  <include location="cravaguiresources.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>OutputDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>OutputDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

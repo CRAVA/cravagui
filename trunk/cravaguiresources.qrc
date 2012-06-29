@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>images/correlation_direction.png</file>
+        <file>images/one_surface_paralell.png</file>
+        <file>images/surface_base.png</file>
+        <file>images/surface_constant.png</file>
+        <file>images/surface_top.png</file>
+        <file>images/two_surface.png</file>
+    </qresource>
+</RCC>
