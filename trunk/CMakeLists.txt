@@ -20,9 +20,9 @@ include(${QT_USE_FILE})
 #--------------------------------------------
 # Workaround for Qt install on /project/res
 # not needed for standard Qt install
-find_package(GTK2 COMPONENTS gtk)
-include_directories (${GTK2_INCLUDE_DIRS})
-link_libraries(${cravagui} ${GTK2_LIBRARIES} )
+#find_package(GTK2 COMPONENTS gtk)
+#include_directories (${GTK2_INCLUDE_DIRS})
+#link_libraries(${cravagui} ${GTK2_LIBRARIES} )
 #--------------------------------------------
 
 # With this line, all intermediary files will be available in the include paths
