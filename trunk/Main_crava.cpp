@@ -2224,7 +2224,7 @@ void Main_crava::seismicFile(const QString &value){
 			setValueInAngleGather( angleGather, QString("file-name"), standard->StandardStrings::relativeFileName(value), QString("seismic-data") );
 			seismicNameLabel->setText(StandardStrings::strippedName(value));
 			stackListWidget->currentItem()->setText(StandardStrings::strippedName(value));
-			seismicFileLineEdit->setText( standard->StandardStrings::relativeFileName(value) );
+
 		}
 	}
 }
