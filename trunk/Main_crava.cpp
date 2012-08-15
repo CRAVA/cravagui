@@ -514,7 +514,7 @@ void Main_crava::updateGuiToTree(){
 			 (!(interval_one_surface_sample_densityPointer->text(1).isEmpty()))){
 			on_constantInversionRadioButton_toggled(false);
 			oneSurfaceRadioButton->setChecked(true);
-			referenceSurfaceLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
+			referenceSurfaceFileLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
 			distanceTopLineEdit->setText(interval_one_surface_shift_to_interval_topPointer->text(1));
 			thicknessLineEdit->setText(interval_one_surface_thicknessPointer->text(1));
 			layerThicknessLineEdit->setText(interval_one_surface_sample_densityPointer->text(1));
@@ -3418,14 +3418,14 @@ void Main_crava::referenceSurfaceFile(const QString & value){
 	}
 }
 
-void Main_crava::on_referenceSurfaceLineEdit_editingFinished(){
-	referenceSurfaceFile(referenceSurfaceLineEdit->text());
+void Main_crava::on_referenceSurfaceFileLineEdit_editingFinished(){
+	referenceSurfaceFile(referenceSurfaceFileLineEdit->text());
 };//update the XML three with the file if it is correct, autocomplete would be nice, reference surface file
 
 void Main_crava::on_referenceSurfaceBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		referenceSurfaceLineEdit->setText(fileName);
+		referenceSurfaceFileLineEdit->setText(fileName);
 		referenceSurfaceFile(fileName);
 	}
 };//browse for the reference surface file then update the XML file if the above is not triggered, update the field
