@@ -712,9 +712,34 @@ void Main_crava::updateGuiToTree(){
 		faciesBottomLineEdit->setText(facies_probabilities_base_surface_filePointer->text(1));
 		uncertaintyLevelLineEdit->setText(uncertainty_levelPointer->text(1));
 	}
-	earthVpFileLineEdit->setText(earth_model_vp_filePointer->text(1));//earth model
-	earthVsFileLineEdit->setText(earth_model_vs_filePointer->text(1));//earth model
-	earthDensityFileLineEdit->setText(earth_model_density_filePointer->text(1));//earth model
+       	if(!earth_model_vp_filePointer->text(1).isEmpty()){
+	        vpComboBox->setCurrentIndex(0);
+	        earthVpAiLineEdit->setText(earth_model_vp_filePointer->text(1));//earth model
+        }
+        else if(!earth_model_ai_filePointer->text(1).isEmpty()){
+	        vpComboBox->setCurrentIndex(1);
+	        earthVpAiLineEdit->setText(earth_model_ai_filePointer->text(1));//earth model
+	}
+	else{
+	  	vpComboBox->setCurrentIndex(0);
+	}
+	if(!earth_model_vs_filePointer->text(1).isEmpty()){
+	        vsComboBox->setCurrentIndex(0);
+	        earthVsSiVpVsLineEdit->setText(earth_model_vs_filePointer->text(1));//earth model
+        }
+        else if(!earth_model_si_filePointer->text(1).isEmpty()){
+	        vsComboBox->setCurrentIndex(1);
+	        earthVsSiVpVsLineEdit->setText(earth_model_si_filePointer->text(1));//earth model
+	}
+	else if(!earth_model_vp_vs_ratio_filePointer->text(1).isEmpty()){
+	        vsComboBox->setCurrentIndex(2);
+	        earthVsSiVpVsLineEdit->setText(earth_model_vp_vs_ratio_filePointer->text(1));//earth model
+	}
+	else{
+	        vsComboBox->setCurrentIndex(0);
+	}
+        densityComboBox->setCurrentIndex(0);
+	earthDensityLineEdit->setText(earth_model_density_filePointer->text(1));//earth model
 	//project-settings inversion-area
 	//ifs check which frames should be visible.
 	//output-volume
