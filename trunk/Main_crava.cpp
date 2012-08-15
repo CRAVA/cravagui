@@ -2422,7 +2422,7 @@ void Main_crava::on_headerUserDefinedRadioButton_toggled(bool checked){
 	formatChangeFrame->setVisible(checked);
 	formatChangeFrame->setEnabled(checked);
 	if(checked){
-		if ( bypassCoordinateYesRadioButton->isChecked() ){
+		if ( bypassCoordinateNoRadioButton->isChecked() ){
 			locationScalingLineEdit->setVisible(true);
 			location_scaling_label->setVisible(true);
 		}
@@ -2435,7 +2435,8 @@ void Main_crava::on_headerUserDefinedRadioButton_toggled(bool checked){
 		}
 		headerFormat(QString(""));
 		bypassCoordinateEstimateRadioButton->setChecked(true);//might be better to check what is actually in the tree for better modibility
-		xCoordLineEdit->setFocus();
+		necessaryFieldGui();
+		inlineLineEdit->setFocus();
 	}
 	else {
 		//clears the user defined settings if the button is deselected
