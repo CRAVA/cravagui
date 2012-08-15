@@ -1155,19 +1155,48 @@ bool Main_crava::mode(bool started, bool *pressedOpen, bool existing, QString &f
 
 void Main_crava::estimationGui(){
 	if(estimationMode()){
-		//project-settings
-		//clear io-settings elastic parameters except background and background-trend
-		elastic_parameters_vpPointer->setText(1,QString(""));
-		elastic_parameters_vsPointer->setText(1,QString(""));
-		elastic_parameters_densityPointer->setText(1,QString(""));
-		elastic_parameters_lame_lambdaPointer->setText(1,QString(""));
-		elastic_parameters_lame_muPointer->setText(1,QString(""));
-		elastic_parameters_poisson_ratioPointer->setText(1,QString(""));
-		elastic_parameters_aiPointer->setText(1,QString(""));
-		elastic_parameters_siPointer->setText(1,QString(""));
-		elastic_parameters_vp_vs_ratioPointer->setText(1,QString(""));
-		elastic_parameters_murhoPointer->setText(1,QString(""));
-		elastic_parameters_lambdarhoPointer->setText(1,QString(""));
+	        QList<QCheckBox*> outputs=toolBox->QObject::findChildren<QCheckBox*>();
+		foreach (QCheckBox* output, outputs){
+			output->setChecked(false);
+		}
+
+	  	//project-settings
+		for(int j=0; j<grid_output_seismic_dataPointer->childCount(); ++j){
+			grid_output_seismic_dataPointer->child(j)->setText(1,QString(""));
+		}
+
+
+		for(int j=0; j<grid_output_domainPointer->childCount(); ++j){
+			grid_output_domainPointer->child(j)->setText(1,QString(""));
+		}
+
+		for(int j=0; j<elastic_parametersPointer->childCount(); ++j){
+			elastic_parametersPointer->child(j)->setText(1,QString(""));
+		}
+
+		for(int j=0; j<grid_output_other_parametersPointer->childCount(); ++j){
+			grid_output_other_parametersPointer->child(j)->setText(1,QString(""));
+		}
+
+		//clear io-settings well, wavelet and other
+		for(int j=0;j<well_outputPointer->childCount();++j){
+			well_outputPointer->child(j)->setText(1,QString(""));
+			for(int k=0;k<well_outputPointer->child(j)->childCount();++k){
+				well_outputPointer->child(j)->child(k)->setText(1,QString(""));
+			}
+		}
+		for(int j=0;j<wavelet_outputPointer->childCount();++j){
+			wavelet_outputPointer->child(j)->setText(1,QString(""));
+			for(int k=0;k<wavelet_outputPointer->child(j)->childCount();++k){
+				wavelet_outputPointer->child(j)->child(k)->setText(1,QString(""));
+			}
+		}
+		for(int j=0;j<io_settings_other_outputPointer->childCount();++j){
+			io_settings_other_outputPointer->child(j)->setText(1,QString(""));
+			for(int k=0;k<io_settings_other_outputPointer->child(j)->childCount();++k){
+				io_settings_other_outputPointer->child(j)->child(k)->setText(1,QString(""));
+			}
+		}
 
 		//clear advanced settings, up to energy-treshold
 		x_fractionPointer->setText(1,QString(""));
@@ -1177,6 +1206,13 @@ void Main_crava::estimationGui(){
 		maximum_relative_thickness_differencePointer->setText(1,QString(""));
 		frequency_band_low_cutPointer->setText(1,QString(""));
 		frequency_band_high_cutPointer->setText(1,QString(""));
+		vp_vs_ratioPointer->setText(1,QString(""));
+		vp_vs_ratioPointer->setText(1,QString(""));
+
+		toolBox->setVisible(false);
+		toolBox->setEnabled(false);
+
+	       	if(stackListWidget->count()<1)	angleLineEdit->setStyleSheet("");
 	}
 	else{
 		readSettings();//restore settings
