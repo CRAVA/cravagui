@@ -220,15 +220,21 @@ void Main_crava::setupButtonGroups(){
 	lateralInterval->addButton(areaUtmRadioButton);
 	lateralInterval->addButton(areaInCrossRadioButton);
 	//prior model
-	QButtonGroup *vpPrior = new QButtonGroup(backgroundGivenFrame);
-	vpPrior->addButton(vpConstantRadioButton);
-	vpPrior->addButton(vpFileRadioButton);
-	QButtonGroup *vsPrior = new QButtonGroup(backgroundGivenFrame);
-	vsPrior->addButton(vsConstantRadioButton);
-	vsPrior->addButton(vsFileRadioButton); 
-	QButtonGroup *densityPrior = new QButtonGroup(backgroundGivenFrame);
-	densityPrior->addButton(densityConstantRadioButton);
-	densityPrior->addButton(densityFileRadioButton);
+	QButtonGroup *vp1Prior = new QButtonGroup(vpVsRhoFrame);
+	vp1Prior->addButton(vpConstant1RadioButton);
+	vp1Prior->addButton(vpFile1RadioButton);
+	QButtonGroup *vs1Prior = new QButtonGroup(vpVsRhoFrame);
+	vs1Prior->addButton(vsConstant1RadioButton);
+	vs1Prior->addButton(vsFile1RadioButton); 
+	QButtonGroup *density1Prior = new QButtonGroup(vpVsRhoFrame);
+	density1Prior->addButton(densityConstant1RadioButton);
+	density1Prior->addButton(densityFile1RadioButton);
+	QButtonGroup *density2Prior = new QButtonGroup(aiVpVsRhoFrame);
+	density2Prior->addButton(densityConstant2RadioButton);
+	density2Prior->addButton(densityFile2RadioButton);
+	QButtonGroup *density3Prior = new QButtonGroup(aiSiRhoFrame);
+	density3Prior->addButton(densityConstant3RadioButton);
+	density3Prior->addButton(densityFile3RadioButton);
 	//QCheckBox:checked:disabled{}; checked and disabled buttons shows as not checked. This is a bug in Qt, using a newer version to compile would fix it
 	absoluteParametersCheckBox->setVisible(false);//Not wanted functionlity?
 	absoluteParametersCheckBox->setEnabled(false);//Not wanted functionlity?
