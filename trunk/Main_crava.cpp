@@ -24,7 +24,6 @@
 #include "VariogramDialog.h"
 #include "ModeDialog.h"
 #include "SettingsDialog.h"
-#include "OutputDialog.h"
 
 #include <iostream>
 #include <string>
