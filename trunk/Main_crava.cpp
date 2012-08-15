@@ -2548,6 +2548,11 @@ void Main_crava::on_estimateWaveCheckBox_toggled(bool checked){
 		QString fileName=QString("");
 		waveletFile(fileName);
 		waveletFileLineEdit->setText(fileName);
+       		QTreeWidgetItem* angleGather;
+		findCorrectAngleGather(&angleGather);
+		setValueInAngleGather(angleGather,QString("ricker"),QString(""));
+		rickerLineEdit->setText(QString(""));
+		waveletFileRadioButton->setChecked(true);
 		fileScaleRadioButton->setChecked(true);
 		shiftFileLabel->setVisible(false);
 		shiftFileLineEdit->setVisible(false);
@@ -2569,8 +2574,6 @@ void Main_crava::on_estimateWaveCheckBox_toggled(bool checked){
 	else{
 		QTreeWidgetItem* angleGather;
 		findCorrectAngleGather(&angleGather);
-
-		waveletFileLineEdit->setFocus();
 		//local wavelet scale and shift can only be given if global wavelet is given, if global wavelet is estimated, they can be estimated.
 		QString estimateShift;
 		getValueFromAngleGather(angleGather, QString("estimate-shift"), estimateShift);
