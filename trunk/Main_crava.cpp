@@ -2987,15 +2987,17 @@ void Main_crava::on_faciesLineEdit_editingFinished(){
 //button vp
 void Main_crava::on_vpRadioButton_toggled(bool checked){
 	//makes sure the correct widgets are visible and the focus makes sure signals trigger to make the info in the tree correct.
-	vpLineEdit->setVisible(checked);
-	dtLineEdit->setVisible(!checked);
 	vpLineEdit->setEnabled(checked);
 	dtLineEdit->setEnabled(!checked);
 	if(checked){
+	  	dtLineEdit->setText(QString(""));
+		log_names_dtPointer->setText( 1, QString() );
 		vpLineEdit->setFocus();
 	}
 	else{
 		dtLineEdit->setFocus();
+		vpLineEdit->setText(QString(""));
+		log_names_vpPointer->setText( 1, QString() );
 	}
 }
 void Main_crava::on_vpLineEdit_editingFinished(){
