@@ -3050,7 +3050,6 @@ void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow ){
 		//move to file-name
 		QString fileName;
 		getValueFromWell( item, QString("file-name"), fileName );
-		wellFileLineEdit->setText(fileName);//sets the correct file-name
 		wellNameLabel->setText(StandardStrings::strippedName(fileName));
 		//move to use-for-wavelet-estimation
 		QString useForWaveletEstimation;
