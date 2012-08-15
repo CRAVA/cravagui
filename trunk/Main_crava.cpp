@@ -1404,6 +1404,7 @@ void Main_crava::forwardGui(){
 			field->clear();
 		}
 		readSettings();//updates with the settings that were removed
+		if(!forwardMode()) updateGuiToTree();
 	}
 	tabWidget->setTabEnabled(tabWidget->indexOf(wellsTab),!forwardMode());//wellsTab, can't hide them without removing
 	tabWidget->setTabEnabled(tabWidget->indexOf(priorModelTab),!forwardMode());//Prior model tab
