@@ -663,7 +663,6 @@ void Main_crava::updateGuiToTree(){
 	}
 	  
 	 
-	backgroundModelCheckBox->setChecked(estimateBackground);//makes sure the correct widgets are displayed.
 	//correlation variograms handled by the appropriate dialogs, the checkboxes must be handled.
 	bool modified=false;
 	for(int i=0;i<local_wavelet_lateral_correlationPointer->childCount();++i){//local wavelet variogram background
