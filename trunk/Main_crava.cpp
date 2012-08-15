@@ -782,6 +782,76 @@ void Main_crava::updateGuiToTree(){
 	else {//default is to use area from seismic
 		areaSeismicRadioButton->setChecked(true);
 	}
+       	//Everything in the output-tab
+	if((!forwardMode())&&(!estimationMode())){
+	        toolBox->setVisible(true);
+		toolBox->setEnabled(true);
+		oDomainDepthCheckBox->setChecked(StandardStrings::checkedBool(grid_output_depthPointer->text(1)));//depth
+		oDomainTimeCheckBox->setChecked(StandardStrings::checkedBool(grid_output_timePointer->text(1),QString("yes")));//time
+
+		oSeismicOriginalCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_originalPointer->text(1)));//original
+		oSeismicSyntheticCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_syntheticPointer->text(1)));//synthetic
+		oSeismicResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_residualsPointer->text(1)));//residual
+		oSeismicSyntheticResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_synthetic_residualsPointer->text(1)));//synthetic residual
+
+		oVpCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vpPointer->text(1),QString("yes")));//vp
+		oVsCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vsPointer->text(1),QString("yes")));//vs
+		oDensityCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_densityPointer->text(1),QString("yes")));//density
+		oLameLamCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_lame_lambdaPointer->text(1)));//lame-lambda
+		oLameMuCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_lame_muPointer->text(1)));//lame-mu
+		oPoissonRatioCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_poisson_ratioPointer->text(1)));//poisson-ratio
+		oAiCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_aiPointer->text(1)));//ai
+		oSiCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_siPointer->text(1)));//si
+		oVpVsRatioCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vp_vs_ratioPointer->text(1)));//vp-vs-ratio
+		oLambdaRhoCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_murhoPointer->text(1)));//murho
+		oMuRhoCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_lambdarhoPointer->text(1)));//lambdarho
+		oBackgroundCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_backgroundPointer->text(1)));//background
+		oBackgroundTrendCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_background_trendPointer->text(1)));//background-trend
+
+		if(faciesProbabilitiesOn()){
+		        oFaciesProbabilitiesCheckBox->setChecked(StandardStrings::checkedBool(grid_output_facies_probabilitiesPointer->text(1),QString("yes")));
+			oFaciesProbabilitiesUndefinedCheckBox->setChecked(StandardStrings::checkedBool(grid_output_facies_probabilities_with_undefPointer->text(1)));//facies-probabilities-with-undefined
+			oFaciesLikelihoodCheckBox->setChecked(StandardStrings::checkedBool(grid_output_facies_likelihoodPointer->text(1)));//facies-likelihood
+			oFaciesQualityGridCheckBox->setChecked(StandardStrings::checkedBool(grid_output_seismic_quality_gridPointer->text(1)));//seismic-quality grid
+			oRockPhysicsCheckBox->setChecked(StandardStrings::checkedBool(io_settings_rock_physics_distributionsPointer->text(1)));//rock-physics-distributions
+		}
+		else{
+			oFaciesProbabilitiesCheckBox->setVisible(false);
+			oFaciesProbabilitiesUndefinedCheckBox->setVisible(false);
+			oFaciesLikelihoodCheckBox->setVisible(false);
+			oFaciesQualityGridCheckBox->setVisible(false);
+			oRockPhysicsCheckBox->setVisible(false);
+			oFaciesProbabilitiesCheckBox->setEnabled(false);
+			oFaciesProbabilitiesUndefinedCheckBox->setEnabled(false);
+			oFaciesLikelihoodCheckBox->setEnabled(false);
+		       	oFaciesQualityGridCheckBox->setEnabled(false);
+			oRockPhysicsCheckBox->setEnabled(false);
+		}
+		oTimeDepthCheckBox->setChecked(StandardStrings::checkedBool(grid_output_time_to_depth_velocityPointer->text(1)));//time-to-depth-velocity
+		oExtraGridsCheckBox->setChecked(StandardStrings::checkedBool(grid_output_extra_gridsPointer->text(1)));//extra-grids
+		oCorrelationsCheckBox->setChecked(StandardStrings::checkedBool(grid_output_correlationsPointer->text(1)));//correlations
+
+		//well-output
+		oWellCheckBox->setChecked(StandardStrings::checkedBool(well_output_wellsPointer->text(1)));//wells
+		oBlockedWellCheckBox->setChecked(StandardStrings::checkedBool(well_output_blocked_wellsPointer->text(1)));//blocked-wells
+		//blocke-logs does nothing atm
+
+		//wavelet-output
+		oWaveletWellCheckBox->setChecked(StandardStrings::checkedBool(wavelet_output_well_waveletsPointer->text(1)));//well-wavelets
+		oWaveletGlobalCheckBox->setChecked(StandardStrings::checkedBool(wavelet_output_global_waveletsPointer->text(1)));//global-wavelets
+		oWaveletLocalCheckBox->setChecked(StandardStrings::checkedBool(wavelet_output_local_waveletsPointer->text(1)));//local-wavelets
+		//other-output
+		//extra surface...
+		oPriorCorrelationCheckBox->setChecked(StandardStrings::checkedBool(io_settings_prior_correlationsPointer->text(1)));//prior-correlations
+		oBackgroundTrend1DCheckBox->setChecked(StandardStrings::checkedBool(io_settings_background_trend_1dPointer->text(1)));//background-trend-1d
+		oLocalNoiseCheckBox->setChecked(StandardStrings::checkedBool(io_settings_local_noisePointer->text(1)));//local-noise
+	}
+	else{
+		toolBox->setVisible(false);
+		toolBox->setEnabled(false);
+	}
+	oPrefixLineEdit->setText(io_settings_file_output_prefixPointer->text(1) );//file-output-prefix
+	oOutputDirectoryLineEdit->setText(top_directoryPointer->text(1)+output_directoryPointer->text(1));
 }
 
 void Main_crava::on_aboutAction_triggered(){
