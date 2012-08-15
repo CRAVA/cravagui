@@ -1641,7 +1641,6 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			wellListWidget->setCurrentRow(wellListWidget->count()-1);
 			recursiveXmlRead(xmlChild,treeItem->child(wellListWidget->count()));
 			on_wellListWidget_currentRowChanged(wellListWidget->currentRow());
-			wellFile(wellFileLineEdit->text());//fixes name in list
 		}
 		else if(xmlChild.toElement().tagName() == QString("optimize-position")){
 			//optimized positions are no in the tree already and needs to be added before they can be populated
