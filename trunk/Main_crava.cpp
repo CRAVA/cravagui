@@ -1249,10 +1249,21 @@ void Main_crava::forwardGui(){
 	       	if(stackListWidget->count()<1)	angleLineEdit->setStyleSheet("");
 	       	QTreeWidgetItem *angleGather;
 		findCorrectAngleGather(&angleGather);
-		waveletFileLabel->setVisible(true);
-		waveletFileLineEdit->setVisible(true);
-		waveletBrowsePushButton->setVisible(true);
 		waveletFrame->setVisible(true);
+		waveletWidget->setVisible(true);
+		waveletLabel->setVisible(true);
+		waveletFileRadioButton->setVisible(true);
+	       	rickerRadioButton->setVisible(true);
+		QString val;
+		getValueFromAngleGather(angleGather,QString("ricker"),val);
+		if(val.isEmpty()){
+		     waveletFileLineEdit->setVisible(true);
+		     waveletBrowsePushButton->setVisible(true);
+		}
+		else{
+		     rickerLineEdit->setVisible(true);
+		}
+	
 		QTreeWidgetItem * item=surveyPointer;//survey
 		for(int i=0;i<survey_angular_correlationPointer->childCount();++i){
 			survey_angular_correlationPointer->child(i)->setText(1,QString(""));//angular-correlation
