@@ -3010,14 +3010,16 @@ void Main_crava::on_dtLineEdit_editingFinished(){
 //button vs
 void Main_crava::on_vsRadioButton_toggled(bool checked){
 	//can either have vs or dts but not both
-	vsLineEdit->setVisible(checked);
-	dtsLineEdit->setVisible(!checked);
 	vsLineEdit->setEnabled(checked);	
 	dtsLineEdit->setEnabled(!checked);
 	if(checked){
 		vsLineEdit->setFocus();
+       	        dtsLineEdit->setText(QString(""));
+		log_names_dtsPointer->setText( 1, QString() );
 	}
 	else{
+	        vsLineEdit->setText(QString(""));
+		log_names_vsPointer->setText( 1, QString() );
 		dtsLineEdit->setFocus();
 	}
 }
