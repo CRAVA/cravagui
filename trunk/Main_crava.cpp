@@ -1910,6 +1910,9 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 		seismicDataFrame->setEnabled(false);
 		deleteStackPushButton->setEnabled(false);
 		applyToAllStacksPushButton->setEnabled(false);
+		seismicDataFrame->setEnabled(false);
+		waveletFrame->setVisible(false);
+		angleLineEdit->setStyleSheet("");
 		return;
 	}
 
