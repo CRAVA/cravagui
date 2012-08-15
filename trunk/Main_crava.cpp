@@ -1406,6 +1406,8 @@ void Main_crava::forwardGui(){
 		readSettings();//updates with the settings that were removed
 		if(!forwardMode()) updateGuiToTree();
 	}
+       	scaleWidget->setVisible(!forwardMode());
+	scaleWidget->setEnabled(!forwardMode());
 	tabWidget->setTabEnabled(tabWidget->indexOf(wellsTab),!forwardMode());//wellsTab, can't hide them without removing
 	tabWidget->setTabEnabled(tabWidget->indexOf(priorModelTab),!forwardMode());//Prior model tab
 	waveletIntervalLabel->setVisible(!forwardMode());
