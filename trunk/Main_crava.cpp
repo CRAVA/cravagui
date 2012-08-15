@@ -2165,6 +2165,7 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 		getValueFromAngleGather(item, QString("estimate-local-noise"), estimateLocalNoise);
 		if(localNoise.isEmpty() && estimateLocalNoise.isEmpty()){
 			localNoiseCheckBox->setChecked(false);
+			on_localNoiseCheckBox_toggled(false);
 		}
 		else {
 			localNoiseCheckBox->setChecked(true);
