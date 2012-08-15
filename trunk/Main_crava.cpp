@@ -1389,6 +1389,8 @@ void Main_crava::forwardGui(){
 		foreach (QLineEdit* field, fields){
 			field->setVisible(true);
 		}
+
+       		on_waveletFileRadioButton_toggled(waveletFileRadioButton->isChecked());
 		on_manualScaleRadioButton_toggled(manualScaleRadioButton->isChecked());
 		on_signalToNoiseCheckBox_toggled(signalToNoiseCheckBox->isChecked());
 		on_shiftLocalWaveletCheckBox_toggled(shiftLocalWaveletCheckBox->isChecked());
