@@ -2722,9 +2722,11 @@ void Main_crava::on_localWaveletCheckBox_toggled(bool checked){
 	shiftLocalWaveletCheckBox->setChecked(checked);
 	scaleLocalWaveletCheckBox->setChecked(checked);
 	localWaveletFrame->setVisible(checked);
+       	oWaveletLocalCheckBox->setEnabled(checked);
 	if(!checked){
 		scaleFile(QString(""));
 		shiftFile(QString(""));
+	       	oWaveletLocalCheckBox->setChecked(false);
 	}
 }
 
