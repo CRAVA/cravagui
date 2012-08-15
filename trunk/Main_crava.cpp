@@ -852,6 +852,7 @@ void Main_crava::updateGuiToTree(){
 	}
 	oPrefixLineEdit->setText(io_settings_file_output_prefixPointer->text(1) );//file-output-prefix
 	oOutputDirectoryLineEdit->setText(top_directoryPointer->text(1)+output_directoryPointer->text(1));
+       	necessaryFieldGui();
 }
 
 void Main_crava::on_aboutAction_triggered(){
