@@ -2229,18 +2229,6 @@ void Main_crava::seismicFile(const QString &value){
 	}
 }
 
-void Main_crava::on_seismicFileLineEdit_editingFinished(){
-	seismicFile(seismicFileLineEdit->text());
-};//update the XML three with the file if it is correct, autocomplete would be nice, seismic stack file
-
-void Main_crava::on_seismicBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
-	if(!fileName.isNull()){
-		seismicFile(fileName);
-// 		seismicFileLineEdit->setText(fileName);
-	}
-}//browse for the seismic stack file then update the XML file, update the field
-
 void Main_crava::on_angleLineEdit_editingFinished(){
 	if(stackListWidget->count()>0){
 		QTreeWidgetItem* angleGather;
