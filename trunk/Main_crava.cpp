@@ -1467,6 +1467,16 @@ void Main_crava::faciesGui(){
 	faciesFormatLabel->setEnabled(faciesProbabilitiesOn());
 	faciesLineEdit->setEnabled(faciesProbabilitiesOn());
 	faciesProbabilitiesCheckBox->setEnabled(faciesProbabilitiesOn());
+       	oFaciesProbabilitiesCheckBox->setVisible(faciesProbabilitiesOn());
+	oFaciesProbabilitiesUndefinedCheckBox->setVisible(faciesProbabilitiesOn());
+	oFaciesLikelihoodCheckBox->setVisible(faciesProbabilitiesOn());
+	oFaciesQualityGridCheckBox->setVisible(faciesProbabilitiesOn());
+	oRockPhysicsCheckBox->setVisible(faciesProbabilitiesOn());
+	oFaciesProbabilitiesCheckBox->setEnabled(faciesProbabilitiesOn());
+	oFaciesProbabilitiesUndefinedCheckBox->setEnabled(faciesProbabilitiesOn());
+	oFaciesLikelihoodCheckBox->setEnabled(faciesProbabilitiesOn());
+	oFaciesQualityGridCheckBox->setEnabled(faciesProbabilitiesOn());
+	oRockPhysicsCheckBox->setEnabled(faciesProbabilitiesOn());
 	if(faciesProbabilitiesOn()){
 		updateGuiToTree();//updates the gui with whatever values(default), are in the tree
 	}
