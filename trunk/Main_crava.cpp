@@ -2888,10 +2888,12 @@ void Main_crava::on_localNoiseCheckBox_toggled(bool checked){
 			QString value("");
 			setValueInAngleGather(angleGather, QString("local-noise-scaled"), value);
 			setValueInAngleGather(angleGather, QString("estimate-local-noise"), value);
+	       		oLocalNoiseCheckBox->setChecked(false);
 		}
 	}
 	localNoiseFrame->setVisible(checked);
 	localNoiseFrame->setEnabled(checked);
+       	oLocalNoiseCheckBox->setEnabled(checked);
 }//update the XML with whether local noise should be enabled and
 
 //local noise radio buttons
