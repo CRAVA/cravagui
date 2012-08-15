@@ -2504,11 +2504,11 @@ void Main_crava::bypassCoordinate(const QString &value){
 	}
 }
 
-void Main_crava::on_bypassCoordinateYesRadioButton_toggled(bool checked){
+void Main_crava::on_bypassCoordinateNoRadioButton_toggled(bool checked){
 	locationScalingLineEdit->setVisible(checked);
 	location_scaling_label->setVisible(checked);
 	if(checked){
-		bypassCoordinate(QString("yes"));
+		bypassCoordinate(QString("no"));
 	}
 	else{
 		QTreeWidgetItem* angleGather;
@@ -2517,9 +2517,9 @@ void Main_crava::on_bypassCoordinateYesRadioButton_toggled(bool checked){
 	}
 }
 
-void Main_crava::on_bypassCoordinateNoRadioButton_toggled(bool checked){
+void Main_crava::on_bypassCoordinateYesRadioButton_toggled(bool checked){
 	if(checked){
-		bypassCoordinate(QString("no"));
+		bypassCoordinate(QString("yes"));
 	}
 }
 
