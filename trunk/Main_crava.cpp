@@ -1026,25 +1026,7 @@ bool Main_crava::okToCloseCurrent(){//makes the program prompt for save on exit
 	}
 		return true;
 }
-bool Main_crava::on_outputAction_triggered(){
-	QString *xmlFilename = new QString; 
-	QPointer<OutputDialog> output = new OutputDialog(this, xmlFilename, this, faciesProbabilitiesOn(),forwardMode(),estimationMode());
-	if(output->exec()){
-		output->updateOutput();//updates the tree
-		output->updateXmlName();
-		QSettings settings("Statoil","CRAVA");
-		settings.beginGroup("crava");
-		settings.beginGroup("GUI");
-		settings.setValue(QString("xmlName"), *xmlFilename);
-		settings.endGroup();
-		settings.endGroup();
-		delete output;
-		return true;
-	}
-	delete output;
-	delete xmlFilename;
-	return false;
-}
+
 void Main_crava::on_settingsAction_triggered(){
 
 	QPointer<SettingsDialog> settings= new SettingsDialog(this, this, forwardMode(),estimationMode(),standard);
