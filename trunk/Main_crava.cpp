@@ -1904,21 +1904,6 @@ void Main_crava::addFacies(){
 		child->setText(0,QString("probability-cube"));
 }
 
-void Main_crava::on_tabWidget_currentChanged(QWidget *tab){//this functionality is not really needed and it messes with tabbing around.
-	/*if(tab==surveyInformationTab){
-		defaultStartTimeLineEdit->setFocus();
-	}
-	else if(tab==wellsTab){
-		timeLineEdit->setFocus();
-	}
-	else if(tab==horizonsTab){
-		twoSurfaceRadioButton->setFocus();
-	}
-	else if(tab==priorModelTab){
-		backgroundModelCheckBox->setFocus();
-	}*/
-}
-
 void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 	//survey=1 angle-gather = 2+stackListWidget->currentRow()
 	if(currentRow == -1){
