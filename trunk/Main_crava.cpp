@@ -2646,6 +2646,28 @@ void Main_crava::on_rickerLineEdit_editingFinished(){
        setValueInAngleGather(angleGather,QString("ricker"),rickerLineEdit->text());
 }//update the XML tree with the peak frequency of the ricker wavelet.
 
+void Main_crava::on_waveletFileRadioButton_toggled(bool checked){
+         waveletFileLineEdit->setEnabled(checked);
+	 waveletFileLineEdit->setVisible(checked);
+	 waveletBrowsePushButton->setEnabled(checked);
+	 waveletBrowsePushButton->setVisible(checked);
+	 rickerLineEdit->setVisible(!checked);
+	 rickerLineEdit->setEnabled(!checked);
+
+	 if(stackListWidget->count()>0){
+	        QTreeWidgetItem *angleGather;
+		findCorrectAngleGather(&angleGather);
+		if(checked){
+	           	setValueInAngleGather(angleGather,QString("ricker"),QString(""));
+			rickerLineEdit->setText(QString(""));
+		}
+		else{
+		  setValueInAngleGather(angleGather, QString("file-name"), QString(""), QString("wavelet"));
+		  waveletFileLineEdit->setText(QString(""));
+		}
+	 }   
+}
+
 void Main_crava::on_fileScaleRadioButton_toggled(bool checked){
 	if(checked){
 		scaleLineEdit->setVisible(false);
