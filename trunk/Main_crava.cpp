@@ -743,7 +743,7 @@ void Main_crava::updateGuiToTree(){
 	//project-settings inversion-area
 	//ifs check which frames should be visible.
 	//output-volume
-	if(!area_from_surface_file_namePointer->text(1).isEmpty()){//area-from-surface
+	if(!area_from_surface_file_namePointer->text(1).isEmpty() || area_from_surface_snap_to_seismic_dataPointer->text(1)==QString("yes")){//area-from-surface
 		areaFileRadioButton->setChecked(true);
 		areaSurfaceLineEdit->setText(area_from_surface_file_namePointer->text(1));
 		on_areaUtmRadioButton_toggled(false);
