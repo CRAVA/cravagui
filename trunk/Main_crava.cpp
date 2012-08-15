@@ -979,16 +979,27 @@ void Main_crava::setCurrentFile(const QString &fileName){
 }
 
 bool Main_crava::on_saveAction_triggered(){
-	if (currentFile().isEmpty()) {
+        QString string = oXmlFilenameLineEdit->text();
+        if (string.isEmpty()) {
 		return on_saveAsAction_triggered();//trigger saveAsAction
 	} else {
-		return saveFile(currentFile());
+                if(string.endsWith(".xml")){
+	              string.remove(string.lastIndexOf(".xml"),4);
+          	}
+	        QString sep = "/";
+	        if(output_directoryPointer->text(1).isEmpty()) sep = "";
+	        return saveFile(top_directoryPointer->text(1) + output_directoryPointer->text(1) + sep + oXmlFilenameLineEdit->text() + QString(".xml"));
 	}
 }
 bool Main_crava::on_saveAsAction_triggered(){
-	QString fileName = QFileDialog::getSaveFileName(this, QString("Save File"), standard->StandardStrings::inputPath(), StandardStrings::xmlFormat());
+  QString fileName = QFileDialog::getSaveFileName(this, QString("Save File"),top_directoryPointer->text(1)+output_directoryPointer->text(1), StandardStrings::xmlFormat());
 	if(!fileName.isNull()){
+	   if(fileName.endsWith(".xml")){
 		return saveFile(fileName);
+	   }
+	   else{
+	        return saveFile(fileName + QString(".xml"));
+	   }
 	}
 	return false;
 }
