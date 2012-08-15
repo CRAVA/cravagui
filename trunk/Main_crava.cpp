@@ -763,7 +763,8 @@ void Main_crava::updateGuiToTree(){
 		areaYLengthLineEdit->setText(utm_coordinates_length_yPointer->text(1));
 		areaXSampleDensityLineEdit->setText(utm_coordinates_sample_density_xPointer->text(1));
 		areaYSampleDensityLineEdit->setText(utm_coordinates_sample_density_yPointer->text(1));
-		areaUtmAngleLabelineEdit->setText(utm_coordinates_anglePointer->text(1));
+		areaUtmAngleLineEdit->setText(utm_coordinates_anglePointer->text(1));
+		utmSnapCheckBox->setChecked(StandardStrings::checkedBool(utm_coordinates_snap_to_seismic_dataPointer->text(1)));
 	}//inline-crossline-numbers
 	else if(!il_startPointer->text(1).isEmpty() || !il_endPointer->text(1).isEmpty() 
 	|| !xl_startPointer->text(1).isEmpty() || !xl_endPointer->text(1).isEmpty()
