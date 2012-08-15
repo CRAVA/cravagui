@@ -499,8 +499,6 @@ void Main_crava::updateGuiToTree(){
 		vsRadioButton->setChecked(true);
 		vsLineEdit->setText(log_names_vsPointer->text(1));
 	}
-	//the wells themselves handled by the list handler
-	seismicResolutionLineEdit->setText(high_cut_seismic_resolutionPointer->text(1));
 
 	//the huge nested ifs check which vertical inversion interval frames should be visible.
 	if((!top_surface_time_valuePointer->text(1).isEmpty()) ||
