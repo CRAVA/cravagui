@@ -25,7 +25,7 @@
 //#include "ui_SettingsDialog.h"
 
 /**
-	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>
+	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
 SettingsDialog::SettingsDialog(Main_crava *main_crava, QWidget *parent, bool forwardOn, bool estimationOn, StandardStrings *standard):QDialog(parent){
 	this->standard=standard;

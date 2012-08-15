@@ -28,7 +28,7 @@
 using namespace std;
 
 /**
-	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>
+	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
 ModeDialog::ModeDialog(Main_crava *main_crava, bool started, bool *pressedOpen, bool existing, QWidget *parent): QDialog(parent) {
 	this->hasPressedOpen = pressedOpen;

@@ -1,5 +1,5 @@
 <ui version="4.0" >
- <author>Øystein Monsrud Arneson</author>
+ <author>Øystein Monsrud Arneson and Andreas B. Lindblad</author>
  <class>SettingsDialog</class>
  <widget class="QDialog" name="SettingsDialog" >
   <property name="geometry" >

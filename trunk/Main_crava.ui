@@ -1,5 +1,5 @@
 <ui version="4.0" >
- <author>Alf Birger Rustad, Øystein Monsrud Arneson and Erik Bakken</author>
+ <author>Alf Birger Rustad, Øystein Monsrud Arneson, Erik Bakken and Andreas B. Lindblad</author>
  <class>Main_crava</class>
  <widget class="QMainWindow" name="Main_crava" >
   <property name="geometry" >
