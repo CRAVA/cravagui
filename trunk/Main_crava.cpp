@@ -688,7 +688,7 @@ void Main_crava::updateGuiToTree(){
 	on_correlationElasticParametersCheckBox_toggled(modified);
 	if(!correlation_directionPointer->text(1).isEmpty()){//correlation-direction
 		correlationSurfaceRadioButton->setChecked(true);
-		correlationDirectionLineEdit->setText(correlation_directionPointer->text(1));
+		correlationDirectionFileLineEdit->setText(correlation_directionPointer->text(1));
 	}
 	else{
 		on_correlationSurfaceRadioButton_toggled(false); // hide the inputs if the button is not checked.
@@ -3209,13 +3209,13 @@ void Main_crava::on_baseSurfaceRadioButton_toggled(bool checked){
 void Main_crava::on_correlationSurfaceRadioButton_toggled(bool checked){
 	//needs to be called with false on startup...
 	correlationDirectionLabel->setVisible(checked);
-	correlationDirectionLineEdit->setVisible(checked);
+	correlationDirectionFileLineEdit->setVisible(checked);
 	correlationDirectionBrowsePushButton->setVisible(checked);
 	correlationDirectionLabel->setEnabled(checked);
-	correlationDirectionLineEdit->setEnabled(checked);
+	correlationDirectionFileLineEdit->setEnabled(checked);
 	correlationDirectionBrowsePushButton->setEnabled(checked);
 	if(!checked){
-		correlationDirectionLineEdit->setText(QString(""));
+		correlationDirectionFileLineEdit->setText(QString(""));
 		correlationDirectionFile(QString(""));
 	}
 	else {
@@ -3816,14 +3816,14 @@ void Main_crava::correlationDirectionFile(const QString &value){
 	}
 }
 
-void Main_crava::on_correlationDirectionLineEdit_editingFinished(){
-	correlationDirectionFile(correlationDirectionLineEdit->text());
+void Main_crava::on_correlationDirectionFileLineEdit_editingFinished(){
+	correlationDirectionFile(correlationDirectionFileLineEdit->text());
 };//update the XML three with the file if it is correct, autocomplete would be nice, prior model corr direction
 
 void Main_crava::on_correlationDirectionBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::correlationFormat());
 	if(!fileName.isNull()){
-		correlationDirectionLineEdit->setText(fileName);
+		correlationDirectionFileLineEdit->setText(fileName);
 		correlationDirectionFile(fileName);
 	}
 };//browse for prior model corr direction file then update the XML file and the above field
