@@ -972,6 +972,7 @@ void Main_crava::setCurrentFile(const QString &fileName){
 	QString showName = QString("untitled");
 	if (standard->StandardStrings::fileExists(currentFile())&&(!currentFile().isEmpty())){
 		showName = StandardStrings::strippedName(currentFile());
+       		oXmlFilenameLineEdit->setText(showName.remove(showName.lastIndexOf(".xml"),4));
 	}
 	setWindowTitle(QString("%1[*] - %2").arg(showName).arg(StandardStrings::cravaVersion()));//update the titlebar
 	setWindowModified(false);
