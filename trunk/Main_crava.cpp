@@ -1312,6 +1312,11 @@ void Main_crava::forwardGui(){
 		for(int j=0;j<segy_formatPointer->childCount();++j){ //clear only segy-format
 			segy_formatPointer->child(j)->setText(1,QString(""));
 		}
+		
+		for(int j=0; j<grid_output_seismic_dataPointer->childCount(); ++j){
+			grid_output_seismic_dataPointer->child(j)->setText(1,QString(""));
+		}
+
 
 		for(int j=0; j<grid_output_domainPointer->childCount(); ++j){
 			grid_output_domainPointer->child(j)->setText(1,QString(""));
