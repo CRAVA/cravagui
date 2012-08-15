@@ -956,6 +956,7 @@ void Main_crava::on_newAction_triggered(){//opens in a new window
 
 bool Main_crava::saveFile(const QString &fileName){
 	if(!writeXmlFromTree(fileName, xmlTreeWidget)){
+	  	statusBar()->showMessage("Saved " + StandardStrings::strippedName(currentFile()),2000);
 		return false;//saving failed
 	}
 	else {
