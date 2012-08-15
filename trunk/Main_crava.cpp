@@ -1356,7 +1356,7 @@ void Main_crava::forwardGui(){
 			}
 			advanced_settingsPointer->child(i)->setText(1,QString(""));
 		}
-		tabWidget->addTab(earthModelTab,QString("Earth Model"));
+		tabWidget->insertTab(tabWidget->count()-2,earthModelTab,QString("Earth Model"));
 		tabWidget->setCurrentIndex(0);
 	}
 	else{
