@@ -3024,21 +3024,13 @@ void Main_crava::on_vsRadioButton_toggled(bool checked){
 	}
 }
 void Main_crava::on_vsLineEdit_editingFinished(){
-	// need to implement removal of dts
-	//can either have vs or dts but not both
 	log_names_vsPointer->setText( 1, vsLineEdit->text() );
-	//for removal of dts
-	log_names_dtsPointer->setText( 1, QString() );
-}//update the XML three with the new vs format, remove dts
+}//update the XML tree with the new vs format
 
 //button dts
 void Main_crava::on_dtsLineEdit_editingFinished(){
-	// need to implement removal of vs
-	//can either have vs or dts but not both
 	log_names_dtsPointer->setText( 1, dtsLineEdit->text() );
-	//for removal of vs
-	log_names_vsPointer->setText( 1, QString() );
-}//update the XML three with the new dts format, remove vs
+}//update the XML tree with the new dts format
 
 //well input
 void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow ){
