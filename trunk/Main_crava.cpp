@@ -152,6 +152,12 @@ Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) 
 	toolBox->setCurrentIndex(1);
 
 	delete pressedOpen;
+	
+	QList<QObject*> fields = getNecessaryFields();
+	foreach(QObject* field, fields){
+	   field->installEventFilter(this);
+	}
+	if(stackListWidget->count()<1)	angleLineEdit->setStyleSheet("");
 }
 
 Main_crava::~Main_crava(){//qt automatically deletes all child widgets.
