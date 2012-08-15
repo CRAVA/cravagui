@@ -563,77 +563,106 @@ void Main_crava::updateGuiToTree(){
 		velocityFieldNoneRadioButton->setChecked(true);
 	}
 	//prior-model
-	bool estimateBackground=true;
-	//loop over the given parameters
-	if(!background_vp_filePointer->text(1).isEmpty()){
-		estimateBackground=false;
+	//zone list is handled by the reading of the tree
+
+	if(zoneListWidget->count()>1 || !background_top_surface_filePointer->text(1).isEmpty() || !background_top_surface_erosion_priorityPointer->text(1).isEmpty()){ //checks if the multizone background model radio button should be checked.
+	        multizoneBackgroundRadioButton->setChecked(true);
+		topSurfaceFileLineEdit->setText(background_top_surface_filePointer->text(1));
+		topPrioritySpinBox->setValue(background_top_surface_erosion_priorityPointer->text(1).toInt());
 	}
-	if(!background_vs_filePointer->text(1).isEmpty()){
-		estimateBackground=false;
+	else if(background_vs_filePointer->text(1).isEmpty() && background_vp_filePointer->text(1).isEmpty() && background_density_filePointer->text(1).isEmpty() && background_ai_filePointer->text(1).isEmpty() && background_si_filePointer->text(1).isEmpty() && background_vp_vs_ratio_filePointer->text(1).isEmpty() && background_vp_constantPointer->text(1).isEmpty() && background_vs_constantPointer->text(1).isEmpty() && background_density_constantPointer->text(1).isEmpty()){//checks whether the estimate background model radio button should be checked or not.	
+
+	  estimateBackgroundRadioButton->setChecked(true);
+	  if(background_velocity_fieldPointer->text(1).isEmpty() && background_high_cut_background_modellingPointer->text(1).isEmpty()){
+	    backgroundEstimatedConfigurationCheckBox->setChecked(false);
+	    velocityFieldLabel->setVisible(false);
+	    velocityFieldPriorFileLineEdit->setVisible(false);
+	    velocityFieldPriorFileBrowsePushButton->setVisible(false);
+	    lateralCorrelationLabel->setVisible(false);
+	    lateralCorrelationBackgroundPushButton->setVisible(false);
+	    highCutFrequencyLabel->setVisible(false);
+	    highCutFrequencyLineEdit->setVisible(false);
+	    hzLabel->setVisible(false);
+	  }
+	  else{
+	    backgroundEstimatedConfigurationCheckBox->setChecked(true);
+	    velocityFieldPriorFileLineEdit->setText(background_velocity_fieldPointer->text(1));
+	    highCutFrequencyLineEdit->setText(background_high_cut_background_modellingPointer->text(1));
+	  }
+	  
 	}
-	if(!background_density_filePointer->text(1).isEmpty()){
-		estimateBackground=false;
+	else{
+	  backgroundRadioButton->setChecked(true);
+	  if(!background_vp_filePointer->text(1).isEmpty()){
+	    vpVsRhoRadioButton->setChecked(true);
+	    vpFile1RadioButton->setChecked(true);
+	    vpFile1LineEdit->setText(background_vp_filePointer->text(1));
+	  }
+	  else if(!background_vp_constantPointer->text(1).isEmpty()){
+	    vpVsRhoRadioButton->setChecked(true);
+	    vpConstant1RadioButton->setChecked(true);
+	    vpConstant1LineEdit->setText(background_vp_constantPointer->text(1));
+	  }
+	  if(!background_vs_filePointer->text(1).isEmpty()){
+	    vpVsRhoRadioButton->setChecked(true);
+	    vsFile1RadioButton->setChecked(true);
+	    vsFile1LineEdit->setText(background_vs_filePointer->text(1));
+	  }
+	  else if(!background_vs_constantPointer->text(1).isEmpty()){
+	    vpVsRhoRadioButton->setChecked(true);
+	    vsConstant1RadioButton->setChecked(true);
+	    vsConstant1LineEdit->setText(background_vs_constantPointer->text(1));
+	  }
+	  if(!background_vp_vs_ratio_filePointer->text(1).isEmpty()){
+	    aiVpVsRhoRadioButton->setChecked(true);
+	    vpVsFile2LineEdit->setText(background_vp_vs_ratio_filePointer->text(1));
+	  }
+	  if(!background_si_filePointer->text(1).isEmpty()){
+	    aiSiRhoRadioButton->setChecked(true);
+	    siFile3LineEdit->setText(background_si_filePointer->text(1));
+	  }
+	  if(!background_ai_filePointer->text(1).isEmpty()){
+	    if(aiSiRhoRadioButton->isChecked()){
+	      aiFile3LineEdit->setText(background_ai_filePointer->text(1));
+	    }
+	    else{
+	      aiVpVsRhoRadioButton->setChecked(true);
+	      aiFile2LineEdit->setText(background_ai_filePointer->text(1));
+	    }
+	  }
+	  if(!background_density_filePointer->text(1).isEmpty()){
+	    if(aiSiRhoRadioButton->isChecked()){
+	      densityFile3RadioButton->setChecked(true);
+	      densityFile3LineEdit->setText(background_density_filePointer->text(1));	
+	    }
+	    else if(aiVpVsRhoRadioButton->isChecked()){
+	      densityFile2RadioButton->setChecked(true);
+	      densityFile2LineEdit->setText(background_density_filePointer->text(1));
+	    }
+	    else{
+	      vpVsRhoRadioButton->setChecked(true);
+	      densityFile1RadioButton->setChecked(true);
+	      densityFile1LineEdit->setText(background_density_filePointer->text(1));
+	    }
+	  }
+	  else if(!background_density_constantPointer->text(1).isEmpty()){
+	    if(aiSiRhoRadioButton->isChecked()){
+	      densityConstant3RadioButton->setChecked(true);
+	      densityConstant3LineEdit->setText(background_density_constantPointer->text(1));
+	    }
+	    else if(aiVpVsRhoRadioButton->isChecked()){
+	      densityConstant2RadioButton->setChecked(true);
+	      densityConstant2LineEdit->setText(background_density_constantPointer->text(1));
+	    }
+	    else{
+	      vpVsRhoRadioButton->setChecked(true);
+	      densityConstant1RadioButton->setChecked(true);
+	      densityConstant1LineEdit->setText(background_density_constantPointer->text(1));
+	    }
+	  }
 	}
-	if(!background_vp_constantPointer->text(1).isEmpty()){
-		estimateBackground=false;
-	}
-	if(!background_vs_constantPointer->text(1).isEmpty()){
-		estimateBackground=false;
-	}
-	if(!background_density_constantPointer->text(1).isEmpty()){
-		estimateBackground=false;
-	}
-	if(estimateBackground){//default
-		velocityFieldPriorFileLineEdit->setText(background_velocity_fieldPointer->text(1));
-		//variogram is handled by the variogram dialog
-		highCutFrequencyLineEdit->setText(background_high_cut_background_modellingPointer->text(1));
-		bool configure=false;
-		//if any of the parameters for estimated background have been given, display the input posibilities.
-		for(int j=0;j<background_lateral_correlationPointer->childCount();j++){
-			if(!background_lateral_correlationPointer->child(j)->text(1).isEmpty()){
-				configure=true;
-				break;
-			}
-		}
-		if(!background_velocity_fieldPointer->text(1).isEmpty()){
-			configure=true;
-		}
-		if(!background_high_cut_background_modellingPointer->text(1).isEmpty()){
-			configure=true;
-		}
-		backgroundEstimatedConfigurationCheckBox->setChecked(configure);
-		on_backgroundEstimatedConfigurationCheckBox_toggled(configure);
-	}
-	else {//background given
-		if(!background_vp_constantPointer->text(1).isEmpty()){//file or constant
-			vpConstantRadioButton->setChecked(true);
-			vpConstantLineEdit->setText(background_vp_constantPointer->text(1));
-			on_vpFileRadioButton_toggled(false);
-		}
-		else{//default
-			vpFileRadioButton->setChecked(true);
-			vpFileLineEdit->setText(background_vp_filePointer->text(1));
-		}
-		if(!background_vs_constantPointer->text(1).isEmpty()){//file or constant
-			vsConstantRadioButton->setChecked(true);
-			vsConstantLineEdit->setText(background_vs_constantPointer->text(1));
-			on_vsFileRadioButton_toggled(false);
-		}
-		else{//default
-			vsFileRadioButton->setChecked(true);
-			vsFileLineEdit->setText(background_vs_filePointer->text(1));
-		}
-		if(!background_density_constantPointer->text(1).isEmpty()){//file or constant
-			densityConstantRadioButton->setChecked(true);
-			densityConstantLineEdit->setText(background_density_constantPointer->text(1));
-			on_densityFileRadioButton_toggled(false);
-		}
-		else{//default
-			densityFileRadioButton->setChecked(true);
-			densityFileLineEdit->setText(background_density_filePointer->text(1));
-		}
-		on_backgroundModelCheckBox_toggled(false);
-	}
+	  
+	 
 	backgroundModelCheckBox->setChecked(estimateBackground);//makes sure the correct widgets are displayed.
 	//correlation variograms handled by the appropriate dialogs, the checkboxes must be handled.
 	bool modified=false;
