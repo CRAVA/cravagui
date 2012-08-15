@@ -1246,6 +1246,7 @@ void Main_crava::forwardGui(){
 		}
 		seismicAngelLabel->setVisible(true);
 		angleLineEdit->setVisible(true);
+	       	if(stackListWidget->count()<1)	angleLineEdit->setStyleSheet("");
 		waveletFileLabel->setVisible(true);
 		waveletFileLineEdit->setVisible(true);
 		waveletBrowsePushButton->setVisible(true);
