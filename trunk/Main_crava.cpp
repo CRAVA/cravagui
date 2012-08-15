@@ -1851,6 +1851,28 @@ void Main_crava::addOptimizePosition(){
 		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("weight"));
 }
+void Main_crava::insertZone(){
+  //the strings make it obvious what items are inserted. this creates all the needed children.
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+
+	int childNumber = zone->parent()->indexOfChild(zone);
+
+        QString label = QString("zone");
+	QTreeWidgetItem* parent = background_multizone_modelPointer;//move to the parent
+	QTreeWidgetItem* precedingItem = background_multizone_modelPointer->child(childNumber-1);//which node will it precede.
+	QTreeWidgetItem* item = new QTreeWidgetItem(parent,precedingItem);//insert another zone
+
+	item->setText(0,label);
+                QTreeWidgetItem* child = new QTreeWidgetItem(item);
+		child->setText(0,QString("base-surface-file"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("erosion-priority"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("correlation-structure"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("surface-uncertainty"));
+}
 
 void Main_crava::addFacies(){
 	//the strings makes it obvious what items are added. this creates all the needed children.
