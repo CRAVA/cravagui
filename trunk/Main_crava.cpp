@@ -1496,6 +1496,9 @@ void Main_crava::faciesGui(){
 
 		grid_output_facies_probabilitiesPointer->setText(1,QString(""));
 		grid_output_facies_probabilities_with_undefPointer->setText(1,QString(""));
+		grid_output_facies_likelihoodPointer->setText(1,QString(""));
+		grid_output_seismic_quality_gridPointer->setText(1,QString(""));
+		io_settings_rock_physics_distributionsPointer->setText(1,QString(""));
 		faciesGivenFrame->setEnabled(false);
 		faciesGivenFrame->setVisible(false);
 	}
