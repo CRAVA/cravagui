@@ -2236,7 +2236,7 @@ void Main_crava::on_angleLineEdit_editingFinished(){
 		QString value = angleLineEdit->text();
 		setValueInAngleGather(angleGather, QString("offset-angle"), value);
 		if(forwardMode()){//need to change the displayed name in forward mode
-			stackListWidget->currentItem()->setText(QString("Synthetic seismic angle %1").arg(value));
+			stackListWidget->currentItem()->setText(QString("Synthetic seismic - angle %1").arg(value));
 		}
 	}
 };//update the offset angle for the selected stack in the XML file
