@@ -3001,20 +3001,12 @@ void Main_crava::on_vpRadioButton_toggled(bool checked){
 	}
 }
 void Main_crava::on_vpLineEdit_editingFinished(){
-	// need to implement removal of dt
-	//can either have vp or dt but not both
 	log_names_vpPointer->setText( 1, vpLineEdit->text() );
-	//for removal of dt
-	log_names_dtPointer->setText( 1, QString() );
-}//update the XML three with the new vp format, remove dt
+}//update the XML tree with the new vp format
 //button dt
 void Main_crava::on_dtLineEdit_editingFinished(){
-	// need to implement removal of vp
-	//can either have vp or dt but not both
 	log_names_dtPointer->setText( 1, dtLineEdit->text() );
-	//for removal of vp
-	log_names_vpPointer->setText( 1, QString() );
-}//update the XML three with the new dt format, remove vp
+}//update the XML three with the new dt format
 //button vs
 void Main_crava::on_vsRadioButton_toggled(bool checked){
 	//can either have vs or dts but not both
