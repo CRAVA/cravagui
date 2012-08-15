@@ -2640,6 +2640,12 @@ void Main_crava::on_waveletBrowsePushButton_clicked(){
 	}
 }//browse for the wavelet file then update the XML file, update the field
 
+void Main_crava::on_rickerLineEdit_editingFinished(){
+       QTreeWidgetItem *angleGather;
+       findCorrectAngleGather(&angleGather);
+       setValueInAngleGather(angleGather,QString("ricker"),rickerLineEdit->text());
+}//update the XML tree with the peak frequency of the ricker wavelet.
+
 void Main_crava::on_fileScaleRadioButton_toggled(bool checked){
 	if(checked){
 		scaleLineEdit->setVisible(false);
