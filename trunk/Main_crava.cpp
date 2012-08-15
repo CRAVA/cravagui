@@ -212,7 +212,7 @@ void Main_crava::setupButtonGroups(){
 	verticalInterval->addButton(topSurfaceRadioButton);
 	verticalInterval->addButton(baseSurfaceRadioButton);
 	verticalInterval->addButton(correlationSurfaceRadioButton);
-	verticalInterval->addButton(oneSufraceRadioButton);
+	verticalInterval->addButton(oneSurfaceRadioButton);
 	verticalInterval->addButton(constantInversionRadioButton);
 	QButtonGroup *lateralInterval = new QButtonGroup(horizonsTab);
 	lateralInterval->addButton(areaSeismicRadioButton);
@@ -486,14 +486,14 @@ void Main_crava::updateGuiToTree(){
 		constantInversionRadioButton->setChecked(true);
 		topTimeValueLineEdit->setText(top_surface_time_valuePointer->text(1));
 		bottomTimeValueLineEdit->setText(base_surface_time_valuePointer->text(1));
-		on_oneSufraceRadioButton_toggled(false);
+		on_oneSurfaceRadioButton_toggled(false);
 	}
 	else if((!(interval_one_surface_reference_surfacePointer->text(1).isEmpty())) ||
 			 (!(interval_one_surface_shift_to_interval_topPointer->text(1).isEmpty() )) ||
 			 (!(interval_one_surface_thicknessPointer->text(1).isEmpty())) ||
 			 (!(interval_one_surface_sample_densityPointer->text(1).isEmpty()))){
 			on_constantInversionRadioButton_toggled(false);
-			oneSufraceRadioButton->setChecked(true);
+			oneSurfaceRadioButton->setChecked(true);
 			referenceSurfaceLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
 			distanceTopLineEdit->setText(interval_one_surface_shift_to_interval_topPointer->text(1));
 			thicknessLineEdit->setText(interval_one_surface_thicknessPointer->text(1));
@@ -514,7 +514,7 @@ void Main_crava::updateGuiToTree(){
 			on_depthSurfacesCheckBox_toggled(false);//this should work by default...
 		}
 		//the depth is checked first because it is cleared if the other buttons are checked..
-		on_oneSufraceRadioButton_toggled(false);
+		on_oneSurfaceRadioButton_toggled(false);
 		on_constantInversionRadioButton_toggled(false);
 		if(top_surface_time_filePointer->text(1).isEmpty()){//top
 			if(base_surface_time_filePointer->text(1).isEmpty()){
@@ -3175,7 +3175,7 @@ void Main_crava::on_correlationSurfaceRadioButton_toggled(bool checked){
 	}
 }
 
-void Main_crava::on_oneSufraceRadioButton_toggled(bool checked){
+void Main_crava::on_oneSurfaceRadioButton_toggled(bool checked){
 	surfaceOneFrame->setVisible(checked);
 	surfaceOneFrame->setEnabled(checked);
 	surfaceTwoFrame->setVisible(!checked);
