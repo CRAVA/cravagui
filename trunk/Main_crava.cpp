@@ -1649,6 +1649,14 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			addOptimizePosition();
 			recursiveXmlRead(xmlChild,treeItem->child(5+optimizePositionListWidget->count()));
 		}
+	     	else if(xmlChild.toElement().tagName() == QString("zone")){
+		        multizoneBackgroundRadioButton->setChecked(true);
+			zoneListWidget->addItem(QString("zone " + QString::number(zoneListWidget->count()+1)));
+			addZone();
+			zoneListWidget->setCurrentRow(zoneListWidget->count()-1);
+			recursiveXmlRead(xmlChild,treeItem->child(1+zoneListWidget->count()));
+			on_zoneListWidget_currentRowChanged(zoneListWidget->currentRow());
+		}
 		else if( (xmlChild.toElement().tagName() == QString("facies")) && (xmlItem.toElement().tagName() == QString("prior-probabilities")) ){
 			//facies are no in the tree already and needs to be added before they can be populated
 			faciesEstimateCheckBox->setChecked(false);
