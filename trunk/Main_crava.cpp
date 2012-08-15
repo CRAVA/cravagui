@@ -2108,16 +2108,37 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 				on_shiftLocalWaveletCheckBox_toggled(shiftLocalWaveletCheckBox->isChecked());
 				on_scaleLocalWaveletCheckBox_toggled(scaleLocalWaveletCheckBox->isChecked());
 				if(forwardMode()){
-					waveletFileLabel->setVisible(true);
-					waveletFileLineEdit->setVisible(true);
+					
+				        waveletLabel->setVisible(true);
+					waveletWidget->setVisible(true);
+				       	waveletFileRadioButton->setVisible(true);
 					waveletBrowsePushButton->setVisible(true);
+					rickerRadioButton->setVisible(true);
 					waveletFrame->setVisible(true);
-					waveletFileLabel->setVisible(true);
-					waveletFileLineEdit->setEnabled(true);
+					waveletLabel->setEnabled(true);
+					waveletWidget->setEnabled(true);
+					waveletFileRadioButton->setEnabled(true);
+				       	waveletFileLineEdit->setEnabled(true);
 					waveletBrowsePushButton->setEnabled(true);
 					waveletFrame->setEnabled(true);
-					//file-name
-					waveletFileLineEdit->setText(waveletFileName);
+				       	rickerRadioButton->setEnabled(true);
+
+				
+					if(!waveletFileName.isEmpty()){
+					  waveletFileLineEdit->setText(waveletFileName);
+					  waveletFileRadioButton->setChecked(true);
+					  on_waveletFileRadioButton_toggled(true);
+					}
+					else if(!rickerPeakFrequency.isEmpty()){
+					  rickerLineEdit->setText(rickerPeakFrequency);
+					  rickerRadioButton->setChecked(true);
+					  on_waveletFileRadioButton_toggled(false);
+					}
+					else{
+			         	  waveletFileRadioButton->setChecked(true);
+					  on_waveletFileRadioButton_toggled(true);
+					  waveletFileLineEdit->setText(QString(""));
+					}
 				}
 		//move to wavelet-3d doesn't do anything yet
 		//move to match-energies				
