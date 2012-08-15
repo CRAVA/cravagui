@@ -746,13 +746,14 @@ void Main_crava::updateGuiToTree(){
 	if(!area_from_surface_file_namePointer->text(1).isEmpty() || area_from_surface_snap_to_seismic_dataPointer->text(1)==QString("yes")){//area-from-surface
 		areaFileRadioButton->setChecked(true);
 		areaSurfaceLineEdit->setText(area_from_surface_file_namePointer->text(1));
+		surfaceSnapCheckBox->setChecked(StandardStrings::checkedBool(area_from_surface_snap_to_seismic_dataPointer->text(1)));
 		on_areaUtmRadioButton_toggled(false);
 		on_areaInCrossRadioButton_toggled(false);
 	}
 	else if(!utm_coordinates_reference_point_xPointer->text(1).isEmpty() || !utm_coordinates_reference_point_yPointer->text(1).isEmpty() 
 	|| !utm_coordinates_length_xPointer->text(1).isEmpty() || !utm_coordinates_length_yPointer->text(1).isEmpty()
 	|| !utm_coordinates_sample_density_xPointer->text(1).isEmpty() || !utm_coordinates_sample_density_yPointer->text(1).isEmpty()
-	|| !utm_coordinates_anglePointer->text(1).isEmpty()){//utm-coordinates
+	|| !utm_coordinates_anglePointer->text(1).isEmpty() || utm_coordinates_snap_to_seismic_dataPointer->text(1)==QString("yes")){//utm-coordinates
 		areaUtmRadioButton->setChecked(true);
 		on_areaInCrossRadioButton_toggled(false);
 		on_areaFileRadioButton_toggled(false);
