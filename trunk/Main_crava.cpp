@@ -2296,6 +2296,10 @@ void Main_crava::on_applyToAllStacksPushButton_clicked(){
 			setValueInAngleGather( angleGathers.at(i), QString("file-name"), waveletFileName, QString("wavelet") );
 		}
 
+		QString rickerPointFrequency;
+		getValueFromAngleGather(angleGather, QString("ricker"), rickerPointFrequency);
+		setValueInAngleGather(angleGathers.at(i), QString("ricker"), rickerPointFrequency);
+
 		QString scale;
 		getValueFromAngleGather(angleGather, QString("scale"), scale);
 		setValueInAngleGather(angleGathers.at(i), QString("scale"), scale);
