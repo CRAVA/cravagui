@@ -1026,7 +1026,18 @@ bool Main_crava::okToCloseCurrent(){//makes the program prompt for save on exit
 	}
 		return true;
 }
-
+bool Main_crava::okToRun(){//makes the program prompt for save on run crava
+	if (isWindowModified()) {//checks if window is modified isWindowModified()
+		int r = QMessageBox::warning(this, QString("Save"), QString("The document has been modified.\nPlease save in order to run CRAVA!"),
+						QMessageBox::Save | QMessageBox::Cancel);
+		if (r == QMessageBox::Save) {
+			return on_saveAction_triggered();
+		} 
+		else if (r == QMessageBox::Cancel) {
+			return false;
+		}
+	} 
+}
 void Main_crava::on_settingsAction_triggered(){
 
 	QPointer<SettingsDialog> settings= new SettingsDialog(this, this, forwardMode(),estimationMode(),standard);
