@@ -1304,6 +1304,10 @@ void Main_crava::forwardGui(){
 			item->child(i)->setText(1,QString(""));
 		}
 
+		QList<QCheckBox*>outputs=toolBox->QObject::findChildren<QCheckBox*>();
+		foreach (QCheckBox* output, outputs){
+		         output->setChecked(false);
+		}
 		//project-settings
 		for(int j=0;j<segy_formatPointer->childCount();++j){ //clear only segy-format
 			segy_formatPointer->child(j)->setText(1,QString(""));
