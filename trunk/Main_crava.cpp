@@ -1788,6 +1788,8 @@ void Main_crava::addStack(){
 			nestedChild = new QTreeWidgetItem(child);
 			nestedChild->setText(0,QString("file-name"));
 			nestedChild = new QTreeWidgetItem(child);
+		       	nestedChild->setText(0,QString("ricker"));
+			nestedChild = new QTreeWidgetItem(child);
 			nestedChild->setText(0,QString("scale"));
 			nestedChild = new QTreeWidgetItem(child);
 			nestedChild->setText(0,QString("estimate-scale"));
