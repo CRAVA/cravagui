@@ -414,6 +414,9 @@ void Main_crava::writeSettings(){
 	if(!forwardMode()){
 		settings.beginGroup(advanced_settingsPointer->text(0));//advanced-settings
 		if(estimationMode()){
+		        settings.setValue(vp_vs_ratioPointer->text(0),vp_vs_ratioPointer->text(1));
+			settings.setValue(vp_vs_ratio_from_wellsPointer->text(0),vp_vs_ratio_from_wellsPointer->text(1));
+			settings.setValue(high_cut_seismic_resolutionPointer->text(0),high_cut_seismic_resolutionPointer->text(1));
 			settings.setValue(energy_tresholdPointer->text(0),energy_tresholdPointer->text(1));
 			settings.setValue(wavelet_tapering_lengthPointer->text(0),wavelet_tapering_lengthPointer->text(1));
 			settings.setValue(minimum_relative_wavelet_amplitudePointer->text(0),minimum_relative_wavelet_amplitudePointer->text(1));
@@ -421,6 +424,7 @@ void Main_crava::writeSettings(){
 			settings.setValue(white_noise_component_cutPointer->text(0),white_noise_component_cutPointer->text(1));
 			//reflection matrix should not be written, relative path...
 			settings.setValue(kriging_data_limitPointer->text(0),kriging_data_limitPointer->text(1));
+		       	settings.setValue(guard_zonePointer->text(0),guard_zonePointer->text(1));
 			settings.setValue(debug_levelPointer->text(0),debug_levelPointer->text(1));
 			settings.setValue(smooth_kriged_parametersPointer->text(0),smooth_kriged_parametersPointer->text(1));
 		}
@@ -429,9 +433,12 @@ void Main_crava::writeSettings(){
 			settings.setValue(y_fractionPointer->text(0),y_fractionPointer->text(1));
 			settings.setValue(z_fractionPointer->text(0),z_fractionPointer->text(1));
 			settings.setValue(use_intermediate_disk_storagePointer->text(0),use_intermediate_disk_storagePointer->text(1));
+			settings.setValue(vp_vs_ratioPointer->text(0),vp_vs_ratioPointer->text(1));
+			settings.setValue(vp_vs_ratio_from_wellsPointer->text(0),vp_vs_ratio_from_wellsPointer->text(1));
 			settings.setValue(maximum_relative_thickness_differencePointer->text(0),maximum_relative_thickness_differencePointer->text(1));
 			settings.setValue(frequency_band_low_cutPointer->text(0),frequency_band_low_cutPointer->text(1));
 			settings.setValue(frequency_band_high_cutPointer->text(0),frequency_band_high_cutPointer->text(1));
+		       	settings.setValue(high_cut_seismic_resolutionPointer->text(0),high_cut_seismic_resolutionPointer->text(1));
 			settings.setValue(energy_tresholdPointer->text(0),energy_tresholdPointer->text(1));
 			settings.setValue(wavelet_tapering_lengthPointer->text(0),wavelet_tapering_lengthPointer->text(1));
 			settings.setValue(minimum_relative_wavelet_amplitudePointer->text(0),minimum_relative_wavelet_amplitudePointer->text(1));
@@ -439,6 +446,7 @@ void Main_crava::writeSettings(){
 			settings.setValue(white_noise_component_cutPointer->text(0),white_noise_component_cutPointer->text(1));
 			//reflection matrix should not be written, relative path...
 			settings.setValue(kriging_data_limitPointer->text(0),kriging_data_limitPointer->text(1));
+		       	settings.setValue(guard_zonePointer->text(0),guard_zonePointer->text(1));
 			settings.setValue(debug_levelPointer->text(0),debug_levelPointer->text(1));
 			settings.setValue(smooth_kriged_parametersPointer->text(0),smooth_kriged_parametersPointer->text(1));
 		}
