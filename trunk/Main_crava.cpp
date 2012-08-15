@@ -1931,7 +1931,6 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 			QString angleGatherFileName;
 			getValueFromAngleGather( item, QString("file-name"), angleGatherFileName, QString("seismic-data") );
 			//move to file-name
-			seismicFileLineEdit->setText(angleGatherFileName);//sets the correct file-name
 			seismicNameLabel->setText(StandardStrings::strippedName(angleGatherFileName));
 			//move to start-time
 			QString startTime;
