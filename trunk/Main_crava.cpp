@@ -312,6 +312,9 @@ void Main_crava::readSettings(){
 	if(!forwardMode()){
 		settings.beginGroup(advanced_settingsPointer->text(0));//advanced-settings
 		if(estimationMode()){
+		        vp_vs_ratioPointer->setText(1,settings.value(vp_vs_ratioPointer->text(0),QString("")).toString());
+			vp_vs_ratio_from_wellsPointer->setText(1,settings.value(vp_vs_ratio_from_wellsPointer->text(0),QString("")).toString());
+			high_cut_seismic_resolutionPointer->setText(1,settings.value(high_cut_seismic_resolutionPointer->text(0),QString("")).toString());
 			energy_tresholdPointer->setText(1,settings.value(energy_tresholdPointer->text(0),QString("")).toString());
 			wavelet_tapering_lengthPointer->setText(1,settings.value(wavelet_tapering_lengthPointer->text(0),QString("")).toString());
 			minimum_relative_wavelet_amplitudePointer->setText(1,settings.value(minimum_relative_wavelet_amplitudePointer->text(0),QString("")).toString());
@@ -319,6 +322,7 @@ void Main_crava::readSettings(){
 			white_noise_component_cutPointer->setText(1,settings.value(white_noise_component_cutPointer->text(0),QString("")).toString());
 			//reflection matrix should not be written, relative path...
 			kriging_data_limitPointer->setText(1,settings.value(kriging_data_limitPointer->text(0),QString("")).toString());
+		       	guard_zonePointer->setText(1,settings.value(guard_zonePointer->text(0),QString("")).toString());
 			debug_levelPointer->setText(1,settings.value(debug_levelPointer->text(0),QString("")).toString());
 			smooth_kriged_parametersPointer->setText(1,settings.value(smooth_kriged_parametersPointer->text(0),QString("")).toString());
 		}
@@ -327,9 +331,12 @@ void Main_crava::readSettings(){
 			y_fractionPointer->setText(1,settings.value(y_fractionPointer->text(0),QString("")).toString());
 			z_fractionPointer->setText(1,settings.value(z_fractionPointer->text(0),QString("")).toString());
 			use_intermediate_disk_storagePointer->setText(1,settings.value(use_intermediate_disk_storagePointer->text(0),QString("")).toString());
+		        vp_vs_ratioPointer->setText(1,settings.value(vp_vs_ratioPointer->text(0),QString("")).toString());
+			vp_vs_ratio_from_wellsPointer->setText(1,settings.value(vp_vs_ratio_from_wellsPointer->text(0),QString("")).toString());
 			maximum_relative_thickness_differencePointer->setText(1,settings.value(maximum_relative_thickness_differencePointer->text(0),QString("")).toString());
 			frequency_band_low_cutPointer->setText(1,settings.value(frequency_band_low_cutPointer->text(0),QString("")).toString());
 			frequency_band_high_cutPointer->setText(1,settings.value(frequency_band_high_cutPointer->text(0),QString("")).toString());
+			high_cut_seismic_resolutionPointer->setText(1,settings.value(high_cut_seismic_resolutionPointer->text(0),QString("")).toString());
 			energy_tresholdPointer->setText(1,settings.value(energy_tresholdPointer->text(0),QString("")).toString());
 			wavelet_tapering_lengthPointer->setText(1,settings.value(wavelet_tapering_lengthPointer->text(0),QString("")).toString());
 			minimum_relative_wavelet_amplitudePointer->setText(1,settings.value(minimum_relative_wavelet_amplitudePointer->text(0),QString("")).toString());
@@ -337,6 +344,7 @@ void Main_crava::readSettings(){
 			white_noise_component_cutPointer->setText(1,settings.value(white_noise_component_cutPointer->text(0),QString("")).toString());
 			//reflection matrix should not be written, relative path...
 			kriging_data_limitPointer->setText(1,settings.value(kriging_data_limitPointer->text(0),QString("")).toString());
+		       	guard_zonePointer->setText(1,settings.value(guard_zonePointer->text(0),QString("")).toString());
 			debug_levelPointer->setText(1,settings.value(debug_levelPointer->text(0),QString("")).toString());
 			smooth_kriged_parametersPointer->setText(1,settings.value(smooth_kriged_parametersPointer->text(0),QString("")).toString());
 		}
