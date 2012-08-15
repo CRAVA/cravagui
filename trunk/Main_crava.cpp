@@ -2032,18 +2032,28 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 				getValueFromAngleGather( item, QString("estimate-scale"), localWaveletEstimateScale, QString("local-wavelet") ); //local-wavelet is the parent
 				//QString eScale=QString(nestedChildChild->text(1));
 			//move to file-name
-			QString waveletFileName;
+		       	QString waveletFileName;
 			getValueFromAngleGather(item, QString("file-name"), waveletFileName, QString("wavelet") ); //wavelet is the parent 
-			if(waveletFileName.isEmpty()){
-				estimateWaveCheckBox->setChecked(true);
-				fileScaleRadioButton->setChecked(true);
+			QString rickerPeakFrequency;
+			getValueFromAngleGather(item, QString("ricker"), rickerPeakFrequency);
+			if(waveletFileName.isEmpty() && rickerPeakFrequency.isEmpty()){
+			        estimateWaveCheckBox->setChecked(true);
+				on_waveletFileRadioButton_toggled(true);
 			}
 			else {
 				estimateWaveCheckBox->setChecked(false);//have to change when changed to checkbox
-				waveletFileLineEdit->setText(waveletFileName);
 				waveletFrame->setVisible(true);
 				waveletFrame->setEnabled(true);
-
+				if(!waveletFileName.isEmpty()){
+				       waveletFileLineEdit->setText(waveletFileName);
+				       waveletFileRadioButton->setChecked(true);
+				       on_waveletFileRadioButton_toggled(true);
+				}
+				else if(!rickerPeakFrequency.isEmpty()){
+				       rickerLineEdit->setText(rickerPeakFrequency);
+				       rickerRadioButton->setChecked(true);
+				       on_waveletFileRadioButton_toggled(false);
+				}
 				QString scale;
 				getValueFromAngleGather(item, QString("scale"), scale);
 				//move to scale
