@@ -1619,15 +1619,19 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 		//these checks could all cause trouble if the names are changed
 		if(xmlChild.toElement().tagName() == QString("angle-gather")){
 			//angle gathers are not in the tree already and needs to be added before they can be populated
-			stackListWidget->addItem( QString("angle gather") );
+		        stackListWidget->addItem( QString("angle-gather") );
 			addStack();
 			recursiveXmlRead(xmlChild,treeItem->child(1+stackListWidget->count()));
 			stackListWidget->setCurrentRow(stackListWidget->count()-1);
-			if(!forwardMode()){
-				seismicFile(seismicFileLineEdit->text());//this is already set by the above line, but this makes sure the names in the list are correct.
+			if(forwardMode()){
+			  on_angleLineEdit_editingFinished();
 			}
 			else{
-				on_angleLineEdit_editingFinished();
+			  QTreeWidgetItem *angleGather;
+			  findCorrectAngleGather(&angleGather);
+			  QString name;
+			  getValueFromAngleGather(angleGather,QString("file-name"),name,QString("seismic-data"));
+			  stackListWidget->currentItem()->setText(name);
 			}
 		}
 		else if(xmlChild.toElement().tagName() == QString("well")&& (xmlItem.toElement().tagName()==QString("well-data"))){
