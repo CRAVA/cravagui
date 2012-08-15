@@ -1615,7 +1615,7 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 	}
 	QTreeWidgetItem* treeChild;
 	while(!xmlChild.isNull()){
-		//since there can be multiple angle-gather, wells, optimize positions and facies as well as variograms...
+		//since there can be multiple angle-gather, wells, optimize positions, zones and facies as well as variograms...
 		//these checks could all cause trouble if the names are changed
 		if(xmlChild.toElement().tagName() == QString("angle-gather")){
 			//angle gathers are not in the tree already and needs to be added before they can be populated
