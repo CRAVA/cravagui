@@ -1358,6 +1358,8 @@ void Main_crava::forwardGui(){
 		}
 		tabWidget->insertTab(tabWidget->count()-2,earthModelTab,QString("Earth Model"));
 		tabWidget->setCurrentIndex(0);
+		toolBox->setVisible(false);
+		toolBox->setEnabled(false);
 	}
 	else{
 		tabWidget->removeTab(tabWidget->indexOf(earthModelTab));
