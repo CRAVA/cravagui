@@ -25,9 +25,8 @@
 #include "ModeDialog.h"
 #include "SettingsDialog.h"
 
-#include <iostream>
 #include <string>
-using namespace std;
+
 
 /**
 	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
