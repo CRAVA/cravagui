@@ -2196,7 +2196,7 @@ void Main_crava::on_addStackPushButton_clicked(){
 		}
 	}
 	else{
-		stackListWidget->addItem(QString("Synthetic seismic angle"));//synthetic_seismic_angle_10
+	  	stackListWidget->addItem(QString("Synthetic seismic"));//synthetic_seismic_angle_10
 		addStack();
 		stackListWidget->setCurrentItem(stackListWidget->item(stackListWidget->count()-1));
 	}
