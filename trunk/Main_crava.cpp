@@ -1874,6 +1874,22 @@ void Main_crava::insertZone(){
 		child->setText(0,QString("surface-uncertainty"));
 }
 
+void Main_crava::addZone(){
+  //the strings make it obvious what items are added. this creates all the needed children.
+        QString label = QString("zone");
+	QTreeWidgetItem* parent = background_multizone_modelPointer;//move to the parent
+	QTreeWidgetItem* item = new QTreeWidgetItem(parent);//insert another zone
+	item->setText(0,label);
+                QTreeWidgetItem* child = new QTreeWidgetItem(item);
+		child->setText(0,QString("base-surface-file"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("erosion-priority"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("correlation-structure"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("surface-uncertainty"));
+}
+
 void Main_crava::addFacies(){
 	//the strings makes it obvious what items are added. this creates all the needed children.
 	QString label = QString("facies");
@@ -1887,7 +1903,6 @@ void Main_crava::addFacies(){
 		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("probability-cube"));
 }
-
 
 void Main_crava::on_tabWidget_currentChanged(QWidget *tab){//this functionality is not really needed and it messes with tabbing around.
 	/*if(tab==surveyInformationTab){
