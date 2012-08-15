@@ -149,6 +149,7 @@ Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) 
 	xmlTreeWidget->resizeColumnToContents(1);
 	xmlTreeWidget->setMinimumWidth(xmlTreeWidget->columnWidth(0)+xmlTreeWidget->columnWidth(1));//makes the treewidget not have to scroll all the time.
 	tabWidget->setCurrentIndex(0);//survey information
+	toolBox->setCurrentIndex(1);
 
 	delete pressedOpen;
 }
