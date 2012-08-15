@@ -1216,6 +1216,12 @@ void Main_crava::estimationGui(){
 	}
 	else{
 		readSettings();//restore settings
+      		if(!forwardMode()){
+		  updateGuiToTree();
+		  toolBox->setVisible(true);
+		  toolBox->setEnabled(true);
+		}
+	
 	}
 	
 }
