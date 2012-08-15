@@ -11,18 +11,15 @@ TEMPLATE = app
 FORMS += Main_crava.ui \
          VariogramDialog.ui \
          ModeDialog.ui \
-         OutputDialog.ui \
          SettingsDialog.ui 
 HEADERS += Main_crava.h \
            VariogramDialog.h \
            ModeDialog.h \
-           OutputDialog.h \
            SettingsDialog.h \
            StandardStrings.h 
 SOURCES += Main_crava.cpp \
            Main.cpp \
            VariogramDialog.cpp \
            ModeDialog.cpp \
-           OutputDialog.cpp \
            SettingsDialog.cpp \
            StandardStrings.cpp 
