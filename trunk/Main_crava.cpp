@@ -2901,8 +2901,10 @@ void Main_crava::on_localNoiseEstimateCheckBox_toggled(bool checked){
 	//can either estimate or give, not both
 	localNoiseFileLineEdit->setVisible(!checked);
 	localNoiseBrowsePushButton->setVisible(!checked);
+	localNoiseFileLabel->setVisible(!checked);
 	localNoiseFileLineEdit->setEnabled(!checked);
 	localNoiseBrowsePushButton->setEnabled(!checked);
+       	localNoiseFileLabel->setEnabled(!checked);
 	if(stackListWidget->count()>0){
 		QTreeWidgetItem* angleGather;
 		findCorrectAngleGather(&angleGather);
