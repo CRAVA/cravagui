@@ -42,6 +42,7 @@ public:
 	
 protected:
 	void closeEvent(QCloseEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event);//used in this case to draw red borders on necessary fields that are empty.
 
 private:
 	/*bool writeXmlFromTree(const QString &fileName, QTreeWidget *tree);
