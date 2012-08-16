@@ -5126,6 +5126,10 @@ void Main_crava::on_oBlockedWellCheckBox_toggled(bool checked){
         well_output_blocked_wellsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oWaveletWellCheckBox_toggled(bool checked){
+        wavelet_output_well_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
