@@ -5024,6 +5024,12 @@ void Main_crava::on_oOutputDirectoryBrowsePushButton_clicked(){
 	}
 }
 
+void Main_crava::on_oOutputDirectoryLineEdit_editingFinished(){
+        QDir topDirectory(top_directoryPointer->text(1));
+	QString outputDir = topDirectory.relativeFilePath(oOutputDirectoryLineEdit->text());
+	output_directoryPointer->setText(1,outputDir);
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
