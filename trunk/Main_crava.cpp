@@ -5154,6 +5154,10 @@ void Main_crava::on_oFaciesProbabilitiesUndefinedCheckBox_toggled(bool checked){
         grid_output_facies_probabilities_with_undefPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oFaciesLikelihoodCheckBox_toggled(bool checked){
+        grid_output_facies_likelihoodPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
