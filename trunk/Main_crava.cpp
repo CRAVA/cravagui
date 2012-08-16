@@ -4960,11 +4960,21 @@ void Main_crava::on_earthVpAiBrowsePushButton_clicked(){
 	}
 }
 
-void Main_crava::on_earthVsFileBrowsePushButton_clicked(){
+void Main_crava::on_earthVsSiVpVsBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		earthVsFileLineEdit->setText(fileName);
+	  if(vsComboBox->currentIndex() == 0){
+		earthVsSiVpVsLineEdit->setText(fileName);
 		earthVsFile(fileName);
+	  }
+	  else if(vsComboBox->currentIndex() == 1){
+	        earthVsSiVpVsLineEdit->setText(fileName);
+		earthSiFile(fileName);
+	  }
+	  else if(vsComboBox->currentIndex() == 2){
+	        earthVsSiVpVsLineEdit->setText(fileName);
+		earthVpVsFile(fileName);
+	  }
 	}
 }
 
