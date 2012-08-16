@@ -5381,6 +5381,15 @@ void Main_crava::setValueInOptimizePosition(QTreeWidgetItem* item, QString itemI
 	}
 }
 
+void Main_crava::setValueInZone(QTreeWidgetItem* item, QString itemInZone, QString value){
+        if(item->text(0) == itemInZone){
+                item->setText(1,value);
+	}
+	for(int i=0; i<item->childCount(); i++){
+                setValueInZone(item->child(i), itemInZone, value);//recursive call to all children
+	}
+}
+
 void Main_crava::setValueInFacies(QTreeWidgetItem* item, QString itemInFacies, QString value){
 	if (item->text(0) == itemInFacies){
 		item->setText(1, value);
