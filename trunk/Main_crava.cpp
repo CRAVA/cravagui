@@ -4473,6 +4473,13 @@ void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
 	}
 };//changes the correlation structure to "compaction" in XML
 
+void Main_crava::on_basePrioritySpinBox_editingFinished(){
+   QTreeWidgetItem* zone;
+   findCorrectZone(&zone);
+   setValueInZone(zone, QString("erosion-priority"), QString::number(basePrioritySpinBox->value()));
+
+   
+ };//changes the erosion priority for a given zone in XML
 
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
