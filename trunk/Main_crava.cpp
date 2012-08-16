@@ -4930,8 +4930,16 @@ void Main_crava::on_earthVpAiLineEdit_editingFinished(){
         }
 }
 
-void Main_crava::on_earthVsFileLineEdit_editingFinished(){
-	earthVsFile(earthVsFileLineEdit->text());
+void Main_crava::on_earthVsSiVpVsLineEdit_editingFinished(){
+	if(vsComboBox->currentIndex() == 0){
+          	earthVsFile(earthVsSiVpVsLineEdit->text());
+	}
+	else if(vsComboBox->currentIndex() == 1){
+	        earthSiFile(earthVsSiVpVsLineEdit->text());
+	}
+	else if(vsComboBox->currentIndex() == 2){
+	        earthVpVsFile(earthVsSiVpVsLineEdit->text());
+	}
 }
 
 void Main_crava::on_earthDensityFileLineEdit_editingFinished(){
