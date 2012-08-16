@@ -4394,6 +4394,23 @@ void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.
 	
 };//adds a new zone for multizone model
 
+void Main_crava::on_insertZonePushButton_clicked(){
+         int insertIndex = zoneListWidget->currentRow();
+	 insertZone();
+	 zoneListWidget->insertItem(insertIndex,QString("zone ")+QString::number(insertIndex+1));
+	 for(int i=insertIndex+1;i<zoneListWidget->count();i++){
+	  zoneListWidget->item(i)->setText(QString("zone ")+QString::number(i+1));
+	 }
+	 zoneListWidget->setCurrentItem(zoneListWidget->item(insertIndex));
+	 basePrioritySpinBox->setValue(1);
+	 on_basePrioritySpinBox_editingFinished();
+	 topCorrelationRadioButton->setChecked(true);
+	 QTreeWidgetItem* zone;
+	 findCorrectZone(&zone);
+	 setValueInZone(zone,QString("correlation-structure"), QString("top"));
+
+};//inserts a new zone for multizone model
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
