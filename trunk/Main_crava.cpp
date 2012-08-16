@@ -4763,6 +4763,8 @@ void Main_crava::on_areaFileRadioButton_toggled(bool checked){
 	if(!checked){
 		areaSurfaceFile(QString(""));
 		areaSurfaceLineEdit->clear();
+    		surfacSnapCheckBox->setChecked(false);
+		area_from_surface_snap_to_seismic_dataPointer->setText(1,QString(""));
 	}
 }
 
