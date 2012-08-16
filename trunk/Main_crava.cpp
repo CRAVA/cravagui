@@ -3833,6 +3833,41 @@ void Main_crava::on_backgroundRadioButton_toggled(bool checked){
 	}
 
 }
+void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
+        if(checked){
+	        backgroundModelFrame->setVisible(false);
+		backgroundEstimateFrame->setVisible(false);
+		backgroundMultizoneFrame->setVisible(true);
+		vpVsRhoRadioButton->setChecked(true);
+		deleteZonePushButton->setEnabled(false);
+		insertZonePushButton->setEnabled(false);
+		if(background_top_surface_filePointer->text(1).isEmpty()){
+		  topSurfaceFileLineEdit->setText(top_surface_time_filePointer->text(1));
+		  on_topSurfaceFileLineEdit_editingFinished();
+		}
+		on_topPrioritySpinBox_editingFinished();
+		zoneFrame->setEnabled(false);
+	
+		QList<QLineEdit*> fields1=backgroundModelFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field1, fields1){
+			field1->clear();
+		}
+
+		QList<QLineEdit*> field2=backgroundEstimateFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field2, field2){
+			field2->clear();
+		}
+		for(int i=0; i<backgroundPointer->childCount();i++){
+		  if(backgroundPointer->child(i)->childCount()<1){
+		    backgroundPointer->child(i)->setText(1,QString(""));
+		  }
+		}
+	        
+	}
+	else{
+	       zoneFrame->setEnabled(false);
+	}
+}
 	//buttons for vp/vs/density
 void Main_crava::on_vpFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
 	vpFileLineEdit->setVisible(checked);
