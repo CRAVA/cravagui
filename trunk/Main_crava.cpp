@@ -5014,6 +5014,16 @@ void Main_crava::on_vsComboBox_currentIndexChanged(int index){
        }
 }
 
+void Main_crava::on_oOutputDirectoryBrowsePushButton_clicked(){
+	QString dirName = QFileDialog::getExistingDirectory( this, QString("Open File"),top_directoryPointer->text(1) );
+	if(!dirName.isNull()){
+	      oOutputDirectoryLineEdit->setText(dirName);
+	      QDir topDirectory(top_directoryPointer->text(1));
+	      QString outputDir = topDirectory.relativeFilePath(dirName);
+	      output_directoryPointer->setText(1,outputDir);
+	}
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
