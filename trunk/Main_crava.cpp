@@ -5070,6 +5070,10 @@ void Main_crava::on_oDensityCheckBox_toggled(bool checked){
         elastic_parameters_densityPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oAiCheckBox_toggled(bool checked){
+        elastic_parameters_aiPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
