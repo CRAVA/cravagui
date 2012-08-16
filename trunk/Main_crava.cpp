@@ -5738,3 +5738,18 @@ QList<QObject*> Main_crava::getNecessaryFields(){
 	  list << referenceSurfaceFileLineEdit << distanceTopLineEdit << thicknessLineEdit << layerThicknessLineEdit;
 	  return list;
 }//returns a list of all necessary objects.
+
+void Main_crava::necessaryFieldGui(){
+  QList<QObject*> list = getNecessaryFields();
+  foreach (QObject *object,list){
+    if(object->objectName().contains("LineEdit")){
+      QLineEdit *field = qobject_cast<QLineEdit*>(object);
+      if(field->text().isEmpty() && field->isEnabled()){
+	field->setStyleSheet("QLineEdit{border: 2px ridge red; border-radius: 5px; margin: 2px}");
+      }
+      else{
+	field->setStyleSheet("");
+      }
+    }
+  }
+}//provide red borders to necessary fields that are empty
