@@ -4057,6 +4057,21 @@ void Main_crava::on_densityFile1RadioButton_toggled(bool checked){//either const
 	}
 }
 
+void Main_crava::on_densityFile2RadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
+	densityFile2LineEdit->setEnabled(checked);
+	densityFile2BrowsePushButton->setEnabled(checked);
+	densityConstant2LineEdit->setEnabled(!checked);
+	if(checked){
+		densityFile2LineEdit->setFocus();
+		densityConstant2LineEdit->setText(QString(""));
+		background_density_constantPointer->setText(1,QString(""));
+	}
+	else{
+		densityConstant2LineEdit->setFocus();
+		densityFile2LineEdit->setText(QString(""));
+		background_density_filePointer->setText(1,QString(""));
+	}
+}
 void Main_crava::vpFile(const QString &value){
 	// should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
