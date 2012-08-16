@@ -3898,56 +3898,6 @@ void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	}
 
 }
-	//buttons for vp/vs/density
-void Main_crava::on_vpFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
-	vpFileLineEdit->setVisible(checked);
-	vpBrowsePushButton->setVisible(checked);
-	vpConstantLineEdit->setVisible(!checked);
-	vpFileLineEdit->setEnabled(checked);
-	vpBrowsePushButton->setEnabled(checked);
-	vpConstantLineEdit->setEnabled(!checked);
-	if(checked){
-		vpFileLineEdit->setFocus();
-	}
-	else{
-		vpConstantLineEdit->setFocus();
-	}
-}
-void Main_crava::on_vsFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
-	vsFileLineEdit->setVisible(checked);
-	vsBrowsePushButton->setVisible(checked);
-	vsConstantLineEdit->setVisible(!checked);
-	vsFileLineEdit->setEnabled(checked);
-	vsBrowsePushButton->setEnabled(checked);
-	vsConstantLineEdit->setEnabled(!checked);
-	if(checked){
-		vsFileLineEdit->setFocus();
-	}
-	else{
-		vsConstantLineEdit->setFocus();
-	}
-}
-
-void Main_crava::on_densityFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
-	densityFileLineEdit->setVisible(checked);
-	densityBrowsePushButton->setVisible(checked);
-	densityConstantLineEdit->setVisible(!checked);
-	densityFileLineEdit->setEnabled(checked);
-	densityBrowsePushButton->setEnabled(checked);
-	densityConstantLineEdit->setEnabled(!checked);
-	if(checked){
-		densityFileLineEdit->setFocus();
-	}
-	else{
-		densityConstantLineEdit->setFocus();
-	}
-}
-
-void Main_crava::on_vpConstantLineEdit_editingFinished(){
-	// should remove the file from the tree
-	background_vp_constantPointer->setText( 1, vpConstantLineEdit->text() );
-	background_vp_filePointer->setText( 1, QString() );
-};//update the XML three with constant vp for the background model
 
 void Main_crava::vpFile(const QString &value){
 	// should remove the constant from the tree
@@ -3957,22 +3907,6 @@ void Main_crava::vpFile(const QString &value){
 	}
 }
 
-void Main_crava::on_vpFileLineEdit_editingFinished(){
-	vpFile(vpFileLineEdit->text());
-};//update the XML three with the file if it is correct, autocomplete would be nice, prior model vp file
-void Main_crava::on_vpBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
-	if(!fileName.isNull()){
-		vpFileLineEdit->setText(fileName);
-		vpFile(fileName);
-	}
-};//browse for the prior model vp file then update the XML file if the above is not triggered, update the field
-
-void Main_crava::on_vsConstantLineEdit_editingFinished(){
-	background_vs_constantPointer->setText( 1, vsConstantLineEdit->text() );
-	background_vs_filePointer->setText( 1, QString() );
-};//update the XML three with constant vs for the background model
-
 void Main_crava::vsFile(const QString &value){
 	//should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
@@ -3980,24 +3914,6 @@ void Main_crava::vsFile(const QString &value){
 		background_vs_constantPointer->setText( 1, QString() );
 	}
 }
-
-void Main_crava::on_vsFileLineEdit_editingFinished(){
-	vsFile(vsFileLineEdit->text());
-};//update the XML three with the file if it is correct, autocomplete would be nice, prior model vs file
-
-void Main_crava::on_vsBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
-	if(!fileName.isNull()){
-		vsFileLineEdit->setText(fileName);
-		vsFile(fileName);
-	}
-};//browse for the prior model vs file then update the XML file if the above is not triggered, update the field
-
-void Main_crava::on_densityConstantLineEdit_editingFinished(){
-	// should remove the file from the tree
-	background_density_constantPointer->setText( 1, densityConstantLineEdit->text() );
-	background_density_filePointer->setText( 1, QString() );
-};//update the XML three with constant density for the background model
 
 void Main_crava::densityFile(const QString &value){
 	// should remove the constant from the tree
@@ -4007,17 +3923,6 @@ void Main_crava::densityFile(const QString &value){
 	}
 }
 
-void Main_crava::on_densityFileLineEdit_editingFinished(){
-	densityFile(densityFileLineEdit->text());	
-};//update the XML tree with the file if it is correct, prior model density file
-
-void Main_crava::on_densityBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
-	if(!fileName.isNull()){
-		densityFileLineEdit->setText(fileName);
-		densityFile(fileName);
-	}
-};//browse for the prior model density file then update the XML file if the above is not triggered, update the field
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
