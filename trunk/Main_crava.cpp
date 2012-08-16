@@ -5688,3 +5688,44 @@ void Main_crava::activateTable(){
 			smooth_kriged_parametersPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(14);
 			guard_zonePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(15);
 }
+
+bool Main_crava::eventFilter(QObject *obj, QEvent *event){
+    if(event->type() == QEvent::FocusIn){
+         QList<QObject*> fields = getNecessaryFields();
+         if(fields.contains(obj)){
+	     QLineEdit *object = qobject_cast<QLineEdit*>(obj);
+	     object->setStyleSheet("");
+	     return false;
+	 }
+    }
+    else if(event->type() == QEvent::FocusOut){
+         QList<QObject*> fields = getNecessaryFields();
+         if(fields.contains(obj)){
+	     QLineEdit *object = qobject_cast<QLineEdit*>(obj);
+	     if(object->text().isEmpty()) object->setStyleSheet("QLineEdit {border: 2px ridge red; border-radius:5px; margin:2px}");
+	     if(!object->text().isEmpty() && object->objectName().contains("File") && !standard->StandardStrings::fileExists(object->text())){
+	       object->setStyleSheet("QLineEdit {border: 2px ridge red; border-radius:5px; margin:2px}");//draw border if the text of a necessary QLineEdit providing a file is not a path to an existing file.
+	     }
+	     return false;
+	 }
+    }
+    else if(event->type() == QEvent::HoverEnter){
+         QList<QObject*> fields = getNecessaryFields();
+         if(fields.contains(obj)){
+	    QLineEdit *object = qobject_cast<QLineEdit*>(obj);
+	    object->setStyleSheet("");
+	    return false;
+	 }
+    }
+    else if(event->type() == QEvent::HoverLeave){
+         QList<QObject*> fields = getNecessaryFields();
+         if(fields.contains(obj)){
+	    QLineEdit *object = qobject_cast<QLineEdit*>(obj);
+	    if(object->text().isEmpty() && !object->hasFocus() && object->isEnabled()) object->setStyleSheet("QLineEdit {border: 2px ridge red; border-radius:5px; margin: 2px}");
+	    if(!object->text().isEmpty() && !object->hasFocus() && object->isEnabled() && object->objectName().contains("File") && !standard->StandardStrings::fileExists(object->text())){
+	       object->setStyleSheet("QLineEdit {border: 2px ridge red; border-radius:5px; margin:2px}");//draw border if the text of a necessary QLineEdit providing a file is not a path to an existing file.
+	    }
+	    return false;
+	 }
+    }
+}//handles the necessary fields
