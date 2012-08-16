@@ -3723,6 +3723,7 @@ void Main_crava::on_referenceSurfaceBrowsePushButton_clicked(){
 	if(!fileName.isNull()){
 		referenceSurfaceFileLineEdit->setText(fileName);
 		referenceSurfaceFile(fileName);
+		referenceSurfaceFileLineEdit->setFocus();
 	}
 };//browse for the reference surface file then update the XML file if the above is not triggered, update the field
 
