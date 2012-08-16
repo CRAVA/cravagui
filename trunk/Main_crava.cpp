@@ -4946,11 +4946,17 @@ void Main_crava::on_earthDensityLineEdit_editingFinished(){
 	earthDensityFile(earthDensityLineEdit->text());
 }
 
-void Main_crava::on_earthVpFileBrowsePushButton_clicked(){
+void Main_crava::on_earthVpAiBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		earthVpFileLineEdit->setText(fileName);
+	  if(vpComboBox->currentIndex() == 0){
+		earthVpAiLineEdit->setText(fileName);
 		earthVpFile(fileName);
+	  }
+	  else if(vpComboBox->currentIndex() == 1){
+	        earthVpAiLineEdit->setText(fileName);
+		earthAiFile(fileName);
+	  }
 	}
 }
 
