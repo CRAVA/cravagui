@@ -5030,6 +5030,10 @@ void Main_crava::on_oOutputDirectoryLineEdit_editingFinished(){
 	output_directoryPointer->setText(1,outputDir);
 }
 
+void Main_crava::on_oPrefixLineEdit_editingFinished(){
+        io_settings_file_output_prefixPointer->setText(1,oPrefixLineEdit->text());
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
