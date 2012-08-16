@@ -246,6 +246,9 @@ private:
 	//prior-model
 	QTreeWidgetItem *prior_modelPointer;
 		QTreeWidgetItem *backgroundPointer;
+			QTreeWidgetItem *background_ai_filePointer;
+			QTreeWidgetItem *background_si_filePointer;
+			QTreeWidgetItem *background_vp_vs_ratio_filePointer;
 			QTreeWidgetItem *background_vp_filePointer;
 			QTreeWidgetItem *background_vs_filePointer;
 			QTreeWidgetItem *background_density_filePointer;
@@ -260,10 +263,16 @@ private:
 				QTreeWidgetItem *background_subrangePointer;
 				QTreeWidgetItem *background_powerPointer;
 			QTreeWidgetItem *background_high_cut_background_modellingPointer;
+				QTreeWidgetItem *background_multizone_modelPointer;
+			        QTreeWidgetItem *background_top_surface_filePointer;
+				QTreeWidgetItem *background_top_surface_erosion_priorityPointer;
 		QTreeWidgetItem *earth_modelPointer;
 			QTreeWidgetItem *earth_model_vp_filePointer;
 			QTreeWidgetItem *earth_model_vs_filePointer;
 			QTreeWidgetItem *earth_model_density_filePointer;
+	       	     	QTreeWidgetItem *earth_model_ai_filePointer;
+			QTreeWidgetItem *earth_model_si_filePointer;
+			QTreeWidgetItem *earth_model_vp_vs_ratio_filePointer;
 		QTreeWidgetItem *local_waveletPointer;
 			QTreeWidgetItem *local_wavelet_lateral_correlationPointer;
 				QTreeWidgetItem *local_wavelet_variogram_typePointer;	
@@ -314,6 +323,7 @@ private:
 				QTreeWidgetItem *interval_one_surface_sample_densityPointer;
 			QTreeWidgetItem *area_from_surfacePointer;
 				QTreeWidgetItem *area_from_surface_file_namePointer;
+				QTreeWidgetItem *area_from_surface_snap_to_seismic_dataPointer;
 			QTreeWidgetItem *utm_coordinatesPointer;
 				QTreeWidgetItem *utm_coordinates_reference_point_xPointer;
 				QTreeWidgetItem *utm_coordinates_reference_point_yPointer;
@@ -322,6 +332,7 @@ private:
 				QTreeWidgetItem *utm_coordinates_sample_density_xPointer;
 				QTreeWidgetItem *utm_coordinates_sample_density_yPointer;
 				QTreeWidgetItem *utm_coordinates_anglePointer;
+			       	QTreeWidgetItem *utm_coordinates_snap_to_seismic_dataPointer;
 			QTreeWidgetItem *inline_crossline_numbersPointer;
 				QTreeWidgetItem *il_startPointer;
 				QTreeWidgetItem *il_endPointer;
@@ -375,12 +386,15 @@ private:
 					QTreeWidgetItem *seismic_data_originalPointer;
 					QTreeWidgetItem *seismic_data_syntheticPointer;
 					QTreeWidgetItem *seismic_data_residualsPointer;
+					QTreeWidgetItem *seismic_data_synthetic_residualsPointer;
 				QTreeWidgetItem *grid_output_other_parametersPointer;
 					QTreeWidgetItem *grid_output_facies_probabilitiesPointer;
 					QTreeWidgetItem *grid_output_facies_probabilities_with_undefPointer;
+			       		QTreeWidgetItem *grid_output_facies_likelihoodPointer;
 					QTreeWidgetItem *grid_output_time_to_depth_velocityPointer;
 					QTreeWidgetItem *grid_output_extra_gridsPointer;
 					QTreeWidgetItem *grid_output_correlationsPointer;
+					QTreeWidgetItem *grid_output_seismic_quality_gridPointer;
 			QTreeWidgetItem *well_outputPointer;
 				QTreeWidgetItem *well_output_formatPointer;
 					QTreeWidgetItem *well_output_rmsPointer;
@@ -400,6 +414,7 @@ private:
 				QTreeWidgetItem *io_settings_prior_correlationsPointer;
 				QTreeWidgetItem *io_settings_background_trend_1dPointer;
 				QTreeWidgetItem *io_settings_local_noisePointer;
+		       		QTreeWidgetItem *io_settings_rock_physics_distributionsPointer;
 			QTreeWidgetItem *io_settings_file_output_prefixPointer;
 			QTreeWidgetItem *io_settings_log_levelPointer;
 		//project-settings/advanced-settings
@@ -409,6 +424,8 @@ private:
 				QTreeWidgetItem *y_fractionPointer;
 				QTreeWidgetItem *z_fractionPointer;
 			QTreeWidgetItem *use_intermediate_disk_storagePointer;
+		       	QTreeWidgetItem *vp_vs_ratioPointer;
+			QTreeWidgetItem *vp_vs_ratio_from_wellsPointer;
 			QTreeWidgetItem *maximum_relative_thickness_differencePointer;
 			QTreeWidgetItem *frequency_bandPointer;
 				QTreeWidgetItem *frequency_band_low_cutPointer;
@@ -422,6 +439,7 @@ private:
 			QTreeWidgetItem *kriging_data_limitPointer;
 			QTreeWidgetItem *debug_levelPointer;
 			QTreeWidgetItem *smooth_kriged_parametersPointer;
+		       	QTreeWidgetItem *guard_zonePointer;
 
 //all the slots starting with on_ are autoconnected by moc.
 private slots:
