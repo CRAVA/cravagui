@@ -5170,6 +5170,10 @@ void Main_crava::on_oLocalNoiseCheckBox_toggled(bool checked){
         io_settings_local_noisePointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oRockPhysicsCheckBox_toggled(bool checked){
+        io_settings_rock_physics_distributionsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
