@@ -3813,38 +3813,6 @@ void Main_crava::on_faciesBottomBrowsePushButton_clicked(){
 };//browse for the facies bottom time file then update the XML file if the above is not triggered, update the field
 
 	//prior model
-void Main_crava::on_backgroundModelCheckBox_toggled(bool checked){
-	//needs to fix the values as well
-	backgroundGivenFrame->setVisible(!checked);
-	backgroundEstimateFrame->setVisible(checked);
-	backgroundGivenFrame->setEnabled(!checked);
-	backgroundEstimateFrame->setEnabled(checked);
-	if(checked){//clears the parameters for given background
-		vpFileRadioButton->setChecked(true);
-		vsFileRadioButton->setChecked(true);
-		densityFileRadioButton->setChecked(true);
-		QList<QLineEdit*> fields=backgroundGivenFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
-		foreach (QLineEdit* field, fields){
-			field->clear();
-		}
-		background_vp_filePointer->setText(1,QString(""));
-		background_vs_filePointer->setText(1,QString(""));
-		background_density_filePointer->setText(1,QString(""));
-		background_vp_constantPointer->setText(1,QString(""));
-		background_vs_constantPointer->setText(1,QString(""));
-		background_density_constantPointer->setText(1,QString(""));
-	}
-	else{//clears the parameters for estimated background
-		velocityFieldPriorFileLineEdit->clear();
-		highCutFrequencyLineEdit->clear();
-
-		QString value("");
-		background_velocity_fieldPointer->setText(1, value);
-		background_high_cut_background_modellingPointer->setText(1, value);
-		background_lateral_correlationPointer->setText(1, value); //isn't this always empty??
-	}
-};//determining wether the background model should be estimated or given
-
 	//buttons for vp/vs/density
 void Main_crava::on_vpFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
 	vpFileLineEdit->setVisible(checked);
