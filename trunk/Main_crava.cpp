@@ -4191,6 +4191,13 @@ void Main_crava::densityFile(const QString &value){
 void Main_crava::on_aiFile2LineEdit_editingFinished(){
         aiFile(aiFile2LineEdit->text());
 };//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model AI file
+void Main_crava::on_aiFile2BrowsePushButton_clicked(){
+  	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		aiFile2LineEdit->setText(fileName);
+		aiFile(fileName);
+	}
+};//browse for the prior model AI file then update the XML file if the above is not triggered, update the field
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
