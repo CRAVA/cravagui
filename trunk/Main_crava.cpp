@@ -5288,6 +5288,13 @@ void Main_crava::deleteAllFacies(){
 	}
 }//deletes all facies
 
+void Main_crava::deleteAllOptimizePosition(){
+	QList<QTreeWidgetItem*> items = xmlTreeWidget->findItems( QString("optimize-position"), Qt::MatchExactly | Qt::MatchRecursive, 0);
+	foreach(QTreeWidgetItem* item,items){
+	  delete item;
+	}
+}// deletes all optimize position
+
 void Main_crava::getValueFromAngleGather(QTreeWidgetItem* item, QString itemInAngleGather, QString &value, QString parentName){
 	if (item->text(0) == itemInAngleGather){
 		if ( itemInAngleGather == QString("file-name") || itemInAngleGather == QString("estimate-scale") ){//these two values appear twice so an extra check is needed
