@@ -46,6 +46,7 @@ private:
 
 private slots:
 	void on_headerUserDefinedRadioButton_toggled(bool checked);//makes sure the frame for making a user defined header format is displayed when that is required.
+       	void on_bypassCoordinateNoRadioButton_toggled(bool checked);//shows locationScalingLineEdit if the No-button is toggled.
 	void on_reflectionMatrixBrowsePushButton_clicked();//files checked for legality on close of settings Updates the field with the selected file
 	void on_cravaPathBrowsePushButton_clicked();//files checked for legality on close of settings Updates the field with the selected file
 	void on_textEditorBrowsePushButton_clicked(); //Updates the field with the selected file
@@ -55,5 +56,6 @@ private slots:
 	void on_manualPathBrowsePushButton_clicked();//files checked for legality on close of settings Updates the field with the selected file
 	void on_terminalCheckBox_toggled(bool checked);//makes the input for what terminal to run enabled/disabled.
 	void on_segyCheckBox_toggled(bool checked);//can only define header format if segy is selected.
+	void on_vpVsUserDefinedRadioButton_toggled(bool checked);//determines whether vpVsUserDefinedLineEdit is to be shown or not.
 };
 #endif
