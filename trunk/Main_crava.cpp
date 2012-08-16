@@ -4997,6 +4997,23 @@ void Main_crava::on_vpComboBox_currentIndexChanged(int index){
        }
 }
 
+void Main_crava::on_vsComboBox_currentIndexChanged(int index){
+       earthVsSiVpVsLineEdit->setText(QString(""));
+
+       if(index == 0){
+                earth_model_si_filePointer->setText(1,QString(""));
+		earth_model_vp_vs_ratio_filePointer->setText(1,QString(""));
+       }
+       else if(index == 1){
+	        earth_model_vs_filePointer->setText(1,QString(""));
+		earth_model_vp_vs_ratio_filePointer->setText(1,QString(""));
+       }
+       else if(index == 2){
+	        earth_model_vs_filePointer->setText(1,QString(""));
+		earth_model_si_filePointer->setText(1,QString(""));
+       }
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
