@@ -5110,6 +5110,10 @@ void Main_crava::on_oBackgroundTrendCheckBox_toggled(bool checked){
         elastic_parameters_background_trendPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oExtraGridsCheckBox_toggled(bool checked){
+        grid_output_extra_gridsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
