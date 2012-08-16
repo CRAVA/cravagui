@@ -4915,6 +4915,12 @@ void Main_crava::earthSiFile(const QString & value){
        	}
 }
 
+void Main_crava::earthVpVsFile(const QString & value){
+	if (standard->StandardStrings::fileExists(value)){
+	  earth_model_vp_vs_ratio_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+       	}
+}
+
 void Main_crava::on_earthVpFileLineEdit_editingFinished(){
 	  earthVpFile(earthVpFileLineEdit->text());
 }
