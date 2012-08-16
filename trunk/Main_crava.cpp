@@ -4451,6 +4451,14 @@ void Main_crava::on_surfaceUncertaintyLineEdit_editingFinished(){
 	setValueInZone(zone, QString("surface-uncertainty"), value);
 };//changes the surface uncertainty for the selected zone in XML
 
+void Main_crava::on_topCorrelationRadioButton_toggled(bool checked){
+        if(checked){
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	  setValueInZone(zone, QString("correlation-structure"), QString("top"));
+        }
+};//changes the correlation structure to "top" in XML
+
 
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
