@@ -5034,6 +5034,10 @@ void Main_crava::on_oPrefixLineEdit_editingFinished(){
         io_settings_file_output_prefixPointer->setText(1,oPrefixLineEdit->text());
 }
 
+void Main_crava::on_oDomainDepthCheckBox_toggled(bool checked){
+        grid_output_depthPointer->setText(1,StandardStrings::checkedString(checked));//depth
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
