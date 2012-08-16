@@ -436,21 +436,21 @@ void SettingsDialog::on_reflectionMatrixBrowsePushButton_clicked(){
 	}
 }
 void SettingsDialog::on_cravaPathBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Crava Executable"), standard->StandardStrings::inputPath(), QString("All files(*.*)"));//fix the file...
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Crava Executable"), standard->StandardStrings::inputPath(), QString("All files(*)"));//fix the file...
 	if(!fileName.isNull()){
 		cravaPathLineEdit->setText(fileName);
 	}
 }
 
 void SettingsDialog::on_textEditorBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("editor"), standard->StandardStrings::inputPath(), QString("All files(*.*)"));//fix the file...
+	QString fileName = QFileDialog::getOpenFileName(this, QString("editor"), standard->StandardStrings::inputPath(), QString("All files(*)"));//fix the file...
 	if(!fileName.isNull()){
 		textEditorLineEdit->setText(fileName);
 	}
 }
 
 void SettingsDialog::on_terminalPathBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Terminal"), standard->StandardStrings::inputPath(), QString("All files(*.*)"));//fix the file...
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Terminal"), standard->StandardStrings::inputPath(), QString("All files(*)"));//fix the file...
 	if(!fileName.isNull()){
 		terminalPathLineEdit->setText(fileName);
 	}
