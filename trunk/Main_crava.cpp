@@ -5062,6 +5062,10 @@ void Main_crava::on_oVpCheckBox_toggled(bool checked){
         elastic_parameters_vpPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oVsCheckBox_toggled(bool checked){
+        elastic_parameters_vsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
