@@ -4942,8 +4942,8 @@ void Main_crava::on_earthVsSiVpVsLineEdit_editingFinished(){
 	}
 }
 
-void Main_crava::on_earthDensityFileLineEdit_editingFinished(){
-	earthDensityFile(earthDensityFileLineEdit->text());
+void Main_crava::on_earthDensityLineEdit_editingFinished(){
+	earthDensityFile(earthDensityLineEdit->text());
 }
 
 void Main_crava::on_earthVpFileBrowsePushButton_clicked(){
