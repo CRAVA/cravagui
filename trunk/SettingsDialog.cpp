@@ -83,16 +83,13 @@ void SettingsDialog::updateFields(){
 		else {
 			headerUserDefinedRadioButton->setChecked(true);
 			formatChangeFrame->setVisible(true);
-			if ( bypassCoordinateYesRadioButton->isChecked() ){
-				main_crava->locationScalingLineEdit->setVisible(true);
-				main_crava->location_scaling_label->setVisible(true);
+			if ( bypassCoordinateNoRadioButton->isChecked() ){
+				locationScalingLineEdit->setVisible(true);
+				location_scaling_label_2->setVisible(true);
 			}
 			else{
-				main_crava->locationScalingLineEdit->setVisible(false);
-				main_crava->location_scaling_label->setVisible(false);
-				QTreeWidgetItem* angleGather;
-				main_crava->findCorrectAngleGather(&angleGather);	
-				main_crava->setValueInAngleGather( angleGather, QString("location-scaling-coefficient"), QString("") );
+			       	locationScalingLineEdit->setVisible(false);
+				location_scaling_label_2->setVisible(false);
 			}
 
 			xCoordLineEdit->setText(main_crava->segy_format_location_xPointer->text(1));
@@ -139,7 +136,7 @@ void SettingsDialog::updateFields(){
 			maximumRelativeThicknessLineEdit->setText(main_crava->maximum_relative_thickness_differencePointer->text(1));
 
 			lowCutFrequencyBandLineEdit->setText(main_crava->frequency_band_low_cutPointer->text(1));
-			highCutFrequencyBandLineEdit->setText(main_crava->frequency_band_low_cutPointer->text(1));
+			highCutFrequencyBandLineEdit->setText(main_crava->frequency_band_high_cutPointer->text(1));
 		}
 		else{
 			fftPaddingLabel->setVisible(false);
@@ -152,6 +149,8 @@ void SettingsDialog::updateFields(){
 			diskStorageCheckBox->setVisible(false);
 			maximumRelativeThicknessLabel->setVisible(false);
 			maximumRelativeThicknessLineEdit->setVisible(false);
+			vpVsRatioLabel->setVisible(false);
+			vpVsRatioFrame->setVisible(false);
 			frequencyBandLabel->setVisible(false);
 			frequencyBandFrame->setVisible(false);
 			fftPaddingLabel->setEnabled(false);
@@ -164,10 +163,24 @@ void SettingsDialog::updateFields(){
 			diskStorageCheckBox->setEnabled(false);
 			maximumRelativeThicknessLabel->setEnabled(false);
 			maximumRelativeThicknessLineEdit->setEnabled(false);
+			vpVsRatioLabel->setEnabled(false);
+			vpVsRatioFrame->setEnabled(false);
 			frequencyBandLabel->setEnabled(false);
 			frequencyBandFrame->setEnabled(false);
 		}
 		//advanced-settings
+	       	if(main_crava->vp_vs_ratio_from_wellsPointer->text(1)==QString("yes")){
+		  vpVsEstimateWellRadioButton->setChecked(true);
+		  
+		}
+		else if(!main_crava->vp_vs_ratioPointer->text(1).isEmpty()){
+		  vpVsUserDefinedRadioButton->setChecked(true);
+		  vpVsUserDefinedLineEdit->setText(main_crava->vp_vs_ratioPointer->text(1));
+		}
+		else{
+		  vpVsEstimateBackgroundRadioButton->setChecked(true);
+		}
+		seismicResolutionLineEdit->setText(main_crava->high_cut_seismic_resolutionPointer->text(1));
 		energyTresholdLineEdit->setText(main_crava->energy_tresholdPointer->text(1));
 		waveletLengthLineEdit->setText(main_crava->wavelet_tapering_lengthPointer->text(1));
 		waveletRelativeMinimumLineEdit->setText(main_crava->minimum_relative_wavelet_amplitudePointer->text(1));
@@ -175,6 +188,7 @@ void SettingsDialog::updateFields(){
 		whiteNoiseLineEdit->setText(main_crava->white_noise_component_cutPointer->text(1));
 		reflectionMatrixLineEdit->setText(main_crava->reflection_matrixPointer->text(1));
 		krigingDataLineEdit->setText(main_crava->kriging_data_limitPointer->text(1));
+		guardZoneLineEdit->setText(main_crava->guard_zonePointer->text(1));
 		//not possible to set debug level
 		if(main_crava->smooth_kriged_parametersPointer->text(1)==QString("yes")){
 			krigedSmoothCheckBox->setChecked(true);
