@@ -4242,6 +4242,14 @@ void Main_crava::on_vpVsFile2BrowsePushButton_clicked(){
 		vpVsFile(fileName);
 	}
 };//browse for the prior model Vp/Vs file then update the XML file if the above is not triggered, update the field
+
+void Main_crava::vpVsFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+		background_vp_vs_ratio_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
+}
+
+
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
