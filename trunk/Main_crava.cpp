@@ -4025,6 +4025,21 @@ void Main_crava::on_vpFile1RadioButton_toggled(bool checked){//either constant o
 		background_vp_filePointer->setText(1,QString(""));
 	}
 }
+void Main_crava::on_vsFile1RadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
+	vsFile1LineEdit->setEnabled(checked);
+	vsFile1BrowsePushButton->setEnabled(checked);
+	vsConstant1LineEdit->setEnabled(!checked);
+	if(checked){
+		vsFile1LineEdit->setFocus();
+		vsConstant1LineEdit->setText(QString(""));
+		background_vs_constantPointer->setText(1,QString(""));
+	}
+	else{
+		vsConstant1LineEdit->setFocus();
+		vsFile1LineEdit->setText(QString(""));
+		background_vs_filePointer->setText(1,QString(""));
+	}
+}
 void Main_crava::vpFile(const QString &value){
 	// should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
