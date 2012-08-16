@@ -4198,6 +4198,9 @@ void Main_crava::on_aiFile2BrowsePushButton_clicked(){
 		aiFile(fileName);
 	}
 };//browse for the prior model AI file then update the XML file if the above is not triggered, update the field
+void Main_crava::on_aiFile3LineEdit_editingFinished(){
+        aiFile(aiFile3LineEdit->text());
+};//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model AI file
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
