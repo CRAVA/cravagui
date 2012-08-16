@@ -241,7 +241,7 @@ void ModeDialog::on_seedCheckBox_toggled(bool checked){
 void ModeDialog::on_topDirectoryBrowsePushButton_clicked(){
 	QString dirName = QFileDialog::getExistingDirectory(this, QString("Open File"), QDir::currentPath());
 	if(!dirName.isNull()){
-		topDirectoryLineEdit->setText(dirName);
+		topDirectoryLineEdit->setText(dirName + QString("/"));
 	}
 }
 
