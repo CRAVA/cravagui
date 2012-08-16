@@ -5114,6 +5114,10 @@ void Main_crava::on_oExtraGridsCheckBox_toggled(bool checked){
         grid_output_extra_gridsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oBackgroundTrend1DCheckBox_toggled(bool checked){
+        io_settings_background_trend_1dPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
