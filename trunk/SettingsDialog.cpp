@@ -21,9 +21,6 @@
 #include <QFileDialog> 
 #include "Main_crava.h"
 
-// added for automoc in cmake
-//#include "ui_SettingsDialog.h"
-
 /**
 	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
