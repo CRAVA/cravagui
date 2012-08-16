@@ -494,3 +494,7 @@ void SettingsDialog::on_segyCheckBox_toggled(bool checked){
 	headerCharismaRadioButton->setEnabled(checked);
 	headerUserDefinedRadioButton->setEnabled(checked);
 }
+void SettingsDialog::on_vpVsUserDefinedRadioButton_toggled(bool checked){
+        vpVsUserDefinedLineEdit->setVisible(checked);
+        vpVsUserDefinedLineEdit->setEnabled(checked);
+}
