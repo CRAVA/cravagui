@@ -4986,6 +4986,17 @@ void Main_crava::on_earthDensityBrowsePushButton_clicked(){
 	}
 }
 
+void Main_crava::on_vpComboBox_currentIndexChanged(int index){
+       earthVpAiLineEdit->setText(QString(""));
+
+       if(index == 0){
+                earth_model_ai_filePointer->setText(1,QString(""));
+       }
+       else if(index == 1){
+	        earth_model_vp_filePointer->setText(1,QString(""));
+       }
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
