@@ -4188,7 +4188,9 @@ void Main_crava::densityFile(const QString &value){
 		background_density_constantPointer->setText( 1, QString() );
 	}
 }
-
+void Main_crava::on_aiFile2LineEdit_editingFinished(){
+        aiFile(aiFile2LineEdit->text());
+};//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model AI file
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
