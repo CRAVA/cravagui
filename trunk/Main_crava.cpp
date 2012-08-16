@@ -4425,6 +4425,10 @@ void Main_crava::on_deleteZonePushButton_clicked(){
 	 }
 }
 
+void Main_crava::on_baseSurfaceFileLineEdit_editingFinished(){
+	baseSurfaceFile(baseSurfaceFileLineEdit->text());
+};//changes the base surface file for the selected zone in XML
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
