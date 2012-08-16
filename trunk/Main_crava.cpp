@@ -3632,6 +3632,7 @@ void Main_crava::on_bottomTimeFileBrowsePushButton_clicked(){
 	if(!fileName.isNull()){
 		bottomTimeFileLineEdit->setText(fileName);
 		bottomTimeFile(fileName);
+	       	bottomTimeFileLineEdit->setFocus();
 	}
 }//browse for the top time file then update the XML file if the above is not triggered, update the field
 
