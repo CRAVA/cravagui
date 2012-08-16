@@ -280,16 +280,31 @@ void SettingsDialog::updateSettings(){
 			main_crava->segy_format_location_ilPointer->setText(1,inlineLineEdit->text());
 			main_crava->segy_format_location_xlPointer->setText(1,crosslineLineEdit->text());
 			main_crava->segy_format_location_scaling_coefficientPointer->setText(1,locationScalingLineEdit->text());
-			QString bypass("");
+
 			if(bypassCoordinateYesRadioButton->isChecked()){
-				bypass=QString("yes");
+				main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,QString("yes"));
+				main_crava->segy_format_location_scaling_coefficientPointer->setText(1,QString(""));
 			}
-			else if(bypassCoordinateNoRadioButton->isChecked()){
-				bypass=QString("no");
+			else if(bypassCoordinateNoRadioButton->isChecked()){        
+			      	main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,QString("no"));;
 			}
-			main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,bypass);
+			else{
+			        main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,QString(""));
+				main_crava->segy_format_location_scaling_coefficientPointer->setText(1,QString(""));
+			}
+	
 			
 		}
+
+		if(!headerUserDefinedRadioButton->isChecked()){
+		        main_crava->segy_format_location_xPointer->setText(1,QString(""));
+			main_crava->segy_format_location_yPointer->setText(1,QString(""));
+			main_crava->segy_format_location_ilPointer->setText(1,QString(""));
+			main_crava->segy_format_location_xlPointer->setText(1,QString(""));
+			main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,QString(""));
+			main_crava->segy_format_location_scaling_coefficientPointer->setText(1,QString(""));
+		} 
+		
 		main_crava->segy_format_standard_formatPointer->setText(1,headerformat);
 		main_crava->well_output_rmsPointer->setText(1,StandardStrings::checkedString(rmsCheckBox->isChecked()));
 		main_crava->well_output_norsarPointer->setText(1,StandardStrings::checkedString(norsarWellCheckBox->isChecked()));
@@ -327,8 +342,21 @@ void SettingsDialog::updateSettings(){
 
 			main_crava->frequency_band_low_cutPointer->setText(1,lowCutFrequencyBandLineEdit->text());
 			main_crava->frequency_band_high_cutPointer->setText(1,highCutFrequencyBandLineEdit->text());
+		    	if(vpVsEstimateBackgroundRadioButton->isChecked()){
+			        main_crava->vp_vs_ratioPointer->setText(1,QString(""));
+				main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString(""));
+			}
+			else if(vpVsEstimateWellRadioButton->isChecked()){
+		                main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString("yes"));
+				main_crava->vp_vs_ratioPointer->setText(1,QString(""));
+			}
+			else{
+		                main_crava->vp_vs_ratioPointer->setText(1,vpVsUserDefinedLineEdit->text());
+				main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString(""));
+			}
 		}
 		//advanced-settings
+		main_crava->high_cut_seismic_resolutionPointer->setText(1,seismicResolutionLineEdit->text());
 		main_crava->energy_tresholdPointer->setText(1,energyTresholdLineEdit->text());
 		main_crava->wavelet_tapering_lengthPointer->setText(1,waveletLengthLineEdit->text());
 		main_crava->minimum_relative_wavelet_amplitudePointer->setText(1,waveletRelativeMinimumLineEdit->text());
@@ -338,6 +366,7 @@ void SettingsDialog::updateSettings(){
 			main_crava->reflection_matrixPointer->setText(1,standard->StandardStrings::relativeFileName(reflectionMatrixLineEdit->text()));
 		}
 		main_crava->kriging_data_limitPointer->setText(1,krigingDataLineEdit->text());
+		main_crava->guard_zonePointer->setText(1,guardZoneLineEdit->text());
 		//not possible to set debug level
 		if(krigedSmoothCheckBox->isChecked()){
 			checker=QString("yes");
