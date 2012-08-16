@@ -4886,7 +4886,9 @@ void Main_crava::on_crosslineStepLineEdit_editingFinished(){
 }
 
 void Main_crava::earthVpFile(const QString & value){
-	earth_model_vp_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	if (standard->StandardStrings::fileExists(value)){
+	  earth_model_vp_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
 }
 
 void Main_crava::earthVsFile(const QString & value){
