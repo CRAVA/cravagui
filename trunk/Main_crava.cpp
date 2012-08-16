@@ -4231,6 +4231,10 @@ void Main_crava::siFile(const QString &value){
 		background_si_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
 	}
 }
+
+void Main_crava::on_vpVsFile2LineEdit_editingFinished(){
+        vpVsFile(vpVsFile2LineEdit->text());
+};//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model Vp/Vs file
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
