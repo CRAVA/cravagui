@@ -3288,6 +3288,7 @@ void Main_crava::on_synteticVsDetectRadioButton_toggled(bool checked){
 void Main_crava::on_optimizePositionCheckBox_toggled(bool checked){
 	optimizePositionFrame->setVisible(checked);
 	optimizePositionFrame->setEnabled(checked);
+	if(!checked) deleteAllOptimizePosition();
 }
 
 void Main_crava::on_optimizePositionListWidget_currentRowChanged ( int currentRow ){
