@@ -5729,3 +5729,12 @@ bool Main_crava::eventFilter(QObject *obj, QEvent *event){
 	 }
     }
 }//handles the necessary fields
+
+QList<QObject*> Main_crava::getNecessaryFields(){
+          QList<QObject*> list;
+	  list << angleLineEdit << inlineLineEdit << crosslineLineEdit << xCoordLineEdit << yCoordLineEdit;
+	  list << timeLineEdit << densityLineEdit << faciesLineEdit << topTimeFileLineEdit << bottomTimeFileLineEdit;
+	  list << topTimeValueLineEdit << bottomTimeValueLineEdit << correlationDirectionFileLineEdit << layersLineEdit;
+	  list << referenceSurfaceFileLineEdit << distanceTopLineEdit << thicknessLineEdit << layerThicknessLineEdit;
+	  return list;
+}//returns a list of all necessary objects.
