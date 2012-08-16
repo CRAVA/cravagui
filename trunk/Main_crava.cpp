@@ -4742,30 +4742,10 @@ void Main_crava::on_uncertaintyLevelLineEdit_editingFinished(){
 };//update the XML file with the uncertainty level
 
 void Main_crava::on_writeXmlPushButton_clicked(){
-	bool pressedOK = false; //bool that becomes true if the users presses the Ok button
-	QString *xmlFilename = new QString; //the name of the xml file
-	QPointer<OutputDialog> output = new OutputDialog(this, xmlFilename, this, faciesProbabilitiesOn(),forwardMode(),estimationMode());
-	if(output->exec()){
-		output->updateOutput();//updates the tree
-		output->updateXmlName(); //updates the xml filename
-		QSettings settings("Statoil","CRAVA");
-		settings.beginGroup("crava");
-		settings.beginGroup("GUI");
-		settings.setValue(QString("xmlName"), *xmlFilename);
-		settings.endGroup();
-		settings.endGroup();
-		delete output;
-		pressedOK = true;
+	      if (okToRun()){ //has to save the file to run
+		on_runAction_triggered();
+		statusBar()->showMessage("Running CRAVA",2000);
 	}
-	delete output;
-	//cout << pressedOK << endl;
-	if (pressedOK == true){
-		//saves the file and then runs
-		if( saveFile( top_directoryPointer->text(1) + output_directoryPointer->text(1) + QString("/") + *xmlFilename + QString(".xml") ) ){ //the full path + the name of the xml file + .xml 
-			on_runAction_triggered();
-		}
-	}
-	delete xmlFilename;
 }
 
 void Main_crava::on_areaSeismicRadioButton_toggled(bool checked){
