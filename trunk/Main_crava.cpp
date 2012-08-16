@@ -4815,6 +4815,10 @@ void Main_crava::on_areaSurfaceFileBrowsePushButton_clicked(){
 	}
 }
 
+void Main_crava::on_surfaceSnapCheckBox_toggled(bool checked){
+        area_from_surface_snap_to_seismic_dataPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::on_areaXRefLineEdit_editingFinished(){
 	utm_coordinates_reference_point_xPointer->setText( 1, areaXRefLineEdit->text() );
 }
