@@ -3813,6 +3813,26 @@ void Main_crava::on_faciesBottomBrowsePushButton_clicked(){
 };//browse for the facies bottom time file then update the XML file if the above is not triggered, update the field
 
 	//prior model
+void Main_crava::on_backgroundRadioButton_toggled(bool checked){
+	if(checked){
+                backgroundModelFrame->setVisible(true);
+		backgroundEstimateFrame->setVisible(false);
+		backgroundMultizoneFrame->setVisible(false);
+		//Clears the background estimation fields
+		velocityFieldPriorFileLineEdit->setText(QString(""));
+		highCutFrequencyLineEdit->setText(QString(""));
+		background_velocity_fieldPointer->setText(1,QString(""));
+		background_high_cut_background_modellingPointer->setText(1,QString(""));
+		//Clears the multizone background model fields
+		background_top_surface_filePointer->setText(1,QString(""));
+		topSurfaceFileLineEdit->setText(QString(""));
+		background_top_surface_erosion_priorityPointer->setText(1,QString(""));
+		topPrioritySpinBox->setValue(1);
+		deleteAllZones();
+		zoneListWidget->clear();
+	}
+
+}
 	//buttons for vp/vs/density
 void Main_crava::on_vpFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
 	vpFileLineEdit->setVisible(checked);
