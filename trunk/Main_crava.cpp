@@ -4300,6 +4300,14 @@ void Main_crava::on_topSurfaceFileLineEdit_editingFinished(){
          topSurfaceFile(topSurfaceFileLineEdit->text());
 };//update the XML tree with the top surface file
 
+void Main_crava::on_topSurfaceFileBrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		topSurfaceFileLineEdit->setText(fileName);
+		topSurfaceFile(fileName);
+	}
+};//browse for the top surface file and update the XML tree if the above is not triggered.
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
