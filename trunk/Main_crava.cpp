@@ -5054,6 +5054,10 @@ void Main_crava::on_oSeismicResidualCheckBox_toggled(bool checked){
         seismic_data_residualsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oSeismicSyntheticResidualCheckBox_toggled(bool checked){
+  seismic_data_synthetic_residualsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
