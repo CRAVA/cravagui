@@ -5421,6 +5421,9 @@ void Main_crava::setDefaultValues(){
 	maximum_offsetPointer->setText( 1, QString("250.0") );
 	maximum_shiftPointer->setText( 1, QString("11.0") );
 
+	guard_zonePointer->setText( 1, QString("100.0"));
+	high_cut_seismic_resolutionPointer->setText( 1, QString(""));
+
 }
 
 void Main_crava::activateTable(){
