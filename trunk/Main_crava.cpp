@@ -3868,6 +3868,36 @@ void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
 	       zoneFrame->setEnabled(false);
 	}
 }
+void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
+	if(checked){
+                backgroundModelFrame->setVisible(false);
+		backgroundEstimateFrame->setVisible(true);
+		backgroundMultizoneFrame->setVisible(false);
+		vpVsRhoRadioButton->setChecked(true);
+		backgroundEstimatedConfigurationCheckBox->setChecked(false);
+		
+		//Clears the background fields
+		QList<QLineEdit*> fields=backgroundModelFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field, fields){
+			field->clear();
+		}
+		for(int i=0;i<backgroundPointer->childCount();i++){
+		  if(backgroundPointer->child(i)->childCount()<1){
+		    if(backgroundPointer->child(i)->text(1) != QString("velocity-field") && backgroundPointer->child(i)->text(1) != QString("high-cut-background-modelling")){
+			backgroundPointer->child(i)->setText(1,QString());//clear
+		    }
+		  }
+		}
+		//Clears the multizone background model fields
+		background_top_surface_filePointer->setText(1,QString(""));
+		topSurfaceFileLineEdit->setText(QString(""));
+		background_top_surface_erosion_priorityPointer->setText(1,QString(""));
+		topPrioritySpinBox->setValue(1);
+		deleteAllZones();
+		zoneListWidget->clear();
+	}
+
+}
 	//buttons for vp/vs/density
 void Main_crava::on_vpFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
 	vpFileLineEdit->setVisible(checked);
