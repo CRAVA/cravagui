@@ -4909,6 +4909,12 @@ void Main_crava::earthAiFile(const QString & value){
        	}
 }
 
+void Main_crava::earthSiFile(const QString & value){
+	if (standard->StandardStrings::fileExists(value)){
+	  earth_model_si_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+       	}
+}
+
 void Main_crava::on_earthVpFileLineEdit_editingFinished(){
 	  earthVpFile(earthVpFileLineEdit->text());
 }
