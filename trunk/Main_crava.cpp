@@ -4458,6 +4458,13 @@ void Main_crava::on_topCorrelationRadioButton_toggled(bool checked){
 	  setValueInZone(zone, QString("correlation-structure"), QString("top"));
         }
 };//changes the correlation structure to "top" in XML
+void Main_crava::on_baseCorrelationRadioButton_toggled(bool checked){
+        if(checked){
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	  setValueInZone(zone, QString("correlation-structure"), QString("base"));
+	}
+};//changes the correlation structure to "base" in XML
 
 
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
