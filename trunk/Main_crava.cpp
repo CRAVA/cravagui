@@ -5138,6 +5138,10 @@ void Main_crava::on_oWaveletLocalCheckBox_toggled(bool checked){
         wavelet_output_local_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oTimeDepthCheckBox_toggled(bool checked){
+        grid_output_time_to_depth_velocityPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
