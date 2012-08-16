@@ -4379,6 +4379,21 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	insertZonePushButton->setEnabled(true);
 }
 
+void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.			   
+        zoneListWidget->addItem(QString("zone ") + QString::number(zoneListWidget->count()+1));
+	addZone();
+	zoneListWidget->setCurrentItem(zoneListWidget->item(zoneListWidget->count()-1));
+	basePrioritySpinBox->setValue(1);
+	on_basePrioritySpinBox_editingFinished();
+	topCorrelationRadioButton->setChecked(true);
+	basePrioritySpinBox->setFocus();
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+	setValueInZone(zone, QString("surface-uncertainty"), QString("0"));
+	surfaceUncertaintyLineEdit->setText(QString("0"));
+	
+};//adds a new zone for multizone model
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
