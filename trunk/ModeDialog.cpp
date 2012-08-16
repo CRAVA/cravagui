@@ -111,7 +111,6 @@ ModeDialog::ModeDialog(Main_crava *main_crava, bool started, bool *pressedOpen, 
 	}
 }
 
-
 void ModeDialog::modes(){
 	
 	if(estimateRadioButton->isChecked()){
@@ -217,6 +216,14 @@ void ModeDialog::modes(){
 			main_crava->estimation_settingsPointer->child(i)->setText(1,QString(""));
 		}
 	}
+}
+
+void ModeDialog::on_oldProjectRadioButton_toggled(bool checked){
+         oldProjectWidget->setVisible(checked);
+	 oldProjectWidget->setEnabled(checked);
+	 newProjectWidget->setVisible(!checked);
+	 newProjectWidget->setEnabled(!checked);
+	 newProjectRadioButton->setChecked(!checked);
 }
 
 void ModeDialog::on_simulationCheckBox_toggled(bool checked){
