@@ -261,10 +261,10 @@ void ModeDialog::on_openProjectBrowsePushButton_clicked(){
 }
 
 void ModeDialog::on_buttonBox_accepted(){
-	if ( modeDialogToolBox->itemText( modeDialogToolBox->currentIndex() ) == QString("Open previous project") ){
-		*(this->hasPressedOpen) = true; //if the "Open previous project" tab is open, hasPressedOpen will be true, and this will make the program load the project later on in the code.
+        if (oldProjectRadioButton->isChecked()){
+		*(this->hasPressedOpen) = true; //if the "Open previous project" radio button is checked, hasPressedOpen will be true, and this will make the program load the project later on in the code.
 	}
-	else if ( modeDialogToolBox->itemText( modeDialogToolBox->currentIndex() ) == QString("Make new project") ){ //check if the directories are valid.
+	else if (newProjectRadioButton->isChecked()){ //check if the directories are valid.
 		//if the folders exist, ok, otherwise message box.
 		QDir topDirectory(topDirectoryLineEdit->text());
 		QDir inputDirectory(inputDirectoryLineEdit->text());
