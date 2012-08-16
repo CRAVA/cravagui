@@ -474,7 +474,7 @@ void SettingsDialog::on_manualPathBrowsePushButton_clicked(){
 	if(!fileName.isNull()){
 		manualPathLineEdit->setText(fileName);
 	}
-}
+ }
 
 void SettingsDialog::on_terminalCheckBox_toggled(bool checked){
 	terminalPathLineEdit->setEnabled(checked);
@@ -483,12 +483,10 @@ void SettingsDialog::on_terminalCheckBox_toggled(bool checked){
 }
 void SettingsDialog::on_segyCheckBox_toggled(bool checked){
 	if(!checked){
-		headerUserDefinedRadioButton->setChecked(true);
+		headerSeisWorksRadioButton->setChecked(true);
 		formatChangeFrame->setVisible(false);
 	}
-	else{
-		headerSeisWorksRadioButton->setChecked(true);
-	}
+
 	headerFormatLabel->setEnabled(checked);
 	headerSeisWorksRadioButton->setEnabled(checked);
 	headerIesxRadioButton->setEnabled(checked);
