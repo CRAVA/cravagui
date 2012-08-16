@@ -54,17 +54,15 @@ ModeDialog::ModeDialog(Main_crava *main_crava, bool started, bool *pressedOpen, 
 	seedCheckBox->setChecked(true);
 	frame->setVisible(false);
 	if (existing == true){
-		for (int i=0; i<modeDialogToolBox->count(); i++){
-			if ( modeDialogToolBox->itemText(i) == QString("Open previous project") ){
-				modeDialogToolBox->setItemEnabled(i, false);
-			}
-			if ( modeDialogToolBox->itemText(i) == QString("Make new project") ){
-				modeDialogToolBox->setItemText( i, QString("Mode") );
-			}
-		}
+	                oldProjectRadioButton->setEnabled(false);
+			oldProjectRadioButton->setVisible(false);
+		        newProjectRadioButton->setText(QString("Mode"));
+			newProjectRadioButton->setChecked(true);
+			on_oldProjectRadioButton_toggled(false)
 	}
 	else{
-		modeDialogToolBox->setCurrentWidget( modeDialogToolBox->widget(0) );
+	                oldProjectRadioButton->setChecked(true);
+			on_oldProjectRadioButton_toggled(true);
 	}
 	topDirectoryLineEdit->setText( main_crava->top_directoryPointer->text(1) );
 	inputDirectoryLineEdit->setText( main_crava->top_directoryPointer->text(1) + main_crava->input_directoryPointer->text(1) );
