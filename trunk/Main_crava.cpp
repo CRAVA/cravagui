@@ -4428,6 +4428,13 @@ void Main_crava::on_deleteZonePushButton_clicked(){
 void Main_crava::on_baseSurfaceFileLineEdit_editingFinished(){
 	baseSurfaceFile(baseSurfaceFileLineEdit->text());
 };//changes the base surface file for the selected zone in XML
+void Main_crava::on_baseSurfaceFileBrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		baseSurfaceFileLineEdit->setText(fileName);
+		baseSurfaceFile(fileName);
+	}
+};//browse for the top surface file and update the XML tree if the above is not triggered.
 
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
