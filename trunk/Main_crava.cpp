@@ -4411,6 +4411,20 @@ void Main_crava::on_insertZonePushButton_clicked(){
 
 };//inserts a new zone for multizone model
 
+void Main_crava::on_deleteZonePushButton_clicked(){
+
+         int row = zoneListWidget->currentRow();
+         QTreeWidgetItem* zone;
+	 findCorrectZone(&zone);
+	 
+	 delete zoneListWidget->takeItem(row);
+	 delete zone;
+
+	 for(int i=row;i<zoneListWidget->count();i++){
+	   zoneListWidget->item(i)->setText(QString("zone ") + QString::number(i+1));
+	 }
+}
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
