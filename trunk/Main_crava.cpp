@@ -5042,6 +5042,10 @@ void Main_crava::on_oDomainTimeCheckBox_toggled(bool checked){
         grid_output_timePointer->setText(1,StandardStrings::checkedString(checked));//time
 }
 
+void Main_crava::on_oSeismicOriginalCheckBox_toggled(bool checked){
+        seismic_data_originalPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
