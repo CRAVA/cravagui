@@ -4008,6 +4008,23 @@ void Main_crava::on_aiSiRhoRadioButton_toggled(bool checked){
 		background_vp_vs_ratio_filePointer->setText(1,QString(""));
 	}
 }
+
+	//buttons for vp/vs/density/ai/si/vp-vs
+void Main_crava::on_vpFile1RadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
+	vpFile1LineEdit->setEnabled(checked);
+	vpFile1BrowsePushButton->setEnabled(checked);
+	vpConstant1LineEdit->setEnabled(!checked);
+	if(checked){
+		vpFile1LineEdit->setFocus();
+		vpConstant1LineEdit->setText(QString(""));
+		background_vp_constantPointer->setText(1,QString(""));
+	}
+	else{
+		vpConstant1LineEdit->setFocus();
+		vpFile1LineEdit->setText(QString(""));
+		background_vp_filePointer->setText(1,QString(""));
+	}
+}
 void Main_crava::vpFile(const QString &value){
 	// should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
