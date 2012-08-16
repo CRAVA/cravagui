@@ -4921,8 +4921,13 @@ void Main_crava::earthVpVsFile(const QString & value){
        	}
 }
 
-void Main_crava::on_earthVpFileLineEdit_editingFinished(){
-	  earthVpFile(earthVpFileLineEdit->text());
+void Main_crava::on_earthVpAiLineEdit_editingFinished(){
+        if(vpComboBox->currentIndex() == 0){
+	  earthVpFile(earthVpAiLineEdit->text());
+	}
+	else if(vpComboBox->currentIndex() == 1){
+	  earthAiFile(earthVpAiLineEdit->text());
+        }
 }
 
 void Main_crava::on_earthVsFileLineEdit_editingFinished(){
