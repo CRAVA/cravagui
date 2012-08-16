@@ -3359,11 +3359,6 @@ void Main_crava::on_weightLineEdit_editingFinished(){
 	setValueInWell(optimizePosition, QString("weight"), value);
 }//updates the weight of the optimized position in XML
 
-//well parameter info
-void Main_crava::on_seismicResolutionLineEdit_editingFinished(){
-	high_cut_seismic_resolutionPointer->setText( 1, seismicResolutionLineEdit->text() );
-}//update the XML three with the high cut seismic resolution
-
 //horizon
 void Main_crava::on_twoSurfaceRadioButton_toggled(bool checked){
 	//needs to remove the values off the other case.
