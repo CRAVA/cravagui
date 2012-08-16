@@ -55,6 +55,7 @@ private:
 	bool noXmlInfo(QTreeWidgetItem *item);//this is used to check whether things should be written to xml, as only non-empty items should be written.
 	void variogram(QTreeWidgetItem *item);//this method opens a variogram modifying the correct data in the xml treewidget
 	bool okToCloseCurrent();//this promts the user to save to xml before exiting.
+       	bool okToRun();//this prompts the user to save to xml before running crava.
 	//file handlers is probably wrong as what they actually handle is putting things in the tree, each is used by at least 2 slots(the line and the browse button).
 	//stack file handlers
 	void addStack();//adds another stack to the xml treewidget with the correct children and their children etc.
@@ -83,16 +84,26 @@ private:
 	void vpFile(const QString & value);//updates the tree with the vp file cube for given background
 	void vsFile(const QString & value);//updates the tree with the vs file cube for given background
 	void densityFile(const QString & value);//updates the tree with the density file cube for given background
+	void aiFile(const QString & value);//updates the tree with the ai file cube for given background
+	void siFile(const QString & value);//updates the tree with the si file cube for given background
+	void vpVsFile(const QString & value);//updates the tree with the Vp/Vs file cube for given background
+	void topSurfaceFile(const QString & value);//updates the tree with the correct file for top surface for multizone background
+	void baseSurfaceFile(const QString & value);//updates the tree with the correct file for base surface for multizone background
 	void velocityFieldPriorFile(const QString & value);//updates the tree with the correct file for the vp trend for extimated background
 	void temporalCorrelationFile(const QString & value);//updates the tree with the correct file for temporal correlation for extimated background
 	void parameterCorrelationFile(const QString & value);//updates the tree with the correct file for parameter correlation for extimated background
 	void correlationDirectionFile(const QString & value);//updates the tree with the correct file for correlation direction, can only be used if two surfaces are given for the inversion interval
+       	void addZone();//adds another zone with the correct children to the tree
+	void insertZone();//inserts another zone with the correct children in the tree
 	void addFacies();//adds another facies with the correct children to the tree
 	void probabilityCubeFile(const QString & value);//updates the tree with the given probability cube.
 	//earth model
 	void earthVpFile(const QString & value);//updates the tree with the earth model vp cube file for forward mode.
 	void earthVsFile(const QString & value);//updates the tree with the earth model vs cube file for forward mode.
 	void earthDensityFile(const QString & value);//updates the tree with the earth model density cube file for forward mode.
+	void earthAiFile(const QString & value);//updates the tree with the earth model AI cube file for forward mode.
+	void earthSiFile(const QString & value);//updates the tree with the earth model SI cube file for forward mode.
+	void earthVpVsFile(const QString & value);//updates the tree with the earth model Vp/Vs ratio cube file for forward mode.
 	//file formats
 	QString currentFile_;//holds the path of the current xml file, should not be accessed directly
 	const QString& currentFile(){return currentFile_;}//gives the current file.
@@ -128,15 +139,25 @@ private:
 
 	void findCorrectOptimizePosition(QTreeWidgetItem** itemParent); //finds the optimize position which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the optimize position. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
 
+	void findCorrectZone(QTreeWidgetItem** itemParent);//finds the zone which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the facies. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
+
 	void findCorrectFacies(QTreeWidgetItem** itemParent); //finds the facies which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the facies. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
 
 	QList<QTreeWidgetItem*> getAllAngleGathers(); // returns a list of all angle gathers in the tree.
+
+       	void deleteAllZones(); //deletes alle zones in the tree
+
+	void deleteAllFacies(); //deletes all facies in the tree
+
+	void deleteAllOptimizePosition(); //deletes all optimize position in tree
 
 	void getValueFromAngleGather( QTreeWidgetItem* item, QString itemInAngleGather, QString &value, QString parentName = QString() ); //gets the wanted value in the tree, but only searches through the subtree consisting of the angle gather. First argument is the angle gather. The second argument is the quantity one wants (for instance file-name). The third argument is the return value. The fourth argument is the name of the parent of the second argument (some nodes in the tree have the same name). Recursive.
 
 	void getValueFromWell(QTreeWidgetItem* item, QString itemInWell, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the well. First argument is the well. The second argument is the quantity one wants (for instance file-name). The third argument is the return value. Recursive.
 
 	void getValueFromOptimizePosition(QTreeWidgetItem* item, QString itemInWell, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the optimize position. First argument is the optimize position. The second argument is the quantity one wants (for instance angle). The third argument is the return value. Recursive.
+
+	void getValueFromZone(QTreeWidgetItem* item, QString itemInZone, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the facies. First argument is the zone. The second argument is the quantity one wants (for instance name). The third argument is the return value. Recursive.
 
 	void getValueFromFacies(QTreeWidgetItem* item, QString itemInWell, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the facies. First argument is the facies. The second argument is the quantity one wants (for instance name). The third argument is the return value. Recursive.
 
@@ -146,10 +167,16 @@ private:
 
 	void setValueInOptimizePosition(QTreeWidgetItem* item, QString itemInWell, QString value); //sets the correct value in the tree, but only searches through the subtree consisting of the optimize position. First argument is the optimize position. The second argument is the quantity one wants to change (for instance angle). The third argument is the value which will be put in the tree. Recursive.
 
+	void setValueInZone(QTreeWidgetItem* item, QString itemInZone, QString value); //sets the correct value in the tree, but only searches through the subtree consisting of the zones. First argument is the zone. The second argument is the quantity one wants to change (for instance name). The third argument is the value which will be put in the tree. Recursive.
+
 	void setValueInFacies(QTreeWidgetItem* item, QString itemInWell, QString value); //sets the correct value in the tree, but only searches through the subtree consisting of the facies. First argument is the facies. The second argument is the quantity one wants to change (for instance name). The third argument is the value which will be put in the tree. Recursive.
 
 
 	void setDefaultValues(); // sets default values for some of the values in well-data.
+
+       	QList<QObject*> getNecessaryFields();// returns a list with fields that are necessary. used to set red borders when empty
+
+	void necessaryFieldGui();// sets borders on the necessary fields when empty
 
 	//Table: This is a table which contains a pointer to all the nodes in tree (except for those what are added during the program). Gives easy access to all the values in the tree. The values are set in activateTable. Those that are added during the program have their own functions (for instance findCorrectAngleGather).
 
