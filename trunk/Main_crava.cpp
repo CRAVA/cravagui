@@ -3183,19 +3183,8 @@ void Main_crava::wellFile(const QString & value){
 		setValueInWell( well, QString("file-name"), standard->StandardStrings::relativeFileName(value) );
 		wellNameLabel->setText(StandardStrings::strippedName(value));
 		wellListWidget->currentItem()->setText(StandardStrings::strippedName(value));
-		wellFileLineEdit->setText( standard->StandardStrings::relativeFileName(value) );
 	}
 }
-void Main_crava::on_wellFileLineEdit_editingFinished(){
-	wellFile(wellFileLineEdit->text());
-}//update the XML three with the file if it is correct, ell file, rms format, would be nice to have a converter from las
-
-void Main_crava::on_wellBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::wellFormat());//well format maybe?
-	if(!fileName.isNull()){
-		wellFile(fileName);
-	}
-}//browse for the well file then update the XML file, update the field
 
 void Main_crava::on_waveletEstimationCheckBox_toggled(bool checked){
 	QTreeWidgetItem* well;
