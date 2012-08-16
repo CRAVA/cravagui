@@ -406,27 +406,21 @@ void SettingsDialog::on_headerUserDefinedRadioButton_toggled(bool checked){
 	formatChangeFrame->setVisible(checked);
 	formatChangeFrame->setEnabled(checked);
 	if(checked){
-		bypassCoordinateEstimateRadioButton->setChecked(true);//might be better to check what is actually in the tree for better modibility
-		if ( bypassCoordinateYesRadioButton->isChecked() ){
-			main_crava->locationScalingLineEdit->setVisible(true);
-			main_crava->location_scaling_label->setVisible(true);
+		bypassCoordinateEstimateRadioButton->setChecked(main_crava->segy_format_bypass_coordinate_scalingPointer->text(1)=="");
+	        bypassCoordinateYesRadioButton->setChecked(main_crava->segy_format_bypass_coordinate_scalingPointer->text(1)=="yes");	
+	        bypassCoordinateNoRadioButton->setChecked(main_crava->segy_format_bypass_coordinate_scalingPointer->text(1)=="no");	
+							  
+		if ( bypassCoordinateNoRadioButton->isChecked() ){
+			locationScalingLineEdit->setVisible(true);
+			location_scaling_label_2->setVisible(true);
 		}
 		else{
-			main_crava->locationScalingLineEdit->setVisible(false);
-			QTreeWidgetItem* angleGather;
-			main_crava->findCorrectAngleGather(&angleGather);	
-			main_crava->setValueInAngleGather( angleGather, QString("location-scaling-coefficient"), QString("") );
-			main_crava->location_scaling_label->setVisible(false);
+			locationScalingLineEdit->setVisible(false);
+			location_scaling_label_2->setVisible(false);
 		}
 		xCoordLineEdit->setFocus();
-	}
-	else {
-		//clears the user defined settings if the button is deselectedAngel_label
-		QList<QLineEdit*> fields=formatChangeFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
-		foreach (QLineEdit* field, fields){
-			field->clear();
-		}
-	}
+        }
+
 	//should enable editing
 }
 
