@@ -101,13 +101,10 @@
     <file>Main_crava.h</file>
     <file>moc_Main_crava.cpp</file>
     <file>moc_ModeDialog.cpp</file>
-    <file>moc_OutputDialog.cpp</file>
     <file>moc_SettingsDialog.cpp</file>
     <file>moc_VariogramDialog.cpp</file>
     <file>ModeDialog.cpp</file>
     <file>ModeDialog.h</file>
-    <file>OutputDialog.cpp</file>
-    <file>OutputDialog.h</file>
     <file>SeismicHeaderFormat.cpp</file>
     <file>seismicHeaderFormat.h</file>
     <file>SeismicHeaderFormat.h</file>
@@ -118,7 +115,6 @@
     <file>StandardStrings.h</file>
     <file>ui_Main_crava.h</file>
     <file>ui_ModeDialog.h</file>
-    <file>ui_OutputDialog.h</file>
     <file>ui_SettingsDialog.h</file>
     <file>ui_VariogramDialog.h</file>
     <file>VariogramDialog.cpp</file>
