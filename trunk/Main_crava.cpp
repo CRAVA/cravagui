@@ -4436,6 +4436,14 @@ void Main_crava::on_baseSurfaceFileBrowsePushButton_clicked(){
 	}
 };//browse for the top surface file and update the XML tree if the above is not triggered.
 
+void Main_crava::baseSurfaceFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	  setValueInZone(zone, QString("base-surface-file"), standard->StandardStrings::relativeFileName(value) );
+	}
+}
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
