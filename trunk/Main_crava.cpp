@@ -3488,10 +3488,10 @@ void Main_crava::on_correlationSurfaceRadioButton_toggled(bool checked){
 }
 
 void Main_crava::on_oneSurfaceRadioButton_toggled(bool checked){
+  	surfaceTwoFrame->setVisible(!checked);
+	surfaceTwoFrame->setEnabled(!checked);
 	surfaceOneFrame->setVisible(checked);
 	surfaceOneFrame->setEnabled(checked);
-	surfaceTwoFrame->setVisible(!checked);
-	surfaceTwoFrame->setEnabled(!checked);
 	if(!checked){//clears one surface;
 		for (int i=0;i<interval_one_surfacePointer->childCount();i++){
 				interval_one_surfacePointer->child(i)->setText(1,QString(""));
