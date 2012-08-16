@@ -5259,6 +5259,10 @@ void Main_crava::findCorrectOptimizePosition(QTreeWidgetItem** itemParent){
 	*itemParent = xmlTreeWidget->topLevelItem(0)->child(2)->child( 1+wellListWidget->currentRow() )->child( 6+optimizePositionListWidget->currentRow() ); //changes the pointer
 }
 
+void Main_crava::findCorrectZone(QTreeWidgetItem** itemParent){
+  *itemParent = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(2+zoneListWidget->currentRow()); //changes the pointer
+}
+
 void Main_crava::findCorrectFacies(QTreeWidgetItem** itemParent){
 	*itemParent = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(4)->child( faciesListWidget->currentRow() ); //changes the pointer
 }
