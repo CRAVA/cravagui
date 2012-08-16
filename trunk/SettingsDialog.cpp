@@ -36,6 +36,7 @@ SettingsDialog::SettingsDialog(Main_crava *main_crava, QWidget *parent, bool for
 	headerButtonGroup->addButton(headerCharismaRadioButton);
 	headerButtonGroup->addButton(headerUserDefinedRadioButton);
 	on_headerUserDefinedRadioButton_toggled(false);
+       	on_vpVsUserDefinedRadioButton_toggled(!main_crava->vp_vs_ratioPointer->text(1).isEmpty());
 	forward=forwardOn;
 	estimation=estimationOn;
 	updateFields();
