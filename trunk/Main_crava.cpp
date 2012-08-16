@@ -3530,8 +3530,6 @@ void Main_crava::on_constantInversionRadioButton_toggled(bool checked){
 	bottomTimeConstantLabel->setEnabled(checked);
 	bottomTimeValueLineEdit->setEnabled(checked);
 	depthSurfacesCheckBox->setVisible(!checked);
-	//depthSurfaceFrame->setVisible(!checked);
-	//depthSurfaceFrame->setEnabled(!checked);
 	depthSurfacesCheckBox->setEnabled(!checked);
 	if(checked) {
 		//needs to clear the files and the fileedits
