@@ -3898,7 +3898,41 @@ void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	}
 
 }
-
+void Main_crava::on_vpVsRhoRadioButton_toggled(bool checked){
+	//needs to fix the values as well
+	if(checked){
+           	vpVsRhoFrame->setVisible(true);
+		aiVpVsRhoFrame->setVisible(false);
+		aiSiRhoFrame->setVisible(false);
+		vpVsRhoFrame->setEnabled(true);
+		aiVpVsRhoFrame->setEnabled(false);
+		aiSiRhoFrame->setEnabled(false);
+		vpFile1RadioButton->setChecked(true);
+		vsFile1RadioButton->setChecked(true);
+		if(!background_density_constantPointer->text(1).isEmpty()){
+		  densityConstant1RadioButton->setChecked(true);
+		  densityConstant1LineEdit->setText(background_density_constantPointer->text(1));
+		  densityFile1LineEdit->setEnabled(false);
+		  densityFile1BrowsePushButton->setEnabled(false);
+		}
+		else{
+		  densityFile1RadioButton->setChecked(true);
+		  densityFile1LineEdit->setText(background_density_filePointer->text(1));
+		   densityConstant1LineEdit->setEnabled(false);
+		}
+		QList<QLineEdit*> fields1=aiVpVsRhoFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field1, fields1){
+			field1->clear();
+		}
+		QList<QLineEdit*> fields2=aiSiRhoFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field2, fields2){
+			field2->clear();
+		}
+		background_ai_filePointer->setText(1,QString(""));
+		background_si_filePointer->setText(1,QString(""));
+		background_vp_vs_ratio_filePointer->setText(1,QString(""));
+	}
+}
 void Main_crava::vpFile(const QString &value){
 	// should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
