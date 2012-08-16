@@ -4114,6 +4114,10 @@ void Main_crava::vpFile(const QString &value){
 void Main_crava::on_vsFile1LineEdit_editingFinished(){
 	vsFile(vsFile1LineEdit->text());
 };//update the XML three with the file if it is correct, autocomplete would be nice, prior model vs file
+void Main_crava::on_vsConstant1LineEdit_editingFinished(){
+	background_vs_constantPointer->setText( 1, vsConstant1LineEdit->text() );
+	background_vs_filePointer->setText( 1, QString() );
+};//update the XML three with constant vs for the background model
 void Main_crava::vsFile(const QString &value){
 	//should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
