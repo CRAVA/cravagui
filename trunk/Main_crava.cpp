@@ -4096,6 +4096,13 @@ void Main_crava::on_vpConstant1LineEdit_editingFinished(){
 	background_vp_constantPointer->setText( 1, vpConstant1LineEdit->text() );
 	background_vp_filePointer->setText( 1, QString() );
 };//update the XML three with constant vp for the background model
+void Main_crava::on_vpFile1BrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		vpFile1LineEdit->setText(fileName);
+		vpFile(fileName);
+	}
+};//browse for the prior model vp file then update the XML file if the above is not triggered, update the field
 void Main_crava::vpFile(const QString &value){
 	// should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
