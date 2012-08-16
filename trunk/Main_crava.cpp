@@ -3392,6 +3392,7 @@ void Main_crava::on_twoSurfaceRadioButton_toggled(bool checked){
 		topDepthFileBrowsePushButton->setEnabled(true);
 		//velocityFieldNoneRadioButton->setChecked(true);
 		on_depthSurfacesCheckBox_toggled(depthSurfacesCheckBox->isChecked());//might break loading, handled
+		necessaryFieldGui();
 	}
 }
 void Main_crava::on_topSurfaceRadioButton_toggled(bool checked){
@@ -3428,6 +3429,7 @@ void Main_crava::on_topSurfaceRadioButton_toggled(bool checked){
 		bottomTimeFileLineEdit->clear();
 		bottomDepthFileLineEdit->clear();
 		on_depthSurfacesCheckBox_toggled(depthSurfacesCheckBox->isChecked());//might break loading, handled.
+       	   	necessaryFieldGui();
 	}
 }
 void Main_crava::on_baseSurfaceRadioButton_toggled(bool checked){
@@ -3463,6 +3465,7 @@ void Main_crava::on_baseSurfaceRadioButton_toggled(bool checked){
 		topDepthFileBrowsePushButton->setEnabled(false);
 		//velocityFieldNoneRadioButton->setChecked(true);
 		on_depthSurfacesCheckBox_toggled(depthSurfacesCheckBox->isChecked());//might break loading handled
+	       	necessaryFieldGui();
 	}
 }
 
@@ -3479,6 +3482,7 @@ void Main_crava::on_correlationSurfaceRadioButton_toggled(bool checked){
 		correlationDirectionFile(QString(""));
 	}
 	else {
+	  	necessaryFieldGui();
 		on_twoSurfaceRadioButton_toggled(true);
 	}
 }
@@ -3512,6 +3516,7 @@ void Main_crava::on_oneSurfaceRadioButton_toggled(bool checked){
 		foreach (QLineEdit* field, fields){
 			field->clear();
 		}
+	       	necessaryFieldGui();
 	}
 }
 void Main_crava::on_constantInversionRadioButton_toggled(bool checked){
@@ -3551,6 +3556,7 @@ void Main_crava::on_constantInversionRadioButton_toggled(bool checked){
 		topTimeSurfaceLabel->setEnabled(false);
 		topTimeFileLineEdit->setEnabled(false);
 		topTimeFileBrowsePushButton->setEnabled(false);
+	       	necessaryFieldGui();
 		//velocityFieldNoneRadioButton->setChecked(true);
 	}
 	else{//clear the constants
