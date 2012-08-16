@@ -4318,6 +4318,67 @@ void Main_crava::on_topPrioritySpinBox_editingFinished(){
         background_top_surface_erosion_priorityPointer->setText(1,QString::number(topPrioritySpinBox->value()));
 }
 
+void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
+	if(currentRow==-1){//disable if there are no items left.
+		baseSurfaceFileLineEdit->setText(QString());
+		basePrioritySpinBox->setValue(1);
+		topCorrelationRadioButton->setChecked(true);
+		surfaceUncertaintyLineEdit->setText(QString());
+		zoneFrame->setEnabled(false);
+		deleteZonePushButton->setEnabled(false);
+		insertZonePushButton->setEnabled(false);
+		return;
+	}
+	if(currentRow==zoneListWidget->count()-1){//The last zone has to have a surface uncertainty equal to zero
+	  surfaceUncertaintyLineEdit->setReadOnly(true);
+	}
+	else{
+	  surfaceUncertaintyLineEdit->setReadOnly(false);
+	}
+
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+	//the selected zone, current row is updated after 
+
+	//move to base-surface-file
+	QString baseSurfaceFile;
+	getValueFromZone(zone, QString("base-surface-file"), baseSurfaceFile);
+	baseSurfaceFileLineEdit->setText(baseSurfaceFile);
+
+	//move to erosion-priority
+	QString baseErosionPriority;
+	getValueFromZone(zone, QString("erosion-priority"), baseErosionPriority);
+	if(!baseErosionPriority.isEmpty()){
+	  basePrioritySpinBox->setValue(baseErosionPriority.toInt());
+	}
+	else{
+	  basePrioritySpinBox->setValue(1);
+	}
+
+	//move to correlation-structure
+	QString correlationStructure;
+	getValueFromZone(zone, QString("correlation-structure"), correlationStructure);
+	if(correlationStructure==QString("top")){
+		topCorrelationRadioButton->setChecked(true);
+
+	}
+	else if(correlationStructure==QString("base")){
+		baseCorrelationRadioButton->setChecked(true);
+	}
+	else if(correlationStructure==QString("compaction")){
+	        compactionCorrelationRadioButton->setChecked(true);
+	}
+
+	//move to surface uncertainty
+	QString surfaceUncertainty;
+	getValueFromZone(zone, QString("surface-uncertainty"), surfaceUncertainty);
+	surfaceUncertaintyLineEdit->setText(surfaceUncertainty);
+	
+	zoneFrame->setEnabled(true);
+	deleteZonePushButton->setEnabled(true);
+	insertZonePushButton->setEnabled(true);
+}
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
