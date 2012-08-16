@@ -5279,6 +5279,15 @@ void Main_crava::deleteAllZones(){
 	}
 }// deletes all zones
 
+void Main_crava::deleteAllFacies(){
+        QList<QTreeWidgetItem*> items = xmlTreeWidget->findItems(QString("facies"), Qt::MatchExactly | Qt::MatchRecursive, 0);
+	foreach(QTreeWidgetItem* item, items){
+	  if(item->parent()->text(0) == QString("prior-probabilities")){
+	    delete item;
+	  }
+	}
+}//deletes all facies
+
 void Main_crava::getValueFromAngleGather(QTreeWidgetItem* item, QString itemInAngleGather, QString &value, QString parentName){
 	if (item->text(0) == itemInAngleGather){
 		if ( itemInAngleGather == QString("file-name") || itemInAngleGather == QString("estimate-scale") ){//these two values appear twice so an extra check is needed
