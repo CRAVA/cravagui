@@ -42,6 +42,7 @@ private:
 	bool *hasPressedOpen; // a bool which is true if the user had the tab "Open previous project" open when pushing the Ok button.
 	QList<QString> getDirectories();//retrives the paths to the directories to update the tree/fix the paths.
 private slots:
+	void on_oldProjectRadioButton_toggled(bool checked);//controls what is shown in the mode dialog
 	void on_simulationCheckBox_toggled(bool checked);//slot responsible for showing/hiding the apropriate widgets for simulation
 	void on_seedCheckBox_toggled(bool checked);//slot for hiding/showing the apropriate widgets for seed generation
 	void on_seedPushButton_clicked(); //generates a new seed into the seed field
