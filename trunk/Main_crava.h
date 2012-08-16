@@ -33,7 +33,6 @@ class Main_crava : public QMainWindow, private Ui::Main_crava{
 
 	friend class ModeDialog;
 	friend class SettingsDialog;
-	friend class OutputDialog;
 	friend class VariogramDialog;
 
 public:
