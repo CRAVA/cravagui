@@ -4847,6 +4847,20 @@ void Main_crava::on_areaUtmAngleLineEdit_editingFinished(){
 	utm_coordinates_anglePointer->setText( 1, areaUtmAngleLineEdit->text() );
 }
 
+void Main_crava::on_utmSnapCheckBox_toggled(bool checked){
+        utm_coordinates_snap_to_seismic_dataPointer->setText(1,StandardStrings::checkedString(checked));
+	areaXSampleDensityLabel->setEnabled(!checked);
+	areaXSampleDensityLineEdit->setEnabled(!checked);
+	areaYSampleDensityLineEdit->setEnabled(!checked);
+	areaYSampleDensityLabel->setEnabled(!checked);
+	if(checked){
+	  areaXSampleDensityLineEdit->setText(QString(""));
+	  areaYSampleDensityLineEdit->setText(QString(""));
+	  on_areaXSampleDensityLineEdit_editingFinished();
+	  on_areaYSampleDensityLineEdit_editingFinished();
+	}
+}
+
 void Main_crava::on_inlineStartLineEdit_editingFinished(){
 	il_startPointer->setText( 1, inlineStartLineEdit->text() );
 }
