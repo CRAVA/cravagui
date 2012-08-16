@@ -4843,8 +4843,8 @@ void Main_crava::on_areaYSampleDensityLineEdit_editingFinished(){
 	utm_coordinates_sample_density_yPointer->setText( 1, areaYSampleDensityLineEdit->text() );
 }
 
-void Main_crava::on_areaUtmAngleLabelineEdit_editingFinished(){
-	utm_coordinates_anglePointer->setText( 1, areaUtmAngleLabelineEdit->text() );
+void Main_crava::on_areaUtmAngleLineEdit_editingFinished(){
+	utm_coordinates_anglePointer->setText( 1, areaUtmAngleLineEdit->text() );
 }
 
 void Main_crava::on_inlineStartLineEdit_editingFinished(){
