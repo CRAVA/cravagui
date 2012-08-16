@@ -5094,6 +5094,10 @@ void Main_crava::on_oLameMuCheckBox_toggled(bool checked){
         elastic_parameters_lame_muPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oLambdaRhoCheckBox_toggled(bool checked){
+        elastic_parameters_lambdarhoPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
