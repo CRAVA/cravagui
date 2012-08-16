@@ -5158,6 +5158,10 @@ void Main_crava::on_oFaciesLikelihoodCheckBox_toggled(bool checked){
         grid_output_facies_likelihoodPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oFaciesQualityGridCheckBox_toggled(bool checked){
+        grid_output_seismic_quality_gridPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
