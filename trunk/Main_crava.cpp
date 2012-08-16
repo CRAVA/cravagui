@@ -4225,6 +4225,12 @@ void Main_crava::on_siFile3BrowsePushButton_clicked(){
 		siFile(fileName);
 	}
 };//browse for the prior model SI file then update the XML file if the above is not triggered, update the field
+
+void Main_crava::siFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+		background_si_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
+}
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
