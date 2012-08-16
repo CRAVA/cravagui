@@ -4898,11 +4898,13 @@ void Main_crava::earthVsFile(const QString & value){
 }
 
 void Main_crava::earthDensityFile(const QString & value){
-	earth_model_density_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+        if (standard->StandardStrings::fileExists(value)){
+	  earth_model_density_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
 }
 
 void Main_crava::on_earthVpFileLineEdit_editingFinished(){
-	earthVpFile(earthVpFileLineEdit->text());
+	  earthVpFile(earthVpFileLineEdit->text());
 }
 
 void Main_crava::on_earthVsFileLineEdit_editingFinished(){
