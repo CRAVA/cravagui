@@ -4148,6 +4148,10 @@ void Main_crava::on_densityFile1BrowsePushButton_clicked(){
 		densityFile(fileName);
 	}
 };//browse for the prior model density file then update the XML file if the above is not triggered, update the field
+
+void Main_crava::on_densityFile2LineEdit_editingFinished(){
+	densityFile(densityFile2LineEdit->text());
+};//update the XML three with the file if it is correct, autocomplete would be nice, prior model density file
 void Main_crava::densityFile(const QString &value){
 	// should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
