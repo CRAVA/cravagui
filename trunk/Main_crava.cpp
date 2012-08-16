@@ -3238,26 +3238,26 @@ void Main_crava::on_filterElasticCheckBox_toggled(bool checked){
 	setValueInWell(well, QString("filter-elastic-logs"), value);
 }//update whether this well should multi-parameter-filter the elastic logs after inversion in XML file
 
-void Main_crava::on_convertLasToRmsPushButton_clicked(){
-	//converts las to rms, needs to be manually fixed for discrete variables since they do not have names in las logs.
-	if(wellListWidget->count()>0){
-		QString fileName = QFileDialog::getOpenFileName(this, QString("Select position file"), standard->StandardStrings::inputPath(), StandardStrings::asciiFormat());
-		if(!fileName.isNull()){
-			QTreeWidgetItem* well;
-			findCorrectWell(&well);
-			QString filename;
-			getValueFromWell(well, QString("file-name"), filename);
-			QString lasWellfilePath( QDir(standard->StandardStrings::inputPath()).absoluteFilePath(filename) );//las file is the current file in the listwidget.
-			if(QFileInfo(lasWellfilePath).suffix()!=QString("las")){//should only convert if the file is a las file
-				QMessageBox::warning(this, QString("Wrong file format"), QString("Not a las file."), QMessageBox::Ok);
-				return;
-			}
-			QString rmsWellfilePath(QFileInfo(lasWellfilePath).path()+QDir::separator() + QFileInfo(lasWellfilePath).baseName() + QString(".rms"));
-			StandardStrings::convertLasToRms(this, lasWellfilePath, rmsWellfilePath, fileName);//converts the file, this might have been better off as a seperate process.
-			wellFile(rmsWellfilePath);//change the in the tree/displayed to the rms version of the file.
-		}
-	}
-}
+// void Main_crava::on_convertLasToRmsPushButton_clicked(){
+// 	//converts las to rms, needs to be manually fixed for discrete variables since they do not have names in las logs.
+// 	if(wellListWidget->count()>0){
+// 		QString fileName = QFileDialog::getOpenFileName(this, QString("Select position file"), standard->StandardStrings::inputPath(), StandardStrings::asciiFormat());
+// 		if(!fileName.isNull()){
+// 			QTreeWidgetItem* well;
+// 			findCorrectWell(&well);
+// 			QString filename;
+// 			getValueFromWell(well, QString("file-name"), filename);
+// 			QString lasWellfilePath( QDir(standard->StandardStrings::inputPath()).absoluteFilePath(filename) );//las file is the current file in the listwidget.
+// 			if(QFileInfo(lasWellfilePath).suffix()!=QString("las")){//should only convert if the file is a las file
+// 				QMessageBox::warning(this, QString("Wrong file format"), QString("Not a las file."), QMessageBox::Ok);
+// 				return;
+// 			}
+// 			QString rmsWellfilePath(QFileInfo(lasWellfilePath).path()+QDir::separator() + QFileInfo(lasWellfilePath).baseName() + QString(".rms"));
+// 			StandardStrings::convertLasToRms(this, lasWellfilePath, rmsWellfilePath, fileName);//converts the file, this might have been better off as a seperate process.
+// 			wellFile(rmsWellfilePath);//change the well in the tree/displayed to the rms version of the file.
+// 		}
+// 	}
+// }
 
 
 //syntetic vs log buttons
