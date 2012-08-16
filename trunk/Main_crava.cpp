@@ -3572,6 +3572,8 @@ void Main_crava::on_depthSurfacesCheckBox_toggled(bool checked){
 		topDepthFile(QString());
 		bottomDepthFile(QString());
 	}
+       	oDomainDepthCheckBox->setChecked(checked);
+	oDomainDepthCheckBox->setEnabled(checked);
 }
 //two surface case
 void Main_crava::topTimeFile(const QString & value){
