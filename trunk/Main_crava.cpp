@@ -4978,10 +4978,10 @@ void Main_crava::on_earthVsSiVpVsBrowsePushButton_clicked(){
 	}
 }
 
-void Main_crava::on_earthDensityFileBrowsePushButton_clicked(){
+void Main_crava::on_earthDensityBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		earthDensityFileLineEdit->setText(fileName);
+		earthDensityLineEdit->setText(fileName);
 		earthDensityFile(fileName);
 	}
 }
