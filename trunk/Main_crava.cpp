@@ -4308,6 +4308,12 @@ void Main_crava::on_topSurfaceFileBrowsePushButton_clicked(){
 	}
 };//browse for the top surface file and update the XML tree if the above is not triggered.
 
+void Main_crava::topSurfaceFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+		background_top_surface_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
+}
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
