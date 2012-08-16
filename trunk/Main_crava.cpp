@@ -4444,6 +4444,14 @@ void Main_crava::baseSurfaceFile(const QString &value){
 	}
 }
 
+void Main_crava::on_surfaceUncertaintyLineEdit_editingFinished(){
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+	QString value=surfaceUncertaintyLineEdit->text();
+	setValueInZone(zone, QString("surface-uncertainty"), value);
+};//changes the surface uncertainty for the selected zone in XML
+
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
