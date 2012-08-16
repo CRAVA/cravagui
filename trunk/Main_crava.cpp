@@ -4772,6 +4772,7 @@ void Main_crava::on_areaUtmRadioButton_toggled(bool checked){
 	areaUtmFrame->setVisible(checked);
 	areaUtmFrame->setEnabled(checked);
 	if(!checked){
+	        utmSnapCheckBox->setChecked(false);
 		for (int i=0;i<utm_coordinatesPointer->childCount();i++){//remove the values if unchecked, both tree and displayed.
 			utm_coordinatesPointer->child(i)->setText(1,QString(""));
 		}
