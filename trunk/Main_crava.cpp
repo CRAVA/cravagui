@@ -5078,6 +5078,10 @@ void Main_crava::on_oSiCheckBox_toggled(bool checked){
         elastic_parameters_siPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
+void Main_crava::on_oPoissonRatioCheckBox_toggled(bool checked){
+        elastic_parameters_poisson_ratioPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::showContextMenu(const QPoint& pos)
 {
 	QPoint globalPos = wellHeaderListWidget->viewport()->mapToGlobal(pos);
