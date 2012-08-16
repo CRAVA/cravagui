@@ -5329,6 +5329,15 @@ void Main_crava::getValueFromOptimizePosition(QTreeWidgetItem* item, QString ite
 	}
 }
 
+void Main_crava::getValueFromZone(QTreeWidgetItem* item, QString itemInZone, QString &value){
+        if(item->text(0) == itemInZone){
+                 value = item->text(1);
+	}
+	for(int i=0; i<item->childCount(); i++){
+	  getValueFromZone(item->child(i), itemInZone, value);//recursive call to all children
+	}
+}
+
 void Main_crava::getValueFromFacies(QTreeWidgetItem* item, QString itemInFacies, QString &value){
 	if (item->text(0) == itemInFacies){
 		value = item->text(1);
