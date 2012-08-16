@@ -4314,6 +4314,10 @@ void Main_crava::topSurfaceFile(const QString &value){
 	}
 }
 
+void Main_crava::on_topPrioritySpinBox_editingFinished(){
+        background_top_surface_erosion_priorityPointer->setText(1,QString::number(topPrioritySpinBox->value()));
+}
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
