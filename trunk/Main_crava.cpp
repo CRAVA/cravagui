@@ -4296,6 +4296,10 @@ void Main_crava::on_highCutFrequencyLineEdit_editingFinished(){
 	background_high_cut_background_modellingPointer->setText( 1, highCutFrequencyLineEdit->text() );
 };//update the XML three with the high cut frequency
 
+void Main_crava::on_topSurfaceFileLineEdit_editingFinished(){
+         topSurfaceFile(topSurfaceFileLineEdit->text());
+};//update the XML tree with the top surface file
+
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
 	lateralCorrelationWaveletPushButton->setEnabled(checked);
