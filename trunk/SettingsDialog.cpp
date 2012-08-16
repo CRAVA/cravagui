@@ -424,6 +424,11 @@ void SettingsDialog::on_headerUserDefinedRadioButton_toggled(bool checked){
 	//should enable editing
 }
 
+void SettingsDialog::on_bypassCoordinateNoRadioButton_toggled(bool checked){
+	locationScalingLineEdit->setVisible(checked);
+	location_scaling_label_2->setVisible(checked);
+}
+
 void SettingsDialog::on_reflectionMatrixBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::asciiFormat());
 	if(!fileName.isNull()){
