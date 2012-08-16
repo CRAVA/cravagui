@@ -4574,8 +4574,8 @@ void Main_crava::on_faciesEstimateCheckBox_toggled(bool checked){
 	if(checked){
 		//clear the list
 		faciesListWidget->clear();
-		// insert an empty prior-probabilities node
-		prior_probabilitesPointer->setText( 1, QString() );
+		// clear tree of facies
+		deleteAllFacies();
 	}
 	else{
 		// clears all estimate-facis options, no estimate-only options currently
