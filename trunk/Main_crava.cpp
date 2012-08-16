@@ -4118,6 +4118,13 @@ void Main_crava::on_vsConstant1LineEdit_editingFinished(){
 	background_vs_constantPointer->setText( 1, vsConstant1LineEdit->text() );
 	background_vs_filePointer->setText( 1, QString() );
 };//update the XML three with constant vs for the background model
+void Main_crava::on_vsFile1BrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		vsFile1LineEdit->setText(fileName);
+		vsFile(fileName);
+	}
+};//browse for the prior model vs file then update the XML file if the above is not triggered, update the field
 void Main_crava::vsFile(const QString &value){
 	//should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
