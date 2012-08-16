@@ -4141,6 +4141,13 @@ void Main_crava::on_densityConstant1LineEdit_editingFinished(){
 	background_density_constantPointer->setText( 1, densityConstant1LineEdit->text() );
 	background_density_filePointer->setText( 1, QString() );
 };//update the XML three with constant density for the background model
+void Main_crava::on_densityFile1BrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		densityFile1LineEdit->setText(fileName);
+		densityFile(fileName);
+	}
+};//browse for the prior model density file then update the XML file if the above is not triggered, update the field
 void Main_crava::densityFile(const QString &value){
 	// should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
