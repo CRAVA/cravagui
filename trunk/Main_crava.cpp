@@ -4218,6 +4218,13 @@ void Main_crava::aiFile(const QString &value){
 void Main_crava::on_siFile3LineEdit_editingFinished(){
         siFile(siFile3LineEdit->text());
 };//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model SI file
+void Main_crava::on_siFile3BrowsePushButton_clicked(){
+  	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		siFile3LineEdit->setText(fileName);
+		siFile(fileName);
+	}
+};//browse for the prior model SI file then update the XML file if the above is not triggered, update the field
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
