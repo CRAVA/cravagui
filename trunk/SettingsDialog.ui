@@ -626,56 +626,56 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="timeDepth3DPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
+     <widget class="QWidget" name="timeDepth3DPage">
+      <layout class="QGridLayout">
+       <property name="margin">
         <number>9</number>
        </property>
-       <property name="spacing" >
+       <property name="spacing">
         <number>6</number>
        </property>
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="1" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLabel" name="referenceDepth3DLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>The Z-value for the reference depth for the target area in meter.</string>
+            <widget class="QLabel" name="referenceDepth3DLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The Z-value for the reference depth for the target area in meter.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>Reference depth</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="averageVelocity3DLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>The average velocity in the target area in meter/second.</string>
+            <widget class="QLabel" name="averageVelocity3DLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The average velocity in the target area in meter/second.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>Average velocity</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="referenceTimeSurface3DLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Filename for the time surface corresponding to the reference depth.</string>
+            <widget class="QLabel" name="referenceTimeSurface3DLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Filename for the time surface corresponding to the reference depth.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>Reference time surface</string>
              </property>
             </widget>
@@ -683,48 +683,48 @@ p, li { white-space: pre-wrap; }
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLineEdit" name="referenceDepth3DLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>The Z-value for the reference depth for the target area in meter.</string>
+            <widget class="QLineEdit" name="referenceDepth3DLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The Z-value for the reference depth for the target area in meter.</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="averageVelocity3DLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>The average velocity in the target area in meter/second.</string>
+            <widget class="QLineEdit" name="averageVelocity3DLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The average velocity in the target area in meter/second.</string>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QLineEdit" name="referenceTimeSurface3DLineEdit" >
-               <property name="toolTip" >
-                <string>&lt;qt>Filename for the time surface corresponding to the reference depth.</string>
+              <widget class="QLineEdit" name="referenceTimeSurface3DLineEdit">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Filename for the time surface corresponding to the reference depth.</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="referenceTimeSurface3DPushButton" >
-               <property name="toolTip" >
-                <string>&lt;qt>Filename for the time surface corresponding to the reference depth.</string>
+              <widget class="QPushButton" name="referenceTimeSurface3DPushButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Filename for the time surface corresponding to the reference depth.</string>
                </property>
-               <property name="text" >
+               <property name="text">
                 <string>Browse...</string>
                </property>
               </widget>
@@ -735,18 +735,34 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </item>
-       <item row="1" column="0" >
+       <item row="2" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Time Depth Mapping Settings</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
