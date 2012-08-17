@@ -58,7 +58,7 @@ ModeDialog::ModeDialog(Main_crava *main_crava, bool started, bool *pressedOpen, 
 			oldProjectRadioButton->setVisible(false);
 		        newProjectRadioButton->setText(QString("Mode"));
 			newProjectRadioButton->setChecked(true);
-			on_oldProjectRadioButton_toggled(false)
+			on_oldProjectRadioButton_toggled(false);
 	}
 	else{
 	                oldProjectRadioButton->setChecked(true);
