@@ -2,27 +2,33 @@
 <ui version="4.0">
  <author>Alf Birger Rustad, Øystein Monsrud Arneson, Erik Bakken and Andreas B. Lindblad</author>
  <class>Main_crava</class>
- <widget class="QMainWindow" name="Main_crava" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="Main_crava">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1291</width>
-    <height>1201</height>
+    <width>1284</width>
+    <height>1800</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget" >
-   <layout class="QGridLayout" >
-    <property name="margin" >
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout">
+    <property name="margin">
      <number>9</number>
     </property>
-    <property name="spacing" >
+    <property name="spacing">
      <number>6</number>
     </property>
-<item row="0" column="1">
+    <item row="0" column="1">
      <layout class="QVBoxLayout">
       <property name="spacing">
        <number>6</number>
@@ -1972,27 +1978,25 @@
       </item>
      </layout>
     </item>
-    <item row="0" column="0" >
-     <widget class="QTabWidget" name="tabWidget" >
-      <property name="sizePolicy" >
-       <sizepolicy>
-        <hsizetype>7</hsizetype>
-        <vsizetype>7</vsizetype>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="toolTip" >
+      <property name="toolTip">
        <string/>
       </property>
-      <property name="whatsThis" >
-       <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;">
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
-      <property name="currentIndex" >
-       <number>0</number>
+      <property name="currentIndex">
+       <number>3</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -8368,111 +8372,110 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar" >
-   <property name="geometry" >
+<widget class="QMenuBar" name="menubar">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1291</width>
-     <height>29</height>
+     <width>1284</width>
+     <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHelp" >
-    <property name="title" >
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="manualAction" />
-    <addaction name="wikiAction" />
-    <addaction name="separator" />
-    <addaction name="aboutAction" />
+    <addaction name="manualAction"/>
+    <addaction name="wikiAction"/>
+    <addaction name="separator"/>
+    <addaction name="aboutAction"/>
    </widget>
-   <widget class="QMenu" name="menuEdit" >
-    <property name="title" >
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
      <string>&amp;Edit</string>
     </property>
-    <addaction name="modeAction" />
-    <addaction name="settingsAction" />
-    <addaction name="outputAction" />
+    <addaction name="modeAction"/>
+    <addaction name="settingsAction"/>
    </widget>
-   <widget class="QMenu" name="menuFile" >
-    <property name="title" >
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="newAction" />
-    <addaction name="openAction" />
-    <addaction name="saveAction" />
-    <addaction name="saveAsAction" />
-    <addaction name="runAction" />
-    <addaction name="separator" />
-    <addaction name="quitAction" />
+    <addaction name="newAction"/>
+    <addaction name="openAction"/>
+    <addaction name="saveAction"/>
+    <addaction name="saveAsAction"/>
+    <addaction name="runAction"/>
+    <addaction name="separator"/>
+    <addaction name="quitAction"/>
    </widget>
-   <addaction name="menuFile" />
-   <addaction name="menuEdit" />
-   <addaction name="menuHelp" />
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
-  <action name="modeAction" >
-   <property name="text" >
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="modeAction">
+   <property name="text">
     <string>&amp;Mode</string>
    </property>
   </action>
-  <action name="saveAction" >
-   <property name="text" >
+  <action name="saveAction">
+   <property name="text">
     <string>&amp;Save</string>
    </property>
   </action>
-  <action name="saveAsAction" >
-   <property name="text" >
+  <action name="saveAsAction">
+   <property name="text">
     <string>Save&amp;As</string>
    </property>
   </action>
-  <action name="newAction" >
-   <property name="text" >
+  <action name="newAction">
+   <property name="text">
     <string>&amp;New</string>
    </property>
   </action>
-  <action name="openAction" >
-   <property name="text" >
+  <action name="openAction">
+   <property name="text">
     <string>&amp;Open</string>
    </property>
   </action>
-  <action name="settingsAction" >
-   <property name="text" >
+  <action name="settingsAction">
+   <property name="text">
     <string>&amp;Settings</string>
    </property>
   </action>
-  <action name="quitAction" >
-   <property name="text" >
+  <action name="quitAction">
+   <property name="text">
     <string>&amp;Quit</string>
    </property>
   </action>
-  <action name="outputAction" >
-   <property name="text" >
+  <action name="outputAction">
+   <property name="text">
     <string>&amp;Output</string>
    </property>
   </action>
-  <action name="aboutAction" >
-   <property name="text" >
+  <action name="aboutAction">
+   <property name="text">
     <string>&amp;About</string>
    </property>
   </action>
-  <action name="runAction" >
-   <property name="text" >
+  <action name="runAction">
+   <property name="text">
     <string>&amp;Run</string>
    </property>
   </action>
-  <action name="wikiAction" >
-   <property name="text" >
+  <action name="wikiAction">
+   <property name="text">
     <string>CRAVA &amp;Wiki</string>
    </property>
   </action>
-  <action name="manualAction" >
-   <property name="text" >
+  <action name="manualAction">
+   <property name="text">
     <string>CRAVA &amp;Manual v.0.9.8</string>
    </property>
   </action>
  </widget>
- <layoutdefault spacing="10" margin="12" />
+ <layoutdefault spacing="10" margin="12"/>
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>addStackPushButton</tabstop>
@@ -8481,8 +8484,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>defaultStartTimeLineEdit</tabstop>
   <tabstop>applyToAllStacksPushButton</tabstop>
   <tabstop>angularCorrelationPushButton</tabstop>
-  <tabstop>seismicFileLineEdit</tabstop>
-  <tabstop>seismicBrowsePushButton</tabstop>
   <tabstop>angleLineEdit</tabstop>
   <tabstop>ppRadioButton</tabstop>
   <tabstop>psRadioButton</tabstop>
@@ -8504,12 +8505,9 @@ p, li { white-space: pre-wrap; }
   <tabstop>wavelet1DRadioButton</tabstop>
   <tabstop>wavelet3DRadioButton</tabstop>
   <tabstop>estimateWaveCheckBox</tabstop>
-  <tabstop>waveletFileLineEdit</tabstop>
-  <tabstop>waveletBrowsePushButton</tabstop>
   <tabstop>fileScaleRadioButton</tabstop>
   <tabstop>estimateScaleRadioButton</tabstop>
   <tabstop>manualScaleRadioButton</tabstop>
-  <tabstop>scaleLineEdit</tabstop>
   <tabstop>wavelet3DFileLineEdit</tabstop>
   <tabstop>wavelet3DFileBrowsePushButton</tabstop>
   <tabstop>wavelet3DProcessingFileLineEdit</tabstop>
@@ -8537,9 +8535,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>deleteWellPushButton</tabstop>
   <tabstop>wellListWidget</tabstop>
   <tabstop>openWellPushButton</tabstop>
-  <tabstop>wellFileLineEdit</tabstop>
-  <tabstop>wellBrowsePushButton</tabstop>
-  <tabstop>convertLasToRmsPushButton</tabstop>
   <tabstop>waveletEstimationCheckBox</tabstop>
   <tabstop>faciesProbabilitiesCheckBox</tabstop>
   <tabstop>backgroundTrendCheckBox</tabstop>
@@ -8553,25 +8548,13 @@ p, li { white-space: pre-wrap; }
   <tabstop>optimizePositionListWidget</tabstop>
   <tabstop>anglePositionlineEdit</tabstop>
   <tabstop>weightLineEdit</tabstop>
-  <tabstop>seismicResolutionLineEdit</tabstop>
-  <tabstop>timeLineEdit</tabstop>
-  <tabstop>densityLineEdit</tabstop>
-  <tabstop>faciesLineEdit</tabstop>
-  <tabstop>vpRadioButton</tabstop>
-  <tabstop>vpLineEdit</tabstop>
-  <tabstop>dtRadioButton</tabstop>
-  <tabstop>dtLineEdit</tabstop>
-  <tabstop>vsRadioButton</tabstop>
-  <tabstop>vsLineEdit</tabstop>
-  <tabstop>dtsRadioButton</tabstop>
-  <tabstop>dtsLineEdit</tabstop>
   <tabstop>wellHeaderListWidget</tabstop>
   <tabstop>wellHeaderPushButton</tabstop>
   <tabstop>twoSurfaceRadioButton</tabstop>
   <tabstop>correlationSurfaceRadioButton</tabstop>
   <tabstop>topSurfaceRadioButton</tabstop>
   <tabstop>baseSurfaceRadioButton</tabstop>
-  <tabstop>oneSufraceRadioButton</tabstop>
+  <tabstop>oneSurfaceRadioButton</tabstop>
   <tabstop>constantInversionRadioButton</tabstop>
   <tabstop>topTimeFileLineEdit</tabstop>
   <tabstop>topTimeFileBrowsePushButton</tabstop>
@@ -8579,7 +8562,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>bottomTimeFileLineEdit</tabstop>
   <tabstop>bottomTimeFileBrowsePushButton</tabstop>
   <tabstop>bottomTimeValueLineEdit</tabstop>
-  <tabstop>correlationDirectionLineEdit</tabstop>
+  <tabstop>correlationDirectionFileLineEdit</tabstop>
   <tabstop>correlationDirectionBrowsePushButton</tabstop>
   <tabstop>depthSurfacesCheckBox</tabstop>
   <tabstop>topDepthFileLineEdit</tabstop>
@@ -8592,7 +8575,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>velocityFieldLineEdit</tabstop>
   <tabstop>velocityFieldBrowsePushButton</tabstop>
   <tabstop>layersLineEdit</tabstop>
-  <tabstop>referenceSurfaceLineEdit</tabstop>
+  <tabstop>referenceSurfaceFileLineEdit</tabstop>
   <tabstop>referenceSurfaceBrowsePushButton</tabstop>
   <tabstop>distanceTopLineEdit</tabstop>
   <tabstop>thicknessLineEdit</tabstop>
@@ -8601,15 +8584,10 @@ p, li { white-space: pre-wrap; }
   <tabstop>areaFileRadioButton</tabstop>
   <tabstop>areaUtmRadioButton</tabstop>
   <tabstop>areaInCrossRadioButton</tabstop>
-  <tabstop>areaSurfaceLineEdit</tabstop>
-  <tabstop>areaSurfaceFileBrowsePushButton</tabstop>
   <tabstop>areaXRefLineEdit</tabstop>
   <tabstop>areaYRefLineEdit</tabstop>
   <tabstop>areaXLengthLineEdit</tabstop>
   <tabstop>areaYLengthLineEdit</tabstop>
-  <tabstop>areaXSampleDensityLineEdit</tabstop>
-  <tabstop>areaYSampleDensityLineEdit</tabstop>
-  <tabstop>areaUtmAngleLabelineEdit</tabstop>
   <tabstop>inlineStartLineEdit</tabstop>
   <tabstop>crosslineStartLineEdit</tabstop>
   <tabstop>inlineEndLineEdit</tabstop>
@@ -8624,29 +8602,11 @@ p, li { white-space: pre-wrap; }
   <tabstop>faciesTopBrowsePushButton</tabstop>
   <tabstop>faciesBottomLineEdit</tabstop>
   <tabstop>faciesBottomBrowsePushButton</tabstop>
-  <tabstop>backgroundModelCheckBox</tabstop>
-  <tabstop>vpFileRadioButton</tabstop>
-  <tabstop>vpFileLineEdit</tabstop>
-  <tabstop>vpBrowsePushButton</tabstop>
-  <tabstop>vpConstantRadioButton</tabstop>
-  <tabstop>vpConstantLineEdit</tabstop>
-  <tabstop>vsFileRadioButton</tabstop>
-  <tabstop>vsFileLineEdit</tabstop>
-  <tabstop>vsBrowsePushButton</tabstop>
-  <tabstop>vsConstantRadioButton</tabstop>
-  <tabstop>vsConstantLineEdit</tabstop>
-  <tabstop>densityFileRadioButton</tabstop>
-  <tabstop>densityFileLineEdit</tabstop>
-  <tabstop>densityBrowsePushButton</tabstop>
-  <tabstop>densityConstantRadioButton</tabstop>
-  <tabstop>densityConstantLineEdit</tabstop>
   <tabstop>backgroundEstimatedConfigurationCheckBox</tabstop>
   <tabstop>velocityFieldPriorFileLineEdit</tabstop>
   <tabstop>velocityFieldPriorFileBrowsePushButton</tabstop>
   <tabstop>lateralCorrelationBackgroundPushButton</tabstop>
   <tabstop>highCutFrequencyLineEdit</tabstop>
-  <tabstop>correlationLocalWaveletCheckBox</tabstop>
-  <tabstop>lateralCorrelationWaveletPushButton</tabstop>
   <tabstop>correlationElasticParametersCheckBox</tabstop>
   <tabstop>lateralCorrelationParametersPushButton</tabstop>
   <tabstop>temporalCorrelationLineEdit</tabstop>
@@ -8667,17 +8627,12 @@ p, li { white-space: pre-wrap; }
   <tabstop>predictionFaciesCheckBox</tabstop>
   <tabstop>absoluteParametersCheckBox</tabstop>
   <tabstop>uncertaintyLevelLineEdit</tabstop>
-  <tabstop>earthVpFileLineEdit</tabstop>
-  <tabstop>earthVpFileBrowsePushButton</tabstop>
-  <tabstop>earthVsFileLineEdit</tabstop>
-  <tabstop>earthVsFileBrowsePushButton</tabstop>
-  <tabstop>earthDensityFileLineEdit</tabstop>
-  <tabstop>earthDensityFileBrowsePushButton</tabstop>
   <tabstop>writeXmlPushButton</tabstop>
   <tabstop>xmlTreeWidget</tabstop>
  </tabstops>
  <resources>
-  <include location="cravaguiresources.qrc" />
+  <include location="cravaguiresources.qrc"/>
  </resources>
  <connections/>
 </ui>
+
