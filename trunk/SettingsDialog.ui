@@ -2,30 +2,90 @@
 <ui version="4.0">
  <author>Øystein Monsrud Arneson and Andreas B. Lindblad</author>
  <class>SettingsDialog</class>
- <widget class="QDialog" name="SettingsDialog" >
-  <property name="geometry" >
+ <widget class="QDialog" name="SettingsDialog">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>1266</width>
-    <height>615</height>
+    <height>811</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Settings</string>
   </property>
-  <layout class="QGridLayout" >
-   <property name="margin" >
+  <layout class="QGridLayout">
+   <property name="margin">
     <number>9</number>
    </property>
-   <property name="spacing" >
+   <property name="spacing">
     <number>6</number>
    </property>
-   <item row="0" column="1" >
-    <widget class="QStackedWidget" name="stackedWidget" >
-     <property name="currentIndex" >
-      <number>4</number>
+   <item row="0" column="0">
+    <layout class="QVBoxLayout">
+     <property name="spacing">
+      <number>6</number>
      </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QListWidget" name="listWidget">
+       <item>
+        <property name="text">
+         <string>Output</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>3D time depth mapping</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Advanced inversion settings</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Wells allowed parameter values</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>GUI settings</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
      <widget class="QWidget" name="inputOutputPage">
       <layout class="QGridLayout">
        <property name="margin">
@@ -2056,68 +2116,6 @@ p, li { white-space: pre-wrap; }
      </widget>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" >
-    <layout class="QVBoxLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
-     <property name="spacing" >
-      <number>6</number>
-     </property>
-     <item>
-      <widget class="QListWidget" name="listWidget" >
-       <item>
-        <property name="text" >
-         <string>Input - Output</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>3D time depth mapping</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Advanced inversion settings</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Wells allowed parameter values</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>GUI settings</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <spacer>
-       <property name="orientation" >
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" >
-        <size>
-         <width>20</width>
-         <height>294</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
  <tabstops>
@@ -2186,17 +2184,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>mergeDistanceLineEdit</tabstop>
   <tabstop>offsetLineEdit</tabstop>
   <tabstop>shiftLineEdit</tabstop>
-  <tabstop>cravaPathLineEdit</tabstop>
-  <tabstop>cravaPathBrowsePushButton</tabstop>
-  <tabstop>textEditorLineEdit</tabstop>
-  <tabstop>textEditorBrowsePushButton</tabstop>
-  <tabstop>terminalCheckBox</tabstop>
-  <tabstop>terminalPathLineEdit</tabstop>
-  <tabstop>terminalPathBrowsePushButton</tabstop>
-  <tabstop>wikiPathLineEdit</tabstop>
-  <tabstop>manualPathLineEdit</tabstop>
-  <tabstop>manualPathBrowsePushButton</tabstop>
-  <tabstop>xmlTreeCheckBox</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
@@ -2207,11 +2194,11 @@ p, li { white-space: pre-wrap; }
    <receiver>SettingsDialog</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>600</x>
      <y>600</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -2223,11 +2210,11 @@ p, li { white-space: pre-wrap; }
    <receiver>SettingsDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>600</x>
      <y>600</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>
@@ -2239,15 +2226,15 @@ p, li { white-space: pre-wrap; }
    <receiver>stackedWidget</receiver>
    <slot>setCurrentIndex(int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>101</x>
      <y>129</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>491</x>
      <y>123</y>
     </hint>
    </hints>
   </connection>
  </connections>
-</ui>
+</ui>  
