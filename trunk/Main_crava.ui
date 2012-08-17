@@ -4053,120 +4053,156 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="earthModelTab" >
-       <attribute name="title" >
+      <widget class="QWidget" name="earthModelTab">
+       <attribute name="title">
         <string>Earth Model</string>
        </attribute>
-       <layout class="QGridLayout" >
-        <property name="margin" >
-         <number>9</number>
-        </property>
-        <property name="spacing" >
-         <number>6</number>
-        </property>
-        <item row="1" column="0" >
+       <layout class="QGridLayout" name="gridLayout_19">
+        <item row="0" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_24">
+          <item>
+           <widget class="QLabel" name="earth_model_label">
+            <property name="text">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Earth Model&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <layout class="QGridLayout" name="gridLayout_18">
+          <item row="0" column="0">
+           <widget class="QComboBox" name="vpComboBox">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving Vp or AI. These can not be given together.</string>
+            </property>
+            <property name="maxVisibleItems">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Vp file</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>AI file</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="earthVpAiLineEdit">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving Vp or AI for the earth model. These two can not be given together.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="earthVpAiBrowsePushButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving Vp or AI. These can not be given together.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QComboBox" name="vsComboBox">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving Vs, SI or Vp/Vs ratio for the earth model. These three can not be given together.</string>
+            </property>
+            <property name="maxVisibleItems">
+             <number>3</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Vs file</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>SI file</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Vp/Vs file</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="earthVsSiVpVsLineEdit">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving Vs, SI or Vp/Vs ratio for the earth model. These three can not be given together.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="earthVsSiVpVsBrowsePushButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving Vs, SI or Vp/Vs ratio for the earth model. These three can not be given together.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="earthDensityLineEdit">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving density for the earth model.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="earthDensityBrowsePushButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving density for the earth model.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QComboBox" name="densityComboBox">
+            <property name="toolTip">
+             <string>&lt;qt&gt;3D grid file, giving density for the earth model.</string>
+            </property>
+            <property name="maxVisibleItems">
+             <number>1</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Density file</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="1">
          <spacer>
-          <property name="orientation" >
+          <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
             <height>40</height>
            </size>
           </property>
          </spacer>
-        </item>
-        <item row="0" column="0" >
-         <layout class="QHBoxLayout" >
-          <property name="margin" >
-           <number>0</number>
-          </property>
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item>
-           <layout class="QVBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="earthVpFileLabel" >
-              <property name="text" >
-               <string>Vp file</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="earthVsFileLabel" >
-              <property name="text" >
-               <string>Vs file</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="earthDensityFileLabel" >
-              <property name="text" >
-               <string>Density file</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QLineEdit" name="earthVpFileLineEdit" />
-            </item>
-            <item>
-             <widget class="QLineEdit" name="earthVsFileLineEdit" />
-            </item>
-            <item>
-             <widget class="QLineEdit" name="earthDensityFileLineEdit" />
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="earthVpFileBrowsePushButton" >
-              <property name="text" >
-               <string>Browse...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="earthVsFileBrowsePushButton" >
-              <property name="text" >
-               <string>Browse...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="earthDensityFileBrowsePushButton" >
-              <property name="text" >
-               <string>Browse...</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
         </item>
        </layout>
       </widget>
