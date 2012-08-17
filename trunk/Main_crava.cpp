@@ -5512,7 +5512,7 @@ void Main_crava::activateTable(){
 			background_high_cut_background_modellingPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(11);
 			background_multizone_modelPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12);
 		         	background_top_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(0);
-				background_top_surface_erosion_priorityPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(1)
+				background_top_surface_erosion_priorityPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(1);
 		earth_modelPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1);
 			earth_model_vp_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(0);
 			earth_model_vs_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(1);
