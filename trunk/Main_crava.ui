@@ -5519,8 +5519,6 @@ p, li { white-space: pre-wrap; }
        <zorder>surfaceTwoFrame</zorder>
        <zorder>areaInCrossFrame</zorder>
        <zorder>areaUtmFrame</zorder>
-       <zorder></zorder>
-       <zorder></zorder>
       </widget>
       <widget class="QWidget" name="priorModelTab">
        <attribute name="title">
@@ -7174,7 +7172,7 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item row="13" column="0">
-         <spacer name="verticalSpacer">
+         <spacer name="verticalSpacer_10">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -7197,7 +7195,6 @@ p, li { white-space: pre-wrap; }
        <zorder>faciesGivenFrame</zorder>
        <zorder>faciesEstimateFrame</zorder>
        <zorder>backgroundMultizoneFrame</zorder>
-       <zorder>verticalSpacer</zorder>
       </widget>
       <widget class="QWidget" name="earthModelTab">
        <attribute name="title">
