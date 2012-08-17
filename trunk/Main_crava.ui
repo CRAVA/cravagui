@@ -1287,42 +1287,87 @@ p, li { white-space: pre-wrap; }
          </spacer>
         </item>
        </layout>
-      </widget>
-      <widget class="QWidget" name="wellsTab" >
-       <attribute name="title" >
+      </widget> 
+      <widget class="QWidget" name="wellsTab">
+       <attribute name="title">
         <string>Wells</string>
        </attribute>
-       <layout class="QGridLayout" >
-        <property name="margin" >
-         <number>9</number>
-        </property>
-        <property name="spacing" >
-         <number>6</number>
-        </property>
-        <item row="0" column="0" colspan="2" >
-         <widget class="QLabel" name="wellsLabel" >
-          <property name="font" >
-           <font>
-            <weight>75</weight>
-            <italic>false</italic>
-            <bold>true</bold>
-            <underline>false</underline>
-           </font>
-          </property>
-          <property name="text" >
-           <string>Wells</string>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+       <layout class="QGridLayout" name="gridLayout_16">
+        <item row="0" column="0" colspan="3">
+         <layout class="QHBoxLayout" name="horizontalLayout_22">
+          <item>
+           <widget class="QLabel" name="wellsLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
+              <underline>false</underline>
+             </font>
+            </property>
+            <property name="text">
+             <string>Wells</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
-        <item row="1" column="1" >
+        <item row="1" column="0" colspan="2">
+         <layout class="QGridLayout">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <item row="0" column="1" rowspan="2">
+           <widget class="QListWidget" name="wellListWidget">
+            <property name="toolTip">
+             <string>&lt;qt&gt;A list of well logs</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="openWellPushButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;Opens the selected well in the editor chosen in &quot;Settings&quot;. Default editor is emacs.</string>
+            </property>
+            <property name="text">
+             <string>Open well file</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="addWellPushButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;Adds another well log</string>
+            </property>
+            <property name="text">
+             <string>Add &amp;well</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="deleteWellPushButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;Removed the selected well log</string>
+            </property>
+            <property name="text">
+             <string>Delete well</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="2">
          <spacer>
-          <property name="orientation" >
+          <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
             <height>20</height>
@@ -1330,346 +1375,238 @@ p, li { white-space: pre-wrap; }
           </property>
          </spacer>
         </item>
-        <item row="5" column="0" colspan="2" >
-         <layout class="QVBoxLayout" >
-          <property name="margin" >
-           <number>0</number>
-          </property>
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item>
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="timeLabel" >
-              <property name="toolTip" >
-               <string>The header name for two way time log</string>
-              </property>
-              <property name="text" >
-               <string>Time (necessary):</string>
-              </property>
-              <property name="buddy" >
-               <cstring>timeLineEdit</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="timeLineEdit" >
-              <property name="toolTip" >
-               <string>The header name for two way time log</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="densityLabel" >
-              <property name="toolTip" >
-               <string>The header name for density log</string>
-              </property>
-              <property name="text" >
-               <string>Density (necessary):</string>
-              </property>
-              <property name="buddy" >
-               <cstring>densityLineEdit</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="densityLineEdit" >
-              <property name="toolTip" >
-               <string>The header name for density log</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="faciesFormatLabel" >
-              <property name="toolTip" >
-               <string>The header name for facies log</string>
-              </property>
-              <property name="text" >
-               <string>Facies (necessary):</string>
-              </property>
-              <property name="buddy" >
-               <cstring>faciesLineEdit</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="faciesLineEdit" >
-              <property name="toolTip" >
-               <string>The header name for facies log</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QRadioButton" name="vpRadioButton" >
-              <property name="text" >
-               <string>Vp</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="vpLineEdit" >
-              <property name="toolTip" >
-               <string>The header name for VP log</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="dtRadioButton" >
-              <property name="text" >
-               <string>DT</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="dtLineEdit" >
-              <property name="toolTip" >
-               <string>The header name for DT log</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" >
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QRadioButton" name="vsRadioButton" >
-              <property name="text" >
-               <string>Vs</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="vsLineEdit" >
-              <property name="toolTip" >
-               <string>The header name for VS log</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="dtsRadioButton" >
-              <property name="text" >
-               <string>DTS</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="dtsLineEdit" >
-              <property name="toolTip" >
-               <string>The header name for DTS log</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" >
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item row="8" column="0" >
-         <widget class="QPushButton" name="wellHeaderPushButton" >
-          <property name="toolTip" >
-           <string>Gets the names of the logs in the selected well. Can only be used if a well is selected.</string>
-          </property>
-          <property name="text" >
-           <string>Get well header log names</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0" >
-         <layout class="QHBoxLayout" >
-          <property name="margin" >
-           <number>0</number>
-          </property>
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="seismicResolutionLabel" >
-            <property name="text" >
-             <string>High cut seismic resolution</string>
-            </property>
-            <property name="buddy" >
-             <cstring>seismicResolutionLineEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="seismicResolutionLineEdit" />
-          </item>
-         </layout>
-        </item>
-        <item row="7" column="0" >
-         <widget class="QListWidget" name="wellHeaderListWidget" >
-          <property name="toolTip" >
-           <string>These are the names of the well logs from the selected well.</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" colspan="2" >
-         <widget class="QFrame" name="wellFrame" >
-          <property name="frameShape" >
+        <item row="2" column="0" colspan="3">
+         <widget class="QFrame" name="wellFrame">
+          <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
-          <property name="frameShadow" >
+          <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QGridLayout" >
-           <property name="margin" >
+          <layout class="QGridLayout">
+           <property name="margin">
             <number>9</number>
            </property>
-           <property name="spacing" >
+           <property name="spacing">
             <number>6</number>
            </property>
-           <item row="5" column="0" colspan="2" >
-            <widget class="QCheckBox" name="optimizePositionCheckBox" >
-             <property name="toolTip" >
-              <string>The position of the well can be optimized using this option by giving different weight to the different angle stacks.</string>
+           <item row="0" column="0" colspan="4">
+            <widget class="QLabel" name="wellNameLabel">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <underline>false</underline>
+              </font>
              </property>
-             <property name="text" >
+             <property name="text">
+              <string>Well name</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0" colspan="2">
+            <widget class="QCheckBox" name="waveletEstimationCheckBox">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Whether this log should be used for wavelet estimation.</string>
+             </property>
+             <property name="text">
+              <string>Use for wavelet estimation</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2" colspan="2">
+            <widget class="QCheckBox" name="faciesProbabilitiesCheckBox">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Whether this log should be used for facies estimation.</string>
+             </property>
+             <property name="text">
+              <string>Use for facies probabilities estimation</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QCheckBox" name="backgroundTrendCheckBox">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Whether this log should be used for background trend estimation.</string>
+             </property>
+             <property name="text">
+              <string>Use for background trend estimation</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2" colspan="2">
+            <widget class="QCheckBox" name="filterElasticCheckBox">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Should the elastic logs in this well be multi-parameter-filtered after inversion?</string>
+             </property>
+             <property name="text">
+              <string>Filter the elastic logs after inversion</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0" colspan="4">
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>42</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="synteticVsLabel">
+               <property name="toolTip">
+                <string>&lt;qt&gt;If the Vs log is synthetic, there is no additional information and it will not be used to estimate facies probabilities.</string>
+               </property>
+               <property name="text">
+                <string>Synthetic Vs log:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="synteticVsDetectRadioButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;If the Vs log is synthetic, there is no additional information and it will not be used to estimate facies probabilities. What the limit is for considering the Vs log synthetic can be set in settings.</string>
+               </property>
+               <property name="text">
+                <string>Detect from Vp-Vs rank correlation</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="synteticVsYesRadioButton">
+               <property name="toolTip">
+                <string>If the Vs log is synthetic, there is no additional information and it will not be used to estimate facies probabilities.</string>
+               </property>
+               <property name="text">
+                <string>Yes</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="synteticVsNoRadioButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;If the Vs log is synthetic, there is no additional information and it will not be used to estimate facies probabilities.</string>
+               </property>
+               <property name="text">
+                <string>No</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_21">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item row="9" column="0" colspan="2">
+            <widget class="QCheckBox" name="optimizePositionCheckBox">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The position of the well can be optimized using this option by giving different weight to the different angle stacks.</string>
+             </property>
+             <property name="text">
               <string>Optimize position for this well</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1" >
-            <widget class="QLineEdit" name="wellFileLineEdit" >
-             <property name="toolTip" >
-              <string>File name for the well log. RMS format.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0" colspan="2" >
-            <widget class="QFrame" name="optimizePositionFrame" >
-             <property name="frameShape" >
+           <item row="10" column="0" colspan="2">
+            <widget class="QFrame" name="optimizePositionFrame">
+             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
-             <property name="frameShadow" >
+             <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QGridLayout" >
-              <property name="margin" >
+             <layout class="QGridLayout">
+              <property name="margin">
                <number>9</number>
               </property>
-              <property name="spacing" >
+              <property name="spacing">
                <number>6</number>
               </property>
-              <item row="0" column="0" >
-               <widget class="QPushButton" name="optimizePositionPushButton" >
-                <property name="toolTip" >
-                 <string>Adds another optmization for this well.</string>
+              <item row="0" column="0">
+               <widget class="QPushButton" name="optimizePositionPushButton">
+                <property name="toolTip">
+                 <string>&lt;qt&gt;Adds another optmization for this well.</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string>Add Optimization</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="0" >
-               <widget class="QPushButton" name="deleteOptimizationPushButton" >
-                <property name="toolTip" >
-                 <string>Delete the selected optimization.</string>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="deleteOptimizationPushButton">
+                <property name="toolTip">
+                 <string>&lt;qt&gt;Delete the selected optimization.</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string>Delete optimization</string>
                 </property>
                </widget>
               </item>
-              <item rowspan="2" row="0" column="1" >
-               <widget class="QListWidget" name="optimizePositionListWidget" />
-              </item>
-              <item row="2" column="0" colspan="2" >
-               <layout class="QHBoxLayout" >
-                <property name="margin" >
-                 <number>0</number>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QListWidget" name="optimizePositionListWidget">
+                <property name="toolTip">
+                 <string>&lt;qt&gt;List of optimizations.</string>
                 </property>
-                <property name="spacing" >
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="2">
+               <layout class="QHBoxLayout">
+                <property name="spacing">
                  <number>6</number>
                 </property>
+                <property name="margin">
+                 <number>0</number>
+                </property>
                 <item>
-                 <widget class="QLabel" name="angleLabel" >
-                  <property name="toolTip" >
-                   <string>Which angle to optimize for.</string>
+                 <widget class="QLabel" name="angleLabel">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Which angle to optimize for.</string>
                   </property>
-                  <property name="text" >
-                   <string>angle</string>
+                  <property name="text">
+                   <string>Angle</string>
                   </property>
-                  <property name="buddy" >
+                  <property name="buddy">
                    <cstring>anglePositionlineEdit</cstring>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="anglePositionlineEdit" >
-                  <property name="toolTip" >
-                   <string>Which angle to optimize for.</string>
+                 <widget class="QLineEdit" name="anglePositionlineEdit">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Which angle to optimize for.</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="weightLabel" >
-                  <property name="toolTip" >
-                   <string>The weight of the optimization for this angle.</string>
+                 <widget class="QLabel" name="weightLabel">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;The weight of the optimization for this angle.</string>
                   </property>
-                  <property name="text" >
-                   <string>weight</string>
+                  <property name="text">
+                   <string>Weight</string>
                   </property>
-                  <property name="buddy" >
+                  <property name="buddy">
                    <cstring>weightLineEdit</cstring>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="weightLineEdit" >
-                  <property name="toolTip" >
-                   <string>The weight of the optimization for this angle.</string>
+                 <widget class="QLineEdit" name="weightLineEdit">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;The weight of the optimization for this angle.</string>
                   </property>
                  </widget>
                 </item>
@@ -1678,231 +1615,296 @@ p, li { white-space: pre-wrap; }
              </layout>
             </widget>
            </item>
-           <item row="2" column="2" colspan="2" >
-            <widget class="QCheckBox" name="faciesProbabilitiesCheckBox" >
-             <property name="toolTip" >
-              <string>Whether this log should be used for facies estimation.</string>
-             </property>
-             <property name="text" >
-              <string>Use for facies probabilities estimation</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0" colspan="4" >
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="synteticVsLabel" >
-               <property name="toolTip" >
-                <string>If the Vs log is synthetic, there is no additional information and it will not be used to estimate facies probabilities.</string>
-               </property>
-               <property name="text" >
-                <string>Is the Vs log synthetic</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="synteticVsDetectRadioButton" >
-               <property name="toolTip" >
-                <string>If the Vs log is synthetic, there is no additional information and it will not be used to estimate facies probabilities. What the limit is for considering the Vs log synthetic can be set in settings.</string>
-               </property>
-               <property name="text" >
-                <string>Detect from Vp-Vs rank correlation</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="synteticVsYesRadioButton" >
-               <property name="toolTip" >
-                <string>If the Vs log is synthetic, there is no additional information and it will not be used to estimate facies probabilities.</string>
-               </property>
-               <property name="text" >
-                <string>Yes</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="synteticVsNoRadioButton" >
-               <property name="toolTip" >
-                <string>If the Vs log is synthetic, there is no additional information and it will not be used to estimate facies probabilities.</string>
-               </property>
-               <property name="text" >
-                <string>No</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="1" column="0" >
-            <widget class="QLabel" name="wellFileNameLabel" >
-             <property name="toolTip" >
-              <string>File name for the well log. RMS format.</string>
-             </property>
-             <property name="text" >
-              <string>File name</string>
-             </property>
-             <property name="buddy" >
-              <cstring>wellFileLineEdit</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2" colspan="2" >
-            <widget class="QCheckBox" name="filterElasticCheckBox" >
-             <property name="toolTip" >
-              <string>Should the elastic logs in this well be multi-parameter-filtered after inversion?</string>
-             </property>
-             <property name="text" >
-              <string>Filter the elastic logs after inversion</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" colspan="2" >
-            <widget class="QCheckBox" name="backgroundTrendCheckBox" >
-             <property name="toolTip" >
-              <string>Whether this log should be used for background trend estimation.</string>
-             </property>
-             <property name="text" >
-              <string>Use for background trend estimation</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2" >
-            <widget class="QPushButton" name="wellBrowsePushButton" >
-             <property name="toolTip" >
-              <string>File name for the well log. RMS format.</string>
-             </property>
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" colspan="2" >
-            <widget class="QCheckBox" name="waveletEstimationCheckBox" >
-             <property name="toolTip" >
-              <string>Whether this log should be used for wavelet estimation.</string>
-             </property>
-             <property name="text" >
-              <string>Use for wavelet estimation</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="4" >
-            <widget class="QLabel" name="wellNameLabel" >
-             <property name="font" >
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-               <underline>false</underline>
-              </font>
-             </property>
-             <property name="text" >
-              <string>Well name</string>
-             </property>
-             <property name="alignment" >
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="3" >
-            <widget class="QPushButton" name="convertLasToRmsPushButton" >
-             <property name="toolTip" >
-              <string>Crava does not handle .las format, .las files needs to be converted to .rms format, for this a position file is needed. This operation takes a bit of time. Discrete log names have to be entered manually, as they are not in the files.</string>
-             </property>
-             <property name="text" >
-              <string>Convert from .las to .rms</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
-        <item row="9" column="0" colspan="2" >
+        <item row="3" column="0" colspan="3">
+         <layout class="QHBoxLayout" name="horizontalLayout_23">
+          <item>
+           <widget class="QLabel" name="logFormatLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Log names</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0" colspan="3">
+         <layout class="QGridLayout" name="gridLayout_17">
+          <item row="0" column="0">
+           <widget class="QLabel" name="timeLabel">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>&lt;qt&gt;The header name for two way time log</string>
+            </property>
+            <property name="text">
+             <string>Time:</string>
+            </property>
+            <property name="buddy">
+             <cstring>timeLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="timeLineEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="acceptDrops">
+             <bool>true</bool>
+            </property>
+            <property name="toolTip">
+             <string>&lt;qt&gt;The header name for two way time log</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="densityLabel">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The header name for density log</string>
+            </property>
+            <property name="text">
+             <string>Density:</string>
+            </property>
+            <property name="buddy">
+             <cstring>densityLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="densityLineEdit">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>&lt;qt&gt;The header name for density log</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="faciesFormatLabel">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The header name for facies log</string>
+            </property>
+            <property name="text">
+             <string>Facies:</string>
+            </property>
+            <property name="buddy">
+             <cstring>faciesLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLineEdit" name="faciesLineEdit">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>&lt;qt&gt;The header name for facies log</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="vpRadioButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;Use Vp log.</string>
+            </property>
+            <property name="text">
+             <string>Vp</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="vpLineEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>The header name for VP log</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QRadioButton" name="dtRadioButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;Use DT log.</string>
+            </property>
+            <property name="text">
+             <string>DT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLineEdit" name="dtLineEdit">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>The header name for DT log</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QRadioButton" name="vsRadioButton">
+            <property name="toolTip">
+             <string>&lt;qt&gt;Use Vs log.</string>
+            </property>
+            <property name="text">
+             <string>Vs</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="vsLineEdit">
+            <property name="toolTip">
+             <string>The header name for VS log</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QRadioButton" name="dtsRadioButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>&lt;qt&gt;Use DTS log.</string>
+            </property>
+            <property name="text">
+             <string>DTS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLineEdit" name="dtsLineEdit">
+            <property name="toolTip">
+             <string>The header name for DTS log</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="wellHeaderLabel">
+          <property name="text">
+           <string>Well header log names</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QListWidget" name="wellHeaderListWidget">
+          <property name="toolTip">
+           <string>&lt;qt&gt;These are the names of the well logs from the selected well.</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QPushButton" name="wellHeaderPushButton">
+          <property name="toolTip">
+           <string>&lt;qt&gt;Gets the names of the logs in the selected well. Can only be used if a well is selected.</string>
+          </property>
+          <property name="text">
+           <string>Get well header log names</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
          <spacer>
-          <property name="orientation" >
+          <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
             <height>40</height>
            </size>
           </property>
          </spacer>
-        </item>
-        <item row="4" column="0" colspan="2" >
-         <widget class="QLabel" name="logFormatLabel" >
-          <property name="font" >
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text" >
-           <string>Log names</string>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0" >
-         <widget class="QLabel" name="wellHeaderLabel" >
-          <property name="text" >
-           <string>Well header log names</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" >
-         <layout class="QGridLayout" >
-          <property name="margin" >
-           <number>0</number>
-          </property>
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item rowspan="2" row="0" column="1" >
-           <widget class="QListWidget" name="wellListWidget" >
-            <property name="toolTip" >
-             <string>A list of well logs</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" >
-           <widget class="QPushButton" name="openWellPushButton" >
-            <property name="toolTip" >
-             <string>Opens the selected well in the editor chosen in "Settings". Default editor is emacs.</string>
-            </property>
-            <property name="text" >
-             <string>Open well file</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" >
-           <widget class="QPushButton" name="addWellPushButton" >
-            <property name="toolTip" >
-             <string>Adds another well log</string>
-            </property>
-            <property name="text" >
-             <string>Add &amp;well</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" >
-           <widget class="QPushButton" name="deleteWellPushButton" >
-            <property name="toolTip" >
-             <string>Removed the selected well log</string>
-            </property>
-            <property name="text" >
-             <string>Delete well</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </item>
        </layout>
       </widget>
