@@ -766,103 +766,234 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="advancedPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
+     <widget class="QWidget" name="advancedPage">
+      <layout class="QGridLayout">
+       <property name="margin">
         <number>9</number>
        </property>
-       <property name="spacing" >
+       <property name="spacing">
         <number>6</number>
        </property>
-       <item row="6" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
+       <item row="4" column="0">
+        <widget class="QLabel" name="fftPaddingLabel">
+         <property name="text">
+          <string>&lt;qt&gt;FFT grid padding</string>
          </property>
-         <property name="spacing" >
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
+          <widget class="QLabel" name="xFractionLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the x-direction relative to the x-length.</string>
            </property>
-           <property name="spacing" >
+           <property name="text">
+            <string>&lt;qt&gt;X-padding ratio</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="xFractionLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the x-direction relative to the x-length.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="yFractionLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the y-direction relative to the y-length.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Y-padding ratio</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="yFractionLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the y-direction relative to the y-length.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="zFractionLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the z-direction relative to the z-length.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Z-padding ratio</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="zFractionLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the z-direction relative to the z-length.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="13" column="0">
+        <widget class="QCheckBox" name="diskStorageCheckBox">
+         <property name="toolTip">
+          <string>&lt;qt&gt;To reduce the physical memory requirement, CRAVA can store intermediate FFT grids on disk rather than holding them in memory. This will typically reduce the total memory requirement of a calculation, but comes at a cost of increased CPU usage and increased disk usage.</string>
+         </property>
+         <property name="text">
+          <string>Use intermediate disk storage</string>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="maximumRelativeThicknessLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value giving the limit of how small the minimum interval thickness can be relative to the maximum. If this gets too low, the tranformation to stationarity for the FFT-algorithm gives strange results.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Minimum required ratio between minimum and maximum output thickness</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="maximumRelativeThicknessLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value giving the limit of how small the minimum interval thickness can be relative to the maximum. If this gets too low, the tranformation to stationarity for the FFT-algorithm gives strange results.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="20" column="0">
+        <widget class="QLabel" name="frequencyBandLabel">
+         <property name="toolTip">
+          <string>&lt;qt&gt;The frequency band is limited by the wavelet, but an additional cut-off is needed to ensure numerical stability.</string>
+         </property>
+         <property name="text">
+          <string>&lt;qt&gt;Frequency band for inversion</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::AutoText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="24" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLabel" name="energyTresholdLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
+            <widget class="QLabel" name="energyTresholdLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Trace energy treshold</string>
+             <property name="text">
+              <string>&lt;qt&gt;Trace energy treshold</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="waveletLengthLabel" >
-             <property name="text" >
-              <string>&lt;qt>Length of wavelet to be estimated, in ms</string>
+            <widget class="QLabel" name="waveletLengthLabel">
+             <property name="toolTip">
+              <string>Giving the length of the wavelet to be estimated in ms. For a 1D wavelet this is the width of the Papoulis taper used, when tapering of auto-correlation of reflection co-efficients, and cross-correlation of reflection-coefficients and seismic data, before doing the spectral division. Increasing this value will give less bias (i.e. less energy at low frequencies), but larger variance in the estimate (i.e. secondary oscillations). For a 3D wavelet this gives the length of the source-wavelet, by dividing this length by the vertical sampling interval we find the the </string>
+             </property>
+             <property name="text">
+              <string>&lt;qt&gt;Length of wavelet to be estimated, in ms</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="waveletRelativeMinimumLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Minimum ratio between smallest and largest relevant amplitude for estimated wavelet.</string>
+            <widget class="QLabel" name="waveletRelativeMinimumLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Minimum ratio between smallest and largest relevant amplitude for estimated wavelet.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Minimum ratio of relevant amplitude for estimated wavelet</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="waveletShiftMaxLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Value controlling how much the wavelet is allowed to be shifted when doing estimation of wavelet or noise.</string>
-             </property>
-             <property name="text" >
-              <string>&lt;qt>Maximum allowed shift of wavelet</string>
+             <property name="text">
+              <string>&lt;qt&gt;Minimum ratio of relevant amplitude for estimated wavelet</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="whiteNoiseLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>In order to stabelize the inversion, some of the noise needs to be interpreted as white. This specifies that fraction.</string>
+            <widget class="QLabel" name="waveletShiftMaxLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Value controlling how much the wavelet is allowed to be shifted when doing estimation of wavelet or noise.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>White noise fraction</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="reflectionMatrixLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>c(x,t,θ) = aVp(θ) δ/δt ln(Vp(x, t)) + aVs(x,t,θ) δ/δt ln(Vs(x, t)) + aρ(x,t,θ) δ/δt ln(ρ(x,t)) , the coefficients aVp, aVs and aρ can be read from file, each line should have one line for each seismic data file with the three coefficients for each.</string>
-             </property>
-             <property name="text" >
-              <string>&lt;qt>Reflection matrix</string>
+             <property name="text">
+              <string>&lt;qt&gt;Maximum allowed shift of wavelet</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="krigingLimitLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Limit for the amount of well data used to kriege each point. A high value gives a smoother and more exact field, but takes more time.</string>
+            <widget class="QLabel" name="whiteNoiseLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;In order to stabelize the inversion, some of the noise needs to be interpreted as white. This specifies that fraction.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Kriging data limit</string>
+             <property name="text">
+              <string>&lt;qt&gt;White noise fraction</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="seedFileLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
+            <widget class="QLabel" name="reflectionMatrixLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;c(x,t,θ) = aVp(θ) δ/δt ln(Vp(x, t)) + aVs(x,t,θ) δ/δt ln(Vs(x, t)) + aρ(x,t,θ) δ/δt ln(ρ(x,t)) , the coefficients aVp, aVs and aρ can be read from file, each line should have one line for each seismic data file with the three coefficients for each.</string>
              </property>
-             <property name="text" >
+             <property name="text">
+              <string>&lt;qt&gt;Reflection matrix</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="krigingLimitLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Limit for the amount of well data used to kriege each point. A high value gives a smoother and more exact field, but takes more time.</string>
+             </property>
+             <property name="text">
+              <string>&lt;qt&gt;Kriging data limit</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="guardZoneLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Changes the amount of data that will be required outside the interval of interest.</string>
+             </property>
+             <property name="text">
+              <string>Guard zone, in ms</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="seedFileLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
+             </property>
+             <property name="text">
               <string>Seed File</string>
              </property>
             </widget>
@@ -870,58 +1001,70 @@ p, li { white-space: pre-wrap; }
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLineEdit" name="energyTresholdLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
+            <widget class="QLineEdit" name="energyTresholdLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="waveletLengthLineEdit" />
-           </item>
-           <item>
-            <widget class="QLineEdit" name="waveletRelativeMinimumLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>Minimum ratio between smallest and largest relevant amplitude for estimated wavelet.</string>
+            <widget class="QLineEdit" name="waveletLengthLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Giving the length of the wavelet to be estimated in ms. For a 1D wavelet this is the width of the Papoulis taper used, when tapering of auto-correlation of reflection co-efficients, and cross-correlation of reflection-coefficients and seismic data, before doing the spectral division. Increasing this value will give less bias (i.e. less energy at low frequencies), but larger variance in the estimate (i.e. secondary oscillations). For a 3D wavelet this gives the length of the source-wavelet, by dividing this length by the vertical sampling interval we find the the
+</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="waveletShiftMaxLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>Value controlling how much the wavelet is allowed to be shifted when doing estimation of wavelet or noise.</string>
+            <widget class="QLineEdit" name="waveletRelativeMinimumLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Minimum ratio between smallest and largest relevant amplitude for estimated wavelet.</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="whiteNoiseLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>In order to stabelize the inversion, we need to interpret some of the noise as white. This specifies that fraction.</string>
+            <widget class="QLineEdit" name="waveletShiftMaxLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Value controlling how much the wavelet is allowed to be shifted when doing estimation of wavelet or noise.</string>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
+            <widget class="QLineEdit" name="whiteNoiseLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;In order to stabelize the inversion, we need to interpret some of the noise as white. This specifies that fraction.</string>
              </property>
-             <property name="spacing" >
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QLineEdit" name="reflectionMatrixLineEdit" />
+              <widget class="QLineEdit" name="reflectionMatrixLineEdit">
+               <property name="toolTip">
+                <string>&lt;qt&gt;c(x,t,θ) = aVp(θ) δ/δt ln(Vp(x, t)) + aVs(x,t,θ) δ/δt ln(Vs(x, t)) + aρ(x,t,θ) δ/δt ln(ρ(x,t)) , the coefficients aVp, aVs and aρ can be read from file, each line should have one line for each seismic data file with the three coefficients for each.</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="reflectionMatrixBrowsePushButton" >
-               <property name="text" >
+              <widget class="QPushButton" name="reflectionMatrixBrowsePushButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;c(x,t,θ) = aVp(θ) δ/δt ln(Vp(x, t)) + aVs(x,t,θ) δ/δt ln(Vs(x, t)) + aρ(x,t,θ) δ/δt ln(ρ(x,t)) , the coefficients aVp, aVs and aρ can be read from file, each line should have one line for each seismic data file with the three coefficients for each.</string>
+               </property>
+               <property name="text">
                 <string>Browse...</string>
                </property>
               </widget>
@@ -929,33 +1072,40 @@ p, li { white-space: pre-wrap; }
             </layout>
            </item>
            <item>
-            <widget class="QLineEdit" name="krigingDataLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>Limit for the amount of well data used to kriege each point. A high value gives a smoother and more exact field, but takes more time.</string>
+            <widget class="QLineEdit" name="krigingDataLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Limit for the amount of well data used to kriege each point. A high value gives a smoother and more exact field, but takes more time.</string>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
+            <widget class="QLineEdit" name="guardZoneLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Changes the amount of data that will be required outside the interval of interest.</string>
              </property>
-             <property name="spacing" >
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QLineEdit" name="seedFileLineEdit" >
-               <property name="toolTip" >
-                <string>&lt;qt>The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
+              <widget class="QLineEdit" name="seedFileLineEdit">
+               <property name="toolTip">
+                <string>&lt;qt&gt;The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="seedFileBrowsePushButton" >
-               <property name="toolTip" >
-                <string>&lt;qt>The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
+              <widget class="QPushButton" name="seedFileBrowsePushButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
                </property>
-               <property name="text" >
+               <property name="text">
                 <string>Browse...</string>
                </property>
               </widget>
@@ -966,194 +1116,319 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </item>
-       <item row="7" column="0" >
-        <widget class="QCheckBox" name="krigedSmoothCheckBox" >
-         <property name="text" >
+       <item row="26" column="0">
+        <widget class="QCheckBox" name="krigedSmoothCheckBox">
+         <property name="toolTip">
+          <string>&lt;qt&gt;Should the program smooth borders between kriging blocks or not?</string>
+         </property>
+         <property name="text">
           <string>Smooth borders between kriging blocks</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="0" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
+       <item row="21" column="0">
+        <widget class="QFrame" name="frequencyBandFrame">
+         <property name="toolTip">
+          <string>&lt;qt&gt;Controls the frequency band of the inversion, so high and/ or low frequency can be filtered away. This should be done by the wavelet, but can be specified here.</string>
          </property>
-         <property name="sizeHint" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="4" column="0" >
-        <widget class="QLabel" name="frequencyBandLabel" >
-         <property name="toolTip" >
-          <string>&lt;qt>&lt;qt>The frequency band is limited by the wavelet, but an additional cut-off is needed to ensure numerical stability.</string>
-         </property>
-         <property name="text" >
-          <string>&lt;qt>Frequency band for inversion</string>
-         </property>
-         <property name="textFormat" >
-          <enum>Qt::AutoText</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0" >
-        <widget class="QFrame" name="frequencyBandFrame" >
-         <property name="toolTip" >
-          <string>&lt;qt>Controls the frequency band of the inversion, so high and/ or low frequency can be filtered away. This should be done by the wavelet, but can be specified here.</string>
-         </property>
-         <property name="frameShape" >
+         <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="frameShadow" >
+         <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QGridLayout" >
-          <property name="margin" >
+         <layout class="QGridLayout">
+          <property name="margin">
            <number>9</number>
           </property>
-          <property name="spacing" >
+          <property name="spacing">
            <number>6</number>
           </property>
-          <item row="0" column="1" >
-           <widget class="QLineEdit" name="lowCutFrequencyBandLineEdit" >
-            <property name="toolTip" >
-             <string>&lt;qt>The minimum frequency affected by the inversion.</string>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lowCutFrequencyBandLineEdit">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The minimum frequency affected by the inversion.</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="0" >
-           <widget class="QLabel" name="lowCutFrequencyBandLabel" >
-            <property name="toolTip" >
-             <string>&lt;qt>The minimum frequency affected by the inversion.</string>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lowCutFrequencyBandLabel">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The minimum frequency affected by the inversion.</string>
             </property>
-            <property name="text" >
-             <string>&lt;qt>Low cut</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" >
-           <widget class="QLabel" name="highCutFrequencyBandLabel" >
-            <property name="toolTip" >
-             <string>&lt;qt>The maximum frequency affected by the inversion.</string>
-            </property>
-            <property name="text" >
-             <string>&lt;qt>High cut</string>
+            <property name="text">
+             <string>&lt;qt&gt;Low cut</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="3" >
-           <widget class="QLineEdit" name="highCutFrequencyBandLineEdit" >
-            <property name="toolTip" >
-             <string>&lt;qt>The maximum frequency affected by the inversion.</string>
+          <item row="0" column="2">
+           <widget class="QLabel" name="highCutFrequencyBandLabel">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The maximum frequency affected by the inversion.</string>
+            </property>
+            <property name="text">
+             <string>&lt;qt&gt;High cut</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="highCutFrequencyBandLineEdit">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The maximum frequency affected by the inversion.</string>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="2" column="0" >
-        <widget class="QCheckBox" name="diskStorageCheckBox" >
-         <property name="toolTip" >
-          <string>&lt;qt>To reduce the physical memory requirement, CRAVA can store intermediate FFT grids on disk rather than holding them in memory. This will typically reduce the total memory requirement of a calculation, but comes at a cost of increased CPU usage and increased disk usage.</string>
+       <item row="16" column="0">
+        <widget class="QFrame" name="vpVsRatioFrame">
+         <property name="toolTip">
+          <string>&lt;qt&gt;The Vp/Vs ratio used in reflection matrix can be estimated from the background model, estimated from the well data or set manually by the user.</string>
          </property>
-         <property name="text" >
-          <string>Use intermediate disk storage</string>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QRadioButton" name="vpVsEstimateBackgroundRadioButton">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Estimate Vp/Vs ratio from the background model.</string>
+                  </property>
+                  <property name="text">
+                   <string>Estimate from background</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="vpVsEstimateWellRadioButton">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Estimate the Vp/Vs ratio from the wells.</string>
+                  </property>
+                  <property name="text">
+                   <string>Estimate from wells</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="vpVsUserDefinedRadioButton">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Value of the Vp/Vs ratio used in the reflection matrix is defined by the user.</string>
+                  </property>
+                  <property name="text">
+                   <string>User defined</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="vpVsUserDefinedLineEdit">
+                <property name="toolTip">
+                 <string>&lt;qt&gt;Value of Vp/Vs ratio used in reflection matrix is defined by the user.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="15" column="0">
+        <widget class="QLabel" name="vpVsRatioLabel">
+         <property name="toolTip">
+          <string>&lt;qt&gt;The Vp/Vs ratio used in reflection matrix can be estimated from the background model, estimated from the well data or set manually by the user.</string>
+         </property>
+         <property name="text">
+          <string>Vp/Vs ratio for reflection matrix</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
+       <item row="12" column="0">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="spacing" >
-          <number>6</number>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
          </property>
-         <item>
-          <widget class="QLabel" name="maximumRelativeThicknessLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value giving the limit of how small the minimum interval thickness can be relative to the maximum. If this gets too low, the tranformation to stationarity for the FFT-algorithm gives strange results.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Minimum required ratio between minimum and maximum output thickness</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="maximumRelativeThicknessLineEdit" />
-         </item>
-        </layout>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
        </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="fftPaddingLabel" >
-         <property name="text" >
-          <string>&lt;qt>FFT grid padding</string>
+       <item row="14" column="0">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="17" column="0">
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="19" column="0">
+        <spacer name="verticalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Advanced Inversion Settings</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
+       <item row="25" column="0">
+        <spacer name="verticalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="spacing" >
-          <number>6</number>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
          </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="23" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="22" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLabel" name="xFractionLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the x-direction relative to the x-length.</string>
+          <widget class="QLabel" name="seismicResolutionLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Used to filter wells down to seismic resolution. Only used to generate output logs for QC.</string>
            </property>
-           <property name="text" >
-            <string>&lt;qt>X-padding ratio</string>
+           <property name="text">
+            <string>High cut seismic resolution for well data</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="xFractionLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the x-direction relative to the x-length.</string>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-          </widget>
+           <property name="sizeType">
+            <enum>QSizePolicy::Maximum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>224</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="yFractionLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the y-direction relative to the y-length.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Y-padding ratio</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="yFractionLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the y-direction relative to the y-length.</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="zFractionLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the z-direction relative to the z-length.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Z-padding ratio</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="zFractionLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the z-direction relative to the z-length.</string>
+          <widget class="QLineEdit" name="seismicResolutionLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Used to filter wells down to seismic resolution. Only used to generate output logs for QC.</string>
            </property>
           </widget>
          </item>
         </layout>
+       </item>
+       <item row="27" column="0">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
