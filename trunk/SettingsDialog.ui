@@ -26,64 +26,70 @@
      <property name="currentIndex" >
       <number>4</number>
      </property>
-     <widget class="QWidget" name="inputOutputPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
+     <widget class="QWidget" name="inputOutputPage">
+      <layout class="QGridLayout">
+       <property name="margin">
         <number>9</number>
        </property>
-       <property name="spacing" >
+       <property name="spacing">
         <number>6</number>
        </property>
-       <item row="5" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="5" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QLabel" name="logLevelLabel" >
-           <property name="text" >
+          <widget class="QLabel" name="logLevelLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output information level should be low, medium, high, error or warning.</string>
+           </property>
+           <property name="text">
             <string>Output information level</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="logComboBox" >
+          <widget class="QComboBox" name="logComboBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output information level should be low, medium, high, error or warning.</string>
+           </property>
            <item>
-            <property name="text" >
-             <string>low</string>
+            <property name="text">
+             <string>Low</string>
             </property>
            </item>
            <item>
-            <property name="text" >
-             <string>medium</string>
+            <property name="text">
+             <string>Medium</string>
             </property>
            </item>
            <item>
-            <property name="text" >
-             <string>high</string>
+            <property name="text">
+             <string>High</string>
             </property>
            </item>
            <item>
-            <property name="text" >
-             <string>error</string>
+            <property name="text">
+             <string>Error</string>
             </property>
            </item>
            <item>
-            <property name="text" >
-             <string>warning</string>
+            <property name="text">
+             <string>Warning</string>
             </property>
            </item>
           </widget>
          </item>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -93,12 +99,12 @@
          </item>
         </layout>
        </item>
-       <item row="6" column="0" >
+       <item row="6" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -106,167 +112,183 @@
          </property>
         </spacer>
        </item>
-       <item row="3" column="0" >
-        <widget class="QFrame" name="formatChangeFrame" >
-         <property name="toolTip" >
-          <string>&lt;qt>Specify the header format for segy files.</string>
+       <item row="3" column="0">
+        <widget class="QFrame" name="formatChangeFrame">
+         <property name="toolTip">
+          <string>&lt;qt&gt;Specify the header format for segy files.</string>
          </property>
-         <property name="frameShape" >
+         <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="frameShadow" >
+         <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QGridLayout" >
-          <property name="margin" >
+         <layout class="QGridLayout">
+          <property name="margin">
            <number>9</number>
           </property>
-          <property name="spacing" >
+          <property name="spacing">
            <number>6</number>
           </property>
-          <item row="1" column="0" >
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
+          <item row="1" column="0">
+           <layout class="QHBoxLayout">
+            <property name="spacing">
              <number>6</number>
             </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QLabel" name="bypassCoordinateLabel" >
-              <property name="toolTip" >
-               <string>&lt;qt>Indicates whether coordinate scaling information should be used.</string>
+             <widget class="QLabel" name="bypassCoordinateLabel">
+              <property name="toolTip">
+               <string>&lt;qt&gt;Indicates whether coordinate scaling information should be used.</string>
               </property>
-              <property name="text" >
-               <string>&lt;qt>Bypass coordinate scaling</string>
+              <property name="text">
+               <string>Ignore coordinate scaling:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="bypassCoordinateEstimateRadioButton" >
-              <property name="text" >
+             <widget class="QRadioButton" name="bypassCoordinateEstimateRadioButton">
+              <property name="toolTip">
+               <string>&lt;qt&gt;Estimate the coordinate scaling information.</string>
+              </property>
+              <property name="text">
                <string>Estimate</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="bypassCoordinateYesRadioButton" >
-              <property name="text" >
+             <widget class="QRadioButton" name="bypassCoordinateYesRadioButton">
+              <property name="toolTip">
+               <string>&lt;qt&gt;Ignore the coordinate scaling.</string>
+              </property>
+              <property name="text">
                <string>Yes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="bypassCoordinateNoRadioButton" >
-              <property name="text" >
+             <widget class="QRadioButton" name="bypassCoordinateNoRadioButton">
+              <property name="toolTip">
+               <string>&lt;qt&gt;Coordinat scaling will be used and given by the user.</string>
+              </property>
+              <property name="text">
                <string>No</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="0" column="0" >
-           <layout class="QGridLayout" >
-            <property name="margin" >
+          <item row="0" column="0">
+           <layout class="QGridLayout">
+            <property name="margin">
              <number>0</number>
             </property>
-            <property name="spacing" >
+            <property name="spacing">
              <number>6</number>
             </property>
-            <item row="1" column="0" >
-             <widget class="QLabel" name="y_coord_label_2" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the y-coordinate in the trace header.</string>
+            <item row="1" column="0">
+             <widget class="QLabel" name="y_coord_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the y-coordinate in the trace header.</string>
               </property>
-              <property name="text" >
-               <string>&lt;qt>y-coordinate</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1" >
-             <widget class="QLineEdit" name="yCoordLineEdit" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the y-coordinate in the trace header.</string>
+              <property name="text">
+               <string>y-coordinate:</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="0" >
-             <widget class="QLabel" name="x_coord_label_2" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the x-coordinate in the trace header.</string>
-              </property>
-              <property name="text" >
-               <string>&lt;qt>x-coordinate</string>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="yCoordLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the y-coordinate in the trace header.</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="3" >
-             <widget class="QLineEdit" name="crosslineLineEdit" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the crossline in the trace header.</string>
+            <item row="0" column="0">
+             <widget class="QLabel" name="x_coord_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the x-coordinate in the trace header.</string>
+              </property>
+              <property name="text">
+               <string>x-coordinate:</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3" >
-             <widget class="QLineEdit" name="inlineLineEdit" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the inline in the trace header.</string>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="crosslineLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the crossline in the trace header.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="2" >
-             <widget class="QLabel" name="inline_label_2" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the inline in the trace header.</string>
-              </property>
-              <property name="text" >
-               <string>&lt;qt>Inline</string>
+            <item row="1" column="3">
+             <widget class="QLineEdit" name="inlineLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the inline in the trace header.</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1" >
-             <widget class="QLineEdit" name="xCoordLineEdit" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the x-coordinate in the trace header.</string>
+            <item row="1" column="2">
+             <widget class="QLabel" name="inline_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the inline in the trace header.</string>
+              </property>
+              <property name="text">
+               <string>Inline:</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="2" >
-             <widget class="QLabel" name="crossline_label_2" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the crossline in the trace header.</string>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="xCoordLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the x-coordinate in the trace header.</string>
               </property>
-              <property name="text" >
-               <string>&lt;qt>Crossline</string>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="crossline_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the crossline in the trace header.</string>
+              </property>
+              <property name="text">
+               <string>Crossline:</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="2" column="0" >
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
+          <item row="2" column="0">
+           <layout class="QHBoxLayout">
+            <property name="spacing">
              <number>6</number>
             </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QLabel" name="location_scaling_label_2" >
-              <property name="text" >
-               <string>&lt;qt>location scaling coefficient</string>
+             <widget class="QLabel" name="location_scaling_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The coefficient used to scale the location.</string>
+              </property>
+              <property name="text">
+               <string>Location scaling coefficient:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="locationScalingLineEdit" />
+             <widget class="QLineEdit" name="locationScalingLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The coefficient used to scale the location.</string>
+              </property>
+             </widget>
             </item>
             <item>
              <spacer>
-              <property name="orientation" >
+              <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0">
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -279,65 +301,80 @@
          </layout>
         </widget>
        </item>
-       <item row="2" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="2" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QLabel" name="headerFormatLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Specify the header format for segy files.</string>
+          <widget class="QLabel" name="headerFormatLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Specify the header format for segy files.</string>
            </property>
-           <property name="text" >
-            <string>&lt;qt>SegY output header format:</string>
+           <property name="text">
+            <string>&lt;qt&gt;SegY output header format:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerSeisWorksRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerSeisWorksRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be SeisWorks (small).</string>
+           </property>
+           <property name="text">
             <string>SeisWorks (small)</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerIesxRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerIesxRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be IESX.</string>
+           </property>
+           <property name="text">
             <string>IESX</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerSipRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerSipRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be SeisWorks (big).</string>
+           </property>
+           <property name="text">
             <string>SeisWorks (Big)</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerCharismaRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerCharismaRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be Charisma.</string>
+           </property>
+           <property name="text">
             <string>Charisma</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerUserDefinedRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerUserDefinedRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be user defined.</string>
+           </property>
+           <property name="text">
             <string>User defined</string>
            </property>
           </widget>
          </item>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -347,82 +384,101 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="inputOutputLabel" >
-         <property name="font" >
+       <item row="0" column="0">
+        <widget class="QLabel" name="inputOutputLabel">
+         <property name="font">
           <font>
            <weight>75</weight>
            <italic>false</italic>
            <bold>true</bold>
           </font>
          </property>
-         <property name="text" >
-          <string>&lt;qt>Input and Output Settings</string>
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Output Settings&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
-         <property name="alignment" >
+         <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="1" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QLabel" name="seismicLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Specifies which formats to output seismic cubes in.</string>
+          <widget class="QLabel" name="seismicLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Specifies which formats to output seismic cubes in.</string>
            </property>
-           <property name="text" >
-            <string>&lt;qt>Seismic formats</string>
+           <property name="text">
+            <string>&lt;qt&gt;Seismic formats</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="segyCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="segyCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in SegY format.</string>
+           </property>
+           <property name="text">
             <string>SegY</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="stormCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="stormCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in Storm format.</string>
+           </property>
+           <property name="text">
             <string>Storm</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="cravaCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="cravaCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in Crava format.</string>
+           </property>
+           <property name="text">
             <string>Crava</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="sgriCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="sgriCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in Sgri format.</string>
+           </property>
+           <property name="text">
             <string>Sgri</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="asciiCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="asciiCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in ASCII format.</string>
+           </property>
+           <property name="text">
             <string>ASCII</string>
            </property>
           </widget>
          </item>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -432,80 +488,86 @@
          </item>
         </layout>
        </item>
-       <item row="4" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="4" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLabel" name="wellFormatLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Specifies which formats to output well logs in.</string>
+            <widget class="QLabel" name="wellFormatLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Specifies which formats to output well logs in.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Well format</string>
+             <property name="text">
+              <string>&lt;qt&gt;Well format</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="waveletFormatLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Specifies which formats to output wavelets in.</string>
+            <widget class="QLabel" name="waveletFormatLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Specifies which formats to output wavelets in.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Wavelet format</string>
+             <property name="text">
+              <string>&lt;qt&gt;Wavelet format</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="rmsCheckBox" >
-               <property name="text" >
+              <widget class="QCheckBox" name="rmsCheckBox">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Control whether the well output should be in RMS format.</string>
+               </property>
+               <property name="text">
                 <string>RMS</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="norsarWellCheckBox" >
-               <property name="text" >
+              <widget class="QCheckBox" name="norsarWellCheckBox">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Control whether the well output should be in NORSAR format.</string>
+               </property>
+               <property name="text">
                 <string>NORSAR</string>
                </property>
               </widget>
              </item>
              <item>
               <spacer>
-               <property name="orientation" >
+               <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeHint" >
+               <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
                  <height>20</height>
@@ -516,33 +578,39 @@
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="jasonCheckBox" >
-               <property name="text" >
+              <widget class="QCheckBox" name="jasonCheckBox">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Control whether the wavelet output should be in JASON format.</string>
+               </property>
+               <property name="text">
                 <string>JASON</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="norsarWaveletCheckBox" >
-               <property name="text" >
+              <widget class="QCheckBox" name="norsarWaveletCheckBox">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Control whether the wavelet output should be in NORSAR format.</string>
+               </property>
+               <property name="text">
                 <string>NORSAR</string>
                </property>
               </widget>
              </item>
              <item>
               <spacer>
-               <property name="orientation" >
+               <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeHint" >
+               <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
                  <height>20</height>
