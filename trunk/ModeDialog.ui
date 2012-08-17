@@ -1,112 +1,154 @@
-<ui version="4.0" >
- <author>Alf Birger Rustad, Øystein Monsrud Arneson and Erik Bakken</author>
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Alf Birger Rustad, Øystein Monsrud Arneson, Erik Bakken and Andreas B. Lindblad</author>
  <class>ModeDialog</class>
- <widget class="QDialog" name="ModeDialog" >
-  <property name="geometry" >
+ <widget class="QDialog" name="ModeDialog">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>897</width>
-    <height>552</height>
+    <width>890</width>
+    <height>556</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Mode</string>
   </property>
-  <layout class="QGridLayout" >
-   <property name="margin" >
-    <number>9</number>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>520</y>
+     <width>175</width>
+     <height>25</height>
+    </rect>
    </property>
-   <property name="spacing" >
-    <number>6</number>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
-   <item row="3" column="0" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" >
-    <widget class="QFrame" name="frame_2" >
-     <property name="frameShape" >
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QGridLayout" >
-      <property name="margin" >
-       <number>9</number>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame_2">
+   <property name="geometry">
+    <rect>
+     <x>4</x>
+     <y>4</y>
+     <width>881</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <layout class="QGridLayout">
+    <property name="margin">
+     <number>9</number>
+    </property>
+    <property name="spacing">
+     <number>6</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QLabel" name="titleLabel">
+      <property name="text">
+       <string>Title</string>
       </property>
-      <property name="spacing" >
-       <number>6</number>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
-      <item row="0" column="0" >
-       <widget class="QLabel" name="titleLabel" >
-        <property name="text" >
-         <string>Title</string>
-        </property>
-        <property name="alignment" >
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0" >
-    <widget class="QToolBox" name="modeDialogToolBox" >
-     <property name="currentIndex" >
-      <number>1</number>
-     </property>
-     <widget class="QWidget" name="openPreviosProject" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>879</width>
-        <height>374</height>
-       </rect>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>100</y>
+     <width>20</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>100</y>
+     <width>601</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
-      <attribute name="label" >
-       <string>Open previous project</string>
-      </attribute>
-      <layout class="QGridLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>17</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QWidget" name="oldProjectWidget" native="true">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>Open previous project:</string>
+          <widget class="QLineEdit" name="openProjectLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Open a previous created CRAVA GUI project.</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="openProjectLineEdit" />
-         </item>
-         <item>
-          <widget class="QPushButton" name="openProjectBrowsePushButton" >
-           <property name="toolTip" >
-            <string>&lt;qt>Opens an old project.</string>
+          <widget class="QPushButton" name="openProjectBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Open a previous created CRAVA GUI project.</string>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="openLabel">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Open file</string>
            </property>
           </widget>
          </item>
@@ -114,244 +156,225 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="makeNewProject" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>879</width>
-        <height>376</height>
-       </rect>
-      </property>
-      <attribute name="label" >
-       <string>Make new project</string>
-      </attribute>
-      <layout class="QGridLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item row="4" column="0" >
-        <layout class="QGridLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item row="1" column="2" >
-          <widget class="QPushButton" name="inputDirectoryBrowsePushButton" >
-           <property name="toolTip" >
-            <string>&lt;qt>Root directory for input files.</string>
+    </item>
+    <item>
+     <widget class="QWidget" name="newProjectWidget" native="true">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="3" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="directoriesLabel">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
            </property>
-           <property name="text" >
-            <string>Browse...</string>
+           <property name="text">
+            <string>Specify directories</string>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="1" >
-          <widget class="QLineEdit" name="inputDirectoryLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Root directory for input files.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" >
-          <widget class="QLineEdit" name="topDirectoryLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Working directory for the model file</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2" >
-          <widget class="QPushButton" name="topDirectoryBrowsePushButton" >
-           <property name="toolTip" >
-            <string>&lt;qt>Working directory for the model file</string>
-           </property>
-           <property name="text" >
-            <string>Browse...</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0" >
-          <widget class="QLabel" name="topDirectoryLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Working directory for the model file</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Working directory</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="inputDirectoryLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Root directory for input files.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Input directory</string>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="3" column="0" >
-        <widget class="QLabel" name="directoriesLabel" >
-         <property name="font" >
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text" >
-          <string>Specify directories</string>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="modeLabel" >
-         <property name="font" >
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text" >
-          <string>Select mode</string>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" >
-        <widget class="QStackedWidget" name="stackedWidget" >
-         <property name="currentIndex" >
+       <item row="4" column="0">
+        <layout class="QGridLayout">
+         <property name="margin">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="inversionPage" >
-          <layout class="QGridLayout" >
-           <property name="margin" >
-            <number>9</number>
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="inputDirectoryBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Root directory for input files.</string>
            </property>
-           <property name="spacing" >
-            <number>6</number>
+           <property name="text">
+            <string>Browse...</string>
            </property>
-           <item row="0" column="0" >
-            <widget class="QCheckBox" name="predictionCheckBox" >
-             <property name="text" >
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="inputDirectoryLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Root directory for input files.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="topDirectoryLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Working directory for the model file</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="topDirectoryBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Working directory for the model file</string>
+           </property>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="inputDirectoryLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Root directory for input files.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Input directory</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="topDirectoryLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Working directory for the model file</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Working directory</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0">
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="inversionPage">
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="predictionCheckBox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>&lt;qt&gt;Control whether predicted elastic parameters will be generated.</string>
+             </property>
+             <property name="text">
               <string>Predict elastic parameters</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0" >
-            <widget class="QCheckBox" name="krigingCheckBox" >
-             <property name="text" >
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="krigingCheckBox">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Control whether the realizations should be kriged to well data.</string>
+             </property>
+             <property name="text">
               <string>Krige elastic parameters to well data</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0" >
-            <widget class="QCheckBox" name="faciesCheckBox" >
-             <property name="toolTip" >
-              <string>&lt;qt>The facies probabilities are computed based on the inversion results and a distribution for inversion values given facies computed from filtered well logs.</string>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="faciesCheckBox">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The facies probabilities are computed based on the inversion results and a distribution for inversion values given facies computed from filtered well logs.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>Estimate facies probabilities</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="0" >
-            <widget class="QCheckBox" name="simulationCheckBox" >
-             <property name="toolTip" >
-              <string>&lt;qt>Generate stochastic realizations of elastic parameter cubes</string>
+           <item row="3" column="0">
+            <widget class="QCheckBox" name="simulationCheckBox">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Generate stochastic realizations of elastic parameter cubes</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>Generate stochastic realizations of elastic parameters</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="0" >
-            <widget class="QFrame" name="frame" >
-             <property name="frameShape" >
+           <item row="4" column="0">
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
-             <property name="frameShadow" >
+             <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QVBoxLayout" >
-              <property name="margin" >
-               <number>9</number>
-              </property>
-              <property name="spacing" >
-               <number>6</number>
-              </property>
-              <item>
-               <layout class="QHBoxLayout" >
-                <property name="margin" >
-                 <number>0</number>
-                </property>
-                <property name="spacing" >
+             <layout class="QGridLayout" name="gridLayout_99">
+              <item row="0" column="0">
+               <layout class="QHBoxLayout" name="_4">
+                <property name="spacing">
                  <number>6</number>
                 </property>
+                <property name="margin">
+                 <number>0</number>
+                </property>
                 <item>
-                 <widget class="QCheckBox" name="seedCheckBox" >
-                  <property name="toolTip" >
-                   <string>&lt;qt>A seed file needs to be specified in settings to be able to generate random seed.</string>
+                 <widget class="QCheckBox" name="seedCheckBox">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;A seed file needs to be specified in settings to be able to generate random seed.</string>
                   </property>
-                  <property name="text" >
+                  <property name="text">
                    <string>Generate random seed</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="seedLineEdit" >
-                  <property name="toolTip" >
-                   <string>&lt;qt>Fill in the random seed here. With the same seed, the same realizations will be generated.</string>
+                 <widget class="QLineEdit" name="seedLineEdit">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Fill in the random seed here. With the same seed, the same realizations will be generated.</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="seedPushButton" >
-                  <property name="toolTip" >
-                   <string>&lt;qt>Generate new random seed</string>
+                 <widget class="QPushButton" name="seedPushButton">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Generate new random seed</string>
                   </property>
-                  <property name="text" >
+                  <property name="text">
                    <string>Random seed</string>
                   </property>
                  </widget>
                 </item>
                </layout>
               </item>
-              <item>
-               <layout class="QHBoxLayout" >
-                <property name="margin" >
-                 <number>0</number>
-                </property>
-                <property name="spacing" >
+              <item row="1" column="0">
+               <layout class="QHBoxLayout" name="_5">
+                <property name="spacing">
                  <number>6</number>
                 </property>
+                <property name="margin">
+                 <number>0</number>
+                </property>
                 <item>
-                 <widget class="QLabel" name="simulationLabel" >
-                  <property name="text" >
+                 <widget class="QLabel" name="simulationLabel">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Integer giving the number of stochastic realizations to generate.</string>
+                  </property>
+                  <property name="text">
                    <string>Number of realizations</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="simulationsLineEdit" />
+                 <widget class="QLineEdit" name="simulationsLineEdit">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Integer giving the number of stochastic realizations to generate.</string>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <spacer>
-                  <property name="orientation" >
+                  <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
-                  <property name="sizeHint" >
+                  <property name="sizeHint" stdset="0">
                    <size>
                     <width>40</width>
                     <height>20</height>
@@ -366,66 +389,109 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="estimationPage" >
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>9</number>
-           </property>
-           <property name="spacing" >
+         <widget class="QWidget" name="estimationPage">
+          <layout class="QVBoxLayout" name="_6">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>9</number>
+           </property>
            <item>
-            <widget class="QCheckBox" name="backgroundCheckBox" >
-             <property name="text" >
+            <widget class="QCheckBox" name="backgroundCheckBox">
+             <property name="text">
               <string>Estimate background</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="correlationCheckBox" >
-             <property name="text" >
+            <widget class="QCheckBox" name="correlationCheckBox">
+             <property name="text">
               <string>Estimate correlations</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="waveletNoiseCheckBox" >
-             <property name="text" >
+            <widget class="QCheckBox" name="waveletNoiseCheckBox">
+             <property name="text">
               <string>Estimate wavelet and noise</string>
              </property>
             </widget>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="forwardPage" />
+         <widget class="QWidget" name="forwardPage"/>
         </widget>
        </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="1" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QRadioButton" name="inversionRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="inversionRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Invert seismic input data to elastic parameters and/or facies probabilities. Needs seismic data and volume, all other misiing data will be estimated.</string>
+           </property>
+           <property name="text">
             <string>Inversion</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="estimateRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="estimateRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Checks input data and performs estimation of lacking information for inversion, but stops before inversion.</string>
+           </property>
+           <property name="text">
             <string>Estimation</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="forwardRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="forwardRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Create seismic response from background model. Not able to estimate anything.</string>
+           </property>
+           <property name="text">
             <string>Forward modeling</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="modeLabel">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Select mode</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -433,9 +499,87 @@
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-  </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>18</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>100</y>
+     <width>188</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="oldProjectRadioButton">
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Open previous project</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="newProjectRadioButton">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Make new project</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>openProjectLineEdit</tabstop>
@@ -443,25 +587,14 @@
   <tabstop>inversionRadioButton</tabstop>
   <tabstop>estimateRadioButton</tabstop>
   <tabstop>forwardRadioButton</tabstop>
-  <tabstop>predictionCheckBox</tabstop>
-  <tabstop>krigingCheckBox</tabstop>
-  <tabstop>faciesCheckBox</tabstop>
-  <tabstop>simulationCheckBox</tabstop>
-  <tabstop>seedCheckBox</tabstop>
-  <tabstop>seedLineEdit</tabstop>
-  <tabstop>seedPushButton</tabstop>
-  <tabstop>simulationsLineEdit</tabstop>
   <tabstop>topDirectoryLineEdit</tabstop>
   <tabstop>topDirectoryBrowsePushButton</tabstop>
   <tabstop>inputDirectoryLineEdit</tabstop>
   <tabstop>inputDirectoryBrowsePushButton</tabstop>
   <tabstop>buttonBox</tabstop>
-  <tabstop>waveletNoiseCheckBox</tabstop>
-  <tabstop>correlationCheckBox</tabstop>
-  <tabstop>backgroundCheckBox</tabstop>
  </tabstops>
  <resources>
-  <include location="cravaguiresources.qrc" />
+  <include location="cravaguiresources.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -470,11 +603,11 @@
    <receiver>ModeDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>304</x>
      <y>481</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>

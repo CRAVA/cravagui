@@ -26,14 +26,13 @@
 
 
 /**
-	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>
+	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
 class Main_crava : public QMainWindow, private Ui::Main_crava{
 	Q_OBJECT
 
 	friend class ModeDialog;
 	friend class SettingsDialog;
-	friend class OutputDialog;
 	friend class VariogramDialog;
 
 public:
@@ -43,6 +42,7 @@ public:
 	
 protected:
 	void closeEvent(QCloseEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event);//used in this case to draw red borders on necessary fields that are empty.
 
 private:
 	/*bool writeXmlFromTree(const QString &fileName, QTreeWidget *tree);
@@ -55,6 +55,7 @@ private:
 	bool noXmlInfo(QTreeWidgetItem *item);//this is used to check whether things should be written to xml, as only non-empty items should be written.
 	void variogram(QTreeWidgetItem *item);//this method opens a variogram modifying the correct data in the xml treewidget
 	bool okToCloseCurrent();//this promts the user to save to xml before exiting.
+       	bool okToRun();//this prompts the user to save to xml before running crava.
 	//file handlers is probably wrong as what they actually handle is putting things in the tree, each is used by at least 2 slots(the line and the browse button).
 	//stack file handlers
 	void addStack();//adds another stack to the xml treewidget with the correct children and their children etc.
@@ -83,16 +84,26 @@ private:
 	void vpFile(const QString & value);//updates the tree with the vp file cube for given background
 	void vsFile(const QString & value);//updates the tree with the vs file cube for given background
 	void densityFile(const QString & value);//updates the tree with the density file cube for given background
+	void aiFile(const QString & value);//updates the tree with the ai file cube for given background
+	void siFile(const QString & value);//updates the tree with the si file cube for given background
+	void vpVsFile(const QString & value);//updates the tree with the Vp/Vs file cube for given background
+	void topSurfaceFile(const QString & value);//updates the tree with the correct file for top surface for multizone background
+	void baseSurfaceFile(const QString & value);//updates the tree with the correct file for base surface for multizone background
 	void velocityFieldPriorFile(const QString & value);//updates the tree with the correct file for the vp trend for extimated background
 	void temporalCorrelationFile(const QString & value);//updates the tree with the correct file for temporal correlation for extimated background
 	void parameterCorrelationFile(const QString & value);//updates the tree with the correct file for parameter correlation for extimated background
 	void correlationDirectionFile(const QString & value);//updates the tree with the correct file for correlation direction, can only be used if two surfaces are given for the inversion interval
+       	void addZone();//adds another zone with the correct children to the tree
+	void insertZone();//inserts another zone with the correct children in the tree
 	void addFacies();//adds another facies with the correct children to the tree
 	void probabilityCubeFile(const QString & value);//updates the tree with the given probability cube.
 	//earth model
 	void earthVpFile(const QString & value);//updates the tree with the earth model vp cube file for forward mode.
 	void earthVsFile(const QString & value);//updates the tree with the earth model vs cube file for forward mode.
 	void earthDensityFile(const QString & value);//updates the tree with the earth model density cube file for forward mode.
+	void earthAiFile(const QString & value);//updates the tree with the earth model AI cube file for forward mode.
+	void earthSiFile(const QString & value);//updates the tree with the earth model SI cube file for forward mode.
+	void earthVpVsFile(const QString & value);//updates the tree with the earth model Vp/Vs ratio cube file for forward mode.
 	//file formats
 	QString currentFile_;//holds the path of the current xml file, should not be accessed directly
 	const QString& currentFile(){return currentFile_;}//gives the current file.
@@ -128,15 +139,25 @@ private:
 
 	void findCorrectOptimizePosition(QTreeWidgetItem** itemParent); //finds the optimize position which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the optimize position. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
 
+	void findCorrectZone(QTreeWidgetItem** itemParent);//finds the zone which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the facies. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
+
 	void findCorrectFacies(QTreeWidgetItem** itemParent); //finds the facies which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the facies. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
 
 	QList<QTreeWidgetItem*> getAllAngleGathers(); // returns a list of all angle gathers in the tree.
+
+       	void deleteAllZones(); //deletes alle zones in the tree
+
+	void deleteAllFacies(); //deletes all facies in the tree
+
+	void deleteAllOptimizePosition(); //deletes all optimize position in tree
 
 	void getValueFromAngleGather( QTreeWidgetItem* item, QString itemInAngleGather, QString &value, QString parentName = QString() ); //gets the wanted value in the tree, but only searches through the subtree consisting of the angle gather. First argument is the angle gather. The second argument is the quantity one wants (for instance file-name). The third argument is the return value. The fourth argument is the name of the parent of the second argument (some nodes in the tree have the same name). Recursive.
 
 	void getValueFromWell(QTreeWidgetItem* item, QString itemInWell, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the well. First argument is the well. The second argument is the quantity one wants (for instance file-name). The third argument is the return value. Recursive.
 
 	void getValueFromOptimizePosition(QTreeWidgetItem* item, QString itemInWell, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the optimize position. First argument is the optimize position. The second argument is the quantity one wants (for instance angle). The third argument is the return value. Recursive.
+
+	void getValueFromZone(QTreeWidgetItem* item, QString itemInZone, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the facies. First argument is the zone. The second argument is the quantity one wants (for instance name). The third argument is the return value. Recursive.
 
 	void getValueFromFacies(QTreeWidgetItem* item, QString itemInWell, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the facies. First argument is the facies. The second argument is the quantity one wants (for instance name). The third argument is the return value. Recursive.
 
@@ -146,10 +167,16 @@ private:
 
 	void setValueInOptimizePosition(QTreeWidgetItem* item, QString itemInWell, QString value); //sets the correct value in the tree, but only searches through the subtree consisting of the optimize position. First argument is the optimize position. The second argument is the quantity one wants to change (for instance angle). The third argument is the value which will be put in the tree. Recursive.
 
+	void setValueInZone(QTreeWidgetItem* item, QString itemInZone, QString value); //sets the correct value in the tree, but only searches through the subtree consisting of the zones. First argument is the zone. The second argument is the quantity one wants to change (for instance name). The third argument is the value which will be put in the tree. Recursive.
+
 	void setValueInFacies(QTreeWidgetItem* item, QString itemInWell, QString value); //sets the correct value in the tree, but only searches through the subtree consisting of the facies. First argument is the facies. The second argument is the quantity one wants to change (for instance name). The third argument is the value which will be put in the tree. Recursive.
 
 
 	void setDefaultValues(); // sets default values for some of the values in well-data.
+
+       	QList<QObject*> getNecessaryFields();// returns a list with fields that are necessary. used to set red borders when empty
+
+	void necessaryFieldGui();// sets borders on the necessary fields when empty
 
 	//Table: This is a table which contains a pointer to all the nodes in tree (except for those what are added during the program). Gives easy access to all the values in the tree. The values are set in activateTable. Those that are added during the program have their own functions (for instance findCorrectAngleGather).
 
@@ -219,6 +246,9 @@ private:
 	//prior-model
 	QTreeWidgetItem *prior_modelPointer;
 		QTreeWidgetItem *backgroundPointer;
+			QTreeWidgetItem *background_ai_filePointer;
+			QTreeWidgetItem *background_si_filePointer;
+			QTreeWidgetItem *background_vp_vs_ratio_filePointer;
 			QTreeWidgetItem *background_vp_filePointer;
 			QTreeWidgetItem *background_vs_filePointer;
 			QTreeWidgetItem *background_density_filePointer;
@@ -233,10 +263,16 @@ private:
 				QTreeWidgetItem *background_subrangePointer;
 				QTreeWidgetItem *background_powerPointer;
 			QTreeWidgetItem *background_high_cut_background_modellingPointer;
+				QTreeWidgetItem *background_multizone_modelPointer;
+			        QTreeWidgetItem *background_top_surface_filePointer;
+				QTreeWidgetItem *background_top_surface_erosion_priorityPointer;
 		QTreeWidgetItem *earth_modelPointer;
 			QTreeWidgetItem *earth_model_vp_filePointer;
 			QTreeWidgetItem *earth_model_vs_filePointer;
 			QTreeWidgetItem *earth_model_density_filePointer;
+	       	     	QTreeWidgetItem *earth_model_ai_filePointer;
+			QTreeWidgetItem *earth_model_si_filePointer;
+			QTreeWidgetItem *earth_model_vp_vs_ratio_filePointer;
 		QTreeWidgetItem *local_waveletPointer;
 			QTreeWidgetItem *local_wavelet_lateral_correlationPointer;
 				QTreeWidgetItem *local_wavelet_variogram_typePointer;	
@@ -287,6 +323,7 @@ private:
 				QTreeWidgetItem *interval_one_surface_sample_densityPointer;
 			QTreeWidgetItem *area_from_surfacePointer;
 				QTreeWidgetItem *area_from_surface_file_namePointer;
+				QTreeWidgetItem *area_from_surface_snap_to_seismic_dataPointer;
 			QTreeWidgetItem *utm_coordinatesPointer;
 				QTreeWidgetItem *utm_coordinates_reference_point_xPointer;
 				QTreeWidgetItem *utm_coordinates_reference_point_yPointer;
@@ -295,6 +332,7 @@ private:
 				QTreeWidgetItem *utm_coordinates_sample_density_xPointer;
 				QTreeWidgetItem *utm_coordinates_sample_density_yPointer;
 				QTreeWidgetItem *utm_coordinates_anglePointer;
+			       	QTreeWidgetItem *utm_coordinates_snap_to_seismic_dataPointer;
 			QTreeWidgetItem *inline_crossline_numbersPointer;
 				QTreeWidgetItem *il_startPointer;
 				QTreeWidgetItem *il_endPointer;
@@ -348,12 +386,15 @@ private:
 					QTreeWidgetItem *seismic_data_originalPointer;
 					QTreeWidgetItem *seismic_data_syntheticPointer;
 					QTreeWidgetItem *seismic_data_residualsPointer;
+					QTreeWidgetItem *seismic_data_synthetic_residualsPointer;
 				QTreeWidgetItem *grid_output_other_parametersPointer;
 					QTreeWidgetItem *grid_output_facies_probabilitiesPointer;
 					QTreeWidgetItem *grid_output_facies_probabilities_with_undefPointer;
+			       		QTreeWidgetItem *grid_output_facies_likelihoodPointer;
 					QTreeWidgetItem *grid_output_time_to_depth_velocityPointer;
 					QTreeWidgetItem *grid_output_extra_gridsPointer;
 					QTreeWidgetItem *grid_output_correlationsPointer;
+					QTreeWidgetItem *grid_output_seismic_quality_gridPointer;
 			QTreeWidgetItem *well_outputPointer;
 				QTreeWidgetItem *well_output_formatPointer;
 					QTreeWidgetItem *well_output_rmsPointer;
@@ -373,6 +414,7 @@ private:
 				QTreeWidgetItem *io_settings_prior_correlationsPointer;
 				QTreeWidgetItem *io_settings_background_trend_1dPointer;
 				QTreeWidgetItem *io_settings_local_noisePointer;
+		       		QTreeWidgetItem *io_settings_rock_physics_distributionsPointer;
 			QTreeWidgetItem *io_settings_file_output_prefixPointer;
 			QTreeWidgetItem *io_settings_log_levelPointer;
 		//project-settings/advanced-settings
@@ -382,6 +424,8 @@ private:
 				QTreeWidgetItem *y_fractionPointer;
 				QTreeWidgetItem *z_fractionPointer;
 			QTreeWidgetItem *use_intermediate_disk_storagePointer;
+		       	QTreeWidgetItem *vp_vs_ratioPointer;
+			QTreeWidgetItem *vp_vs_ratio_from_wellsPointer;
 			QTreeWidgetItem *maximum_relative_thickness_differencePointer;
 			QTreeWidgetItem *frequency_bandPointer;
 				QTreeWidgetItem *frequency_band_low_cutPointer;
@@ -395,6 +439,7 @@ private:
 			QTreeWidgetItem *kriging_data_limitPointer;
 			QTreeWidgetItem *debug_levelPointer;
 			QTreeWidgetItem *smooth_kriged_parametersPointer;
+		       	QTreeWidgetItem *guard_zonePointer;
 
 //all the slots starting with on_ are autoconnected by moc.
 private slots:
@@ -408,16 +453,12 @@ private slots:
 	void on_settingsAction_triggered();//opens the settings dialog.
 	bool on_saveAction_triggered();//saves the current file, if it is empty calls saveAs use saveFile(QString)
 	bool on_saveAsAction_triggered();//open savefiledialog and saves the xml file to that file. Use saveFile(QString)
-	bool on_outputAction_triggered();//opens the output dialog, in forward or estimation mode it is rather ribbed
 	void on_newAction_triggered();//starts a clear run in a new window
 	void on_openAction_triggered();//opens an existing xml file in a new window
 	//survey information:
-	void on_tabWidget_currentChanged(QWidget *tab);//handles correct line selection when changing between tabs
 	void on_stackListWidget_currentRowChanged ( int currentRow );//makes sure the frame for the stack is updated correctly according to which stack is selected.
 	void on_addStackPushButton_clicked();//adds a new seismic stack
 	void on_deleteStackPushButton_clicked();//removes the selected stack, should be undoable
-	void on_seismicFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, autocomplete would be nice, seismic stack file
-	void on_seismicBrowsePushButton_clicked();//browse for the seismic stack file then update the XML file, update the field
 	void on_angleLineEdit_editingFinished();//update the offset angle for the selected stack in the XML file
 	void on_applyToAllStacksPushButton_clicked(); //gives the other stacks the same settings
 	//PP - PS buttons 
@@ -445,6 +486,8 @@ private slots:
 	//need to implement 3D wavelet
 	void on_waveletFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, wavelet file for the seieismic stack
 	void on_waveletBrowsePushButton_clicked();//browse for the wavelet file then update the XML tree, update the field
+	void on_rickerLineEdit_editingFinished();//update the XML tree with the peak frecuency for the ricker wavelet.
+	void on_waveletFileRadioButton_toggled(bool checked);//updates the XML tree by deleting the unchecked values
 	//buttons wavelet scale
 	void on_fileScaleRadioButton_toggled(bool checked);//shows the correct input line, updates the tree
 	void on_estimateScaleRadioButton_toggled(bool checked);//updates the tree with the correct value, clears the others
@@ -488,13 +531,11 @@ private slots:
 	void on_addWellPushButton_clicked();//add a new well for input
 	void on_deleteWellPushButton_clicked();//remove the selected well
         void on_openWellPushButton_clicked();//opens the selected well in a text editor
-	void on_wellFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, ell file, rms format, would be nice to have a converter from las
-	void on_wellBrowsePushButton_clicked();//browse for the well file then update the XML tree, update the field
 	void on_waveletEstimationCheckBox_toggled(bool checked);//update whether this well should be used for wavelet estimationin XML tree
 	void on_backgroundTrendCheckBox_toggled(bool checked);//update whether this well should be used for background trend estimationin XML tree
 	void on_faciesProbabilitiesCheckBox_toggled(bool checked);//update whether this well should be used for facies estimationin XML tree
 	void on_filterElasticCheckBox_toggled(bool checked);//update whether this well should multi-parameter-filter the elastic logs after inversion in XML tree
-	void on_convertLasToRmsPushButton_clicked();
+	/*	void on_convertLasToRmsPushButton_clicked(); */
 	//syntetic vs log buttons
 	void on_synteticVsYesRadioButton_toggled(bool checked);//calls synteticVsLog(const QString & value) with correct value
 	void on_synteticVsNoRadioButton_toggled(bool checked);//calls synteticVsLog(const QString & value) with correct value
@@ -506,12 +547,11 @@ private slots:
 	void on_anglePositionlineEdit_editingFinished();//updates the angle for the optimized position in XML
 	void on_weightLineEdit_editingFinished();//updates the weight of the optimized position in XML
 	//well parameter info
-	void on_seismicResolutionLineEdit_editingFinished();//update the XML three with the high cut seismic resolution
 	//horizon
 	void on_twoSurfaceRadioButton_toggled(bool checked);//makes sure the proper frame is shown for this way of setting the volume
 	void on_topSurfaceRadioButton_toggled(bool checked);//makes sure the proper frame is shown for this way of setting the volume
 	void on_baseSurfaceRadioButton_toggled(bool checked);//makes sure the proper frame is shown for this way of setting the volume
-	void on_oneSufraceRadioButton_toggled(bool checked);//makes sure the proper frame is shown for this way of setting the volume
+	void on_oneSurfaceRadioButton_toggled(bool checked);//makes sure the proper frame is shown for this way of setting the volume
 	void on_constantInversionRadioButton_toggled(bool checked);//makes sure the proper frame is shown for this way of setting the volume
 	void on_correlationSurfaceRadioButton_toggled(bool checked);//makes sure the proper frame is shown for this way of setting the volume
 	void on_depthSurfacesCheckBox_toggled(bool checked);//shows/hides the depth input as apropriate.
@@ -539,7 +579,7 @@ private slots:
 	void on_velocityFieldLineEdit_editingFinished();//update the XML tree with the file if it is correct, velocity field file
 	void on_velocityFieldBrowsePushButton_clicked();//browse for the velocity field file then update the XML tree if the above is not triggered, update the field
 	//one surface case
-	void on_referenceSurfaceLineEdit_editingFinished();//update the XML tree with the file if it is correct, reference surface file
+	void on_referenceSurfaceFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, reference surface file
 	void on_referenceSurfaceBrowsePushButton_clicked();//browse for the reference surface file then update the XML tree if the above is not triggered, update the field
 	void on_distanceTopLineEdit_editingFinished();//update the XML tree with the distance to the top layer from the referance surface
 	void on_thicknessLineEdit_editingFinished();//update the XML tree with the thickness for the volume of the entire inversion
@@ -553,26 +593,66 @@ private slots:
 	void on_faciesTopBrowsePushButton_clicked();//browse for the facies top time file then update the XML tree if the above is not triggered, update the field
 	void on_faciesBottomLineEdit_editingFinished();//update the XML tree with the file if it is correct, facies bottom time file
 	void on_faciesBottomBrowsePushButton_clicked();//browse for the facies bottom time file then update the XML tree if the above is not triggered, update the field
-	//prior modeld
-	void on_backgroundModelCheckBox_toggled(bool checked);//determining wether the background model should be estimated or given
-	//buttons for vp/vs/density
-	void on_vpFileRadioButton_toggled(bool checked);//gives whether vp should be given from a cube or constant. displays proper widgets for each case
-	void on_vsFileRadioButton_toggled(bool checked);//gives whether vs should be given from a cube or constant. displays proper widgets for each case
-	void on_densityFileRadioButton_toggled(bool checked);//gives whether density should be given from a cube or constant. displays proper widgets for each case
-	void on_vpConstantLineEdit_editingFinished();//update the XML tree with constant vp for the background model
-	void on_vpFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model vp file
-	void on_vpBrowsePushButton_clicked();//browse for the prior model vp file then update the XML tree if the above is not triggered, update the field
-	void on_vsConstantLineEdit_editingFinished();//update the XML tree with constant vs for the background model
-	void on_vsFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model vs file
-	void on_vsBrowsePushButton_clicked();//browse for the prior model vs file then update the XML tree if the above is not triggered, update the field
-	void on_densityConstantLineEdit_editingFinished();//update the XML tree with constant density for the background model
-	void on_densityFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model density file
-	void on_densityBrowsePushButton_clicked();//browse for the prior model density file then update the XML tree if the above is not triggered, update the field
+	//prior model
+	void on_backgroundRadioButton_toggled(bool checked);//determines whether the regular background model should be given or not.
+	void on_estimateBackgroundRadioButton_toggled(bool checked);//determines whether the beckground model should be estimated or not.
+	void on_multizoneBackgroundRadioButton_toggled(bool checked);//determines whether the multizone background model should be given or not.
+	void on_vpVsRhoRadioButton_toggled(bool checked);//determines whether it is the combination Vp,Vs and density that should be given as parameters.
+	void on_aiVpVsRhoRadioButton_toggled(bool checked);//determines whether it is the combination AI,Vp/Vs and density that should be given as parameters.
+	void on_aiSiRhoRadioButton_toggled(bool checked);//determines whether it is the combination AI,SI and density that should be given as parameters.
+
+	         //buttons for vp/vs/density/ai/si/vp-vs
+	void on_vpFile1RadioButton_toggled(bool checked);//gives whether vp should be given from a cube or constant in vpVsRhoFrame. displays proper widgets for each case
+	void on_vsFile1RadioButton_toggled(bool checked);//gives whether vs should be given from a cube or constant in vpVsRhoFrame. displays proper widgets for each case
+	void on_densityFile1RadioButton_toggled(bool checked);//gives whether density should be given from a cube or constant in vpVsRhoFrame. displays proper widgets for each case
+	void on_densityFile2RadioButton_toggled(bool checked);//gives whether density should be given from a cube or constant in aiVpVsRhoFrame. displays proper widgets for each case
+	void on_densityFile3RadioButton_toggled(bool checked);//gives whether density should be given from a cube or constant in aiSiRhoFrame. displays proper widgets for each case
+        	//vpVsRho
+	void on_vpConstant1LineEdit_editingFinished();//update the XML tree with constant vp for the background model
+	void on_vpFile1LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model vp file
+	void on_vpFile1BrowsePushButton_clicked();//browse for the prior model vp file then update the XML tree if the above is not triggered, update the field
+	void on_vsConstant1LineEdit_editingFinished();//update the XML tree with constant vs for the background model
+	void on_vsFile1LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model vs file
+	void on_vsFile1BrowsePushButton_clicked();//browse for the prior model vs file then update the XML tree if the above is not triggered, update the field
+	void on_densityConstant1LineEdit_editingFinished();//update the XML tree with constant density for the background model
+	void on_densityFile1LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model density file
+	void on_densityFile1BrowsePushButton_clicked();//browse for the prior model density file then update the XML tree if the above is not triggered, update the field
+        	//aiVpVsRho
+ 	void on_aiFile2LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model ai file
+	void on_aiFile2BrowsePushButton_clicked();//browse for the prior model ai file and update the XML tree if the above is not triggered.
+	void on_vpVsFile2LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model Vp/Vs file
+	void on_vpVsFile2BrowsePushButton_clicked();//browse for the prior model Vp/Vs file and update the XML tree if the above is not triggered.
+	void on_densityConstant2LineEdit_editingFinished();//update the XML tree with constant density for the background model
+	void on_densityFile2LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model density file
+	void on_densityFile2BrowsePushButton_clicked();//browse for the prior model density file then update the XML tree if the above is not triggered, update the field
+         	//aiSiRho
+	void on_aiFile3LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model ai file
+	void on_aiFile3BrowsePushButton_clicked();//browse for the prior model ai file and update the XML tree if the above is not triggered.
+	void on_siFile3LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model SI file
+	void on_siFile3BrowsePushButton_clicked();//browse for the prior model SI file and update the XML tree if the above is not triggered.
+	void on_densityConstant3LineEdit_editingFinished();//update the XML tree with constant density for the background model
+	void on_densityFile3LineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model density file
+	void on_densityFile3BrowsePushButton_clicked();//browse for the prior model density file then update the XML tree if the above is not triggered, update the field
+
 	void on_velocityFieldPriorFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model velocity field
 	void on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked);//shows the proper widgets for inputting background estimation info, does not modify the tree in any way.
 	void on_velocityFieldPriorFileBrowsePushButton_clicked();//browse for the prior model velocity field file then update the XML tree and the above field
 	void on_lateralCorrelationBackgroundPushButton_clicked();//pop up the variogram edit window for background
 	void on_highCutFrequencyLineEdit_editingFinished();//update the XML tree with the high cut frequency
+       	void on_topSurfaceFileLineEdit_editingFinished();//update the XML tree with top surface file
+       	void on_topSurfaceFileBrowsePushButton_clicked();//browse for the top surface file, then update the XML tree and the above field.
+	void on_topPrioritySpinBox_editingFinished();//update the XML tree with the erosion priority
+	void on_addZonePushButton_clicked();//adds a new zone for multizone background model
+	void on_insertZonePushButton_clicked();//inserts a new zone for multizone background model
+	void on_deleteZonePushButton_clicked();//remove the selected zone, should be undoable
+	void on_zoneListWidget_currentRowChanged(int currentRow);//makes sure the correct widgets and information is displayed depending on which zone is selected
+	void on_baseSurfaceFileLineEdit_editingFinished();//updates the XML with the base surface file
+	void on_baseSurfaceFileBrowsePushButton_clicked();//browse for the base surface file, then update the XML tree and the above field.
+	void on_basePrioritySpinBox_editingFinished();//updates the XML with the base surface file
+	void on_topCorrelationRadioButton_toggled(bool checked);//updates the XML with "top" at correlation structure
+	void on_baseCorrelationRadioButton_toggled(bool checked);//updates the XML with "base" at correlation structure
+	void on_compactionCorrelationRadioButton_toggled(bool checked);//updates the XML with "compaction" at correlation structure
+	void on_surfaceUncertaintyLineEdit_editingFinished();//updates the XML with the surface uncertainty
 	void on_correlationLocalWaveletCheckBox_toggled(bool checked);//shows the proper widgets for inputting correlation for wavelet info, does not modify the tree in any way.
 	void on_lateralCorrelationWaveletPushButton_clicked();//pop up the variogram edit window for wavelet
 	void on_correlationElasticParametersCheckBox_toggled(bool checked);//shows the proper widgets for inputting correlation of parameters info, does not modify the tree in any way.
@@ -581,7 +661,7 @@ private slots:
 	void on_temporalCorrelationBrowsePushButton_clicked();//browse for prior model temporal correlation file then update the XML tree and the above field
 	void on_parameterCorrelationLineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model parameter corr
 	void on_parameterCorrelationBrowsePushButton_clicked();//browse for prior model parameter corr file then update the XML tree and the above field
-	void on_correlationDirectionLineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model corr direction
+	void on_correlationDirectionFileLineEdit_editingFinished();//update the XML tree with the file if it is correct, prior model corr direction
 	void on_correlationDirectionBrowsePushButton_clicked();//browse for prior model corr direction file then update the XML tree and the above field
 	void on_faciesEstimateCheckBox_toggled(bool checked);//should the prior model for facies be estimated or given
 	void on_vsForFaciesCheckBox_toggled(bool checked);//should vs be used for facies estimaton, update XML tree
@@ -605,26 +685,67 @@ private slots:
 	void on_areaInCrossRadioButton_toggled(bool checked);//makes sure the correct frame is displayed for input of lateral inversion geometry and that the info is not wrong in tree.
 	void on_areaSurfaceLineEdit_editingFinished();//updates the tree via the filehandler for lateral inversion geometry
 	void on_areaSurfaceFileBrowsePushButton_clicked();//updates the tree via the filehandler for lateral inversion geometry
+       	void on_surfaceSnapCheckBox_toggled(bool checked);//updates the tree with the correct snap to seismic data value (yes or no)
 	void on_areaXRefLineEdit_editingFinished();//updates the tree with the correct utm value reference coordinate x
 	void on_areaYRefLineEdit_editingFinished();//updates the tree with the correct utm value reference coordinate y
 	void on_areaXLengthLineEdit_editingFinished();//updates the tree with the correct utm value length x
 	void on_areaYLengthLineEdit_editingFinished();//updates the tree with the correct utm value length y
 	void on_areaXSampleDensityLineEdit_editingFinished();//updates the tree with the correct utm value sample density x
 	void on_areaYSampleDensityLineEdit_editingFinished();//updates the tree with the correct utm value sample density y
-	void on_areaUtmAngleLabelineEdit_editingFinished();//updates the tree with the correct utm value angle
+	void on_areaUtmAngleLineEdit_editingFinished();//updates the tree with the correct utm value angle
+	void on_utmSnapCheckBox_toggled(bool checked);//updates the tree with the correct snap to seismic data value (yes or no)
 	void on_inlineStartLineEdit_editingFinished();//updates the tree with the correct inline value start
 	void on_crosslineStartLineEdit_editingFinished();//updates the tree with the correct crossline value start
 	void on_inlineEndLineEdit_editingFinished();//updates the tree with the correct inline value end
 	void on_crosslineEndLineEdit_editingFinished();//updates the tree with the correct crossline value end
 	void on_inlineStepLineEdit_editingFinished();//updates the tree with the correct inline value step
 	void on_crosslineStepLineEdit_editingFinished();//updates the tree with the correct crossline value step
-	void on_earthVpFileLineEdit_editingFinished();//updates the tree via the filehandler for vp for earth model
-	void on_earthVsFileLineEdit_editingFinished();//updates the tree via the filehandler for vs for earth model
-	void on_earthDensityFileLineEdit_editingFinished();//updates the tree via the filehandler for density for earth model
-	void on_earthVpFileBrowsePushButton_clicked();//updates the tree via the filehandler for vp for earth model
-	void on_earthVsFileBrowsePushButton_clicked();//updates the tree via the filehandler for vs for earth model
-	void on_earthDensityFileBrowsePushButton_clicked();//updates the tree via the filehandler for density for earth model
-
+	void on_earthVpAiLineEdit_editingFinished();//updates the tree for earth model Vp or AI (depending on vpComboBox)
+	void on_earthVsSiVpVsLineEdit_editingFinished();//updates the tree for earth model Vs, SI or Vp/Vs ratio (depending on vsComboBox)
+	void on_earthDensityLineEdit_editingFinished();//updates the tree for earth model density
+	void on_earthVpAiBrowsePushButton_clicked();//updates the tree via the filehandler for earth model Vp or AI (depending on vpComboBox)
+	void on_earthVsSiVpVsBrowsePushButton_clicked();//updates the tree via the filehandler for earth model Vs, SI or Vp/Vs ratio (depending on vsComboBox)
+	void on_earthDensityBrowsePushButton_clicked();//updates the tree via the filehandler for earth model density.
+	void on_vpComboBox_currentIndexChanged(int index);//updates the tree by removing values that should not be there when a particular index is chosen.
+	void on_vsComboBox_currentIndexChanged(int index);//updates the tree by removing values that should not be there when a particular index is chosen.
+	void on_oOutputDirectoryBrowsePushButton_clicked();//updates the tree by setting output directory via filehandler.
+	void on_oOutputDirectoryLineEdit_editingFinished();//updates the tree with the correct output directory.
+	void on_oPrefixLineEdit_editingFinished();//updates the tree with the correct prefix for output files.
+	void on_oDomainDepthCheckBox_toggled(bool checked);//updates the tree - should seismic output in depth domain be generated?
+	void on_oDomainTimeCheckBox_toggled(bool checked);//updates the tree - should seismic output in time domain be generated?
+	void on_oSeismicOriginalCheckBox_toggled(bool checked);//updates the tree - should the original seismic cube be a part of the output?
+	void on_oSeismicSyntheticCheckBox_toggled(bool checked);//updates the tree - should a synthetic cube be generated in the output?
+	void on_oSeismicResidualCheckBox_toggled(bool checked);//updates the tree - should a residual seismic cube be generated in the output?
+	void on_oSeismicSyntheticResidualCheckBox_toggled(bool checked);//updates the tree - should a synthetic residual seismic cube be generated in the output?
+	void on_oVpCheckBox_toggled(bool checked);//updates the tree - should the velocity of pressure waves be a part of the output?
+	void on_oVsCheckBox_toggled(bool checked);//updates the tree - should the velocity of shear waves be a part of the output?
+	void on_oDensityCheckBox_toggled(bool checked);//updates the tree - should the density be a part of the output?
+	void on_oAiCheckBox_toggled(bool checked);//updates the tree - should the AI be a part of the output?
+	void on_oSiCheckBox_toggled(bool checked);//updates the tree - should SI be a part of the output?
+	void on_oPoissonRatioCheckBox_toggled(bool checked);//updates the tree - should Poisson ratio be a part of the output?
+	void on_oVpVsRatioCheckBox_toggled(bool checked);//updates the tree - should pressure wave velocity over shear wave velocity ratio be a part of the output?
+	void on_oLameLamCheckBox_toggled(bool checked);//updates the tree - should lambda (Lame's parameter) be a part of the output?
+	void on_oLameMuCheckBox_toggled(bool checked);//updates the tree - should mu (Lame's parameter) be a part of the output?
+	void on_oLambdaRhoCheckBox_toggled(bool checked);//updates the tree - should lambda*rho be a part of the output?
+	void on_oMuRhoCheckBox_toggled(bool checked);//updates the tree - should mu*rho be a part of the output?
+	void on_oBackgroundCheckBox_toggled(bool checked);//updates the tree - should a background be a part of the output?
+	void on_oBackgroundTrendCheckBox_toggled(bool checked);//updates the tree - should a background trend be a part of the output?
+	void on_oExtraGridsCheckBox_toggled(bool checked);//updates the tree - should estimated background files (extra grids) be a part of the output?
+	void on_oBackgroundTrend1DCheckBox_toggled(bool checked);//updates the tree - should a background trend as a 1D curve be a part of the output?
+	void on_oWellCheckBox_toggled(bool checked);//updates the tree - should the original sampled wells be a part of the output?
+	void on_oBlockedWellCheckBox_toggled(bool checked);//updates the tree - should blocked wells be a part of the output?
+	void on_oWaveletWellCheckBox_toggled(bool checked);//updates the tree - should well wavelet files be a part of the output?
+	void on_oWaveletGlobalCheckBox_toggled(bool checked);//updates the tree - should global wavelet files be a part of the output?
+	void on_oWaveletLocalCheckBox_toggled(bool checked);//updates the tree - should local wavelet files be a part of the output?
+	void on_oTimeDepthCheckBox_toggled(bool checked);//updates the tree - should "time to depth velocity" be a part of the output?
+	void on_oCorrelationsCheckBox_toggled(bool checked);//updates the tree - should posterior correlations be a part of the output?
+	void on_oFaciesProbabilitiesCheckBox_toggled(bool checked);//updates the tree - should facies probabilities be a part of the output?
+	void on_oFaciesProbabilitiesUndefinedCheckBox_toggled(bool checked);//updates the tree - should facies probabilities with undefined facies be a part of the output?
+     	void on_oFaciesLikelihoodCheckBox_toggled(bool checked);//updates the tree - should facies likelihood be a part of the output?
+	void on_oPriorCorrelationCheckBox_toggled(bool checked);//updates the tree - should prior correlations be a part of the output?
+	void on_oLocalNoiseCheckBox_toggled(bool checked);//updates the tree - should local noise be a part of the output?
+	void on_oFaciesQualityGridCheckBox_toggled(bool checked);//updates the tree - should seismic quality grid be a part of the output?
+	void on_oRockPhysicsCheckBox_toggled(bool checked);//updates the tree - should rock physics distributions of each facies be a part of the output?
 	void showContextMenu(const QPoint& pos); //used to activate right clicking for wellHeaderListWidget
 };
 

@@ -1,88 +1,157 @@
-<ui version="4.0" >
- <author>Øystein Monsrud Arneson</author>
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Øystein Monsrud Arneson and Andreas B. Lindblad</author>
  <class>SettingsDialog</class>
- <widget class="QDialog" name="SettingsDialog" >
-  <property name="geometry" >
+ <widget class="QDialog" name="SettingsDialog">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>1266</width>
-    <height>615</height>
+    <height>811</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Settings</string>
   </property>
-  <layout class="QGridLayout" >
-   <property name="margin" >
+  <layout class="QGridLayout">
+   <property name="margin">
     <number>9</number>
    </property>
-   <property name="spacing" >
+   <property name="spacing">
     <number>6</number>
    </property>
-   <item row="0" column="1" >
-    <widget class="QStackedWidget" name="stackedWidget" >
-     <property name="currentIndex" >
-      <number>4</number>
+   <item row="0" column="0">
+    <layout class="QVBoxLayout">
+     <property name="spacing">
+      <number>6</number>
      </property>
-     <widget class="QWidget" name="inputOutputPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QListWidget" name="listWidget">
+       <item>
+        <property name="text">
+         <string>Output</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>3D time depth mapping</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Advanced inversion settings</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Wells allowed parameter values</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>GUI settings</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+       <number>4</number>
+     </property>
+     <widget class="QWidget" name="inputOutputPage">
+      <layout class="QGridLayout">
+       <property name="margin">
         <number>9</number>
        </property>
-       <property name="spacing" >
+       <property name="spacing">
         <number>6</number>
        </property>
-       <item row="5" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="5" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QLabel" name="logLevelLabel" >
-           <property name="text" >
+          <widget class="QLabel" name="logLevelLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output information level should be low, medium, high, error or warning.</string>
+           </property>
+           <property name="text">
             <string>Output information level</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="logComboBox" >
+          <widget class="QComboBox" name="logComboBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output information level should be low, medium, high, error or warning.</string>
+           </property>
            <item>
-            <property name="text" >
-             <string>low</string>
+            <property name="text">
+             <string>Low</string>
             </property>
            </item>
            <item>
-            <property name="text" >
-             <string>medium</string>
+            <property name="text">
+             <string>Medium</string>
             </property>
            </item>
            <item>
-            <property name="text" >
-             <string>high</string>
+            <property name="text">
+             <string>High</string>
             </property>
            </item>
            <item>
-            <property name="text" >
-             <string>error</string>
+            <property name="text">
+             <string>Error</string>
             </property>
            </item>
            <item>
-            <property name="text" >
-             <string>warning</string>
+            <property name="text">
+             <string>Warning</string>
             </property>
            </item>
           </widget>
          </item>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -92,12 +161,12 @@
          </item>
         </layout>
        </item>
-       <item row="6" column="0" >
+       <item row="6" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -105,167 +174,183 @@
          </property>
         </spacer>
        </item>
-       <item row="3" column="0" >
-        <widget class="QFrame" name="formatChangeFrame" >
-         <property name="toolTip" >
-          <string>&lt;qt>Specify the header format for segy files.</string>
+       <item row="3" column="0">
+        <widget class="QFrame" name="formatChangeFrame">
+         <property name="toolTip">
+          <string>&lt;qt&gt;Specify the header format for segy files.</string>
          </property>
-         <property name="frameShape" >
+         <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="frameShadow" >
+         <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QGridLayout" >
-          <property name="margin" >
+         <layout class="QGridLayout">
+          <property name="margin">
            <number>9</number>
           </property>
-          <property name="spacing" >
+          <property name="spacing">
            <number>6</number>
           </property>
-          <item row="1" column="0" >
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
+          <item row="1" column="0">
+           <layout class="QHBoxLayout">
+            <property name="spacing">
              <number>6</number>
             </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QLabel" name="bypassCoordinateLabel" >
-              <property name="toolTip" >
-               <string>&lt;qt>Indicates whether coordinate scaling information should be used.</string>
+             <widget class="QLabel" name="bypassCoordinateLabel">
+              <property name="toolTip">
+               <string>&lt;qt&gt;Indicates whether coordinate scaling information should be used.</string>
               </property>
-              <property name="text" >
-               <string>&lt;qt>Bypass coordinate scaling</string>
+              <property name="text">
+               <string>Ignore coordinate scaling:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="bypassCoordinateEstimateRadioButton" >
-              <property name="text" >
+             <widget class="QRadioButton" name="bypassCoordinateEstimateRadioButton">
+              <property name="toolTip">
+               <string>&lt;qt&gt;Estimate the coordinate scaling information.</string>
+              </property>
+              <property name="text">
                <string>Estimate</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="bypassCoordinateYesRadioButton" >
-              <property name="text" >
+             <widget class="QRadioButton" name="bypassCoordinateYesRadioButton">
+              <property name="toolTip">
+               <string>&lt;qt&gt;Ignore the coordinate scaling.</string>
+              </property>
+              <property name="text">
                <string>Yes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="bypassCoordinateNoRadioButton" >
-              <property name="text" >
+             <widget class="QRadioButton" name="bypassCoordinateNoRadioButton">
+              <property name="toolTip">
+               <string>&lt;qt&gt;Coordinat scaling will be used and given by the user.</string>
+              </property>
+              <property name="text">
                <string>No</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="0" column="0" >
-           <layout class="QGridLayout" >
-            <property name="margin" >
+          <item row="0" column="0">
+           <layout class="QGridLayout">
+            <property name="margin">
              <number>0</number>
             </property>
-            <property name="spacing" >
+            <property name="spacing">
              <number>6</number>
             </property>
-            <item row="1" column="0" >
-             <widget class="QLabel" name="y_coord_label_2" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the y-coordinate in the trace header.</string>
+            <item row="1" column="0">
+             <widget class="QLabel" name="y_coord_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the y-coordinate in the trace header.</string>
               </property>
-              <property name="text" >
-               <string>&lt;qt>y-coordinate</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1" >
-             <widget class="QLineEdit" name="yCoordLineEdit" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the y-coordinate in the trace header.</string>
+              <property name="text">
+               <string>y-coordinate:</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="0" >
-             <widget class="QLabel" name="x_coord_label_2" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the x-coordinate in the trace header.</string>
-              </property>
-              <property name="text" >
-               <string>&lt;qt>x-coordinate</string>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="yCoordLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the y-coordinate in the trace header.</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="3" >
-             <widget class="QLineEdit" name="crosslineLineEdit" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the crossline in the trace header.</string>
+            <item row="0" column="0">
+             <widget class="QLabel" name="x_coord_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the x-coordinate in the trace header.</string>
+              </property>
+              <property name="text">
+               <string>x-coordinate:</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3" >
-             <widget class="QLineEdit" name="inlineLineEdit" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the inline in the trace header.</string>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="crosslineLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the crossline in the trace header.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="2" >
-             <widget class="QLabel" name="inline_label_2" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the inline in the trace header.</string>
-              </property>
-              <property name="text" >
-               <string>&lt;qt>Inline</string>
+            <item row="1" column="3">
+             <widget class="QLineEdit" name="inlineLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the inline in the trace header.</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1" >
-             <widget class="QLineEdit" name="xCoordLineEdit" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the x-coordinate in the trace header.</string>
+            <item row="1" column="2">
+             <widget class="QLabel" name="inline_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the inline in the trace header.</string>
+              </property>
+              <property name="text">
+               <string>Inline:</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="2" >
-             <widget class="QLabel" name="crossline_label_2" >
-              <property name="toolTip" >
-               <string>&lt;qt>The byte location for the crossline in the trace header.</string>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="xCoordLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the x-coordinate in the trace header.</string>
               </property>
-              <property name="text" >
-               <string>&lt;qt>Crossline</string>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="crossline_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The byte location for the crossline in the trace header.</string>
+              </property>
+              <property name="text">
+               <string>Crossline:</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="2" column="0" >
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
+          <item row="2" column="0">
+           <layout class="QHBoxLayout">
+            <property name="spacing">
              <number>6</number>
             </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QLabel" name="location_scaling_label_2" >
-              <property name="text" >
-               <string>&lt;qt>location scaling coefficient</string>
+             <widget class="QLabel" name="location_scaling_label_2">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The coefficient used to scale the location.</string>
+              </property>
+              <property name="text">
+               <string>Location scaling coefficient:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="locationScalingLineEdit" />
+             <widget class="QLineEdit" name="locationScalingLineEdit">
+              <property name="toolTip">
+               <string>&lt;qt&gt;The coefficient used to scale the location.</string>
+              </property>
+             </widget>
             </item>
             <item>
              <spacer>
-              <property name="orientation" >
+              <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0">
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -278,65 +363,80 @@
          </layout>
         </widget>
        </item>
-       <item row="2" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="2" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QLabel" name="headerFormatLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Specify the header format for segy files.</string>
+          <widget class="QLabel" name="headerFormatLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Specify the header format for segy files.</string>
            </property>
-           <property name="text" >
-            <string>&lt;qt>SegY output header format:</string>
+           <property name="text">
+            <string>&lt;qt&gt;SegY output header format:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerSeisWorksRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerSeisWorksRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be SeisWorks (small).</string>
+           </property>
+           <property name="text">
             <string>SeisWorks (small)</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerIesxRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerIesxRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be IESX.</string>
+           </property>
+           <property name="text">
             <string>IESX</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerSipRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerSipRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be SeisWorks (big).</string>
+           </property>
+           <property name="text">
             <string>SeisWorks (Big)</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerCharismaRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerCharismaRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be Charisma.</string>
+           </property>
+           <property name="text">
             <string>Charisma</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="headerUserDefinedRadioButton" >
-           <property name="text" >
+          <widget class="QRadioButton" name="headerUserDefinedRadioButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The SegY output header format will be user defined.</string>
+           </property>
+           <property name="text">
             <string>User defined</string>
            </property>
           </widget>
          </item>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -346,82 +446,101 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="inputOutputLabel" >
-         <property name="font" >
+       <item row="0" column="0">
+        <widget class="QLabel" name="inputOutputLabel">
+         <property name="font">
           <font>
            <weight>75</weight>
            <italic>false</italic>
            <bold>true</bold>
           </font>
          </property>
-         <property name="text" >
-          <string>&lt;qt>Input and Output Settings</string>
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Output Settings&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
-         <property name="alignment" >
+         <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="1" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QLabel" name="seismicLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Specifies which formats to output seismic cubes in.</string>
+          <widget class="QLabel" name="seismicLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Specifies which formats to output seismic cubes in.</string>
            </property>
-           <property name="text" >
-            <string>&lt;qt>Seismic formats</string>
+           <property name="text">
+            <string>&lt;qt&gt;Seismic formats</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="segyCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="segyCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in SegY format.</string>
+           </property>
+           <property name="text">
             <string>SegY</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="stormCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="stormCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in Storm format.</string>
+           </property>
+           <property name="text">
             <string>Storm</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="cravaCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="cravaCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in Crava format.</string>
+           </property>
+           <property name="text">
             <string>Crava</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="sgriCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="sgriCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in Sgri format.</string>
+           </property>
+           <property name="text">
             <string>Sgri</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="asciiCheckBox" >
-           <property name="text" >
+          <widget class="QCheckBox" name="asciiCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the output should be in ASCII format.</string>
+           </property>
+           <property name="text">
             <string>ASCII</string>
            </property>
           </widget>
          </item>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -431,80 +550,86 @@
          </item>
         </layout>
        </item>
-       <item row="4" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="4" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLabel" name="wellFormatLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Specifies which formats to output well logs in.</string>
+            <widget class="QLabel" name="wellFormatLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Specifies which formats to output well logs in.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Well format</string>
+             <property name="text">
+              <string>&lt;qt&gt;Well format</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="waveletFormatLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Specifies which formats to output wavelets in.</string>
+            <widget class="QLabel" name="waveletFormatLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Specifies which formats to output wavelets in.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Wavelet format</string>
+             <property name="text">
+              <string>&lt;qt&gt;Wavelet format</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="rmsCheckBox" >
-               <property name="text" >
+              <widget class="QCheckBox" name="rmsCheckBox">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Control whether the well output should be in RMS format.</string>
+               </property>
+               <property name="text">
                 <string>RMS</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="norsarWellCheckBox" >
-               <property name="text" >
+              <widget class="QCheckBox" name="norsarWellCheckBox">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Control whether the well output should be in NORSAR format.</string>
+               </property>
+               <property name="text">
                 <string>NORSAR</string>
                </property>
               </widget>
              </item>
              <item>
               <spacer>
-               <property name="orientation" >
+               <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeHint" >
+               <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
                  <height>20</height>
@@ -515,33 +640,39 @@
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QCheckBox" name="jasonCheckBox" >
-               <property name="text" >
+              <widget class="QCheckBox" name="jasonCheckBox">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Control whether the wavelet output should be in JASON format.</string>
+               </property>
+               <property name="text">
                 <string>JASON</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="norsarWaveletCheckBox" >
-               <property name="text" >
+              <widget class="QCheckBox" name="norsarWaveletCheckBox">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Control whether the wavelet output should be in NORSAR format.</string>
+               </property>
+               <property name="text">
                 <string>NORSAR</string>
                </property>
               </widget>
              </item>
              <item>
               <spacer>
-               <property name="orientation" >
+               <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeHint" >
+               <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
                  <height>20</height>
@@ -557,56 +688,56 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="timeDepth3DPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
+     <widget class="QWidget" name="timeDepth3DPage">
+      <layout class="QGridLayout">
+       <property name="margin">
         <number>9</number>
        </property>
-       <property name="spacing" >
+       <property name="spacing">
         <number>6</number>
        </property>
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
+       <item row="1" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLabel" name="referenceDepth3DLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>The Z-value for the reference depth for the target area in meter.</string>
+            <widget class="QLabel" name="referenceDepth3DLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The Z-value for the reference depth for the target area in meter.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>Reference depth</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="averageVelocity3DLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>The average velocity in the target area in meter/second.</string>
+            <widget class="QLabel" name="averageVelocity3DLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The average velocity in the target area in meter/second.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>Average velocity</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="referenceTimeSurface3DLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Filename for the time surface corresponding to the reference depth.</string>
+            <widget class="QLabel" name="referenceTimeSurface3DLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Filename for the time surface corresponding to the reference depth.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>Reference time surface</string>
              </property>
             </widget>
@@ -614,48 +745,48 @@
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLineEdit" name="referenceDepth3DLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>The Z-value for the reference depth for the target area in meter.</string>
+            <widget class="QLineEdit" name="referenceDepth3DLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The Z-value for the reference depth for the target area in meter.</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="averageVelocity3DLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>The average velocity in the target area in meter/second.</string>
+            <widget class="QLineEdit" name="averageVelocity3DLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The average velocity in the target area in meter/second.</string>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
-             </property>
-             <property name="spacing" >
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QLineEdit" name="referenceTimeSurface3DLineEdit" >
-               <property name="toolTip" >
-                <string>&lt;qt>Filename for the time surface corresponding to the reference depth.</string>
+              <widget class="QLineEdit" name="referenceTimeSurface3DLineEdit">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Filename for the time surface corresponding to the reference depth.</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="referenceTimeSurface3DPushButton" >
-               <property name="toolTip" >
-                <string>&lt;qt>Filename for the time surface corresponding to the reference depth.</string>
+              <widget class="QPushButton" name="referenceTimeSurface3DPushButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Filename for the time surface corresponding to the reference depth.</string>
                </property>
-               <property name="text" >
+               <property name="text">
                 <string>Browse...</string>
                </property>
               </widget>
@@ -666,12 +797,12 @@
          </item>
         </layout>
        </item>
-       <item row="1" column="0" >
+       <item row="2" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -679,105 +810,252 @@
          </property>
         </spacer>
        </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Time Depth Mapping Settings</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="advancedPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
+     <widget class="QWidget" name="advancedPage">
+      <layout class="QGridLayout">
+       <property name="margin">
         <number>9</number>
        </property>
-       <property name="spacing" >
+       <property name="spacing">
         <number>6</number>
        </property>
-       <item row="6" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
+       <item row="4" column="0">
+        <widget class="QLabel" name="fftPaddingLabel">
+         <property name="text">
+          <string>&lt;qt&gt;FFT grid padding</string>
          </property>
-         <property name="spacing" >
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
+          <widget class="QLabel" name="xFractionLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the x-direction relative to the x-length.</string>
            </property>
-           <property name="spacing" >
+           <property name="text">
+            <string>&lt;qt&gt;X-padding ratio</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="xFractionLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the x-direction relative to the x-length.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="yFractionLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the y-direction relative to the y-length.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Y-padding ratio</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="yFractionLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the y-direction relative to the y-length.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="zFractionLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the z-direction relative to the z-length.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Z-padding ratio</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="zFractionLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value for the ratio of the padding in the z-direction relative to the z-length.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="13" column="0">
+        <widget class="QCheckBox" name="diskStorageCheckBox">
+         <property name="toolTip">
+          <string>&lt;qt&gt;To reduce the physical memory requirement, CRAVA can store intermediate FFT grids on disk rather than holding them in memory. This will typically reduce the total memory requirement of a calculation, but comes at a cost of increased CPU usage and increased disk usage.</string>
+         </property>
+         <property name="text">
+          <string>Use intermediate disk storage</string>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="maximumRelativeThicknessLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value giving the limit of how small the minimum interval thickness can be relative to the maximum. If this gets too low, the tranformation to stationarity for the FFT-algorithm gives strange results.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Minimum required ratio between minimum and maximum output thickness</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="maximumRelativeThicknessLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Value giving the limit of how small the minimum interval thickness can be relative to the maximum. If this gets too low, the tranformation to stationarity for the FFT-algorithm gives strange results.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="20" column="0">
+        <widget class="QLabel" name="frequencyBandLabel">
+         <property name="toolTip">
+          <string>&lt;qt&gt;The frequency band is limited by the wavelet, but an additional cut-off is needed to ensure numerical stability.</string>
+         </property>
+         <property name="text">
+          <string>&lt;qt&gt;Frequency band for inversion</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::AutoText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="24" column="0">
+        <layout class="QHBoxLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLabel" name="energyTresholdLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
+            <widget class="QLabel" name="energyTresholdLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Trace energy treshold</string>
+             <property name="text">
+              <string>&lt;qt&gt;Trace energy treshold</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="waveletLengthLabel" >
-             <property name="text" >
-              <string>&lt;qt>Length of wavelet to be estimated, in ms</string>
+            <widget class="QLabel" name="waveletLengthLabel">
+             <property name="toolTip">
+              <string>Giving the length of the wavelet to be estimated in ms. For a 1D wavelet this is the width of the Papoulis taper used, when tapering of auto-correlation of reflection co-efficients, and cross-correlation of reflection-coefficients and seismic data, before doing the spectral division. Increasing this value will give less bias (i.e. less energy at low frequencies), but larger variance in the estimate (i.e. secondary oscillations). For a 3D wavelet this gives the length of the source-wavelet, by dividing this length by the vertical sampling interval we find the the </string>
+             </property>
+             <property name="text">
+              <string>&lt;qt&gt;Length of wavelet to be estimated, in ms</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="waveletRelativeMinimumLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Minimum ratio between smallest and largest relevant amplitude for estimated wavelet.</string>
+            <widget class="QLabel" name="waveletRelativeMinimumLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Minimum ratio between smallest and largest relevant amplitude for estimated wavelet.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Minimum ratio of relevant amplitude for estimated wavelet</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="waveletShiftMaxLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Value controlling how much the wavelet is allowed to be shifted when doing estimation of wavelet or noise.</string>
-             </property>
-             <property name="text" >
-              <string>&lt;qt>Maximum allowed shift of wavelet</string>
+             <property name="text">
+              <string>&lt;qt&gt;Minimum ratio of relevant amplitude for estimated wavelet</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="whiteNoiseLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>In order to stabelize the inversion, some of the noise needs to be interpreted as white. This specifies that fraction.</string>
+            <widget class="QLabel" name="waveletShiftMaxLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Value controlling how much the wavelet is allowed to be shifted when doing estimation of wavelet or noise.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>White noise fraction</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="reflectionMatrixLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>c(x,t,θ) = aVp(θ) δ/δt ln(Vp(x, t)) + aVs(x,t,θ) δ/δt ln(Vs(x, t)) + aρ(x,t,θ) δ/δt ln(ρ(x,t)) , the coefficients aVp, aVs and aρ can be read from file, each line should have one line for each seismic data file with the three coefficients for each.</string>
-             </property>
-             <property name="text" >
-              <string>&lt;qt>Reflection matrix</string>
+             <property name="text">
+              <string>&lt;qt&gt;Maximum allowed shift of wavelet</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="krigingLimitLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>Limit for the amount of well data used to kriege each point. A high value gives a smoother and more exact field, but takes more time.</string>
+            <widget class="QLabel" name="whiteNoiseLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;In order to stabelize the inversion, some of the noise needs to be interpreted as white. This specifies that fraction.</string>
              </property>
-             <property name="text" >
-              <string>&lt;qt>Kriging data limit</string>
+             <property name="text">
+              <string>&lt;qt&gt;White noise fraction</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="seedFileLabel" >
-             <property name="toolTip" >
-              <string>&lt;qt>The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
+            <widget class="QLabel" name="reflectionMatrixLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;c(x,t,θ) = aVp(θ) δ/δt ln(Vp(x, t)) + aVs(x,t,θ) δ/δt ln(Vs(x, t)) + aρ(x,t,θ) δ/δt ln(ρ(x,t)) , the coefficients aVp, aVs and aρ can be read from file, each line should have one line for each seismic data file with the three coefficients for each.</string>
              </property>
-             <property name="text" >
+             <property name="text">
+              <string>&lt;qt&gt;Reflection matrix</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="krigingLimitLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Limit for the amount of well data used to kriege each point. A high value gives a smoother and more exact field, but takes more time.</string>
+             </property>
+             <property name="text">
+              <string>&lt;qt&gt;Kriging data limit</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="guardZoneLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Changes the amount of data that will be required outside the interval of interest.</string>
+             </property>
+             <property name="text">
+              <string>Guard zone, in ms</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="seedFileLabel">
+             <property name="toolTip">
+              <string>&lt;qt&gt;The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
+             </property>
+             <property name="text">
               <string>Seed File</string>
              </property>
             </widget>
@@ -785,58 +1063,70 @@
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
+          <layout class="QVBoxLayout">
+           <property name="spacing">
             <number>6</number>
            </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLineEdit" name="energyTresholdLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
+            <widget class="QLineEdit" name="energyTresholdLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="waveletLengthLineEdit" />
-           </item>
-           <item>
-            <widget class="QLineEdit" name="waveletRelativeMinimumLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>Minimum ratio between smallest and largest relevant amplitude for estimated wavelet.</string>
+            <widget class="QLineEdit" name="waveletLengthLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Giving the length of the wavelet to be estimated in ms. For a 1D wavelet this is the width of the Papoulis taper used, when tapering of auto-correlation of reflection co-efficients, and cross-correlation of reflection-coefficients and seismic data, before doing the spectral division. Increasing this value will give less bias (i.e. less energy at low frequencies), but larger variance in the estimate (i.e. secondary oscillations). For a 3D wavelet this gives the length of the source-wavelet, by dividing this length by the vertical sampling interval we find the the
+</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="waveletShiftMaxLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>Value controlling how much the wavelet is allowed to be shifted when doing estimation of wavelet or noise.</string>
+            <widget class="QLineEdit" name="waveletRelativeMinimumLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Minimum ratio between smallest and largest relevant amplitude for estimated wavelet.</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="whiteNoiseLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>In order to stabelize the inversion, we need to interpret some of the noise as white. This specifies that fraction.</string>
+            <widget class="QLineEdit" name="waveletShiftMaxLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Value controlling how much the wavelet is allowed to be shifted when doing estimation of wavelet or noise.</string>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
+            <widget class="QLineEdit" name="whiteNoiseLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;In order to stabelize the inversion, we need to interpret some of the noise as white. This specifies that fraction.</string>
              </property>
-             <property name="spacing" >
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QLineEdit" name="reflectionMatrixLineEdit" />
+              <widget class="QLineEdit" name="reflectionMatrixLineEdit">
+               <property name="toolTip">
+                <string>&lt;qt&gt;c(x,t,θ) = aVp(θ) δ/δt ln(Vp(x, t)) + aVs(x,t,θ) δ/δt ln(Vs(x, t)) + aρ(x,t,θ) δ/δt ln(ρ(x,t)) , the coefficients aVp, aVs and aρ can be read from file, each line should have one line for each seismic data file with the three coefficients for each.</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="reflectionMatrixBrowsePushButton" >
-               <property name="text" >
+              <widget class="QPushButton" name="reflectionMatrixBrowsePushButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;c(x,t,θ) = aVp(θ) δ/δt ln(Vp(x, t)) + aVs(x,t,θ) δ/δt ln(Vs(x, t)) + aρ(x,t,θ) δ/δt ln(ρ(x,t)) , the coefficients aVp, aVs and aρ can be read from file, each line should have one line for each seismic data file with the three coefficients for each.</string>
+               </property>
+               <property name="text">
                 <string>Browse...</string>
                </property>
               </widget>
@@ -844,33 +1134,40 @@
             </layout>
            </item>
            <item>
-            <widget class="QLineEdit" name="krigingDataLineEdit" >
-             <property name="toolTip" >
-              <string>&lt;qt>Limit for the amount of well data used to kriege each point. A high value gives a smoother and more exact field, but takes more time.</string>
+            <widget class="QLineEdit" name="krigingDataLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Limit for the amount of well data used to kriege each point. A high value gives a smoother and more exact field, but takes more time.</string>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>0</number>
+            <widget class="QLineEdit" name="guardZoneLineEdit">
+             <property name="toolTip">
+              <string>&lt;qt&gt;Changes the amount of data that will be required outside the interval of interest.</string>
              </property>
-             <property name="spacing" >
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
               <number>6</number>
              </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QLineEdit" name="seedFileLineEdit" >
-               <property name="toolTip" >
-                <string>&lt;qt>The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
+              <widget class="QLineEdit" name="seedFileLineEdit">
+               <property name="toolTip">
+                <string>&lt;qt&gt;The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="seedFileBrowsePushButton" >
-               <property name="toolTip" >
-                <string>&lt;qt>The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
+              <widget class="QPushButton" name="seedFileBrowsePushButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;The seed file should contain one integer number, the number will be overwritten after each stoachstic realization.</string>
                </property>
-               <property name="text" >
+               <property name="text">
                 <string>Browse...</string>
                </property>
               </widget>
@@ -881,611 +1178,313 @@
          </item>
         </layout>
        </item>
-       <item row="7" column="0" >
-        <widget class="QCheckBox" name="krigedSmoothCheckBox" >
-         <property name="text" >
+       <item row="26" column="0">
+        <widget class="QCheckBox" name="krigedSmoothCheckBox">
+         <property name="toolTip">
+          <string>&lt;qt&gt;Should the program smooth borders between kriging blocks or not?</string>
+         </property>
+         <property name="text">
           <string>Smooth borders between kriging blocks</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="0" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
+       <item row="21" column="0">
+        <widget class="QFrame" name="frequencyBandFrame">
+         <property name="toolTip">
+          <string>&lt;qt&gt;Controls the frequency band of the inversion, so high and/ or low frequency can be filtered away. This should be done by the wavelet, but can be specified here.</string>
          </property>
-         <property name="sizeHint" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="4" column="0" >
-        <widget class="QLabel" name="frequencyBandLabel" >
-         <property name="toolTip" >
-          <string>&lt;qt>&lt;qt>The frequency band is limited by the wavelet, but an additional cut-off is needed to ensure numerical stability.</string>
-         </property>
-         <property name="text" >
-          <string>&lt;qt>Frequency band for inversion</string>
-         </property>
-         <property name="textFormat" >
-          <enum>Qt::AutoText</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0" >
-        <widget class="QFrame" name="frequencyBandFrame" >
-         <property name="toolTip" >
-          <string>&lt;qt>Controls the frequency band of the inversion, so high and/ or low frequency can be filtered away. This should be done by the wavelet, but can be specified here.</string>
-         </property>
-         <property name="frameShape" >
+         <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="frameShadow" >
+         <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QGridLayout" >
-          <property name="margin" >
+         <layout class="QGridLayout">
+          <property name="margin">
            <number>9</number>
           </property>
-          <property name="spacing" >
+          <property name="spacing">
            <number>6</number>
           </property>
-          <item row="0" column="1" >
-           <widget class="QLineEdit" name="lowCutFrequencyBandLineEdit" >
-            <property name="toolTip" >
-             <string>&lt;qt>The minimum frequency affected by the inversion.</string>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lowCutFrequencyBandLineEdit">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The minimum frequency affected by the inversion.</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="0" >
-           <widget class="QLabel" name="lowCutFrequencyBandLabel" >
-            <property name="toolTip" >
-             <string>&lt;qt>The minimum frequency affected by the inversion.</string>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lowCutFrequencyBandLabel">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The minimum frequency affected by the inversion.</string>
             </property>
-            <property name="text" >
-             <string>&lt;qt>Low cut</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" >
-           <widget class="QLabel" name="highCutFrequencyBandLabel" >
-            <property name="toolTip" >
-             <string>&lt;qt>The maximum frequency affected by the inversion.</string>
-            </property>
-            <property name="text" >
-             <string>&lt;qt>High cut</string>
+            <property name="text">
+             <string>&lt;qt&gt;Low cut</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="3" >
-           <widget class="QLineEdit" name="highCutFrequencyBandLineEdit" >
-            <property name="toolTip" >
-             <string>&lt;qt>The maximum frequency affected by the inversion.</string>
+          <item row="0" column="2">
+           <widget class="QLabel" name="highCutFrequencyBandLabel">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The maximum frequency affected by the inversion.</string>
+            </property>
+            <property name="text">
+             <string>&lt;qt&gt;High cut</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="highCutFrequencyBandLineEdit">
+            <property name="toolTip">
+             <string>&lt;qt&gt;The maximum frequency affected by the inversion.</string>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="2" column="0" >
-        <widget class="QCheckBox" name="diskStorageCheckBox" >
-         <property name="toolTip" >
-          <string>&lt;qt>To reduce the physical memory requirement, CRAVA can store intermediate FFT grids on disk rather than holding them in memory. This will typically reduce the total memory requirement of a calculation, but comes at a cost of increased CPU usage and increased disk usage.</string>
+       <item row="16" column="0">
+        <widget class="QFrame" name="vpVsRatioFrame">
+         <property name="toolTip">
+          <string>&lt;qt&gt;The Vp/Vs ratio used in reflection matrix can be estimated from the background model, estimated from the well data or set manually by the user.</string>
          </property>
-         <property name="text" >
-          <string>Use intermediate disk storage</string>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QRadioButton" name="vpVsEstimateBackgroundRadioButton">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Estimate Vp/Vs ratio from the background model.</string>
+                  </property>
+                  <property name="text">
+                   <string>Estimate from background</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="vpVsEstimateWellRadioButton">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Estimate the Vp/Vs ratio from the wells.</string>
+                  </property>
+                  <property name="text">
+                   <string>Estimate from wells</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="vpVsUserDefinedRadioButton">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt;Value of the Vp/Vs ratio used in the reflection matrix is defined by the user.</string>
+                  </property>
+                  <property name="text">
+                   <string>User defined</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="vpVsUserDefinedLineEdit">
+                <property name="toolTip">
+                 <string>&lt;qt&gt;Value of Vp/Vs ratio used in reflection matrix is defined by the user.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="15" column="0">
+        <widget class="QLabel" name="vpVsRatioLabel">
+         <property name="toolTip">
+          <string>&lt;qt&gt;The Vp/Vs ratio used in reflection matrix can be estimated from the background model, estimated from the well data or set manually by the user.</string>
+         </property>
+         <property name="text">
+          <string>Vp/Vs ratio for reflection matrix</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="maximumRelativeThicknessLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value giving the limit of how small the minimum interval thickness can be relative to the maximum. If this gets too low, the tranformation to stationarity for the FFT-algorithm gives strange results.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Minimum required ratio between minimum and maximum output thickness</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="maximumRelativeThicknessLineEdit" />
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="fftPaddingLabel" >
-         <property name="text" >
-          <string>&lt;qt>FFT grid padding</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="xFractionLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the x-direction relative to the x-length.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>X-padding ratio</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="xFractionLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the x-direction relative to the x-length.</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="yFractionLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the y-direction relative to the y-length.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Y-padding ratio</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="yFractionLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the y-direction relative to the y-length.</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="zFractionLabel" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the z-direction relative to the z-length.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Z-padding ratio</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="zFractionLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Value for the ratio of the padding in the z-direction relative to the z-length.</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="parameterValuesPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item row="0" column="0" >
-        <layout class="QGridLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item row="4" column="2" >
-          <widget class="QLabel" name="vp_vs_ratio_max_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Largest Vp/Vs-ratio regarded as likely</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>maximum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vpVsRatioMaxLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2" >
-          <widget class="QLabel" name="vs_max_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Vs - largest allowed value</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>maximum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vsMaxLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1" >
-          <widget class="QLineEdit" name="vpVsCorrelationLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>If the correlation between Vp and Vs exceed this value, the vs log is considered to be synthetic, and not counted as additional data in estimation.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="4" >
-          <widget class="QLabel" name="density_variance_min_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Smallest legal variance in the density log after the background is subtracted and the logarithm is taken</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>variance minimum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>densityVarianceMinLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" >
-          <widget class="QLineEdit" name="densityMinLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Density - smallest allowed value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="1" >
-          <widget class="QLineEdit" name="offsetLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>The maximum allowed offset for moving wells in meters.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="7" >
-          <widget class="QLineEdit" name="vpVarianceMaxLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Largest legal variance in the vp log after the background is subtracted and the logarithm is taken</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3" >
-          <widget class="QLineEdit" name="vpMaxLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Vp - largest allowed value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" >
-          <widget class="QLineEdit" name="vpMinLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Vp - smallest allowed value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="5" >
-          <widget class="QLineEdit" name="vpVarianceMinLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Smallest legal variance in the vp log after the background is subtracted and the logarithm is taken</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2" >
-          <widget class="QLabel" name="density_max_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Density - largest allowed value</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>maximum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>densityMaxLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0" >
-          <widget class="QLabel" name="density_min_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Density - smallest allowed value</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Density minimum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>densityMinLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="1" >
-          <widget class="QLineEdit" name="mergeDistanceLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>The maximum distance in time between well log entries before they are merged.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1" >
-          <widget class="QLineEdit" name="vsMinLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Vs - smallest allowed value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="0" >
-          <widget class="QLabel" name="shift_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>The maximum allowed vertical shift for moving wells.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Maximum shift</string>
-           </property>
-           <property name="buddy" >
-            <cstring>shiftLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1" >
-          <widget class="QLineEdit" name="vpVsRatioMinLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Smallest Vp/Vs-ratio regarded as likely</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0" >
-          <widget class="QLabel" name="merge_distance_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>The maximum distance in time between well log entries before they are merged.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Maximum merge distance</string>
-           </property>
-           <property name="buddy" >
-            <cstring>mergeDistanceLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="3" >
-          <widget class="QLineEdit" name="vpVsRatioMaxLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Largest Vp/Vs-ratio regarded as likely</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0" >
-          <widget class="QLabel" name="deviation_angle_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>The maximum deviation angle of a well before it is excluded from estimation of wavelet and signal to noise.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Maximum deviation angle</string>
-           </property>
-           <property name="buddy" >
-            <cstring>deviationAngleLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="3" >
-          <widget class="QLineEdit" name="densityMaxLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Density - largest allowed value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="6" >
-          <widget class="QLabel" name="vp_variance_max_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Largest legal variance in the vp log after the background is subtracted and the logarithm is taken</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>maximum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vpVarianceMaxLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="4" >
-          <widget class="QLabel" name="vp_vairiance_min_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Smallest legal variance in the vp log after the background is subtracted and the logarithm is taken</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>variance minimum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vpVarianceMinLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0" >
-          <widget class="QLabel" name="vp_vs_ratio_min_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Smallest Vp/Vs-ratio regarded as likely</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Vp/Vs ratio minimum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vpVsRatioMinLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="7" >
-          <widget class="QLineEdit" name="densityVarianceMaxLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Largest legal variance in the density log after the background is subtracted and the logarithm is taken</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="vs_min_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Vs - smallest allowed value</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Vs minimum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vsMinLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5" >
-          <widget class="QLineEdit" name="vsVarianceMinLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Smallest legal variance in the vs log after the background is subtracted and the logarithm is taken</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="5" >
-          <widget class="QLineEdit" name="densityVarianceMinLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Smallest legal variance in the density log after the background is subtracted and the logarithm is taken</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0" >
-          <widget class="QLabel" name="offset_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>The maximum allowed offset for moving wells in meters.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Maximum offset</string>
-           </property>
-           <property name="buddy" >
-            <cstring>offsetLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="6" >
-          <widget class="QLabel" name="density_variance_max_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Largest legal variance in the density log after the background is subtracted and the logarithm is taken</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>maximum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>densityVarianceMaxLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="3" >
-          <widget class="QLineEdit" name="vsMaxLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Vs - largest allowed value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="vp_min_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Vp - smallest allowed value</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Vp minimum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vpMinLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1" >
-          <widget class="QLineEdit" name="deviationAngleLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>The maximum deviation angle of a well before it is excluded from estimation of wavelet and signal to noise.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="1" >
-          <widget class="QLineEdit" name="shiftLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>The maximum allowed vertical shift for moving wells.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0" >
-          <widget class="QLabel" name="vp_vs_correleation_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>If the correlation between Vp and Vs exceed this value, the vs log is considered to be synthetic, and not counted as additional data in estimation.</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>Maximum Vp-Vs correlation</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vpVsCorrelationLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2" >
-          <widget class="QLabel" name="vp_max_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Vp - largest allowed value</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>maximum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vpMaxLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4" >
-          <widget class="QLabel" name="vs_variance_min_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Smallest legal variance in the vs log after the background is subtracted and the logarithm is taken</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>variance minimum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vsVarianceMinLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="6" >
-          <widget class="QLabel" name="vs_variance_max_label" >
-           <property name="toolTip" >
-            <string>&lt;qt>Largest legal variance in the vs log after the background is subtracted and the logarithm is taken</string>
-           </property>
-           <property name="text" >
-            <string>&lt;qt>maximum</string>
-           </property>
-           <property name="buddy" >
-            <cstring>vsVarianceMaxLineEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="7" >
-          <widget class="QLineEdit" name="vsVarianceMaxLineEdit" >
-           <property name="toolTip" >
-            <string>&lt;qt>Largest legal variance in the vs log after the background is subtracted and the logarithm is taken</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0" >
-          <widget class="QLabel" name="parameterValuesLabel" >
-           <property name="text" >
-            <string>&lt;qt>Allowed parameter values</string>
-           </property>
-           <property name="textFormat" >
-            <enum>Qt::AutoText</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0" >
-        <spacer>
-         <property name="orientation" >
+       <item row="12" column="0">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="14" column="0">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="17" column="0">
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="19" column="0">
+        <spacer name="verticalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Advanced Inversion Settings</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="25" column="0">
+        <spacer name="verticalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="23" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="22" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="seismicResolutionLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Used to filter wells down to seismic resolution. Only used to generate output logs for QC.</string>
+           </property>
+           <property name="text">
+            <string>High cut seismic resolution for well data</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Maximum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>224</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="seismicResolutionLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Used to filter wells down to seismic resolution. Only used to generate output logs for QC.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="27" column="0">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -1495,248 +1494,619 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="guiPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
+     <widget class="QWidget" name="parameterValuesPage">
+      <layout class="QGridLayout">
+       <property name="margin">
         <number>9</number>
        </property>
-       <property name="spacing" >
+       <property name="spacing">
         <number>6</number>
        </property>
-       <item row="6" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
+       <item row="1" column="0">
+        <layout class="QGridLayout">
+         <property name="margin">
           <number>0</number>
          </property>
-         <property name="spacing" >
+         <property name="spacing">
           <number>6</number>
          </property>
-         <item>
-          <widget class="QCheckBox" name="xmlTreeCheckBox" >
-           <property name="text" >
-            <string>Display XML tree</string>
+         <item row="4" column="2">
+          <widget class="QLabel" name="vp_vs_ratio_max_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Largest Vp/Vs-ratio regarded as likely</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;maximum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vpVsRatioMaxLineEdit</cstring>
            </property>
           </widget>
          </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
+         <item row="2" column="2">
+          <widget class="QLabel" name="vs_max_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Vs - largest allowed value</string>
            </property>
-           <property name="sizeHint" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
+           <property name="text">
+            <string>&lt;qt&gt;maximum</string>
            </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item row="5" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="manualPathLabel" >
-           <property name="text" >
-            <string>CRAVA manual path:</string>
+           <property name="buddy">
+            <cstring>vsMaxLineEdit</cstring>
            </property>
           </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <widget class="QLineEdit" name="manualPathLineEdit" />
-           </item>
-           <item>
-            <widget class="QPushButton" name="manualPathBrowsePushButton" >
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item row="4" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="wikiPathLabel" >
-           <property name="text" >
-            <string>CRAVA wiki path:</string>
+         <item row="6" column="1">
+          <widget class="QLineEdit" name="vpVsCorrelationLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;If the correlation between Vp and Vs exceed this value, the vs log is considered to be synthetic, and not counted as additional data in estimation.</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLineEdit" name="wikiPathLineEdit" />
-         </item>
-        </layout>
-       </item>
-       <item row="3" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="terminalPathLabel" >
-           <property name="text" >
-            <string>Terminal application for running crava:</string>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="densityMinLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Density - smallest allowed value</string>
            </property>
           </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <widget class="QLineEdit" name="terminalPathLineEdit" />
-           </item>
-           <item>
-            <widget class="QPushButton" name="terminalPathBrowsePushButton" >
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="terminalCheckBox" >
-           <property name="text" >
-            <string>Run crava in terminal</string>
+         <item row="8" column="1">
+          <widget class="QLineEdit" name="offsetLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The maximum allowed offset for moving wells in meters.</string>
            </property>
           </widget>
          </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>Text Editor</string>
+         <item row="1" column="7">
+          <widget class="QLineEdit" name="vpVarianceMaxLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Largest legal variance in the vp log after the background is subtracted and the logarithm is taken</string>
            </property>
           </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
+         <item row="1" column="3">
+          <widget class="QLineEdit" name="vpMaxLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Vp - largest allowed value</string>
            </property>
-           <property name="spacing" >
-            <number>6</number>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="vpMinLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Vp - smallest allowed value</string>
            </property>
-           <item>
-            <widget class="QLineEdit" name="textEditorLineEdit" />
-           </item>
-           <item>
-            <widget class="QPushButton" name="textEditorBrowsePushButton" >
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QLineEdit" name="vpVarianceMinLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Smallest legal variance in the vp log after the background is subtracted and the logarithm is taken</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QLabel" name="density_max_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Density - largest allowed value</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;maximum</string>
+           </property>
+           <property name="buddy">
+            <cstring>densityMaxLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="density_min_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Density - smallest allowed value</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Density minimum</string>
+           </property>
+           <property name="buddy">
+            <cstring>densityMinLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QLineEdit" name="mergeDistanceLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The maximum distance in time between well log entries before they are merged.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="vsMinLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Vs - smallest allowed value</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QLabel" name="shift_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The maximum allowed vertical shift for moving wells.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Maximum shift</string>
+           </property>
+           <property name="buddy">
+            <cstring>shiftLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="vpVsRatioMinLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Smallest Vp/Vs-ratio regarded as likely</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="merge_distance_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The maximum distance in time between well log entries before they are merged.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Maximum merge distance</string>
+           </property>
+           <property name="buddy">
+            <cstring>mergeDistanceLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="3">
+          <widget class="QLineEdit" name="vpVsRatioMaxLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Largest Vp/Vs-ratio regarded as likely</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="deviation_angle_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The maximum deviation angle of a well before it is excluded from estimation of wavelet and signal to noise.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Maximum deviation angle</string>
+           </property>
+           <property name="buddy">
+            <cstring>deviationAngleLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QLineEdit" name="densityMaxLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Density - largest allowed value</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6">
+          <widget class="QLabel" name="vp_variance_max_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Largest legal variance in the vp log after the background is subtracted and the logarithm is taken</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;maximum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vpVarianceMaxLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QLabel" name="vp_vairiance_min_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Smallest legal variance in the vp log after the background is subtracted and the logarithm is taken</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;variance minimum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vpVarianceMinLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="vp_vs_ratio_min_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Smallest Vp/Vs-ratio regarded as likely</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Vp/Vs ratio minimum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vpVsRatioMinLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="7">
+          <widget class="QLineEdit" name="densityVarianceMaxLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Largest legal variance in the density log after the background is subtracted and the logarithm is taken</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="vs_min_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Vs - smallest allowed value</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Vs minimum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vsMinLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="5">
+          <widget class="QLineEdit" name="vsVarianceMinLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Smallest legal variance in the vs log after the background is subtracted and the logarithm is taken</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="5">
+          <widget class="QLineEdit" name="densityVarianceMinLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Smallest legal variance in the density log after the background is subtracted and the logarithm is taken</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="offset_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The maximum allowed offset for moving wells in meters.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Maximum offset</string>
+           </property>
+           <property name="buddy">
+            <cstring>offsetLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="6">
+          <widget class="QLabel" name="density_variance_max_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Largest legal variance in the density log after the background is subtracted and the logarithm is taken</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;maximum</string>
+           </property>
+           <property name="buddy">
+            <cstring>densityVarianceMaxLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QLineEdit" name="vsMaxLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Vs - largest allowed value</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="vp_min_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Vp - smallest allowed value</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Vp minimum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vpMinLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="deviationAngleLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The maximum deviation angle of a well before it is excluded from estimation of wavelet and signal to noise.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QLineEdit" name="shiftLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The maximum allowed vertical shift for moving wells.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="vp_vs_correleation_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;If the correlation between Vp and Vs exceed this value, the vs log is considered to be synthetic, and not counted as additional data in estimation.</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;Maximum Vp-Vs correlation</string>
+           </property>
+           <property name="buddy">
+            <cstring>vpVsCorrelationLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="vp_max_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Vp - largest allowed value</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;maximum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vpMaxLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QLabel" name="vs_variance_min_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Smallest legal variance in the vs log after the background is subtracted and the logarithm is taken</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;variance minimum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vsVarianceMinLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="6">
+          <widget class="QLabel" name="vs_variance_max_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Largest legal variance in the vs log after the background is subtracted and the logarithm is taken</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;maximum</string>
+           </property>
+           <property name="buddy">
+            <cstring>vsVarianceMaxLineEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="7">
+          <widget class="QLineEdit" name="vsVarianceMaxLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Largest legal variance in the vs log after the background is subtracted and the logarithm is taken</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="parameterValuesLabel">
+           <property name="text">
+            <string>&lt;qt&gt;Allowed parameter values</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::AutoText</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QLabel" name="density_variance_min_label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Smallest legal variance in the density log after the background is subtracted and the logarithm is taken</string>
+           </property>
+           <property name="text">
+            <string>&lt;qt&gt;variance minimum</string>
+           </property>
+           <property name="buddy">
+            <cstring>densityVarianceMinLineEdit</cstring>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
+       <item row="2" column="0">
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="spacing" >
-          <number>6</number>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
          </property>
-         <item>
-          <widget class="QLabel" name="cravaPathLabel" >
-           <property name="text" >
+        </spacer>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Wells Allowed Parameter Values</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="guiPage">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>GUI settings</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout_98">
+         <item row="0" column="0">
+          <widget class="QLabel" name="cravaPathLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path of the CRAVA executable.</string>
+           </property>
+           <property name="text">
             <string>CRAVA executable path:</string>
            </property>
           </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="cravaPathLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path of the CRAVA executable.</string>
            </property>
-           <property name="spacing" >
-            <number>6</number>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="cravaPathBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path of the CRAVA executable.</string>
            </property>
-           <item>
-            <widget class="QLineEdit" name="cravaPathLineEdit" />
-           </item>
-           <item>
-            <widget class="QPushButton" name="cravaPathBrowsePushButton" >
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Choose the text editor which is to be used.</string>
+           </property>
+           <property name="text">
+            <string>Text editor:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="textEditorLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Choose the text editor which is to be used.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="textEditorBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Choose the text editor which is to be used.</string>
+           </property>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="terminalCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt; Control whether CRAVA should run in the terminal or not.</string>
+           </property>
+           <property name="text">
+            <string>Run CRAVA in terminal</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="terminalPathLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
+           </property>
+           <property name="text">
+            <string>Terminal application:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="terminalPathLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QPushButton" name="terminalPathBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
+           </property>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="wikiPathLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA wiki page.</string>
+           </property>
+           <property name="text">
+            <string>CRAVA wiki path:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="wikiPathLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA wiki page.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="manualPathLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA manual.</string>
+           </property>
+           <property name="text">
+            <string>CRAVA manual path:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="manualPathLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA manual.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QPushButton" name="manualPathBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA manual.</string>
+           </property>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="xmlTreeCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the XML tree on the right side of the application should be turned on or off.</string>
+           </property>
+           <property name="text">
+            <string>Display XML tree</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
-       <item row="7" column="0" >
+       <item row="2" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>892</width>
            <height>381</height>
@@ -1747,68 +2117,6 @@
       </layout>
      </widget>
     </widget>
-   </item>
-   <item row="1" column="1" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" >
-    <layout class="QVBoxLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
-     <property name="spacing" >
-      <number>6</number>
-     </property>
-     <item>
-      <widget class="QListWidget" name="listWidget" >
-       <item>
-        <property name="text" >
-         <string>Input - Output</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>3D time depth mapping</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Advanced inversion settings</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Wells allowed parameter values</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>GUI settings</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <spacer>
-       <property name="orientation" >
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" >
-        <size>
-         <width>20</width>
-         <height>294</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>
@@ -1878,17 +2186,6 @@
   <tabstop>mergeDistanceLineEdit</tabstop>
   <tabstop>offsetLineEdit</tabstop>
   <tabstop>shiftLineEdit</tabstop>
-  <tabstop>cravaPathLineEdit</tabstop>
-  <tabstop>cravaPathBrowsePushButton</tabstop>
-  <tabstop>textEditorLineEdit</tabstop>
-  <tabstop>textEditorBrowsePushButton</tabstop>
-  <tabstop>terminalCheckBox</tabstop>
-  <tabstop>terminalPathLineEdit</tabstop>
-  <tabstop>terminalPathBrowsePushButton</tabstop>
-  <tabstop>wikiPathLineEdit</tabstop>
-  <tabstop>manualPathLineEdit</tabstop>
-  <tabstop>manualPathBrowsePushButton</tabstop>
-  <tabstop>xmlTreeCheckBox</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
@@ -1899,11 +2196,11 @@
    <receiver>SettingsDialog</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>600</x>
      <y>600</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -1915,11 +2212,11 @@
    <receiver>SettingsDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>600</x>
      <y>600</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>
@@ -1931,11 +2228,11 @@
    <receiver>stackedWidget</receiver>
    <slot>setCurrentIndex(int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>101</x>
      <y>129</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>491</x>
      <y>123</y>
     </hint>

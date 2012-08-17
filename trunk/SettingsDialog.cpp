@@ -21,11 +21,8 @@
 #include <QFileDialog> 
 #include "Main_crava.h"
 
-// added for automoc in cmake
-//#include "ui_SettingsDialog.h"
-
 /**
-	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>
+	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
 SettingsDialog::SettingsDialog(Main_crava *main_crava, QWidget *parent, bool forwardOn, bool estimationOn, StandardStrings *standard):QDialog(parent){
 	this->standard=standard;
@@ -39,6 +36,7 @@ SettingsDialog::SettingsDialog(Main_crava *main_crava, QWidget *parent, bool for
 	headerButtonGroup->addButton(headerCharismaRadioButton);
 	headerButtonGroup->addButton(headerUserDefinedRadioButton);
 	on_headerUserDefinedRadioButton_toggled(false);
+       	on_vpVsUserDefinedRadioButton_toggled(!main_crava->vp_vs_ratioPointer->text(1).isEmpty());
 	forward=forwardOn;
 	estimation=estimationOn;
 	updateFields();
@@ -85,16 +83,13 @@ void SettingsDialog::updateFields(){
 		else {
 			headerUserDefinedRadioButton->setChecked(true);
 			formatChangeFrame->setVisible(true);
-			if ( bypassCoordinateYesRadioButton->isChecked() ){
-				main_crava->locationScalingLineEdit->setVisible(true);
-				main_crava->location_scaling_label->setVisible(true);
+			if ( bypassCoordinateNoRadioButton->isChecked() ){
+				locationScalingLineEdit->setVisible(true);
+				location_scaling_label_2->setVisible(true);
 			}
 			else{
-				main_crava->locationScalingLineEdit->setVisible(false);
-				main_crava->location_scaling_label->setVisible(false);
-				QTreeWidgetItem* angleGather;
-				main_crava->findCorrectAngleGather(&angleGather);	
-				main_crava->setValueInAngleGather( angleGather, QString("location-scaling-coefficient"), QString("") );
+			       	locationScalingLineEdit->setVisible(false);
+				location_scaling_label_2->setVisible(false);
 			}
 
 			xCoordLineEdit->setText(main_crava->segy_format_location_xPointer->text(1));
@@ -141,7 +136,7 @@ void SettingsDialog::updateFields(){
 			maximumRelativeThicknessLineEdit->setText(main_crava->maximum_relative_thickness_differencePointer->text(1));
 
 			lowCutFrequencyBandLineEdit->setText(main_crava->frequency_band_low_cutPointer->text(1));
-			highCutFrequencyBandLineEdit->setText(main_crava->frequency_band_low_cutPointer->text(1));
+			highCutFrequencyBandLineEdit->setText(main_crava->frequency_band_high_cutPointer->text(1));
 		}
 		else{
 			fftPaddingLabel->setVisible(false);
@@ -154,6 +149,8 @@ void SettingsDialog::updateFields(){
 			diskStorageCheckBox->setVisible(false);
 			maximumRelativeThicknessLabel->setVisible(false);
 			maximumRelativeThicknessLineEdit->setVisible(false);
+			vpVsRatioLabel->setVisible(false);
+			vpVsRatioFrame->setVisible(false);
 			frequencyBandLabel->setVisible(false);
 			frequencyBandFrame->setVisible(false);
 			fftPaddingLabel->setEnabled(false);
@@ -166,10 +163,24 @@ void SettingsDialog::updateFields(){
 			diskStorageCheckBox->setEnabled(false);
 			maximumRelativeThicknessLabel->setEnabled(false);
 			maximumRelativeThicknessLineEdit->setEnabled(false);
+			vpVsRatioLabel->setEnabled(false);
+			vpVsRatioFrame->setEnabled(false);
 			frequencyBandLabel->setEnabled(false);
 			frequencyBandFrame->setEnabled(false);
 		}
 		//advanced-settings
+	       	if(main_crava->vp_vs_ratio_from_wellsPointer->text(1)==QString("yes")){
+		  vpVsEstimateWellRadioButton->setChecked(true);
+		  
+		}
+		else if(!main_crava->vp_vs_ratioPointer->text(1).isEmpty()){
+		  vpVsUserDefinedRadioButton->setChecked(true);
+		  vpVsUserDefinedLineEdit->setText(main_crava->vp_vs_ratioPointer->text(1));
+		}
+		else{
+		  vpVsEstimateBackgroundRadioButton->setChecked(true);
+		}
+		seismicResolutionLineEdit->setText(main_crava->high_cut_seismic_resolutionPointer->text(1));
 		energyTresholdLineEdit->setText(main_crava->energy_tresholdPointer->text(1));
 		waveletLengthLineEdit->setText(main_crava->wavelet_tapering_lengthPointer->text(1));
 		waveletRelativeMinimumLineEdit->setText(main_crava->minimum_relative_wavelet_amplitudePointer->text(1));
@@ -177,6 +188,7 @@ void SettingsDialog::updateFields(){
 		whiteNoiseLineEdit->setText(main_crava->white_noise_component_cutPointer->text(1));
 		reflectionMatrixLineEdit->setText(main_crava->reflection_matrixPointer->text(1));
 		krigingDataLineEdit->setText(main_crava->kriging_data_limitPointer->text(1));
+		guardZoneLineEdit->setText(main_crava->guard_zonePointer->text(1));
 		//not possible to set debug level
 		if(main_crava->smooth_kriged_parametersPointer->text(1)==QString("yes")){
 			krigedSmoothCheckBox->setChecked(true);
@@ -268,16 +280,31 @@ void SettingsDialog::updateSettings(){
 			main_crava->segy_format_location_ilPointer->setText(1,inlineLineEdit->text());
 			main_crava->segy_format_location_xlPointer->setText(1,crosslineLineEdit->text());
 			main_crava->segy_format_location_scaling_coefficientPointer->setText(1,locationScalingLineEdit->text());
-			QString bypass("");
+
 			if(bypassCoordinateYesRadioButton->isChecked()){
-				bypass=QString("yes");
+				main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,QString("yes"));
+				main_crava->segy_format_location_scaling_coefficientPointer->setText(1,QString(""));
 			}
-			else if(bypassCoordinateNoRadioButton->isChecked()){
-				bypass=QString("no");
+			else if(bypassCoordinateNoRadioButton->isChecked()){        
+			      	main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,QString("no"));;
 			}
-			main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,bypass);
+			else{
+			        main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,QString(""));
+				main_crava->segy_format_location_scaling_coefficientPointer->setText(1,QString(""));
+			}
+	
 			
 		}
+
+		if(!headerUserDefinedRadioButton->isChecked()){
+		        main_crava->segy_format_location_xPointer->setText(1,QString(""));
+			main_crava->segy_format_location_yPointer->setText(1,QString(""));
+			main_crava->segy_format_location_ilPointer->setText(1,QString(""));
+			main_crava->segy_format_location_xlPointer->setText(1,QString(""));
+			main_crava->segy_format_bypass_coordinate_scalingPointer->setText(1,QString(""));
+			main_crava->segy_format_location_scaling_coefficientPointer->setText(1,QString(""));
+		} 
+		
 		main_crava->segy_format_standard_formatPointer->setText(1,headerformat);
 		main_crava->well_output_rmsPointer->setText(1,StandardStrings::checkedString(rmsCheckBox->isChecked()));
 		main_crava->well_output_norsarPointer->setText(1,StandardStrings::checkedString(norsarWellCheckBox->isChecked()));
@@ -315,8 +342,21 @@ void SettingsDialog::updateSettings(){
 
 			main_crava->frequency_band_low_cutPointer->setText(1,lowCutFrequencyBandLineEdit->text());
 			main_crava->frequency_band_high_cutPointer->setText(1,highCutFrequencyBandLineEdit->text());
+		    	if(vpVsEstimateBackgroundRadioButton->isChecked()){
+			        main_crava->vp_vs_ratioPointer->setText(1,QString(""));
+				main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString(""));
+			}
+			else if(vpVsEstimateWellRadioButton->isChecked()){
+		                main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString("yes"));
+				main_crava->vp_vs_ratioPointer->setText(1,QString(""));
+			}
+			else{
+		                main_crava->vp_vs_ratioPointer->setText(1,vpVsUserDefinedLineEdit->text());
+				main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString(""));
+			}
 		}
 		//advanced-settings
+		main_crava->high_cut_seismic_resolutionPointer->setText(1,seismicResolutionLineEdit->text());
 		main_crava->energy_tresholdPointer->setText(1,energyTresholdLineEdit->text());
 		main_crava->wavelet_tapering_lengthPointer->setText(1,waveletLengthLineEdit->text());
 		main_crava->minimum_relative_wavelet_amplitudePointer->setText(1,waveletRelativeMinimumLineEdit->text());
@@ -326,6 +366,7 @@ void SettingsDialog::updateSettings(){
 			main_crava->reflection_matrixPointer->setText(1,standard->StandardStrings::relativeFileName(reflectionMatrixLineEdit->text()));
 		}
 		main_crava->kriging_data_limitPointer->setText(1,krigingDataLineEdit->text());
+		main_crava->guard_zonePointer->setText(1,guardZoneLineEdit->text());
 		//not possible to set debug level
 		if(krigedSmoothCheckBox->isChecked()){
 			checker=QString("yes");
@@ -365,28 +406,27 @@ void SettingsDialog::on_headerUserDefinedRadioButton_toggled(bool checked){
 	formatChangeFrame->setVisible(checked);
 	formatChangeFrame->setEnabled(checked);
 	if(checked){
-		bypassCoordinateEstimateRadioButton->setChecked(true);//might be better to check what is actually in the tree for better modibility
-		if ( bypassCoordinateYesRadioButton->isChecked() ){
-			main_crava->locationScalingLineEdit->setVisible(true);
-			main_crava->location_scaling_label->setVisible(true);
+		bypassCoordinateEstimateRadioButton->setChecked(main_crava->segy_format_bypass_coordinate_scalingPointer->text(1)=="");
+	        bypassCoordinateYesRadioButton->setChecked(main_crava->segy_format_bypass_coordinate_scalingPointer->text(1)=="yes");	
+	        bypassCoordinateNoRadioButton->setChecked(main_crava->segy_format_bypass_coordinate_scalingPointer->text(1)=="no");	
+							  
+		if ( bypassCoordinateNoRadioButton->isChecked() ){
+			locationScalingLineEdit->setVisible(true);
+			location_scaling_label_2->setVisible(true);
 		}
 		else{
-			main_crava->locationScalingLineEdit->setVisible(false);
-			QTreeWidgetItem* angleGather;
-			main_crava->findCorrectAngleGather(&angleGather);	
-			main_crava->setValueInAngleGather( angleGather, QString("location-scaling-coefficient"), QString("") );
-			main_crava->location_scaling_label->setVisible(false);
+			locationScalingLineEdit->setVisible(false);
+			location_scaling_label_2->setVisible(false);
 		}
 		xCoordLineEdit->setFocus();
-	}
-	else {
-		//clears the user defined settings if the button is deselectedAngel_label
-		QList<QLineEdit*> fields=formatChangeFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
-		foreach (QLineEdit* field, fields){
-			field->clear();
-		}
-	}
+        }
+
 	//should enable editing
+}
+
+void SettingsDialog::on_bypassCoordinateNoRadioButton_toggled(bool checked){
+	locationScalingLineEdit->setVisible(checked);
+	location_scaling_label_2->setVisible(checked);
 }
 
 void SettingsDialog::on_reflectionMatrixBrowsePushButton_clicked(){
@@ -396,21 +436,21 @@ void SettingsDialog::on_reflectionMatrixBrowsePushButton_clicked(){
 	}
 }
 void SettingsDialog::on_cravaPathBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Crava Executable"), standard->StandardStrings::inputPath(), QString("All files(*.*)"));//fix the file...
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Crava Executable"), standard->StandardStrings::inputPath(), QString("All files(*)"));//fix the file...
 	if(!fileName.isNull()){
 		cravaPathLineEdit->setText(fileName);
 	}
 }
 
 void SettingsDialog::on_textEditorBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("editor"), standard->StandardStrings::inputPath(), QString("All files(*.*)"));//fix the file...
+	QString fileName = QFileDialog::getOpenFileName(this, QString("editor"), standard->StandardStrings::inputPath(), QString("All files(*)"));//fix the file...
 	if(!fileName.isNull()){
 		textEditorLineEdit->setText(fileName);
 	}
 }
 
 void SettingsDialog::on_terminalPathBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Terminal"), standard->StandardStrings::inputPath(), QString("All files(*.*)"));//fix the file...
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Terminal"), standard->StandardStrings::inputPath(), QString("All files(*)"));//fix the file...
 	if(!fileName.isNull()){
 		terminalPathLineEdit->setText(fileName);
 	}
@@ -434,7 +474,7 @@ void SettingsDialog::on_manualPathBrowsePushButton_clicked(){
 	if(!fileName.isNull()){
 		manualPathLineEdit->setText(fileName);
 	}
-}
+ }
 
 void SettingsDialog::on_terminalCheckBox_toggled(bool checked){
 	terminalPathLineEdit->setEnabled(checked);
@@ -443,16 +483,18 @@ void SettingsDialog::on_terminalCheckBox_toggled(bool checked){
 }
 void SettingsDialog::on_segyCheckBox_toggled(bool checked){
 	if(!checked){
-		headerUserDefinedRadioButton->setChecked(true);
+		headerSeisWorksRadioButton->setChecked(true);
 		formatChangeFrame->setVisible(false);
 	}
-	else{
-		headerSeisWorksRadioButton->setChecked(true);
-	}
+
 	headerFormatLabel->setEnabled(checked);
 	headerSeisWorksRadioButton->setEnabled(checked);
 	headerIesxRadioButton->setEnabled(checked);
 	headerSipRadioButton->setEnabled(checked);
 	headerCharismaRadioButton->setEnabled(checked);
 	headerUserDefinedRadioButton->setEnabled(checked);
+}
+void SettingsDialog::on_vpVsUserDefinedRadioButton_toggled(bool checked){
+        vpVsUserDefinedLineEdit->setVisible(checked);
+        vpVsUserDefinedLineEdit->setEnabled(checked);
 }

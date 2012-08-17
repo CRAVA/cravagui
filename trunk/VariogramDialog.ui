@@ -1,8 +1,9 @@
-<ui version="4.0" >
- <author>Øystein Monsrud Arneson</author>
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Øystein Monsrud Arneson and Andreas B. Lindblad</author>
  <class>VariogramDialog</class>
- <widget class="QDialog" name="VariogramDialog" >
-  <property name="geometry" >
+ <widget class="QDialog" name="VariogramDialog">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -10,114 +11,142 @@
     <height>229</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Variogram</string>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
-   <property name="spacing" >
+  <layout class="QVBoxLayout">
+   <property name="spacing">
     <number>6</number>
    </property>
+   <property name="margin">
+    <number>9</number>
+   </property>
    <item>
-    <widget class="QLabel" name="variogramLabel" >
-     <property name="text" >
+    <widget class="QLabel" name="variogramLabel">
+     <property name="text">
       <string>Variogram</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" >
-     <property name="margin" >
+    <layout class="QGridLayout">
+     <property name="margin">
       <number>0</number>
      </property>
-     <property name="spacing" >
+     <property name="spacing">
       <number>6</number>
      </property>
-     <item row="0" column="0" >
-      <widget class="QRadioButton" name="genexpRadioButton" >
-       <property name="text" >
+     <item row="0" column="0">
+      <widget class="QRadioButton" name="genexpRadioButton">
+       <property name="toolTip">
+        <string>&lt;qt&gt;The variogram will be general exponential.</string>
+       </property>
+       <property name="text">
         <string>General exponential</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1" >
-      <widget class="QLineEdit" name="powerLineEdit" />
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="powerLineEdit">
+       <property name="toolTip">
+        <string>&lt;qt&gt;Value between 1 and 2 for the power of the general exponential variogram.</string>
+       </property>
+      </widget>
      </item>
-     <item row="3" column="1" >
-      <widget class="QLineEdit" name="normalRangeLineEdit" />
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="normalRangeLineEdit">
+       <property name="toolTip">
+        <string>&lt;qt&gt;Range normal to the azimuth direction.</string>
+       </property>
+      </widget>
      </item>
-     <item row="0" column="1" >
-      <widget class="QRadioButton" name="sphericalRadioButton" >
-       <property name="text" >
+     <item row="0" column="1">
+      <widget class="QRadioButton" name="sphericalRadioButton">
+       <property name="toolTip">
+        <string>&lt;qt&gt;The variogram will be spherical.</string>
+       </property>
+       <property name="text">
         <string>Spherical</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0" >
-      <widget class="QLabel" name="powerLabel" >
-       <property name="text" >
+     <item row="2" column="0">
+      <widget class="QLabel" name="powerLabel">
+       <property name="toolTip">
+        <string>&lt;qt&gt;Value between 1 and 2 for the power of the general exponential variogram.</string>
+       </property>
+       <property name="text">
         <string>Power</string>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>powerLineEdit</cstring>
        </property>
       </widget>
      </item>
-     <item row="3" column="0" >
-      <widget class="QLabel" name="normalRangeLabel" >
-       <property name="toolTip" >
-        <string>Range normal to the azimuth direction</string>
+     <item row="3" column="0">
+      <widget class="QLabel" name="normalRangeLabel">
+       <property name="toolTip">
+        <string>&lt;qt&gt;Range normal to the azimuth direction.</string>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Subrange</string>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>normalRangeLineEdit</cstring>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" >
-      <widget class="QLabel" name="rangeLabel" >
-       <property name="toolTip" >
-        <string>Range in the azimuth direction</string>
+     <item row="1" column="0">
+      <widget class="QLabel" name="rangeLabel">
+       <property name="toolTip">
+        <string>&lt;qt&gt;Range in the azimuth direction.</string>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Range</string>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>rangeLineEdit</cstring>
        </property>
       </widget>
      </item>
-     <item row="1" column="1" >
-      <widget class="QLineEdit" name="rangeLineEdit" />
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="rangeLineEdit">
+       <property name="toolTip">
+        <string>&lt;qt&gt;Range in the azimuth direction.</string>
+       </property>
+      </widget>
      </item>
-     <item row="4" column="0" >
-      <widget class="QLabel" name="angleLabel" >
-       <property name="text" >
+     <item row="4" column="0">
+      <widget class="QLabel" name="angleLabel">
+       <property name="toolTip">
+        <string>&lt;qt&gt;Value for the azimuth direction.</string>
+       </property>
+       <property name="text">
         <string>Angle</string>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>angleLineEdit</cstring>
        </property>
       </widget>
      </item>
-     <item row="4" column="1" >
-      <widget class="QLineEdit" name="angleLineEdit" />
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="angleLineEdit">
+       <property name="toolTip">
+        <string>&lt;qt&gt;Value for the azimuth direction.</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
    <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>297</width>
        <height>16</height>
@@ -126,12 +155,12 @@
     </spacer>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -146,7 +175,6 @@
   <tabstop>angleLineEdit</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <includes/>
  <resources/>
  <connections>
   <connection>
@@ -155,11 +183,11 @@
    <receiver>VariogramDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>

@@ -24,11 +24,9 @@
 #include <QSettings>
 #include "StandardStrings.h"
 
-#include <iostream>
-using namespace std;
 
 /**
-	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>
+	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
 ModeDialog::ModeDialog(Main_crava *main_crava, bool started, bool *pressedOpen, bool existing, QWidget *parent): QDialog(parent) {
 	this->hasPressedOpen = pressedOpen;
@@ -56,17 +54,15 @@ ModeDialog::ModeDialog(Main_crava *main_crava, bool started, bool *pressedOpen, 
 	seedCheckBox->setChecked(true);
 	frame->setVisible(false);
 	if (existing == true){
-		for (int i=0; i<modeDialogToolBox->count(); i++){
-			if ( modeDialogToolBox->itemText(i) == QString("Open previous project") ){
-				modeDialogToolBox->setItemEnabled(i, false);
-			}
-			if ( modeDialogToolBox->itemText(i) == QString("Make new project") ){
-				modeDialogToolBox->setItemText( i, QString("Mode") );
-			}
-		}
+	                oldProjectRadioButton->setEnabled(false);
+			oldProjectRadioButton->setVisible(false);
+		        newProjectRadioButton->setText(QString("Mode"));
+			newProjectRadioButton->setChecked(true);
+			on_oldProjectRadioButton_toggled(false);
 	}
 	else{
-		modeDialogToolBox->setCurrentWidget( modeDialogToolBox->widget(0) );
+	                oldProjectRadioButton->setChecked(true);
+			on_oldProjectRadioButton_toggled(true);
 	}
 	topDirectoryLineEdit->setText( main_crava->top_directoryPointer->text(1) );
 	inputDirectoryLineEdit->setText( main_crava->top_directoryPointer->text(1) + main_crava->input_directoryPointer->text(1) );
@@ -114,7 +110,6 @@ ModeDialog::ModeDialog(Main_crava *main_crava, bool started, bool *pressedOpen, 
 		}
 	}
 }
-
 
 void ModeDialog::modes(){
 	
@@ -223,6 +218,14 @@ void ModeDialog::modes(){
 	}
 }
 
+void ModeDialog::on_oldProjectRadioButton_toggled(bool checked){
+         oldProjectWidget->setVisible(checked);
+	 oldProjectWidget->setEnabled(checked);
+	 newProjectWidget->setVisible(!checked);
+	 newProjectWidget->setEnabled(!checked);
+	 newProjectRadioButton->setChecked(!checked);
+}
+
 void ModeDialog::on_simulationCheckBox_toggled(bool checked){
 	frame->setVisible(checked);
 	frame->setEnabled(checked);
@@ -238,7 +241,7 @@ void ModeDialog::on_seedCheckBox_toggled(bool checked){
 void ModeDialog::on_topDirectoryBrowsePushButton_clicked(){
 	QString dirName = QFileDialog::getExistingDirectory(this, QString("Open File"), QDir::currentPath());
 	if(!dirName.isNull()){
-		topDirectoryLineEdit->setText(dirName);
+		topDirectoryLineEdit->setText(dirName + QString("/"));
 	}
 }
 
@@ -258,10 +261,10 @@ void ModeDialog::on_openProjectBrowsePushButton_clicked(){
 }
 
 void ModeDialog::on_buttonBox_accepted(){
-	if ( modeDialogToolBox->itemText( modeDialogToolBox->currentIndex() ) == QString("Open previous project") ){
-		*(this->hasPressedOpen) = true; //if the "Open previous project" tab is open, hasPressedOpen will be true, and this will make the program load the project later on in the code.
+        if (oldProjectRadioButton->isChecked()){
+		*(this->hasPressedOpen) = true; //if the "Open previous project" radio button is checked, hasPressedOpen will be true, and this will make the program load the project later on in the code.
 	}
-	else if ( modeDialogToolBox->itemText( modeDialogToolBox->currentIndex() ) == QString("Make new project") ){ //check if the directories are valid.
+	else if (newProjectRadioButton->isChecked()){ //check if the directories are valid.
 		//if the folders exist, ok, otherwise message box.
 		QDir topDirectory(topDirectoryLineEdit->text());
 		QDir inputDirectory(inputDirectoryLineEdit->text());
