@@ -22,6 +22,1956 @@
     <property name="spacing" >
      <number>6</number>
     </property>
+<item row="0" column="1">
+     <layout class="QVBoxLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QTreeWidget" name="xmlTreeWidget">
+        <property name="columnCount">
+         <number>2</number>
+        </property>
+        <column>
+         <property name="text">
+          <string>Commands</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Value</string>
+         </property>
+        </column>
+        <item>
+         <property name="text">
+          <string>crava</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <item>
+          <property name="text">
+           <string>actions</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <item>
+           <property name="text">
+            <string>mode</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>inversion-settings</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>prediction</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>simulation</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>seed</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>seed-file</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>number-of-simulations</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>kriging-to-wells</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>facies-probabilities</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>estimation-settings</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>estimate-background</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>estimate-correlations</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>estimate-wavelet-or-noise</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+         </item>
+         <item>
+          <property name="text">
+           <string>survey</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <item>
+           <property name="text">
+            <string>angular-correlation</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>variogram-type</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>angle</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>range</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>subrange</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>power</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>segy-start-time</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>wavelet-estimation-interval</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>top-surface-file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>base-surface-file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+         </item>
+         <item>
+          <property name="text">
+           <string>well-data</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <item>
+           <property name="text">
+            <string>log-names</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>time</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vp</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>dt</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vs</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>dts</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>density</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>facies</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>high-cut-seismic-resolution</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>allowed-parameter-values</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>minimum-vp</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-vp</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>minimum-vs</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-vs</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>minimum-density</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-density</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>minimum-variance-vp</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-variance-vp</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>minimum-variance-vs</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-variance-vs</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>minimum-variance-density</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-variance-density</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>minimum-vp-vs-ratio</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-vp-vs-ratio</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>maximum-deviation-angle</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>maximum-rank-correlation</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>maximum-merge-distance</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>maximum-offset</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>maximum-shift</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+         </item>
+         <item>
+          <property name="text">
+           <string>prior-model</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <item>
+           <property name="text">
+            <string>background</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>ai-file</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>si-file</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vp-vs-ratio-file</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vp-file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vs-file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>density-file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vp-constant</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vs-constant</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>density-constant</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>velocity-field</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>lateral-correlation</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>variogram-type</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>angle</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>range</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>subrange</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>power</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>high-cut-background-modelling</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>multizone-model</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>top-surface-file</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>top-surface-erosion-priority</string>
+             </property>
+            </item>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>earth-model</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>vp-file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vs-file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>density-file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ai-file</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>si-file</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vp-vs-ratio-file</string>
+            </property>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>local-wavelet</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>lateral-correlation</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>variogram-type</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>angle</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>range</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>subrange</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>power</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>lateral-correlation</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>variogram-type</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>angle</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>range</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>subrange</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>power</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>temporal-correlation</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>parameter-correlation</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>correlation-direction</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>facies-probabilities</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>use-vs</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>use-prediction</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>use-absolute-elastic-parameters</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>estimation-interval</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>top-surface-file</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>base-surface-file</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>prior-probabilities</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>uncertainty-level</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+         </item>
+         <item>
+          <property name="text">
+           <string>project-settings</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <item>
+           <property name="text">
+            <string>output-volume</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>interval-two-surfaces</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>top-surface</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>time-file</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>time-value</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>depth-file</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>base-surface</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>time-file</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>time-value</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>depth-file</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>number-of-layers</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>velocity-field</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>velocity-field-from-inversion</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>interval-one-surface</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>reference-surface</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>shift-to-interval-top</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>thickness</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>sample-density</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>area-from-surface</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>file-name</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>snap-to-seismic-data</string>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>utm-coordinates</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>reference-point-x</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>reference-point-y</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>length-x</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>length-y</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>sample-density-x</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>sample-density-y</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>angle</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>snap-to-seismic-data</string>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>inline-crossline-numbers</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>il-start</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>il-end</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>xl-start</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>xl-end</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>il-step</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>xl-step</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>time-to-depth-mapping-for-3d-wavelet</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>reference-depth</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>average-velocity</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>reference-time-surface</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>io-settings</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>top-directory</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>input-directory</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>output-directory</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>grid-output</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>domain</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>depth</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>time</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>format</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>segy-format</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <item>
+               <property name="text">
+                <string>standard-format</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>location-x</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>location-y</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>location-il</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>location-xl</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>bypass-coordinate-scaling</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>location-scaling-coefficient</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+             </item>
+             <item>
+              <property name="text">
+               <string>segy</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>storm</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>crava</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>sgri</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>ascii</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>elastic-parameters</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>vp</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>vs</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>density</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>lame-lambda</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>lame-mu</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>poisson-ratio</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>ai</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>si</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>vp-vs-ratio</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>murho</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>lambdarho</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>background</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>background-trend</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>seismic-data</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>original</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>synthetic</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>residuals</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>synthetic-residuals</string>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>other-parameters</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>facies-probabilities</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>facies-probabilities-with-undef</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>facies-likelihood</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>time-to-depth-velocity</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>extra-grids</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>correlations</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>seismic-quality-grid</string>
+              </property>
+             </item>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>well-output</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>format</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>rms</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>norsar</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>wells</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>blocked-wells</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>blocked-logs</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>wavelet-output</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>format</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <item>
+              <property name="text">
+               <string>jason</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>norsar</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>well-wavelets</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>global-wavelets</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>local-wavelets</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>other-output</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>extra-surfaces</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>prior-correlations</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>background-trend-1d</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>local-noise</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>rock-physics-distributions</string>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>file-output-prefix</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>log-level</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>advanced-settings</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <item>
+            <property name="text">
+             <string>fft-grid-padding</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>x-fraction</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>y-fraction</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>z-fraction</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>use-intermediate-disk-storage</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vp-vs-ratio</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>vp-vs-ratio-from-wells</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-relative-thickness-difference</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>frequency-band</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <item>
+             <property name="text">
+              <string>low-cut</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>high-cut</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </item>
+           <item>
+            <property name="text">
+             <string>energy-treshold</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>wavelet-tapering-length</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>minimum-relative-wavelet-amplitude</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>maximum-wavelet-shift</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>white-noise-component</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>reflection-matrix</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>kriging-data-limit</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>debug-level</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>smooth-kriged-parameters</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>guard-zone</string>
+            </property>
+           </item>
+          </item>
+         </item>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="writeXmlPushButton">
+          <property name="text">
+           <string>Run</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
     <item row="0" column="0" >
      <widget class="QTabWidget" name="tabWidget" >
       <property name="sizePolicy" >
@@ -6415,1866 +8365,6 @@ p, li { white-space: pre-wrap; }
        </layout>
       </widget>
      </widget>
-    </item>
-    <item row="0" column="1" >
-     <layout class="QVBoxLayout" >
-      <property name="margin" >
-       <number>0</number>
-      </property>
-      <property name="spacing" >
-       <number>6</number>
-      </property>
-      <item>
-       <widget class="QTreeWidget" name="xmlTreeWidget" >
-        <property name="columnCount" >
-         <number>2</number>
-        </property>
-        <column>
-         <property name="text" >
-          <string>Commands</string>
-         </property>
-        </column>
-        <column>
-         <property name="text" >
-          <string>Value</string>
-         </property>
-        </column>
-        <item>
-         <property name="text" >
-          <string>crava</string>
-         </property>
-         <property name="text" >
-          <string/>
-         </property>
-         <item>
-          <property name="text" >
-           <string>actions</string>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <item>
-           <property name="text" >
-            <string>mode</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>inversion-settings</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>prediction</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>simulation</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>seed</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>seed-file</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>number-of-simulations</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>kriging-to-wells</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>facies-probabilities</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>estimation-settings</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>estimate-background</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>estimate-correlations</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>estimate-wavelet-or-noise</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-         </item>
-         <item>
-          <property name="text" >
-           <string>survey</string>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <item>
-           <property name="text" >
-            <string>angular-correlation</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>variogram-type</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>angle</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>range</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>subrange</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>power</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>segy-start-time</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>wavelet-estimation-interval</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>top-surface-file</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>base-surface-file</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-         </item>
-         <item>
-          <property name="text" >
-           <string>well-data</string>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <item>
-           <property name="text" >
-            <string>log-names</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>time</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>vp</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>dt</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>vs</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>dts</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>density</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>facies</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>high-cut-seismic-resolution</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>allowed-parameter-values</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>minimum-vp</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-vp</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>minimum-vs</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-vs</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>minimum-density</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-density</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>minimum-variance-vp</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-variance-vp</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>minimum-variance-vs</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-variance-vs</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>minimum-variance-density</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-variance-density</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>minimum-vp-vs-ratio</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-vp-vs-ratio</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>maximum-deviation-angle</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>maximum-rank-correlation</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>maximum-merge-distance</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>maximum-offset</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>maximum-shift</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-         </item>
-         <item>
-          <property name="text" >
-           <string>prior-model</string>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <item>
-           <property name="text" >
-            <string>background</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>vp-file</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>vs-file</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>density-file</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>vp-constant</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>vs-constant</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>density-constant</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>velocity-field</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>lateral-correlation</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>variogram-type</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>angle</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>range</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>subrange</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>power</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>high-cut-background-modelling</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>earth-model</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>vp-file</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>vs-file</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>density-file</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>local-wavelet</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>lateral-correlation</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>variogram-type</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>angle</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>range</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>subrange</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>power</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>lateral-correlation</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>variogram-type</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>angle</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>range</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>subrange</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>power</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>temporal-correlation</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>parameter-correlation</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>correlation-direction</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>facies-probabilities</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>use-vs</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>use-prediction</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>use-absolute-elastic-parameters</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>estimation-interval</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>top-surface-file</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>base-surface-file</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>prior-probabilities</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>uncertainty-level</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-         </item>
-         <item>
-          <property name="text" >
-           <string>project-settings</string>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <item>
-           <property name="text" >
-            <string>output-volume</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>interval-two-surfaces</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>top-surface</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>time-file</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>time-value</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>depth-file</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-            <item>
-             <property name="text" >
-              <string>base-surface</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>time-file</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>time-value</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>depth-file</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-            <item>
-             <property name="text" >
-              <string>number-of-layers</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>velocity-field</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>velocity-field-from-inversion</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>interval-one-surface</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>reference-surface</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>shift-to-interval-top</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>thickness</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>sample-density</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>area-from-surface</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>file-name</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>utm-coordinates</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>reference-point-x</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>reference-point-y</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>length-x</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>length-y</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>sample-density-x</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>sample-density-y</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>angle</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>inline-crossline-numbers</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>il-start</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>il-end</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>xl-start</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>xl-end</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>il-step</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>xl-step</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>time-3D-mapping</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>reference-depth</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>average-velocity</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>reference-time-surface</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>io-settings</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>top-directory</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>input-directory</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>output-directory</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>grid-output</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>domain</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>depth</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>time</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-            <item>
-             <property name="text" >
-              <string>format</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>segy-format</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-              <item>
-               <property name="text" >
-                <string>standard-format</string>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>location-x</string>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>location-y</string>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>location-il</string>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>location-xl</string>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>bypass-coordinate-scaling</string>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>location-scaling-coefficient</string>
-               </property>
-               <property name="text" >
-                <string/>
-               </property>
-              </item>
-             </item>
-             <item>
-              <property name="text" >
-               <string>segy</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>storm</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>crava</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>sgri</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>ascii</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-            <item>
-             <property name="text" >
-              <string>elastic-parameters</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>vp</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>vs</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>density</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>lame-lambda</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>lame-mu</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>poisson-ratio</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>ai</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>si</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>vp-vs-ratio</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>murho</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>lambdarho</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>background</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>background-trend</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-            <item>
-             <property name="text" >
-              <string>seismic-data</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>original</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>synthetic</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>residuals</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-            <item>
-             <property name="text" >
-              <string>other-parameters</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>facies-probabilities</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>facies-probabilities-with-undef</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>time-to-depth-velocity</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>extra-grids</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>correlations</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>well-output</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>format</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>rms</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>norsar</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-            <item>
-             <property name="text" >
-              <string>wells</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>blocked-wells</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>blocked-logs</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>wavelet-output</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>format</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-             <item>
-              <property name="text" >
-               <string>jason</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>norsar</string>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </item>
-            </item>
-            <item>
-             <property name="text" >
-              <string>well-wavelets</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>global-wavelets</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>local-wavelets</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>other-output</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>extra-surfaces</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>prior-correlations</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>background-trend-1d</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>local-noise</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>file-output-prefix</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>log-level</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-          <item>
-           <property name="text" >
-            <string>advanced-settings</string>
-           </property>
-           <property name="text" >
-            <string/>
-           </property>
-           <item>
-            <property name="text" >
-             <string>fft-grid-padding</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>x-fraction</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>y-fraction</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>z-fraction</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>use-intermediate-disk-storage</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-relative-thickness-difference</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>frequency-band</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <item>
-             <property name="text" >
-              <string>low-cut</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>high-cut</string>
-             </property>
-             <property name="text" >
-              <string/>
-             </property>
-            </item>
-           </item>
-           <item>
-            <property name="text" >
-             <string>energy-treshold</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>wavelet-tapering-length</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>minimum-relative-wavelet-amplitude</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>maximum-wavelet-shift</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>white-noise-component</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>reflection-matrix</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>kriging-data-limit</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>debug-level</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>smooth-kriged-parameters</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-           </item>
-          </item>
-         </item>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
-        <property name="spacing" >
-         <number>6</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="writeXmlPushButton" >
-          <property name="text" >
-           <string>Run</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
     </item>
    </layout>
   </widget>
