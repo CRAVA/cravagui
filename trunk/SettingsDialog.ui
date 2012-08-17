@@ -1871,248 +1871,180 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="guiPage" >
-      <layout class="QGridLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item row="6" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
+     <widget class="QWidget" name="guiPage">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
+          </font>
          </property>
-         <property name="spacing" >
-          <number>6</number>
+         <property name="text">
+          <string>GUI settings</string>
          </property>
-         <item>
-          <widget class="QCheckBox" name="xmlTreeCheckBox" >
-           <property name="text" >
-            <string>Display XML tree</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
        </item>
-       <item row="5" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="manualPathLabel" >
-           <property name="text" >
-            <string>CRAVA manual path:</string>
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="cravaPathLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path of the CRAVA executable.</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <widget class="QLineEdit" name="manualPathLineEdit" />
-           </item>
-           <item>
-            <widget class="QPushButton" name="manualPathBrowsePushButton" >
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item row="4" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="wikiPathLabel" >
-           <property name="text" >
-            <string>CRAVA wiki path:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="wikiPathLineEdit" />
-         </item>
-        </layout>
-       </item>
-       <item row="3" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="terminalPathLabel" >
-           <property name="text" >
-            <string>Terminal application for running crava:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <widget class="QLineEdit" name="terminalPathLineEdit" />
-           </item>
-           <item>
-            <widget class="QPushButton" name="terminalPathBrowsePushButton" >
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="terminalCheckBox" >
-           <property name="text" >
-            <string>Run crava in terminal</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>Text Editor</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <widget class="QLineEdit" name="textEditorLineEdit" />
-           </item>
-           <item>
-            <widget class="QPushButton" name="textEditorBrowsePushButton" >
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="cravaPathLabel" >
-           <property name="text" >
+           <property name="text">
             <string>CRAVA executable path:</string>
            </property>
           </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="cravaPathLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path of the CRAVA executable.</string>
            </property>
-           <property name="spacing" >
-            <number>6</number>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="cravaPathBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path of the CRAVA executable.</string>
            </property>
-           <item>
-            <widget class="QLineEdit" name="cravaPathLineEdit" />
-           </item>
-           <item>
-            <widget class="QPushButton" name="cravaPathBrowsePushButton" >
-             <property name="text" >
-              <string>Browse...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Choose the text editor which is to be used.</string>
+           </property>
+           <property name="text">
+            <string>Text editor:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="textEditorLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Choose the text editor which is to be used.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="textEditorBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Choose the text editor which is to be used.</string>
+           </property>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="terminalCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt; Control whether CRAVA should run in the terminal or not.</string>
+           </property>
+           <property name="text">
+            <string>Run CRAVA in terminal</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="terminalPathLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
+           </property>
+           <property name="text">
+            <string>Terminal application:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="terminalPathLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QPushButton" name="terminalPathBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
+           </property>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="wikiPathLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA wiki page.</string>
+           </property>
+           <property name="text">
+            <string>CRAVA wiki path:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="wikiPathLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA wiki page.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="manualPathLabel">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA manual.</string>
+           </property>
+           <property name="text">
+            <string>CRAVA manual path:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="manualPathLineEdit">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA manual.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QPushButton" name="manualPathBrowsePushButton">
+           <property name="toolTip">
+            <string>&lt;qt&gt;The path to the CRAVA manual.</string>
+           </property>
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="xmlTreeCheckBox">
+           <property name="toolTip">
+            <string>&lt;qt&gt;Control whether the XML tree on the right side of the application should be turned on or off.</string>
+           </property>
+           <property name="text">
+            <string>Display XML tree</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
-       <item row="7" column="0" >
+       <item row="2" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>892</width>
            <height>381</height>
