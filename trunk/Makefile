@@ -49,25 +49,21 @@ SOURCES       = Main_crava.cpp \
 		Main.cpp \
 		VariogramDialog.cpp \
 		ModeDialog.cpp \
-		OutputDialog.cpp \
 		SettingsDialog.cpp \
 		StandardStrings.cpp moc_Main_crava.cpp \
 		moc_VariogramDialog.cpp \
 		moc_ModeDialog.cpp \
-		moc_OutputDialog.cpp \
 		moc_SettingsDialog.cpp \
 		qrc_cravaguiresources.cpp
 OBJECTS       = Main_crava.o \
 		Main.o \
 		VariogramDialog.o \
 		ModeDialog.o \
-		OutputDialog.o \
 		SettingsDialog.o \
 		StandardStrings.o \
 		moc_Main_crava.o \
 		moc_VariogramDialog.o \
 		moc_ModeDialog.o \
-		moc_OutputDialog.o \
 		moc_SettingsDialog.o \
 		qrc_cravaguiresources.o
 DIST          = /usr/lib64/qt4/mkspecs/common/unix.conf \
@@ -115,7 +111,7 @@ first: all
 
 all: Makefile $(TARGET)
 
-$(TARGET): ui_Main_crava.h ui_VariogramDialog.h ui_ModeDialog.h ui_OutputDialog.h ui_SettingsDialog.h $(OBJECTS)  
+$(TARGET): ui_Main_crava.h ui_VariogramDialog.h ui_ModeDialog.h ui_SettingsDialog.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: cravagui.pro  /usr/lib64/qt4/mkspecs/linux-g++-64/qmake.conf /usr/lib64/qt4/mkspecs/common/unix.conf \
@@ -162,7 +158,7 @@ qmake:  FORCE
 
 dist: 
 	@$(CHK_DIR_EXISTS) .tmp/cravagui1.0.0 || $(MKDIR) .tmp/cravagui1.0.0 
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/cravagui1.0.0/ && $(COPY_FILE) --parents Main_crava.h VariogramDialog.h ModeDialog.h OutputDialog.h SettingsDialog.h StandardStrings.h .tmp/cravagui1.0.0/ && $(COPY_FILE) --parents cravaguiresources.qrc .tmp/cravagui1.0.0/ && $(COPY_FILE) --parents Main_crava.cpp Main.cpp VariogramDialog.cpp ModeDialog.cpp OutputDialog.cpp SettingsDialog.cpp StandardStrings.cpp .tmp/cravagui1.0.0/ && $(COPY_FILE) --parents Main_crava.ui VariogramDialog.ui ModeDialog.ui OutputDialog.ui SettingsDialog.ui .tmp/cravagui1.0.0/ && (cd `dirname .tmp/cravagui1.0.0` && $(TAR) cravagui1.0.0.tar cravagui1.0.0 && $(COMPRESS) cravagui1.0.0.tar) && $(MOVE) `dirname .tmp/cravagui1.0.0`/cravagui1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/cravagui1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/cravagui1.0.0/ && $(COPY_FILE) --parents Main_crava.h VariogramDialog.h ModeDialog.h SettingsDialog.h StandardStrings.h .tmp/cravagui1.0.0/ && $(COPY_FILE) --parents cravaguiresources.qrc .tmp/cravagui1.0.0/ && $(COPY_FILE) --parents Main_crava.cpp Main.cpp VariogramDialog.cpp ModeDialog.cpp SettingsDialog.cpp StandardStrings.cpp .tmp/cravagui1.0.0/ && $(COPY_FILE) --parents Main_crava.ui VariogramDialog.ui ModeDialog.ui SettingsDialog.ui .tmp/cravagui1.0.0/ && (cd `dirname .tmp/cravagui1.0.0` && $(TAR) cravagui1.0.0.tar cravagui1.0.0 && $(COMPRESS) cravagui1.0.0.tar) && $(MOVE) `dirname .tmp/cravagui1.0.0`/cravagui1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/cravagui1.0.0
 
 
 yaccclean:
@@ -186,9 +182,9 @@ mocclean: compiler_moc_header_clean compiler_moc_source_clean
 
 mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
-compiler_moc_header_make_all: moc_Main_crava.cpp moc_VariogramDialog.cpp moc_ModeDialog.cpp moc_OutputDialog.cpp moc_SettingsDialog.cpp
+compiler_moc_header_make_all: moc_Main_crava.cpp moc_VariogramDialog.cpp moc_ModeDialog.cpp moc_SettingsDialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Main_crava.cpp moc_VariogramDialog.cpp moc_ModeDialog.cpp moc_OutputDialog.cpp moc_SettingsDialog.cpp
+	-$(DEL_FILE) moc_Main_crava.cpp moc_VariogramDialog.cpp moc_ModeDialog.cpp moc_SettingsDialog.cpp
 moc_Main_crava.cpp: StandardStrings.h \
 		ui_Main_crava.h \
 		Main_crava.h \
@@ -204,11 +200,6 @@ moc_ModeDialog.cpp: ui_ModeDialog.h \
 		ModeDialog.h \
 		/usr/lib64/qt4/bin/moc
 	/usr/lib64/qt4/bin/moc $(DEFINES) $(INCPATH) ModeDialog.h -o moc_ModeDialog.cpp
-
-moc_OutputDialog.cpp: ui_OutputDialog.h \
-		OutputDialog.h \
-		/usr/lib64/qt4/bin/moc
-	/usr/lib64/qt4/bin/moc $(DEFINES) $(INCPATH) OutputDialog.h -o moc_OutputDialog.cpp
 
 moc_SettingsDialog.cpp: ui_SettingsDialog.h \
 		StandardStrings.h \
@@ -234,9 +225,9 @@ compiler_image_collection_clean:
 	-$(DEL_FILE) qmake_image_collection.cpp
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_Main_crava.h ui_VariogramDialog.h ui_ModeDialog.h ui_OutputDialog.h ui_SettingsDialog.h
+compiler_uic_make_all: ui_Main_crava.h ui_VariogramDialog.h ui_ModeDialog.h ui_SettingsDialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_Main_crava.h ui_VariogramDialog.h ui_ModeDialog.h ui_OutputDialog.h ui_SettingsDialog.h
+	-$(DEL_FILE) ui_Main_crava.h ui_VariogramDialog.h ui_ModeDialog.h ui_SettingsDialog.h
 ui_Main_crava.h: Main_crava.ui
 	/usr/lib64/qt4/bin/uic Main_crava.ui -o ui_Main_crava.h
 
@@ -245,9 +236,6 @@ ui_VariogramDialog.h: VariogramDialog.ui
 
 ui_ModeDialog.h: ModeDialog.ui
 	/usr/lib64/qt4/bin/uic ModeDialog.ui -o ui_ModeDialog.h
-
-ui_OutputDialog.h: OutputDialog.ui
-	/usr/lib64/qt4/bin/uic OutputDialog.ui -o ui_OutputDialog.h
 
 ui_SettingsDialog.h: SettingsDialog.ui
 	/usr/lib64/qt4/bin/uic SettingsDialog.ui -o ui_SettingsDialog.h
@@ -264,9 +252,7 @@ Main_crava.o: Main_crava.cpp Main_crava.h \
 		ModeDialog.h \
 		ui_ModeDialog.h \
 		SettingsDialog.h \
-		ui_SettingsDialog.h \
-		OutputDialog.h \
-		ui_OutputDialog.h
+		ui_SettingsDialog \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Main_crava.o Main_crava.cpp
 
 Main.o: Main.cpp Main_crava.h \
@@ -283,11 +269,6 @@ ModeDialog.o: ModeDialog.cpp ModeDialog.h \
 		ui_ModeDialog.h \
 		StandardStrings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ModeDialog.o ModeDialog.cpp
-
-OutputDialog.o: OutputDialog.cpp OutputDialog.h \
-		ui_OutputDialog.h \
-		StandardStrings.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o OutputDialog.o OutputDialog.cpp
 
 SettingsDialog.o: SettingsDialog.cpp SettingsDialog.h \
 		ui_SettingsDialog.h \
@@ -307,9 +288,6 @@ moc_VariogramDialog.o: moc_VariogramDialog.cpp
 
 moc_ModeDialog.o: moc_ModeDialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ModeDialog.o moc_ModeDialog.cpp
-
-moc_OutputDialog.o: moc_OutputDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_OutputDialog.o moc_OutputDialog.cpp
 
 moc_SettingsDialog.o: moc_SettingsDialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_SettingsDialog.o moc_SettingsDialog.cpp
