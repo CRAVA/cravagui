@@ -24,14 +24,12 @@
 #include "VariogramDialog.h"
 #include "ModeDialog.h"
 #include "SettingsDialog.h"
-#include "OutputDialog.h"
 
-#include <iostream>
 #include <string>
-using namespace std;
+
 
 /**
-	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>
+	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
 Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) :QMainWindow(parent){
 
@@ -151,8 +149,15 @@ Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) 
 	xmlTreeWidget->resizeColumnToContents(1);
 	xmlTreeWidget->setMinimumWidth(xmlTreeWidget->columnWidth(0)+xmlTreeWidget->columnWidth(1));//makes the treewidget not have to scroll all the time.
 	tabWidget->setCurrentIndex(0);//survey information
+	toolBox->setCurrentIndex(1);
 
 	delete pressedOpen;
+	
+	QList<QObject*> fields = getNecessaryFields();
+	foreach(QObject* field, fields){
+	   field->installEventFilter(this);
+	}
+	if(stackListWidget->count()<1)	angleLineEdit->setStyleSheet("");
 }
 
 Main_crava::~Main_crava(){//qt automatically deletes all child widgets.
@@ -207,7 +212,7 @@ void Main_crava::setupButtonGroups(){
 	verticalInterval->addButton(topSurfaceRadioButton);
 	verticalInterval->addButton(baseSurfaceRadioButton);
 	verticalInterval->addButton(correlationSurfaceRadioButton);
-	verticalInterval->addButton(oneSufraceRadioButton);
+	verticalInterval->addButton(oneSurfaceRadioButton);
 	verticalInterval->addButton(constantInversionRadioButton);
 	QButtonGroup *lateralInterval = new QButtonGroup(horizonsTab);
 	lateralInterval->addButton(areaSeismicRadioButton);
@@ -215,15 +220,21 @@ void Main_crava::setupButtonGroups(){
 	lateralInterval->addButton(areaUtmRadioButton);
 	lateralInterval->addButton(areaInCrossRadioButton);
 	//prior model
-	QButtonGroup *vpPrior = new QButtonGroup(backgroundGivenFrame);
-	vpPrior->addButton(vpConstantRadioButton);
-	vpPrior->addButton(vpFileRadioButton);
-	QButtonGroup *vsPrior = new QButtonGroup(backgroundGivenFrame);
-	vsPrior->addButton(vsConstantRadioButton);
-	vsPrior->addButton(vsFileRadioButton); 
-	QButtonGroup *densityPrior = new QButtonGroup(backgroundGivenFrame);
-	densityPrior->addButton(densityConstantRadioButton);
-	densityPrior->addButton(densityFileRadioButton);
+	QButtonGroup *vp1Prior = new QButtonGroup(vpVsRhoFrame);
+	vp1Prior->addButton(vpConstant1RadioButton);
+	vp1Prior->addButton(vpFile1RadioButton);
+	QButtonGroup *vs1Prior = new QButtonGroup(vpVsRhoFrame);
+	vs1Prior->addButton(vsConstant1RadioButton);
+	vs1Prior->addButton(vsFile1RadioButton); 
+	QButtonGroup *density1Prior = new QButtonGroup(vpVsRhoFrame);
+	density1Prior->addButton(densityConstant1RadioButton);
+	density1Prior->addButton(densityFile1RadioButton);
+	QButtonGroup *density2Prior = new QButtonGroup(aiVpVsRhoFrame);
+	density2Prior->addButton(densityConstant2RadioButton);
+	density2Prior->addButton(densityFile2RadioButton);
+	QButtonGroup *density3Prior = new QButtonGroup(aiSiRhoFrame);
+	density3Prior->addButton(densityConstant3RadioButton);
+	density3Prior->addButton(densityFile3RadioButton);
 	//QCheckBox:checked:disabled{}; checked and disabled buttons shows as not checked. This is a bug in Qt, using a newer version to compile would fix it
 	absoluteParametersCheckBox->setVisible(false);//Not wanted functionlity?
 	absoluteParametersCheckBox->setEnabled(false);//Not wanted functionlity?
@@ -301,6 +312,9 @@ void Main_crava::readSettings(){
 	if(!forwardMode()){
 		settings.beginGroup(advanced_settingsPointer->text(0));//advanced-settings
 		if(estimationMode()){
+		        vp_vs_ratioPointer->setText(1,settings.value(vp_vs_ratioPointer->text(0),QString("")).toString());
+			vp_vs_ratio_from_wellsPointer->setText(1,settings.value(vp_vs_ratio_from_wellsPointer->text(0),QString("")).toString());
+			high_cut_seismic_resolutionPointer->setText(1,settings.value(high_cut_seismic_resolutionPointer->text(0),QString("")).toString());
 			energy_tresholdPointer->setText(1,settings.value(energy_tresholdPointer->text(0),QString("")).toString());
 			wavelet_tapering_lengthPointer->setText(1,settings.value(wavelet_tapering_lengthPointer->text(0),QString("")).toString());
 			minimum_relative_wavelet_amplitudePointer->setText(1,settings.value(minimum_relative_wavelet_amplitudePointer->text(0),QString("")).toString());
@@ -308,6 +322,7 @@ void Main_crava::readSettings(){
 			white_noise_component_cutPointer->setText(1,settings.value(white_noise_component_cutPointer->text(0),QString("")).toString());
 			//reflection matrix should not be written, relative path...
 			kriging_data_limitPointer->setText(1,settings.value(kriging_data_limitPointer->text(0),QString("")).toString());
+		       	guard_zonePointer->setText(1,settings.value(guard_zonePointer->text(0),QString("")).toString());
 			debug_levelPointer->setText(1,settings.value(debug_levelPointer->text(0),QString("")).toString());
 			smooth_kriged_parametersPointer->setText(1,settings.value(smooth_kriged_parametersPointer->text(0),QString("")).toString());
 		}
@@ -316,9 +331,12 @@ void Main_crava::readSettings(){
 			y_fractionPointer->setText(1,settings.value(y_fractionPointer->text(0),QString("")).toString());
 			z_fractionPointer->setText(1,settings.value(z_fractionPointer->text(0),QString("")).toString());
 			use_intermediate_disk_storagePointer->setText(1,settings.value(use_intermediate_disk_storagePointer->text(0),QString("")).toString());
+		        vp_vs_ratioPointer->setText(1,settings.value(vp_vs_ratioPointer->text(0),QString("")).toString());
+			vp_vs_ratio_from_wellsPointer->setText(1,settings.value(vp_vs_ratio_from_wellsPointer->text(0),QString("")).toString());
 			maximum_relative_thickness_differencePointer->setText(1,settings.value(maximum_relative_thickness_differencePointer->text(0),QString("")).toString());
 			frequency_band_low_cutPointer->setText(1,settings.value(frequency_band_low_cutPointer->text(0),QString("")).toString());
 			frequency_band_high_cutPointer->setText(1,settings.value(frequency_band_high_cutPointer->text(0),QString("")).toString());
+			high_cut_seismic_resolutionPointer->setText(1,settings.value(high_cut_seismic_resolutionPointer->text(0),QString("")).toString());
 			energy_tresholdPointer->setText(1,settings.value(energy_tresholdPointer->text(0),QString("")).toString());
 			wavelet_tapering_lengthPointer->setText(1,settings.value(wavelet_tapering_lengthPointer->text(0),QString("")).toString());
 			minimum_relative_wavelet_amplitudePointer->setText(1,settings.value(minimum_relative_wavelet_amplitudePointer->text(0),QString("")).toString());
@@ -326,6 +344,7 @@ void Main_crava::readSettings(){
 			white_noise_component_cutPointer->setText(1,settings.value(white_noise_component_cutPointer->text(0),QString("")).toString());
 			//reflection matrix should not be written, relative path...
 			kriging_data_limitPointer->setText(1,settings.value(kriging_data_limitPointer->text(0),QString("")).toString());
+		       	guard_zonePointer->setText(1,settings.value(guard_zonePointer->text(0),QString("")).toString());
 			debug_levelPointer->setText(1,settings.value(debug_levelPointer->text(0),QString("")).toString());
 			smooth_kriged_parametersPointer->setText(1,settings.value(smooth_kriged_parametersPointer->text(0),QString("")).toString());
 		}
@@ -395,6 +414,9 @@ void Main_crava::writeSettings(){
 	if(!forwardMode()){
 		settings.beginGroup(advanced_settingsPointer->text(0));//advanced-settings
 		if(estimationMode()){
+		        settings.setValue(vp_vs_ratioPointer->text(0),vp_vs_ratioPointer->text(1));
+			settings.setValue(vp_vs_ratio_from_wellsPointer->text(0),vp_vs_ratio_from_wellsPointer->text(1));
+			settings.setValue(high_cut_seismic_resolutionPointer->text(0),high_cut_seismic_resolutionPointer->text(1));
 			settings.setValue(energy_tresholdPointer->text(0),energy_tresholdPointer->text(1));
 			settings.setValue(wavelet_tapering_lengthPointer->text(0),wavelet_tapering_lengthPointer->text(1));
 			settings.setValue(minimum_relative_wavelet_amplitudePointer->text(0),minimum_relative_wavelet_amplitudePointer->text(1));
@@ -402,6 +424,7 @@ void Main_crava::writeSettings(){
 			settings.setValue(white_noise_component_cutPointer->text(0),white_noise_component_cutPointer->text(1));
 			//reflection matrix should not be written, relative path...
 			settings.setValue(kriging_data_limitPointer->text(0),kriging_data_limitPointer->text(1));
+		       	settings.setValue(guard_zonePointer->text(0),guard_zonePointer->text(1));
 			settings.setValue(debug_levelPointer->text(0),debug_levelPointer->text(1));
 			settings.setValue(smooth_kriged_parametersPointer->text(0),smooth_kriged_parametersPointer->text(1));
 		}
@@ -410,9 +433,12 @@ void Main_crava::writeSettings(){
 			settings.setValue(y_fractionPointer->text(0),y_fractionPointer->text(1));
 			settings.setValue(z_fractionPointer->text(0),z_fractionPointer->text(1));
 			settings.setValue(use_intermediate_disk_storagePointer->text(0),use_intermediate_disk_storagePointer->text(1));
+			settings.setValue(vp_vs_ratioPointer->text(0),vp_vs_ratioPointer->text(1));
+			settings.setValue(vp_vs_ratio_from_wellsPointer->text(0),vp_vs_ratio_from_wellsPointer->text(1));
 			settings.setValue(maximum_relative_thickness_differencePointer->text(0),maximum_relative_thickness_differencePointer->text(1));
 			settings.setValue(frequency_band_low_cutPointer->text(0),frequency_band_low_cutPointer->text(1));
 			settings.setValue(frequency_band_high_cutPointer->text(0),frequency_band_high_cutPointer->text(1));
+		       	settings.setValue(high_cut_seismic_resolutionPointer->text(0),high_cut_seismic_resolutionPointer->text(1));
 			settings.setValue(energy_tresholdPointer->text(0),energy_tresholdPointer->text(1));
 			settings.setValue(wavelet_tapering_lengthPointer->text(0),wavelet_tapering_lengthPointer->text(1));
 			settings.setValue(minimum_relative_wavelet_amplitudePointer->text(0),minimum_relative_wavelet_amplitudePointer->text(1));
@@ -420,6 +446,7 @@ void Main_crava::writeSettings(){
 			settings.setValue(white_noise_component_cutPointer->text(0),white_noise_component_cutPointer->text(1));
 			//reflection matrix should not be written, relative path...
 			settings.setValue(kriging_data_limitPointer->text(0),kriging_data_limitPointer->text(1));
+		       	settings.setValue(guard_zonePointer->text(0),guard_zonePointer->text(1));
 			settings.setValue(debug_levelPointer->text(0),debug_levelPointer->text(1));
 			settings.setValue(smooth_kriged_parametersPointer->text(0),smooth_kriged_parametersPointer->text(1));
 		}
@@ -472,8 +499,6 @@ void Main_crava::updateGuiToTree(){
 		vsRadioButton->setChecked(true);
 		vsLineEdit->setText(log_names_vsPointer->text(1));
 	}
-	//the wells themselves handled by the list handler
-	seismicResolutionLineEdit->setText(high_cut_seismic_resolutionPointer->text(1));
 
 	//the huge nested ifs check which vertical inversion interval frames should be visible.
 	if((!top_surface_time_valuePointer->text(1).isEmpty()) ||
@@ -481,15 +506,15 @@ void Main_crava::updateGuiToTree(){
 		constantInversionRadioButton->setChecked(true);
 		topTimeValueLineEdit->setText(top_surface_time_valuePointer->text(1));
 		bottomTimeValueLineEdit->setText(base_surface_time_valuePointer->text(1));
-		on_oneSufraceRadioButton_toggled(false);
+		on_oneSurfaceRadioButton_toggled(false);
 	}
 	else if((!(interval_one_surface_reference_surfacePointer->text(1).isEmpty())) ||
 			 (!(interval_one_surface_shift_to_interval_topPointer->text(1).isEmpty() )) ||
 			 (!(interval_one_surface_thicknessPointer->text(1).isEmpty())) ||
 			 (!(interval_one_surface_sample_densityPointer->text(1).isEmpty()))){
 			on_constantInversionRadioButton_toggled(false);
-			oneSufraceRadioButton->setChecked(true);
-			referenceSurfaceLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
+			oneSurfaceRadioButton->setChecked(true);
+			referenceSurfaceFileLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
 			distanceTopLineEdit->setText(interval_one_surface_shift_to_interval_topPointer->text(1));
 			thicknessLineEdit->setText(interval_one_surface_thicknessPointer->text(1));
 			layerThicknessLineEdit->setText(interval_one_surface_sample_densityPointer->text(1));
@@ -509,7 +534,7 @@ void Main_crava::updateGuiToTree(){
 			on_depthSurfacesCheckBox_toggled(false);//this should work by default...
 		}
 		//the depth is checked first because it is cleared if the other buttons are checked..
-		on_oneSufraceRadioButton_toggled(false);
+		on_oneSurfaceRadioButton_toggled(false);
 		on_constantInversionRadioButton_toggled(false);
 		if(top_surface_time_filePointer->text(1).isEmpty()){//top
 			if(base_surface_time_filePointer->text(1).isEmpty()){
@@ -538,78 +563,106 @@ void Main_crava::updateGuiToTree(){
 		velocityFieldNoneRadioButton->setChecked(true);
 	}
 	//prior-model
-	bool estimateBackground=true;
-	//loop over the given parameters
-	if(!background_vp_filePointer->text(1).isEmpty()){
-		estimateBackground=false;
+	//zone list is handled by the reading of the tree
+
+	if(zoneListWidget->count()>1 || !background_top_surface_filePointer->text(1).isEmpty() || !background_top_surface_erosion_priorityPointer->text(1).isEmpty()){ //checks if the multizone background model radio button should be checked.
+	        multizoneBackgroundRadioButton->setChecked(true);
+		topSurfaceFileLineEdit->setText(background_top_surface_filePointer->text(1));
+		topPrioritySpinBox->setValue(background_top_surface_erosion_priorityPointer->text(1).toInt());
 	}
-	if(!background_vs_filePointer->text(1).isEmpty()){
-		estimateBackground=false;
+	else if(background_vs_filePointer->text(1).isEmpty() && background_vp_filePointer->text(1).isEmpty() && background_density_filePointer->text(1).isEmpty() && background_ai_filePointer->text(1).isEmpty() && background_si_filePointer->text(1).isEmpty() && background_vp_vs_ratio_filePointer->text(1).isEmpty() && background_vp_constantPointer->text(1).isEmpty() && background_vs_constantPointer->text(1).isEmpty() && background_density_constantPointer->text(1).isEmpty()){//checks whether the estimate background model radio button should be checked or not.	
+
+	  estimateBackgroundRadioButton->setChecked(true);
+	  if(background_velocity_fieldPointer->text(1).isEmpty() && background_high_cut_background_modellingPointer->text(1).isEmpty()){
+	    backgroundEstimatedConfigurationCheckBox->setChecked(false);
+	    velocityFieldLabel->setVisible(false);
+	    velocityFieldPriorFileLineEdit->setVisible(false);
+	    velocityFieldPriorFileBrowsePushButton->setVisible(false);
+	    lateralCorrelationLabel->setVisible(false);
+	    lateralCorrelationBackgroundPushButton->setVisible(false);
+	    highCutFrequencyLabel->setVisible(false);
+	    highCutFrequencyLineEdit->setVisible(false);
+	    hzLabel->setVisible(false);
+	  }
+	  else{
+	    backgroundEstimatedConfigurationCheckBox->setChecked(true);
+	    velocityFieldPriorFileLineEdit->setText(background_velocity_fieldPointer->text(1));
+	    highCutFrequencyLineEdit->setText(background_high_cut_background_modellingPointer->text(1));
+	  }
+	  
 	}
-	if(!background_density_filePointer->text(1).isEmpty()){
-		estimateBackground=false;
+	else{
+	  backgroundRadioButton->setChecked(true);
+	  if(!background_vp_filePointer->text(1).isEmpty()){
+	    vpVsRhoRadioButton->setChecked(true);
+	    vpFile1RadioButton->setChecked(true);
+	    vpFile1LineEdit->setText(background_vp_filePointer->text(1));
+	  }
+	  else if(!background_vp_constantPointer->text(1).isEmpty()){
+	    vpVsRhoRadioButton->setChecked(true);
+	    vpConstant1RadioButton->setChecked(true);
+	    vpConstant1LineEdit->setText(background_vp_constantPointer->text(1));
+	  }
+	  if(!background_vs_filePointer->text(1).isEmpty()){
+	    vpVsRhoRadioButton->setChecked(true);
+	    vsFile1RadioButton->setChecked(true);
+	    vsFile1LineEdit->setText(background_vs_filePointer->text(1));
+	  }
+	  else if(!background_vs_constantPointer->text(1).isEmpty()){
+	    vpVsRhoRadioButton->setChecked(true);
+	    vsConstant1RadioButton->setChecked(true);
+	    vsConstant1LineEdit->setText(background_vs_constantPointer->text(1));
+	  }
+	  if(!background_vp_vs_ratio_filePointer->text(1).isEmpty()){
+	    aiVpVsRhoRadioButton->setChecked(true);
+	    vpVsFile2LineEdit->setText(background_vp_vs_ratio_filePointer->text(1));
+	  }
+	  if(!background_si_filePointer->text(1).isEmpty()){
+	    aiSiRhoRadioButton->setChecked(true);
+	    siFile3LineEdit->setText(background_si_filePointer->text(1));
+	  }
+	  if(!background_ai_filePointer->text(1).isEmpty()){
+	    if(aiSiRhoRadioButton->isChecked()){
+	      aiFile3LineEdit->setText(background_ai_filePointer->text(1));
+	    }
+	    else{
+	      aiVpVsRhoRadioButton->setChecked(true);
+	      aiFile2LineEdit->setText(background_ai_filePointer->text(1));
+	    }
+	  }
+	  if(!background_density_filePointer->text(1).isEmpty()){
+	    if(aiSiRhoRadioButton->isChecked()){
+	      densityFile3RadioButton->setChecked(true);
+	      densityFile3LineEdit->setText(background_density_filePointer->text(1));	
+	    }
+	    else if(aiVpVsRhoRadioButton->isChecked()){
+	      densityFile2RadioButton->setChecked(true);
+	      densityFile2LineEdit->setText(background_density_filePointer->text(1));
+	    }
+	    else{
+	      vpVsRhoRadioButton->setChecked(true);
+	      densityFile1RadioButton->setChecked(true);
+	      densityFile1LineEdit->setText(background_density_filePointer->text(1));
+	    }
+	  }
+	  else if(!background_density_constantPointer->text(1).isEmpty()){
+	    if(aiSiRhoRadioButton->isChecked()){
+	      densityConstant3RadioButton->setChecked(true);
+	      densityConstant3LineEdit->setText(background_density_constantPointer->text(1));
+	    }
+	    else if(aiVpVsRhoRadioButton->isChecked()){
+	      densityConstant2RadioButton->setChecked(true);
+	      densityConstant2LineEdit->setText(background_density_constantPointer->text(1));
+	    }
+	    else{
+	      vpVsRhoRadioButton->setChecked(true);
+	      densityConstant1RadioButton->setChecked(true);
+	      densityConstant1LineEdit->setText(background_density_constantPointer->text(1));
+	    }
+	  }
 	}
-	if(!background_vp_constantPointer->text(1).isEmpty()){
-		estimateBackground=false;
-	}
-	if(!background_vs_constantPointer->text(1).isEmpty()){
-		estimateBackground=false;
-	}
-	if(!background_density_constantPointer->text(1).isEmpty()){
-		estimateBackground=false;
-	}
-	if(estimateBackground){//default
-		velocityFieldPriorFileLineEdit->setText(background_velocity_fieldPointer->text(1));
-		//variogram is handled by the variogram dialog
-		highCutFrequencyLineEdit->setText(background_high_cut_background_modellingPointer->text(1));
-		bool configure=false;
-		//if any of the parameters for estimated background have been given, display the input posibilities.
-		for(int j=0;j<background_lateral_correlationPointer->childCount();j++){
-			if(!background_lateral_correlationPointer->child(j)->text(1).isEmpty()){
-				configure=true;
-				break;
-			}
-		}
-		if(!background_velocity_fieldPointer->text(1).isEmpty()){
-			configure=true;
-		}
-		if(!background_high_cut_background_modellingPointer->text(1).isEmpty()){
-			configure=true;
-		}
-		backgroundEstimatedConfigurationCheckBox->setChecked(configure);
-		on_backgroundEstimatedConfigurationCheckBox_toggled(configure);
-	}
-	else {//background given
-		if(!background_vp_constantPointer->text(1).isEmpty()){//file or constant
-			vpConstantRadioButton->setChecked(true);
-			vpConstantLineEdit->setText(background_vp_constantPointer->text(1));
-			on_vpFileRadioButton_toggled(false);
-		}
-		else{//default
-			vpFileRadioButton->setChecked(true);
-			vpFileLineEdit->setText(background_vp_filePointer->text(1));
-		}
-		if(!background_vs_constantPointer->text(1).isEmpty()){//file or constant
-			vsConstantRadioButton->setChecked(true);
-			vsConstantLineEdit->setText(background_vs_constantPointer->text(1));
-			on_vsFileRadioButton_toggled(false);
-		}
-		else{//default
-			vsFileRadioButton->setChecked(true);
-			vsFileLineEdit->setText(background_vs_filePointer->text(1));
-		}
-		if(!background_density_constantPointer->text(1).isEmpty()){//file or constant
-			densityConstantRadioButton->setChecked(true);
-			densityConstantLineEdit->setText(background_density_constantPointer->text(1));
-			on_densityFileRadioButton_toggled(false);
-		}
-		else{//default
-			densityFileRadioButton->setChecked(true);
-			densityFileLineEdit->setText(background_density_filePointer->text(1));
-		}
-		on_backgroundModelCheckBox_toggled(false);
-	}
-	backgroundModelCheckBox->setChecked(estimateBackground);//makes sure the correct widgets are displayed.
+	  
+	 
 	//correlation variograms handled by the appropriate dialogs, the checkboxes must be handled.
 	bool modified=false;
 	for(int i=0;i<local_wavelet_lateral_correlationPointer->childCount();++i){//local wavelet variogram background
@@ -635,7 +688,7 @@ void Main_crava::updateGuiToTree(){
 	on_correlationElasticParametersCheckBox_toggled(modified);
 	if(!correlation_directionPointer->text(1).isEmpty()){//correlation-direction
 		correlationSurfaceRadioButton->setChecked(true);
-		correlationDirectionLineEdit->setText(correlation_directionPointer->text(1));
+		correlationDirectionFileLineEdit->setText(correlation_directionPointer->text(1));
 	}
 	else{
 		on_correlationSurfaceRadioButton_toggled(false); // hide the inputs if the button is not checked.
@@ -659,22 +712,48 @@ void Main_crava::updateGuiToTree(){
 		faciesBottomLineEdit->setText(facies_probabilities_base_surface_filePointer->text(1));
 		uncertaintyLevelLineEdit->setText(uncertainty_levelPointer->text(1));
 	}
-	earthVpFileLineEdit->setText(earth_model_vp_filePointer->text(1));//earth model
-	earthVsFileLineEdit->setText(earth_model_vs_filePointer->text(1));//earth model
-	earthDensityFileLineEdit->setText(earth_model_density_filePointer->text(1));//earth model
+       	if(!earth_model_vp_filePointer->text(1).isEmpty()){
+	        vpComboBox->setCurrentIndex(0);
+	        earthVpAiLineEdit->setText(earth_model_vp_filePointer->text(1));//earth model
+        }
+        else if(!earth_model_ai_filePointer->text(1).isEmpty()){
+	        vpComboBox->setCurrentIndex(1);
+	        earthVpAiLineEdit->setText(earth_model_ai_filePointer->text(1));//earth model
+	}
+	else{
+	  	vpComboBox->setCurrentIndex(0);
+	}
+	if(!earth_model_vs_filePointer->text(1).isEmpty()){
+	        vsComboBox->setCurrentIndex(0);
+	        earthVsSiVpVsLineEdit->setText(earth_model_vs_filePointer->text(1));//earth model
+        }
+        else if(!earth_model_si_filePointer->text(1).isEmpty()){
+	        vsComboBox->setCurrentIndex(1);
+	        earthVsSiVpVsLineEdit->setText(earth_model_si_filePointer->text(1));//earth model
+	}
+	else if(!earth_model_vp_vs_ratio_filePointer->text(1).isEmpty()){
+	        vsComboBox->setCurrentIndex(2);
+	        earthVsSiVpVsLineEdit->setText(earth_model_vp_vs_ratio_filePointer->text(1));//earth model
+	}
+	else{
+	        vsComboBox->setCurrentIndex(0);
+	}
+        densityComboBox->setCurrentIndex(0);
+	earthDensityLineEdit->setText(earth_model_density_filePointer->text(1));//earth model
 	//project-settings inversion-area
 	//ifs check which frames should be visible.
 	//output-volume
-	if(!area_from_surface_file_namePointer->text(1).isEmpty()){//area-from-surface
+	if(!area_from_surface_file_namePointer->text(1).isEmpty() || area_from_surface_snap_to_seismic_dataPointer->text(1)==QString("yes")){//area-from-surface
 		areaFileRadioButton->setChecked(true);
 		areaSurfaceLineEdit->setText(area_from_surface_file_namePointer->text(1));
+		surfaceSnapCheckBox->setChecked(StandardStrings::checkedBool(area_from_surface_snap_to_seismic_dataPointer->text(1)));
 		on_areaUtmRadioButton_toggled(false);
 		on_areaInCrossRadioButton_toggled(false);
 	}
 	else if(!utm_coordinates_reference_point_xPointer->text(1).isEmpty() || !utm_coordinates_reference_point_yPointer->text(1).isEmpty() 
 	|| !utm_coordinates_length_xPointer->text(1).isEmpty() || !utm_coordinates_length_yPointer->text(1).isEmpty()
 	|| !utm_coordinates_sample_density_xPointer->text(1).isEmpty() || !utm_coordinates_sample_density_yPointer->text(1).isEmpty()
-	|| !utm_coordinates_anglePointer->text(1).isEmpty()){//utm-coordinates
+	|| !utm_coordinates_anglePointer->text(1).isEmpty() || utm_coordinates_snap_to_seismic_dataPointer->text(1)==QString("yes")){//utm-coordinates
 		areaUtmRadioButton->setChecked(true);
 		on_areaInCrossRadioButton_toggled(false);
 		on_areaFileRadioButton_toggled(false);
@@ -684,7 +763,8 @@ void Main_crava::updateGuiToTree(){
 		areaYLengthLineEdit->setText(utm_coordinates_length_yPointer->text(1));
 		areaXSampleDensityLineEdit->setText(utm_coordinates_sample_density_xPointer->text(1));
 		areaYSampleDensityLineEdit->setText(utm_coordinates_sample_density_yPointer->text(1));
-		areaUtmAngleLabelineEdit->setText(utm_coordinates_anglePointer->text(1));
+		areaUtmAngleLineEdit->setText(utm_coordinates_anglePointer->text(1));
+		utmSnapCheckBox->setChecked(StandardStrings::checkedBool(utm_coordinates_snap_to_seismic_dataPointer->text(1)));
 	}//inline-crossline-numbers
 	else if(!il_startPointer->text(1).isEmpty() || !il_endPointer->text(1).isEmpty() 
 	|| !xl_startPointer->text(1).isEmpty() || !xl_endPointer->text(1).isEmpty()
@@ -702,6 +782,77 @@ void Main_crava::updateGuiToTree(){
 	else {//default is to use area from seismic
 		areaSeismicRadioButton->setChecked(true);
 	}
+       	//Everything in the output-tab
+	if((!forwardMode())&&(!estimationMode())){
+	        toolBox->setVisible(true);
+		toolBox->setEnabled(true);
+		oDomainDepthCheckBox->setChecked(StandardStrings::checkedBool(grid_output_depthPointer->text(1)));//depth
+		oDomainTimeCheckBox->setChecked(StandardStrings::checkedBool(grid_output_timePointer->text(1),QString("yes")));//time
+
+		oSeismicOriginalCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_originalPointer->text(1)));//original
+		oSeismicSyntheticCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_syntheticPointer->text(1)));//synthetic
+		oSeismicResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_residualsPointer->text(1)));//residual
+		oSeismicSyntheticResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_synthetic_residualsPointer->text(1)));//synthetic residual
+
+		oVpCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vpPointer->text(1),QString("yes")));//vp
+		oVsCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vsPointer->text(1),QString("yes")));//vs
+		oDensityCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_densityPointer->text(1),QString("yes")));//density
+		oLameLamCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_lame_lambdaPointer->text(1)));//lame-lambda
+		oLameMuCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_lame_muPointer->text(1)));//lame-mu
+		oPoissonRatioCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_poisson_ratioPointer->text(1)));//poisson-ratio
+		oAiCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_aiPointer->text(1)));//ai
+		oSiCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_siPointer->text(1)));//si
+		oVpVsRatioCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vp_vs_ratioPointer->text(1)));//vp-vs-ratio
+		oLambdaRhoCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_murhoPointer->text(1)));//murho
+		oMuRhoCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_lambdarhoPointer->text(1)));//lambdarho
+		oBackgroundCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_backgroundPointer->text(1)));//background
+		oBackgroundTrendCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_background_trendPointer->text(1)));//background-trend
+
+		if(faciesProbabilitiesOn()){
+		        oFaciesProbabilitiesCheckBox->setChecked(StandardStrings::checkedBool(grid_output_facies_probabilitiesPointer->text(1),QString("yes")));
+			oFaciesProbabilitiesUndefinedCheckBox->setChecked(StandardStrings::checkedBool(grid_output_facies_probabilities_with_undefPointer->text(1)));//facies-probabilities-with-undefined
+			oFaciesLikelihoodCheckBox->setChecked(StandardStrings::checkedBool(grid_output_facies_likelihoodPointer->text(1)));//facies-likelihood
+			oFaciesQualityGridCheckBox->setChecked(StandardStrings::checkedBool(grid_output_seismic_quality_gridPointer->text(1)));//seismic-quality grid
+			oRockPhysicsCheckBox->setChecked(StandardStrings::checkedBool(io_settings_rock_physics_distributionsPointer->text(1)));//rock-physics-distributions
+		}
+		else{
+			oFaciesProbabilitiesCheckBox->setVisible(false);
+			oFaciesProbabilitiesUndefinedCheckBox->setVisible(false);
+			oFaciesLikelihoodCheckBox->setVisible(false);
+			oFaciesQualityGridCheckBox->setVisible(false);
+			oRockPhysicsCheckBox->setVisible(false);
+			oFaciesProbabilitiesCheckBox->setEnabled(false);
+			oFaciesProbabilitiesUndefinedCheckBox->setEnabled(false);
+			oFaciesLikelihoodCheckBox->setEnabled(false);
+		       	oFaciesQualityGridCheckBox->setEnabled(false);
+			oRockPhysicsCheckBox->setEnabled(false);
+		}
+		oTimeDepthCheckBox->setChecked(StandardStrings::checkedBool(grid_output_time_to_depth_velocityPointer->text(1)));//time-to-depth-velocity
+		oExtraGridsCheckBox->setChecked(StandardStrings::checkedBool(grid_output_extra_gridsPointer->text(1)));//extra-grids
+		oCorrelationsCheckBox->setChecked(StandardStrings::checkedBool(grid_output_correlationsPointer->text(1)));//correlations
+
+		//well-output
+		oWellCheckBox->setChecked(StandardStrings::checkedBool(well_output_wellsPointer->text(1)));//wells
+		oBlockedWellCheckBox->setChecked(StandardStrings::checkedBool(well_output_blocked_wellsPointer->text(1)));//blocked-wells
+		//blocke-logs does nothing atm
+
+		//wavelet-output
+		oWaveletWellCheckBox->setChecked(StandardStrings::checkedBool(wavelet_output_well_waveletsPointer->text(1)));//well-wavelets
+		oWaveletGlobalCheckBox->setChecked(StandardStrings::checkedBool(wavelet_output_global_waveletsPointer->text(1)));//global-wavelets
+		oWaveletLocalCheckBox->setChecked(StandardStrings::checkedBool(wavelet_output_local_waveletsPointer->text(1)));//local-wavelets
+		//other-output
+		//extra surface...
+		oPriorCorrelationCheckBox->setChecked(StandardStrings::checkedBool(io_settings_prior_correlationsPointer->text(1)));//prior-correlations
+		oBackgroundTrend1DCheckBox->setChecked(StandardStrings::checkedBool(io_settings_background_trend_1dPointer->text(1)));//background-trend-1d
+		oLocalNoiseCheckBox->setChecked(StandardStrings::checkedBool(io_settings_local_noisePointer->text(1)));//local-noise
+	}
+	else{
+		toolBox->setVisible(false);
+		toolBox->setEnabled(false);
+	}
+	oPrefixLineEdit->setText(io_settings_file_output_prefixPointer->text(1) );//file-output-prefix
+	oOutputDirectoryLineEdit->setText(top_directoryPointer->text(1)+output_directoryPointer->text(1));
+       	necessaryFieldGui();
 }
 
 void Main_crava::on_aboutAction_triggered(){
@@ -805,6 +956,7 @@ void Main_crava::on_newAction_triggered(){//opens in a new window
 
 bool Main_crava::saveFile(const QString &fileName){
 	if(!writeXmlFromTree(fileName, xmlTreeWidget)){
+	  	statusBar()->showMessage("Saved " + StandardStrings::strippedName(currentFile()),2000);
 		return false;//saving failed
 	}
 	else {
@@ -820,22 +972,34 @@ void Main_crava::setCurrentFile(const QString &fileName){
 	QString showName = QString("untitled");
 	if (standard->StandardStrings::fileExists(currentFile())&&(!currentFile().isEmpty())){
 		showName = StandardStrings::strippedName(currentFile());
+       		oXmlFilenameLineEdit->setText(showName.remove(showName.lastIndexOf(".xml"),4));
 	}
 	setWindowTitle(QString("%1[*] - %2").arg(showName).arg(StandardStrings::cravaVersion()));//update the titlebar
 	setWindowModified(false);
 }
 
 bool Main_crava::on_saveAction_triggered(){
-	if (currentFile().isEmpty()) {
+        QString string = oXmlFilenameLineEdit->text();
+        if (string.isEmpty()) {
 		return on_saveAsAction_triggered();//trigger saveAsAction
 	} else {
-		return saveFile(currentFile());
+                if(string.endsWith(".xml")){
+	              string.remove(string.lastIndexOf(".xml"),4);
+          	}
+	        QString sep = "/";
+	        if(output_directoryPointer->text(1).isEmpty()) sep = "";
+	        return saveFile(top_directoryPointer->text(1) + output_directoryPointer->text(1) + sep + oXmlFilenameLineEdit->text() + QString(".xml"));
 	}
 }
 bool Main_crava::on_saveAsAction_triggered(){
-	QString fileName = QFileDialog::getSaveFileName(this, QString("Save File"), standard->StandardStrings::inputPath(), StandardStrings::xmlFormat());
+  QString fileName = QFileDialog::getSaveFileName(this, QString("Save File"),top_directoryPointer->text(1)+output_directoryPointer->text(1), StandardStrings::xmlFormat());
 	if(!fileName.isNull()){
+	   if(fileName.endsWith(".xml")){
 		return saveFile(fileName);
+	   }
+	   else{
+	        return saveFile(fileName + QString(".xml"));
+	   }
 	}
 	return false;
 }
@@ -862,24 +1026,17 @@ bool Main_crava::okToCloseCurrent(){//makes the program prompt for save on exit
 	}
 		return true;
 }
-bool Main_crava::on_outputAction_triggered(){
-	QString *xmlFilename = new QString; 
-	QPointer<OutputDialog> output = new OutputDialog(this, xmlFilename, this, faciesProbabilitiesOn(),forwardMode(),estimationMode());
-	if(output->exec()){
-		output->updateOutput();//updates the tree
-		output->updateXmlName();
-		QSettings settings("Statoil","CRAVA");
-		settings.beginGroup("crava");
-		settings.beginGroup("GUI");
-		settings.setValue(QString("xmlName"), *xmlFilename);
-		settings.endGroup();
-		settings.endGroup();
-		delete output;
-		return true;
-	}
-	delete output;
-	delete xmlFilename;
-	return false;
+bool Main_crava::okToRun(){//makes the program prompt for save on run crava
+	if (isWindowModified()) {//checks if window is modified isWindowModified()
+		int r = QMessageBox::warning(this, QString("Save"), QString("The document has been modified.\nPlease save in order to run CRAVA!"),
+						QMessageBox::Save | QMessageBox::Cancel);
+		if (r == QMessageBox::Save) {
+			return on_saveAction_triggered();
+		} 
+		else if (r == QMessageBox::Cancel) {
+			return false;
+		}
+	} 
 }
 void Main_crava::on_settingsAction_triggered(){
 
@@ -998,19 +1155,48 @@ bool Main_crava::mode(bool started, bool *pressedOpen, bool existing, QString &f
 
 void Main_crava::estimationGui(){
 	if(estimationMode()){
-		//project-settings
-		//clear io-settings elastic parameters except background and background-trend
-		elastic_parameters_vpPointer->setText(1,QString(""));
-		elastic_parameters_vsPointer->setText(1,QString(""));
-		elastic_parameters_densityPointer->setText(1,QString(""));
-		elastic_parameters_lame_lambdaPointer->setText(1,QString(""));
-		elastic_parameters_lame_muPointer->setText(1,QString(""));
-		elastic_parameters_poisson_ratioPointer->setText(1,QString(""));
-		elastic_parameters_aiPointer->setText(1,QString(""));
-		elastic_parameters_siPointer->setText(1,QString(""));
-		elastic_parameters_vp_vs_ratioPointer->setText(1,QString(""));
-		elastic_parameters_murhoPointer->setText(1,QString(""));
-		elastic_parameters_lambdarhoPointer->setText(1,QString(""));
+	        QList<QCheckBox*> outputs=toolBox->QObject::findChildren<QCheckBox*>();
+		foreach (QCheckBox* output, outputs){
+			output->setChecked(false);
+		}
+
+	  	//project-settings
+		for(int j=0; j<grid_output_seismic_dataPointer->childCount(); ++j){
+			grid_output_seismic_dataPointer->child(j)->setText(1,QString(""));
+		}
+
+
+		for(int j=0; j<grid_output_domainPointer->childCount(); ++j){
+			grid_output_domainPointer->child(j)->setText(1,QString(""));
+		}
+
+		for(int j=0; j<elastic_parametersPointer->childCount(); ++j){
+			elastic_parametersPointer->child(j)->setText(1,QString(""));
+		}
+
+		for(int j=0; j<grid_output_other_parametersPointer->childCount(); ++j){
+			grid_output_other_parametersPointer->child(j)->setText(1,QString(""));
+		}
+
+		//clear io-settings well, wavelet and other
+		for(int j=0;j<well_outputPointer->childCount();++j){
+			well_outputPointer->child(j)->setText(1,QString(""));
+			for(int k=0;k<well_outputPointer->child(j)->childCount();++k){
+				well_outputPointer->child(j)->child(k)->setText(1,QString(""));
+			}
+		}
+		for(int j=0;j<wavelet_outputPointer->childCount();++j){
+			wavelet_outputPointer->child(j)->setText(1,QString(""));
+			for(int k=0;k<wavelet_outputPointer->child(j)->childCount();++k){
+				wavelet_outputPointer->child(j)->child(k)->setText(1,QString(""));
+			}
+		}
+		for(int j=0;j<io_settings_other_outputPointer->childCount();++j){
+			io_settings_other_outputPointer->child(j)->setText(1,QString(""));
+			for(int k=0;k<io_settings_other_outputPointer->child(j)->childCount();++k){
+				io_settings_other_outputPointer->child(j)->child(k)->setText(1,QString(""));
+			}
+		}
 
 		//clear advanced settings, up to energy-treshold
 		x_fractionPointer->setText(1,QString(""));
@@ -1020,9 +1206,22 @@ void Main_crava::estimationGui(){
 		maximum_relative_thickness_differencePointer->setText(1,QString(""));
 		frequency_band_low_cutPointer->setText(1,QString(""));
 		frequency_band_high_cutPointer->setText(1,QString(""));
+		vp_vs_ratioPointer->setText(1,QString(""));
+		vp_vs_ratioPointer->setText(1,QString(""));
+
+		toolBox->setVisible(false);
+		toolBox->setEnabled(false);
+
+	       	if(stackListWidget->count()<1)	angleLineEdit->setStyleSheet("");
 	}
 	else{
 		readSettings();//restore settings
+      		if(!forwardMode()){
+		  updateGuiToTree();
+		  toolBox->setVisible(true);
+		  toolBox->setEnabled(true);
+		}
+	
 	}
 	
 }
@@ -1047,10 +1246,24 @@ void Main_crava::forwardGui(){
 		}
 		seismicAngelLabel->setVisible(true);
 		angleLineEdit->setVisible(true);
-		waveletFileLabel->setVisible(true);
-		waveletFileLineEdit->setVisible(true);
-		waveletBrowsePushButton->setVisible(true);
+	       	if(stackListWidget->count()<1)	angleLineEdit->setStyleSheet("");
+	       	QTreeWidgetItem *angleGather;
+		findCorrectAngleGather(&angleGather);
 		waveletFrame->setVisible(true);
+		waveletWidget->setVisible(true);
+		waveletLabel->setVisible(true);
+		waveletFileRadioButton->setVisible(true);
+	       	rickerRadioButton->setVisible(true);
+		QString val;
+		getValueFromAngleGather(angleGather,QString("ricker"),val);
+		if(val.isEmpty()){
+		     waveletFileLineEdit->setVisible(true);
+		     waveletBrowsePushButton->setVisible(true);
+		}
+		else{
+		     rickerLineEdit->setVisible(true);
+		}
+	
 		QTreeWidgetItem * item=surveyPointer;//survey
 		for(int i=0;i<survey_angular_correlationPointer->childCount();++i){
 			survey_angular_correlationPointer->child(i)->setText(1,QString(""));//angular-correlation
@@ -1091,10 +1304,19 @@ void Main_crava::forwardGui(){
 			item->child(i)->setText(1,QString(""));
 		}
 
+		QList<QCheckBox*>outputs=toolBox->QObject::findChildren<QCheckBox*>();
+		foreach (QCheckBox* output, outputs){
+		         output->setChecked(false);
+		}
 		//project-settings
 		for(int j=0;j<segy_formatPointer->childCount();++j){ //clear only segy-format
 			segy_formatPointer->child(j)->setText(1,QString(""));
 		}
+		
+		for(int j=0; j<grid_output_seismic_dataPointer->childCount(); ++j){
+			grid_output_seismic_dataPointer->child(j)->setText(1,QString(""));
+		}
+
 
 		for(int j=0; j<grid_output_domainPointer->childCount(); ++j){
 			grid_output_domainPointer->child(j)->setText(1,QString(""));
@@ -1134,8 +1356,10 @@ void Main_crava::forwardGui(){
 			}
 			advanced_settingsPointer->child(i)->setText(1,QString(""));
 		}
-		tabWidget->addTab(earthModelTab,QString("Earth Model"));
+		tabWidget->insertTab(tabWidget->count()-2,earthModelTab,QString("Earth Model"));
 		tabWidget->setCurrentIndex(0);
+		toolBox->setVisible(false);
+		toolBox->setEnabled(false);
 	}
 	else{
 		tabWidget->removeTab(tabWidget->indexOf(earthModelTab));
@@ -1165,6 +1389,8 @@ void Main_crava::forwardGui(){
 		foreach (QLineEdit* field, fields){
 			field->setVisible(true);
 		}
+
+       		on_waveletFileRadioButton_toggled(waveletFileRadioButton->isChecked());
 		on_manualScaleRadioButton_toggled(manualScaleRadioButton->isChecked());
 		on_signalToNoiseCheckBox_toggled(signalToNoiseCheckBox->isChecked());
 		on_shiftLocalWaveletCheckBox_toggled(shiftLocalWaveletCheckBox->isChecked());
@@ -1178,7 +1404,10 @@ void Main_crava::forwardGui(){
 			field->clear();
 		}
 		readSettings();//updates with the settings that were removed
+		if(!forwardMode()) updateGuiToTree();
 	}
+       	scaleWidget->setVisible(!forwardMode());
+	scaleWidget->setEnabled(!forwardMode());
 	tabWidget->setTabEnabled(tabWidget->indexOf(wellsTab),!forwardMode());//wellsTab, can't hide them without removing
 	tabWidget->setTabEnabled(tabWidget->indexOf(priorModelTab),!forwardMode());//Prior model tab
 	waveletIntervalLabel->setVisible(!forwardMode());
@@ -1238,6 +1467,16 @@ void Main_crava::faciesGui(){
 	faciesFormatLabel->setEnabled(faciesProbabilitiesOn());
 	faciesLineEdit->setEnabled(faciesProbabilitiesOn());
 	faciesProbabilitiesCheckBox->setEnabled(faciesProbabilitiesOn());
+       	oFaciesProbabilitiesCheckBox->setVisible(faciesProbabilitiesOn());
+	oFaciesProbabilitiesUndefinedCheckBox->setVisible(faciesProbabilitiesOn());
+	oFaciesLikelihoodCheckBox->setVisible(faciesProbabilitiesOn());
+	oFaciesQualityGridCheckBox->setVisible(faciesProbabilitiesOn());
+	oRockPhysicsCheckBox->setVisible(faciesProbabilitiesOn());
+	oFaciesProbabilitiesCheckBox->setEnabled(faciesProbabilitiesOn());
+	oFaciesProbabilitiesUndefinedCheckBox->setEnabled(faciesProbabilitiesOn());
+	oFaciesLikelihoodCheckBox->setEnabled(faciesProbabilitiesOn());
+	oFaciesQualityGridCheckBox->setEnabled(faciesProbabilitiesOn());
+	oRockPhysicsCheckBox->setEnabled(faciesProbabilitiesOn());
 	if(faciesProbabilitiesOn()){
 		updateGuiToTree();//updates the gui with whatever values(default), are in the tree
 	}
@@ -1257,6 +1496,9 @@ void Main_crava::faciesGui(){
 
 		grid_output_facies_probabilitiesPointer->setText(1,QString(""));
 		grid_output_facies_probabilities_with_undefPointer->setText(1,QString(""));
+		grid_output_facies_likelihoodPointer->setText(1,QString(""));
+		grid_output_seismic_quality_gridPointer->setText(1,QString(""));
+		io_settings_rock_physics_distributionsPointer->setText(1,QString(""));
 		faciesGivenFrame->setEnabled(false);
 		faciesGivenFrame->setVisible(false);
 	}
@@ -1373,19 +1615,23 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 	}
 	QTreeWidgetItem* treeChild;
 	while(!xmlChild.isNull()){
-		//since there can be multiple angle-gather, wells, optimize positions and facies as well as variograms...
+		//since there can be multiple angle-gather, wells, optimize positions, zones and facies as well as variograms...
 		//these checks could all cause trouble if the names are changed
 		if(xmlChild.toElement().tagName() == QString("angle-gather")){
 			//angle gathers are not in the tree already and needs to be added before they can be populated
-			stackListWidget->addItem( QString("angle gather") );
+		        stackListWidget->addItem( QString("angle-gather") );
 			addStack();
 			recursiveXmlRead(xmlChild,treeItem->child(1+stackListWidget->count()));
 			stackListWidget->setCurrentRow(stackListWidget->count()-1);
-			if(!forwardMode()){
-				seismicFile(seismicFileLineEdit->text());//this is already set by the above line, but this makes sure the names in the list are correct.
+			if(forwardMode()){
+			  on_angleLineEdit_editingFinished();
 			}
 			else{
-				on_angleLineEdit_editingFinished();
+			  QTreeWidgetItem *angleGather;
+			  findCorrectAngleGather(&angleGather);
+			  QString name;
+			  getValueFromAngleGather(angleGather,QString("file-name"),name,QString("seismic-data"));
+			  stackListWidget->currentItem()->setText(name);
 			}
 		}
 		else if(xmlChild.toElement().tagName() == QString("well")&& (xmlItem.toElement().tagName()==QString("well-data"))){
@@ -1395,7 +1641,6 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			wellListWidget->setCurrentRow(wellListWidget->count()-1);
 			recursiveXmlRead(xmlChild,treeItem->child(wellListWidget->count()));
 			on_wellListWidget_currentRowChanged(wellListWidget->currentRow());
-			wellFile(wellFileLineEdit->text());//fixes name in list
 		}
 		else if(xmlChild.toElement().tagName() == QString("optimize-position")){
 			//optimized positions are no in the tree already and needs to be added before they can be populated
@@ -1403,6 +1648,14 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			optimizePositionListWidget->addItem(QString("optimization"));
 			addOptimizePosition();
 			recursiveXmlRead(xmlChild,treeItem->child(5+optimizePositionListWidget->count()));
+		}
+	     	else if(xmlChild.toElement().tagName() == QString("zone")){
+		        multizoneBackgroundRadioButton->setChecked(true);
+			zoneListWidget->addItem(QString("zone " + QString::number(zoneListWidget->count()+1)));
+			addZone();
+			zoneListWidget->setCurrentRow(zoneListWidget->count()-1);
+			recursiveXmlRead(xmlChild,treeItem->child(1+zoneListWidget->count()));
+			on_zoneListWidget_currentRowChanged(zoneListWidget->currentRow());
 		}
 		else if( (xmlChild.toElement().tagName() == QString("facies")) && (xmlItem.toElement().tagName() == QString("prior-probabilities")) ){
 			//facies are no in the tree already and needs to be added before they can be populated
@@ -1535,6 +1788,8 @@ void Main_crava::addStack(){
 			nestedChild = new QTreeWidgetItem(child);
 			nestedChild->setText(0,QString("file-name"));
 			nestedChild = new QTreeWidgetItem(child);
+		       	nestedChild->setText(0,QString("ricker"));
+			nestedChild = new QTreeWidgetItem(child);
 			nestedChild->setText(0,QString("scale"));
 			nestedChild = new QTreeWidgetItem(child);
 			nestedChild->setText(0,QString("estimate-scale"));
@@ -1596,6 +1851,44 @@ void Main_crava::addOptimizePosition(){
 		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("weight"));
 }
+void Main_crava::insertZone(){
+  //the strings make it obvious what items are inserted. this creates all the needed children.
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+
+	int childNumber = zone->parent()->indexOfChild(zone);
+
+        QString label = QString("zone");
+	QTreeWidgetItem* parent = background_multizone_modelPointer;//move to the parent
+	QTreeWidgetItem* precedingItem = background_multizone_modelPointer->child(childNumber-1);//which node will it precede.
+	QTreeWidgetItem* item = new QTreeWidgetItem(parent,precedingItem);//insert another zone
+
+	item->setText(0,label);
+                QTreeWidgetItem* child = new QTreeWidgetItem(item);
+		child->setText(0,QString("base-surface-file"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("erosion-priority"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("correlation-structure"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("surface-uncertainty"));
+}
+
+void Main_crava::addZone(){
+  //the strings make it obvious what items are added. this creates all the needed children.
+        QString label = QString("zone");
+	QTreeWidgetItem* parent = background_multizone_modelPointer;//move to the parent
+	QTreeWidgetItem* item = new QTreeWidgetItem(parent);//insert another zone
+	item->setText(0,label);
+                QTreeWidgetItem* child = new QTreeWidgetItem(item);
+		child->setText(0,QString("base-surface-file"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("erosion-priority"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("correlation-structure"));
+		child = new QTreeWidgetItem(item);
+		child->setText(0,QString("surface-uncertainty"));
+}
 
 void Main_crava::addFacies(){
 	//the strings makes it obvious what items are added. this creates all the needed children.
@@ -1611,28 +1904,15 @@ void Main_crava::addFacies(){
 		child->setText(0,QString("probability-cube"));
 }
 
-
-void Main_crava::on_tabWidget_currentChanged(QWidget *tab){//this functionality is not really needed and it messes with tabbing around.
-	/*if(tab==surveyInformationTab){
-		defaultStartTimeLineEdit->setFocus();
-	}
-	else if(tab==wellsTab){
-		timeLineEdit->setFocus();
-	}
-	else if(tab==horizonsTab){
-		twoSurfaceRadioButton->setFocus();
-	}
-	else if(tab==priorModelTab){
-		backgroundModelCheckBox->setFocus();
-	}*/
-}
-
 void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 	//survey=1 angle-gather = 2+stackListWidget->currentRow()
 	if(currentRow == -1){
 		seismicDataFrame->setEnabled(false);
 		deleteStackPushButton->setEnabled(false);
 		applyToAllStacksPushButton->setEnabled(false);
+		seismicDataFrame->setEnabled(false);
+		waveletFrame->setVisible(false);
+		angleLineEdit->setStyleSheet("");
 		return;
 	}
 
@@ -1651,7 +1931,6 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 			QString angleGatherFileName;
 			getValueFromAngleGather( item, QString("file-name"), angleGatherFileName, QString("seismic-data") );
 			//move to file-name
-			seismicFileLineEdit->setText(angleGatherFileName);//sets the correct file-name
 			seismicNameLabel->setText(StandardStrings::strippedName(angleGatherFileName));
 			//move to start-time
 			QString startTime;
@@ -1753,18 +2032,28 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 				getValueFromAngleGather( item, QString("estimate-scale"), localWaveletEstimateScale, QString("local-wavelet") ); //local-wavelet is the parent
 				//QString eScale=QString(nestedChildChild->text(1));
 			//move to file-name
-			QString waveletFileName;
+		       	QString waveletFileName;
 			getValueFromAngleGather(item, QString("file-name"), waveletFileName, QString("wavelet") ); //wavelet is the parent 
-			if(waveletFileName.isEmpty()){
-				estimateWaveCheckBox->setChecked(true);
-				fileScaleRadioButton->setChecked(true);
+			QString rickerPeakFrequency;
+			getValueFromAngleGather(item, QString("ricker"), rickerPeakFrequency);
+			if(waveletFileName.isEmpty() && rickerPeakFrequency.isEmpty()){
+			        estimateWaveCheckBox->setChecked(true);
+				on_waveletFileRadioButton_toggled(true);
 			}
 			else {
 				estimateWaveCheckBox->setChecked(false);//have to change when changed to checkbox
-				waveletFileLineEdit->setText(waveletFileName);
 				waveletFrame->setVisible(true);
 				waveletFrame->setEnabled(true);
-
+				if(!waveletFileName.isEmpty()){
+				       waveletFileLineEdit->setText(waveletFileName);
+				       waveletFileRadioButton->setChecked(true);
+				       on_waveletFileRadioButton_toggled(true);
+				}
+				else if(!rickerPeakFrequency.isEmpty()){
+				       rickerLineEdit->setText(rickerPeakFrequency);
+				       rickerRadioButton->setChecked(true);
+				       on_waveletFileRadioButton_toggled(false);
+				}
 				QString scale;
 				getValueFromAngleGather(item, QString("scale"), scale);
 				//move to scale
@@ -1819,16 +2108,37 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 				on_shiftLocalWaveletCheckBox_toggled(shiftLocalWaveletCheckBox->isChecked());
 				on_scaleLocalWaveletCheckBox_toggled(scaleLocalWaveletCheckBox->isChecked());
 				if(forwardMode()){
-					waveletFileLabel->setVisible(true);
-					waveletFileLineEdit->setVisible(true);
+					
+				        waveletLabel->setVisible(true);
+					waveletWidget->setVisible(true);
+				       	waveletFileRadioButton->setVisible(true);
 					waveletBrowsePushButton->setVisible(true);
+					rickerRadioButton->setVisible(true);
 					waveletFrame->setVisible(true);
-					waveletFileLabel->setVisible(true);
-					waveletFileLineEdit->setEnabled(true);
+					waveletLabel->setEnabled(true);
+					waveletWidget->setEnabled(true);
+					waveletFileRadioButton->setEnabled(true);
+				       	waveletFileLineEdit->setEnabled(true);
 					waveletBrowsePushButton->setEnabled(true);
 					waveletFrame->setEnabled(true);
-					//file-name
-					waveletFileLineEdit->setText(waveletFileName);
+				       	rickerRadioButton->setEnabled(true);
+
+				
+					if(!waveletFileName.isEmpty()){
+					  waveletFileLineEdit->setText(waveletFileName);
+					  waveletFileRadioButton->setChecked(true);
+					  on_waveletFileRadioButton_toggled(true);
+					}
+					else if(!rickerPeakFrequency.isEmpty()){
+					  rickerLineEdit->setText(rickerPeakFrequency);
+					  rickerRadioButton->setChecked(true);
+					  on_waveletFileRadioButton_toggled(false);
+					}
+					else{
+			         	  waveletFileRadioButton->setChecked(true);
+					  on_waveletFileRadioButton_toggled(true);
+					  waveletFileLineEdit->setText(QString(""));
+					}
 				}
 		//move to wavelet-3d doesn't do anything yet
 		//move to match-energies				
@@ -1855,6 +2165,7 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 		getValueFromAngleGather(item, QString("estimate-local-noise"), estimateLocalNoise);
 		if(localNoise.isEmpty() && estimateLocalNoise.isEmpty()){
 			localNoiseCheckBox->setChecked(false);
+			on_localNoiseCheckBox_toggled(false);
 		}
 		else {
 			localNoiseCheckBox->setChecked(true);
@@ -1885,7 +2196,7 @@ void Main_crava::on_addStackPushButton_clicked(){
 		}
 	}
 	else{
-		stackListWidget->addItem(QString("Synthetic seismic angle"));//synthetic_seismic_angle_10
+	  	stackListWidget->addItem(QString("Synthetic seismic"));//synthetic_seismic_angle_10
 		addStack();
 		stackListWidget->setCurrentItem(stackListWidget->item(stackListWidget->count()-1));
 	}
@@ -1913,22 +2224,10 @@ void Main_crava::seismicFile(const QString &value){
 			setValueInAngleGather( angleGather, QString("file-name"), standard->StandardStrings::relativeFileName(value), QString("seismic-data") );
 			seismicNameLabel->setText(StandardStrings::strippedName(value));
 			stackListWidget->currentItem()->setText(StandardStrings::strippedName(value));
-			seismicFileLineEdit->setText( standard->StandardStrings::relativeFileName(value) );
+
 		}
 	}
 }
-
-void Main_crava::on_seismicFileLineEdit_editingFinished(){
-	seismicFile(seismicFileLineEdit->text());
-};//update the XML three with the file if it is correct, autocomplete would be nice, seismic stack file
-
-void Main_crava::on_seismicBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
-	if(!fileName.isNull()){
-		seismicFile(fileName);
-// 		seismicFileLineEdit->setText(fileName);
-	}
-}//browse for the seismic stack file then update the XML file, update the field
 
 void Main_crava::on_angleLineEdit_editingFinished(){
 	if(stackListWidget->count()>0){
@@ -1937,7 +2236,7 @@ void Main_crava::on_angleLineEdit_editingFinished(){
 		QString value = angleLineEdit->text();
 		setValueInAngleGather(angleGather, QString("offset-angle"), value);
 		if(forwardMode()){//need to change the displayed name in forward mode
-			stackListWidget->currentItem()->setText(QString("Synthetic seismic angle %1").arg(value));
+			stackListWidget->currentItem()->setText(QString("Synthetic seismic - angle %1").arg(value));
 		}
 	}
 };//update the offset angle for the selected stack in the XML file
@@ -1996,6 +2295,10 @@ void Main_crava::on_applyToAllStacksPushButton_clicked(){
 		if ( waveletFileNameInList.isEmpty() ){ //only changes the wavelet filename if the current filename is empty.
 			setValueInAngleGather( angleGathers.at(i), QString("file-name"), waveletFileName, QString("wavelet") );
 		}
+
+		QString rickerPointFrequency;
+		getValueFromAngleGather(angleGather, QString("ricker"), rickerPointFrequency);
+		setValueInAngleGather(angleGathers.at(i), QString("ricker"), rickerPointFrequency);
 
 		QString scale;
 		getValueFromAngleGather(angleGather, QString("scale"), scale);
@@ -2119,7 +2422,7 @@ void Main_crava::on_headerUserDefinedRadioButton_toggled(bool checked){
 	formatChangeFrame->setVisible(checked);
 	formatChangeFrame->setEnabled(checked);
 	if(checked){
-		if ( bypassCoordinateYesRadioButton->isChecked() ){
+		if ( bypassCoordinateNoRadioButton->isChecked() ){
 			locationScalingLineEdit->setVisible(true);
 			location_scaling_label->setVisible(true);
 		}
@@ -2132,7 +2435,8 @@ void Main_crava::on_headerUserDefinedRadioButton_toggled(bool checked){
 		}
 		headerFormat(QString(""));
 		bypassCoordinateEstimateRadioButton->setChecked(true);//might be better to check what is actually in the tree for better modibility
-		xCoordLineEdit->setFocus();
+		necessaryFieldGui();
+		inlineLineEdit->setFocus();
 	}
 	else {
 		//clears the user defined settings if the button is deselected
@@ -2200,11 +2504,11 @@ void Main_crava::bypassCoordinate(const QString &value){
 	}
 }
 
-void Main_crava::on_bypassCoordinateYesRadioButton_toggled(bool checked){
+void Main_crava::on_bypassCoordinateNoRadioButton_toggled(bool checked){
 	locationScalingLineEdit->setVisible(checked);
 	location_scaling_label->setVisible(checked);
 	if(checked){
-		bypassCoordinate(QString("yes"));
+		bypassCoordinate(QString("no"));
 	}
 	else{
 		QTreeWidgetItem* angleGather;
@@ -2213,9 +2517,9 @@ void Main_crava::on_bypassCoordinateYesRadioButton_toggled(bool checked){
 	}
 }
 
-void Main_crava::on_bypassCoordinateNoRadioButton_toggled(bool checked){
+void Main_crava::on_bypassCoordinateYesRadioButton_toggled(bool checked){
 	if(checked){
-		bypassCoordinate(QString("no"));
+		bypassCoordinate(QString("yes"));
 	}
 }
 
@@ -2244,6 +2548,11 @@ void Main_crava::on_estimateWaveCheckBox_toggled(bool checked){
 		QString fileName=QString("");
 		waveletFile(fileName);
 		waveletFileLineEdit->setText(fileName);
+       		QTreeWidgetItem* angleGather;
+		findCorrectAngleGather(&angleGather);
+		setValueInAngleGather(angleGather,QString("ricker"),QString(""));
+		rickerLineEdit->setText(QString(""));
+		waveletFileRadioButton->setChecked(true);
 		fileScaleRadioButton->setChecked(true);
 		shiftFileLabel->setVisible(false);
 		shiftFileLineEdit->setVisible(false);
@@ -2265,8 +2574,6 @@ void Main_crava::on_estimateWaveCheckBox_toggled(bool checked){
 	else{
 		QTreeWidgetItem* angleGather;
 		findCorrectAngleGather(&angleGather);
-
-		waveletFileLineEdit->setFocus();
 		//local wavelet scale and shift can only be given if global wavelet is given, if global wavelet is estimated, they can be estimated.
 		QString estimateShift;
 		getValueFromAngleGather(angleGather, QString("estimate-shift"), estimateShift);
@@ -2333,6 +2640,34 @@ void Main_crava::on_waveletBrowsePushButton_clicked(){
 	}
 }//browse for the wavelet file then update the XML file, update the field
 
+void Main_crava::on_rickerLineEdit_editingFinished(){
+       QTreeWidgetItem *angleGather;
+       findCorrectAngleGather(&angleGather);
+       setValueInAngleGather(angleGather,QString("ricker"),rickerLineEdit->text());
+}//update the XML tree with the peak frequency of the ricker wavelet.
+
+void Main_crava::on_waveletFileRadioButton_toggled(bool checked){
+         waveletFileLineEdit->setEnabled(checked);
+	 waveletFileLineEdit->setVisible(checked);
+	 waveletBrowsePushButton->setEnabled(checked);
+	 waveletBrowsePushButton->setVisible(checked);
+	 rickerLineEdit->setVisible(!checked);
+	 rickerLineEdit->setEnabled(!checked);
+
+	 if(stackListWidget->count()>0){
+	        QTreeWidgetItem *angleGather;
+		findCorrectAngleGather(&angleGather);
+		if(checked){
+	           	setValueInAngleGather(angleGather,QString("ricker"),QString(""));
+			rickerLineEdit->setText(QString(""));
+		}
+		else{
+		  setValueInAngleGather(angleGather, QString("file-name"), QString(""), QString("wavelet"));
+		  waveletFileLineEdit->setText(QString(""));
+		}
+	 }   
+}
+
 void Main_crava::on_fileScaleRadioButton_toggled(bool checked){
 	if(checked){
 		scaleLineEdit->setVisible(false);
@@ -2387,9 +2722,11 @@ void Main_crava::on_localWaveletCheckBox_toggled(bool checked){
 	shiftLocalWaveletCheckBox->setChecked(checked);
 	scaleLocalWaveletCheckBox->setChecked(checked);
 	localWaveletFrame->setVisible(checked);
+       	oWaveletLocalCheckBox->setEnabled(checked);
 	if(!checked){
 		scaleFile(QString(""));
 		shiftFile(QString(""));
+	       	oWaveletLocalCheckBox->setChecked(false);
 	}
 }
 
@@ -2551,10 +2888,12 @@ void Main_crava::on_localNoiseCheckBox_toggled(bool checked){
 			QString value("");
 			setValueInAngleGather(angleGather, QString("local-noise-scaled"), value);
 			setValueInAngleGather(angleGather, QString("estimate-local-noise"), value);
+	       		oLocalNoiseCheckBox->setChecked(false);
 		}
 	}
 	localNoiseFrame->setVisible(checked);
 	localNoiseFrame->setEnabled(checked);
+       	oLocalNoiseCheckBox->setEnabled(checked);
 }//update the XML with whether local noise should be enabled and
 
 //local noise radio buttons
@@ -2562,8 +2901,10 @@ void Main_crava::on_localNoiseEstimateCheckBox_toggled(bool checked){
 	//can either estimate or give, not both
 	localNoiseFileLineEdit->setVisible(!checked);
 	localNoiseBrowsePushButton->setVisible(!checked);
+	localNoiseFileLabel->setVisible(!checked);
 	localNoiseFileLineEdit->setEnabled(!checked);
 	localNoiseBrowsePushButton->setEnabled(!checked);
+       	localNoiseFileLabel->setEnabled(!checked);
 	if(stackListWidget->count()>0){
 		QTreeWidgetItem* angleGather;
 		findCorrectAngleGather(&angleGather);
@@ -2646,62 +2987,50 @@ void Main_crava::on_faciesLineEdit_editingFinished(){
 //button vp
 void Main_crava::on_vpRadioButton_toggled(bool checked){
 	//makes sure the correct widgets are visible and the focus makes sure signals trigger to make the info in the tree correct.
-	vpLineEdit->setVisible(checked);
-	dtLineEdit->setVisible(!checked);
 	vpLineEdit->setEnabled(checked);
 	dtLineEdit->setEnabled(!checked);
 	if(checked){
+	  	dtLineEdit->setText(QString(""));
+		log_names_dtPointer->setText( 1, QString() );
 		vpLineEdit->setFocus();
 	}
 	else{
 		dtLineEdit->setFocus();
+		vpLineEdit->setText(QString(""));
+		log_names_vpPointer->setText( 1, QString() );
 	}
 }
 void Main_crava::on_vpLineEdit_editingFinished(){
-	// need to implement removal of dt
-	//can either have vp or dt but not both
 	log_names_vpPointer->setText( 1, vpLineEdit->text() );
-	//for removal of dt
-	log_names_dtPointer->setText( 1, QString() );
-}//update the XML three with the new vp format, remove dt
+}//update the XML tree with the new vp format
 //button dt
 void Main_crava::on_dtLineEdit_editingFinished(){
-	// need to implement removal of vp
-	//can either have vp or dt but not both
 	log_names_dtPointer->setText( 1, dtLineEdit->text() );
-	//for removal of vp
-	log_names_vpPointer->setText( 1, QString() );
-}//update the XML three with the new dt format, remove vp
+}//update the XML three with the new dt format
 //button vs
 void Main_crava::on_vsRadioButton_toggled(bool checked){
 	//can either have vs or dts but not both
-	vsLineEdit->setVisible(checked);
-	dtsLineEdit->setVisible(!checked);
 	vsLineEdit->setEnabled(checked);	
 	dtsLineEdit->setEnabled(!checked);
 	if(checked){
 		vsLineEdit->setFocus();
+       	        dtsLineEdit->setText(QString(""));
+		log_names_dtsPointer->setText( 1, QString() );
 	}
 	else{
+	        vsLineEdit->setText(QString(""));
+		log_names_vsPointer->setText( 1, QString() );
 		dtsLineEdit->setFocus();
 	}
 }
 void Main_crava::on_vsLineEdit_editingFinished(){
-	// need to implement removal of dts
-	//can either have vs or dts but not both
 	log_names_vsPointer->setText( 1, vsLineEdit->text() );
-	//for removal of dts
-	log_names_dtsPointer->setText( 1, QString() );
-}//update the XML three with the new vs format, remove dts
+}//update the XML tree with the new vs format
 
 //button dts
 void Main_crava::on_dtsLineEdit_editingFinished(){
-	// need to implement removal of vs
-	//can either have vs or dts but not both
 	log_names_dtsPointer->setText( 1, dtsLineEdit->text() );
-	//for removal of vs
-	log_names_vsPointer->setText( 1, QString() );
-}//update the XML three with the new dts format, remove vs
+}//update the XML tree with the new dts format
 
 //well input
 void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow ){
@@ -2721,7 +3050,6 @@ void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow ){
 		//move to file-name
 		QString fileName;
 		getValueFromWell( item, QString("file-name"), fileName );
-		wellFileLineEdit->setText(fileName);//sets the correct file-name
 		wellNameLabel->setText(StandardStrings::strippedName(fileName));
 		//move to use-for-wavelet-estimation
 		QString useForWaveletEstimation;
@@ -2855,19 +3183,8 @@ void Main_crava::wellFile(const QString & value){
 		setValueInWell( well, QString("file-name"), standard->StandardStrings::relativeFileName(value) );
 		wellNameLabel->setText(StandardStrings::strippedName(value));
 		wellListWidget->currentItem()->setText(StandardStrings::strippedName(value));
-		wellFileLineEdit->setText( standard->StandardStrings::relativeFileName(value) );
 	}
 }
-void Main_crava::on_wellFileLineEdit_editingFinished(){
-	wellFile(wellFileLineEdit->text());
-}//update the XML three with the file if it is correct, ell file, rms format, would be nice to have a converter from las
-
-void Main_crava::on_wellBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::wellFormat());//well format maybe?
-	if(!fileName.isNull()){
-		wellFile(fileName);
-	}
-}//browse for the well file then update the XML file, update the field
 
 void Main_crava::on_waveletEstimationCheckBox_toggled(bool checked){
 	QTreeWidgetItem* well;
@@ -2921,26 +3238,26 @@ void Main_crava::on_filterElasticCheckBox_toggled(bool checked){
 	setValueInWell(well, QString("filter-elastic-logs"), value);
 }//update whether this well should multi-parameter-filter the elastic logs after inversion in XML file
 
-void Main_crava::on_convertLasToRmsPushButton_clicked(){
-	//converts las to rms, needs to be manually fixed for discrete variables since they do not have names in las logs.
-	if(wellListWidget->count()>0){
-		QString fileName = QFileDialog::getOpenFileName(this, QString("Select position file"), standard->StandardStrings::inputPath(), StandardStrings::asciiFormat());
-		if(!fileName.isNull()){
-			QTreeWidgetItem* well;
-			findCorrectWell(&well);
-			QString filename;
-			getValueFromWell(well, QString("file-name"), filename);
-			QString lasWellfilePath( QDir(standard->StandardStrings::inputPath()).absoluteFilePath(filename) );//las file is the current file in the listwidget.
-			if(QFileInfo(lasWellfilePath).suffix()!=QString("las")){//should only convert if the file is a las file
-				QMessageBox::warning(this, QString("Wrong file format"), QString("Not a las file."), QMessageBox::Ok);
-				return;
-			}
-			QString rmsWellfilePath(QFileInfo(lasWellfilePath).path()+QDir::separator() + QFileInfo(lasWellfilePath).baseName() + QString(".rms"));
-			StandardStrings::convertLasToRms(this, lasWellfilePath, rmsWellfilePath, fileName);//converts the file, this might have been better off as a seperate process.
-			wellFile(rmsWellfilePath);//change the in the tree/displayed to the rms version of the file.
-		}
-	}
-}
+// void Main_crava::on_convertLasToRmsPushButton_clicked(){
+// 	//converts las to rms, needs to be manually fixed for discrete variables since they do not have names in las logs.
+// 	if(wellListWidget->count()>0){
+// 		QString fileName = QFileDialog::getOpenFileName(this, QString("Select position file"), standard->StandardStrings::inputPath(), StandardStrings::asciiFormat());
+// 		if(!fileName.isNull()){
+// 			QTreeWidgetItem* well;
+// 			findCorrectWell(&well);
+// 			QString filename;
+// 			getValueFromWell(well, QString("file-name"), filename);
+// 			QString lasWellfilePath( QDir(standard->StandardStrings::inputPath()).absoluteFilePath(filename) );//las file is the current file in the listwidget.
+// 			if(QFileInfo(lasWellfilePath).suffix()!=QString("las")){//should only convert if the file is a las file
+// 				QMessageBox::warning(this, QString("Wrong file format"), QString("Not a las file."), QMessageBox::Ok);
+// 				return;
+// 			}
+// 			QString rmsWellfilePath(QFileInfo(lasWellfilePath).path()+QDir::separator() + QFileInfo(lasWellfilePath).baseName() + QString(".rms"));
+// 			StandardStrings::convertLasToRms(this, lasWellfilePath, rmsWellfilePath, fileName);//converts the file, this might have been better off as a seperate process.
+// 			wellFile(rmsWellfilePath);//change the well in the tree/displayed to the rms version of the file.
+// 		}
+// 	}
+// }
 
 
 //syntetic vs log buttons
@@ -2971,6 +3288,7 @@ void Main_crava::on_synteticVsDetectRadioButton_toggled(bool checked){
 void Main_crava::on_optimizePositionCheckBox_toggled(bool checked){
 	optimizePositionFrame->setVisible(checked);
 	optimizePositionFrame->setEnabled(checked);
+	if(!checked) deleteAllOptimizePosition();
 }
 
 void Main_crava::on_optimizePositionListWidget_currentRowChanged ( int currentRow ){
@@ -3041,11 +3359,6 @@ void Main_crava::on_weightLineEdit_editingFinished(){
 	setValueInWell(optimizePosition, QString("weight"), value);
 }//updates the weight of the optimized position in XML
 
-//well parameter info
-void Main_crava::on_seismicResolutionLineEdit_editingFinished(){
-	high_cut_seismic_resolutionPointer->setText( 1, seismicResolutionLineEdit->text() );
-}//update the XML three with the high cut seismic resolution
-
 //horizon
 void Main_crava::on_twoSurfaceRadioButton_toggled(bool checked){
 	//needs to remove the values off the other case.
@@ -3079,6 +3392,7 @@ void Main_crava::on_twoSurfaceRadioButton_toggled(bool checked){
 		topDepthFileBrowsePushButton->setEnabled(true);
 		//velocityFieldNoneRadioButton->setChecked(true);
 		on_depthSurfacesCheckBox_toggled(depthSurfacesCheckBox->isChecked());//might break loading, handled
+		necessaryFieldGui();
 	}
 }
 void Main_crava::on_topSurfaceRadioButton_toggled(bool checked){
@@ -3115,6 +3429,7 @@ void Main_crava::on_topSurfaceRadioButton_toggled(bool checked){
 		bottomTimeFileLineEdit->clear();
 		bottomDepthFileLineEdit->clear();
 		on_depthSurfacesCheckBox_toggled(depthSurfacesCheckBox->isChecked());//might break loading, handled.
+       	   	necessaryFieldGui();
 	}
 }
 void Main_crava::on_baseSurfaceRadioButton_toggled(bool checked){
@@ -3150,31 +3465,33 @@ void Main_crava::on_baseSurfaceRadioButton_toggled(bool checked){
 		topDepthFileBrowsePushButton->setEnabled(false);
 		//velocityFieldNoneRadioButton->setChecked(true);
 		on_depthSurfacesCheckBox_toggled(depthSurfacesCheckBox->isChecked());//might break loading handled
+	       	necessaryFieldGui();
 	}
 }
 
 void Main_crava::on_correlationSurfaceRadioButton_toggled(bool checked){
 	//needs to be called with false on startup...
 	correlationDirectionLabel->setVisible(checked);
-	correlationDirectionLineEdit->setVisible(checked);
+	correlationDirectionFileLineEdit->setVisible(checked);
 	correlationDirectionBrowsePushButton->setVisible(checked);
 	correlationDirectionLabel->setEnabled(checked);
-	correlationDirectionLineEdit->setEnabled(checked);
+	correlationDirectionFileLineEdit->setEnabled(checked);
 	correlationDirectionBrowsePushButton->setEnabled(checked);
 	if(!checked){
-		correlationDirectionLineEdit->setText(QString(""));
+		correlationDirectionFileLineEdit->setText(QString(""));
 		correlationDirectionFile(QString(""));
 	}
 	else {
+	  	necessaryFieldGui();
 		on_twoSurfaceRadioButton_toggled(true);
 	}
 }
 
-void Main_crava::on_oneSufraceRadioButton_toggled(bool checked){
+void Main_crava::on_oneSurfaceRadioButton_toggled(bool checked){
+  	surfaceTwoFrame->setVisible(!checked);
+	surfaceTwoFrame->setEnabled(!checked);
 	surfaceOneFrame->setVisible(checked);
 	surfaceOneFrame->setEnabled(checked);
-	surfaceTwoFrame->setVisible(!checked);
-	surfaceTwoFrame->setEnabled(!checked);
 	if(!checked){//clears one surface;
 		for (int i=0;i<interval_one_surfacePointer->childCount();i++){
 				interval_one_surfacePointer->child(i)->setText(1,QString(""));
@@ -3199,6 +3516,7 @@ void Main_crava::on_oneSufraceRadioButton_toggled(bool checked){
 		foreach (QLineEdit* field, fields){
 			field->clear();
 		}
+	       	necessaryFieldGui();
 	}
 }
 void Main_crava::on_constantInversionRadioButton_toggled(bool checked){
@@ -3212,8 +3530,6 @@ void Main_crava::on_constantInversionRadioButton_toggled(bool checked){
 	bottomTimeConstantLabel->setEnabled(checked);
 	bottomTimeValueLineEdit->setEnabled(checked);
 	depthSurfacesCheckBox->setVisible(!checked);
-	//depthSurfaceFrame->setVisible(!checked);
-	//depthSurfaceFrame->setEnabled(!checked);
 	depthSurfacesCheckBox->setEnabled(!checked);
 	if(checked) {
 		//needs to clear the files and the fileedits
@@ -3238,6 +3554,7 @@ void Main_crava::on_constantInversionRadioButton_toggled(bool checked){
 		topTimeSurfaceLabel->setEnabled(false);
 		topTimeFileLineEdit->setEnabled(false);
 		topTimeFileBrowsePushButton->setEnabled(false);
+	       	necessaryFieldGui();
 		//velocityFieldNoneRadioButton->setChecked(true);
 	}
 	else{//clear the constants
@@ -3255,6 +3572,8 @@ void Main_crava::on_depthSurfacesCheckBox_toggled(bool checked){
 		topDepthFile(QString());
 		bottomDepthFile(QString());
 	}
+       	oDomainDepthCheckBox->setChecked(checked);
+	oDomainDepthCheckBox->setEnabled(checked);
 }
 //two surface case
 void Main_crava::topTimeFile(const QString & value){
@@ -3272,6 +3591,7 @@ void Main_crava::on_topTimeFileBrowsePushButton_clicked(){
 	if(!fileName.isNull()){
 		topTimeFileLineEdit->setText(fileName);
 		topTimeFile(fileName);
+		topTimeFileLineEdit->setFocus();
 	}
 }//browse for the top time file then update the XML file if the above is not triggered, update the field
 
@@ -3312,6 +3632,7 @@ void Main_crava::on_bottomTimeFileBrowsePushButton_clicked(){
 	if(!fileName.isNull()){
 		bottomTimeFileLineEdit->setText(fileName);
 		bottomTimeFile(fileName);
+	       	bottomTimeFileLineEdit->setFocus();
 	}
 }//browse for the top time file then update the XML file if the above is not triggered, update the field
 
@@ -3393,15 +3714,16 @@ void Main_crava::referenceSurfaceFile(const QString & value){
 	}
 }
 
-void Main_crava::on_referenceSurfaceLineEdit_editingFinished(){
-	referenceSurfaceFile(referenceSurfaceLineEdit->text());
+void Main_crava::on_referenceSurfaceFileLineEdit_editingFinished(){
+	referenceSurfaceFile(referenceSurfaceFileLineEdit->text());
 };//update the XML three with the file if it is correct, autocomplete would be nice, reference surface file
 
 void Main_crava::on_referenceSurfaceBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		referenceSurfaceLineEdit->setText(fileName);
+		referenceSurfaceFileLineEdit->setText(fileName);
 		referenceSurfaceFile(fileName);
+		referenceSurfaceFileLineEdit->setFocus();
 	}
 };//browse for the reference surface file then update the XML file if the above is not triggered, update the field
 
@@ -3491,89 +3813,296 @@ void Main_crava::on_faciesBottomBrowsePushButton_clicked(){
 };//browse for the facies bottom time file then update the XML file if the above is not triggered, update the field
 
 	//prior model
-void Main_crava::on_backgroundModelCheckBox_toggled(bool checked){
-	//needs to fix the values as well
-	backgroundGivenFrame->setVisible(!checked);
-	backgroundEstimateFrame->setVisible(checked);
-	backgroundGivenFrame->setEnabled(!checked);
-	backgroundEstimateFrame->setEnabled(checked);
-	if(checked){//clears the parameters for given background
-		vpFileRadioButton->setChecked(true);
-		vsFileRadioButton->setChecked(true);
-		densityFileRadioButton->setChecked(true);
-		QList<QLineEdit*> fields=backgroundGivenFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+void Main_crava::on_backgroundRadioButton_toggled(bool checked){
+	if(checked){
+                backgroundModelFrame->setVisible(true);
+		backgroundEstimateFrame->setVisible(false);
+		backgroundMultizoneFrame->setVisible(false);
+		//Clears the background estimation fields
+		velocityFieldPriorFileLineEdit->setText(QString(""));
+		highCutFrequencyLineEdit->setText(QString(""));
+		background_velocity_fieldPointer->setText(1,QString(""));
+		background_high_cut_background_modellingPointer->setText(1,QString(""));
+		//Clears the multizone background model fields
+		background_top_surface_filePointer->setText(1,QString(""));
+		topSurfaceFileLineEdit->setText(QString(""));
+		background_top_surface_erosion_priorityPointer->setText(1,QString(""));
+		topPrioritySpinBox->setValue(1);
+		deleteAllZones();
+		zoneListWidget->clear();
+	}
+
+}
+void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
+        if(checked){
+	        backgroundModelFrame->setVisible(false);
+		backgroundEstimateFrame->setVisible(false);
+		backgroundMultizoneFrame->setVisible(true);
+		vpVsRhoRadioButton->setChecked(true);
+		deleteZonePushButton->setEnabled(false);
+		insertZonePushButton->setEnabled(false);
+		if(background_top_surface_filePointer->text(1).isEmpty()){
+		  topSurfaceFileLineEdit->setText(top_surface_time_filePointer->text(1));
+		  on_topSurfaceFileLineEdit_editingFinished();
+		}
+		on_topPrioritySpinBox_editingFinished();
+		zoneFrame->setEnabled(false);
+	
+		QList<QLineEdit*> fields1=backgroundModelFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field1, fields1){
+			field1->clear();
+		}
+
+		QList<QLineEdit*> field2=backgroundEstimateFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field2, field2){
+			field2->clear();
+		}
+		for(int i=0; i<backgroundPointer->childCount();i++){
+		  if(backgroundPointer->child(i)->childCount()<1){
+		    backgroundPointer->child(i)->setText(1,QString(""));
+		  }
+		}
+	        
+	}
+	else{
+	       zoneFrame->setEnabled(false);
+	}
+}
+void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
+	if(checked){
+                backgroundModelFrame->setVisible(false);
+		backgroundEstimateFrame->setVisible(true);
+		backgroundMultizoneFrame->setVisible(false);
+		vpVsRhoRadioButton->setChecked(true);
+		backgroundEstimatedConfigurationCheckBox->setChecked(false);
+		
+		//Clears the background fields
+		QList<QLineEdit*> fields=backgroundModelFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
 		foreach (QLineEdit* field, fields){
 			field->clear();
 		}
+		for(int i=0;i<backgroundPointer->childCount();i++){
+		  if(backgroundPointer->child(i)->childCount()<1){
+		    if(backgroundPointer->child(i)->text(1) != QString("velocity-field") && backgroundPointer->child(i)->text(1) != QString("high-cut-background-modelling")){
+			backgroundPointer->child(i)->setText(1,QString());//clear
+		    }
+		  }
+		}
+		//Clears the multizone background model fields
+		background_top_surface_filePointer->setText(1,QString(""));
+		topSurfaceFileLineEdit->setText(QString(""));
+		background_top_surface_erosion_priorityPointer->setText(1,QString(""));
+		topPrioritySpinBox->setValue(1);
+		deleteAllZones();
+		zoneListWidget->clear();
+	}
+
+}
+void Main_crava::on_vpVsRhoRadioButton_toggled(bool checked){
+	//needs to fix the values as well
+	if(checked){
+           	vpVsRhoFrame->setVisible(true);
+		aiVpVsRhoFrame->setVisible(false);
+		aiSiRhoFrame->setVisible(false);
+		vpVsRhoFrame->setEnabled(true);
+		aiVpVsRhoFrame->setEnabled(false);
+		aiSiRhoFrame->setEnabled(false);
+		vpFile1RadioButton->setChecked(true);
+		vsFile1RadioButton->setChecked(true);
+		if(!background_density_constantPointer->text(1).isEmpty()){
+		  densityConstant1RadioButton->setChecked(true);
+		  densityConstant1LineEdit->setText(background_density_constantPointer->text(1));
+		  densityFile1LineEdit->setEnabled(false);
+		  densityFile1BrowsePushButton->setEnabled(false);
+		}
+		else{
+		  densityFile1RadioButton->setChecked(true);
+		  densityFile1LineEdit->setText(background_density_filePointer->text(1));
+		   densityConstant1LineEdit->setEnabled(false);
+		}
+		QList<QLineEdit*> fields1=aiVpVsRhoFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field1, fields1){
+			field1->clear();
+		}
+		QList<QLineEdit*> fields2=aiSiRhoFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field2, fields2){
+			field2->clear();
+		}
+		background_ai_filePointer->setText(1,QString(""));
+		background_si_filePointer->setText(1,QString(""));
+		background_vp_vs_ratio_filePointer->setText(1,QString(""));
+	}
+}
+void Main_crava::on_aiVpVsRhoRadioButton_toggled(bool checked){
+	//needs to fix the values as well
+	if(checked){
+	        vpVsRhoFrame->setVisible(false);
+		aiVpVsRhoFrame->setVisible(true);
+		aiSiRhoFrame->setVisible(false);
+		vpVsRhoFrame->setEnabled(false);
+		aiVpVsRhoFrame->setEnabled(true);
+		aiSiRhoFrame->setEnabled(false);
+		if(!background_ai_filePointer->text(1).isEmpty()){
+		  aiFile2LineEdit->setText(background_ai_filePointer->text(1));
+		}
+		if(!background_density_constantPointer->text(1).isEmpty()){
+		  densityConstant2RadioButton->setChecked(true);
+		  densityConstant2LineEdit->setText(background_density_constantPointer->text(1));
+		  densityFile2LineEdit->setEnabled(false);
+		  densityFile2BrowsePushButton->setEnabled(false);
+		}
+		else{
+		  densityFile2RadioButton->setChecked(true);
+		  densityFile2LineEdit->setText(background_density_filePointer->text(1));
+		  densityConstant2LineEdit->setEnabled(false);
+		}
+		QList<QLineEdit*> fields1=vpVsRhoFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field1, fields1){
+			field1->clear();
+		}
+		QList<QLineEdit*> fields2=aiSiRhoFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field2, fields2){
+			field2->clear();
+		}
 		background_vp_filePointer->setText(1,QString(""));
 		background_vs_filePointer->setText(1,QString(""));
-		background_density_filePointer->setText(1,QString(""));
 		background_vp_constantPointer->setText(1,QString(""));
 		background_vs_constantPointer->setText(1,QString(""));
+	}
+}
+void Main_crava::on_aiSiRhoRadioButton_toggled(bool checked){
+	//needs to fix the values as well
+	if(checked){
+	        vpVsRhoFrame->setVisible(false);
+		aiVpVsRhoFrame->setVisible(false);
+		aiSiRhoFrame->setVisible(true);
+		vpVsRhoFrame->setEnabled(false);
+		aiVpVsRhoFrame->setEnabled(false);
+		aiSiRhoFrame->setEnabled(true);
+		if(!background_ai_filePointer->text(1).isEmpty()){
+		  aiFile3LineEdit->setText(background_ai_filePointer->text(1));
+		}
+		if(!background_density_constantPointer->text(1).isEmpty()){
+		  densityConstant3RadioButton->setChecked(true);
+		  densityConstant3LineEdit->setText(background_density_constantPointer->text(1));
+		  densityFile3LineEdit->setEnabled(false);
+		  densityFile3BrowsePushButton->setEnabled(false);
+		}
+		else{
+		  densityFile3RadioButton->setChecked(true);
+		  densityFile3LineEdit->setText(background_density_filePointer->text(1));
+		  densityConstant3LineEdit->setEnabled(false);
+		}
+		QList<QLineEdit*> fields1=vpVsRhoFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field1, fields1){
+			field1->clear();
+		}
+		QList<QLineEdit*> fields2=aiVpVsRhoFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		foreach (QLineEdit* field2, fields2){
+			field2->clear();
+		}
+		background_vp_filePointer->setText(1,QString(""));
+		background_vs_filePointer->setText(1,QString(""));
+		background_vp_constantPointer->setText(1,QString(""));
+		background_vs_constantPointer->setText(1,QString(""));
+		background_vp_vs_ratio_filePointer->setText(1,QString(""));
+	}
+}
+
+	//buttons for vp/vs/density/ai/si/vp-vs
+void Main_crava::on_vpFile1RadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
+	vpFile1LineEdit->setEnabled(checked);
+	vpFile1BrowsePushButton->setEnabled(checked);
+	vpConstant1LineEdit->setEnabled(!checked);
+	if(checked){
+		vpFile1LineEdit->setFocus();
+		vpConstant1LineEdit->setText(QString(""));
+		background_vp_constantPointer->setText(1,QString(""));
+	}
+	else{
+		vpConstant1LineEdit->setFocus();
+		vpFile1LineEdit->setText(QString(""));
+		background_vp_filePointer->setText(1,QString(""));
+	}
+}
+void Main_crava::on_vsFile1RadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
+	vsFile1LineEdit->setEnabled(checked);
+	vsFile1BrowsePushButton->setEnabled(checked);
+	vsConstant1LineEdit->setEnabled(!checked);
+	if(checked){
+		vsFile1LineEdit->setFocus();
+		vsConstant1LineEdit->setText(QString(""));
+		background_vs_constantPointer->setText(1,QString(""));
+	}
+	else{
+		vsConstant1LineEdit->setFocus();
+		vsFile1LineEdit->setText(QString(""));
+		background_vs_filePointer->setText(1,QString(""));
+	}
+}
+
+void Main_crava::on_densityFile1RadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
+	densityFile1LineEdit->setEnabled(checked);
+	densityFile1BrowsePushButton->setEnabled(checked);
+	densityConstant1LineEdit->setEnabled(!checked);
+	if(checked){
+		densityFile1LineEdit->setFocus();
+		densityConstant1LineEdit->setText(QString(""));
 		background_density_constantPointer->setText(1,QString(""));
 	}
-	else{//clears the parameters for estimated background
-		velocityFieldPriorFileLineEdit->clear();
-		highCutFrequencyLineEdit->clear();
-
-		QString value("");
-		background_velocity_fieldPointer->setText(1, value);
-		background_high_cut_background_modellingPointer->setText(1, value);
-		background_lateral_correlationPointer->setText(1, value); //isn't this always empty??
-	}
-};//determining wether the background model should be estimated or given
-
-	//buttons for vp/vs/density
-void Main_crava::on_vpFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
-	vpFileLineEdit->setVisible(checked);
-	vpBrowsePushButton->setVisible(checked);
-	vpConstantLineEdit->setVisible(!checked);
-	vpFileLineEdit->setEnabled(checked);
-	vpBrowsePushButton->setEnabled(checked);
-	vpConstantLineEdit->setEnabled(!checked);
-	if(checked){
-		vpFileLineEdit->setFocus();
-	}
 	else{
-		vpConstantLineEdit->setFocus();
-	}
-}
-void Main_crava::on_vsFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
-	vsFileLineEdit->setVisible(checked);
-	vsBrowsePushButton->setVisible(checked);
-	vsConstantLineEdit->setVisible(!checked);
-	vsFileLineEdit->setEnabled(checked);
-	vsBrowsePushButton->setEnabled(checked);
-	vsConstantLineEdit->setEnabled(!checked);
-	if(checked){
-		vsFileLineEdit->setFocus();
-	}
-	else{
-		vsConstantLineEdit->setFocus();
+		densityConstant1LineEdit->setFocus();
+		densityFile1LineEdit->setText(QString(""));
+		background_density_filePointer->setText(1,QString(""));
 	}
 }
 
-void Main_crava::on_densityFileRadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
-	densityFileLineEdit->setVisible(checked);
-	densityBrowsePushButton->setVisible(checked);
-	densityConstantLineEdit->setVisible(!checked);
-	densityFileLineEdit->setEnabled(checked);
-	densityBrowsePushButton->setEnabled(checked);
-	densityConstantLineEdit->setEnabled(!checked);
+void Main_crava::on_densityFile2RadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
+	densityFile2LineEdit->setEnabled(checked);
+	densityFile2BrowsePushButton->setEnabled(checked);
+	densityConstant2LineEdit->setEnabled(!checked);
 	if(checked){
-		densityFileLineEdit->setFocus();
+		densityFile2LineEdit->setFocus();
+		densityConstant2LineEdit->setText(QString(""));
+		background_density_constantPointer->setText(1,QString(""));
 	}
 	else{
-		densityConstantLineEdit->setFocus();
+		densityConstant2LineEdit->setFocus();
+		densityFile2LineEdit->setText(QString(""));
+		background_density_filePointer->setText(1,QString(""));
+	}
+}
+void Main_crava::on_densityFile3RadioButton_toggled(bool checked){//either constant or from file fixes displayed widgets
+	densityFile3LineEdit->setEnabled(checked);
+	densityFile3BrowsePushButton->setEnabled(checked);
+	densityConstant3LineEdit->setEnabled(!checked);
+	if(checked){
+		densityFile3LineEdit->setFocus();
+	       	densityConstant3LineEdit->setText(QString(""));
+		background_density_constantPointer->setText(1,QString(""));
+	}
+	else{
+		densityConstant3LineEdit->setFocus();
+		densityFile3LineEdit->setText(QString(""));
+		background_density_filePointer->setText(1,QString(""));
 	}
 }
 
-void Main_crava::on_vpConstantLineEdit_editingFinished(){
+void Main_crava::on_vpFile1LineEdit_editingFinished(){
+	vpFile(vpFile1LineEdit->text());
+};//update the XML three with the file if it is correct, autocomplete would be nice, prior model vp file
+void Main_crava::on_vpConstant1LineEdit_editingFinished(){
 	// should remove the file from the tree
-	background_vp_constantPointer->setText( 1, vpConstantLineEdit->text() );
+	background_vp_constantPointer->setText( 1, vpConstant1LineEdit->text() );
 	background_vp_filePointer->setText( 1, QString() );
 };//update the XML three with constant vp for the background model
-
+void Main_crava::on_vpFile1BrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		vpFile1LineEdit->setText(fileName);
+		vpFile(fileName);
+	}
+};//browse for the prior model vp file then update the XML file if the above is not triggered, update the field
 void Main_crava::vpFile(const QString &value){
 	// should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
@@ -3582,22 +4111,20 @@ void Main_crava::vpFile(const QString &value){
 	}
 }
 
-void Main_crava::on_vpFileLineEdit_editingFinished(){
-	vpFile(vpFileLineEdit->text());
-};//update the XML three with the file if it is correct, autocomplete would be nice, prior model vp file
-void Main_crava::on_vpBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
-	if(!fileName.isNull()){
-		vpFileLineEdit->setText(fileName);
-		vpFile(fileName);
-	}
-};//browse for the prior model vp file then update the XML file if the above is not triggered, update the field
-
-void Main_crava::on_vsConstantLineEdit_editingFinished(){
-	background_vs_constantPointer->setText( 1, vsConstantLineEdit->text() );
+void Main_crava::on_vsFile1LineEdit_editingFinished(){
+	vsFile(vsFile1LineEdit->text());
+};//update the XML three with the file if it is correct, autocomplete would be nice, prior model vs file
+void Main_crava::on_vsConstant1LineEdit_editingFinished(){
+	background_vs_constantPointer->setText( 1, vsConstant1LineEdit->text() );
 	background_vs_filePointer->setText( 1, QString() );
 };//update the XML three with constant vs for the background model
-
+void Main_crava::on_vsFile1BrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		vsFile1LineEdit->setText(fileName);
+		vsFile(fileName);
+	}
+};//browse for the prior model vs file then update the XML file if the above is not triggered, update the field
 void Main_crava::vsFile(const QString &value){
 	//should remove the constant from the tree
 	if (standard->StandardStrings::fileExists(value)){
@@ -3606,23 +4133,53 @@ void Main_crava::vsFile(const QString &value){
 	}
 }
 
-void Main_crava::on_vsFileLineEdit_editingFinished(){
-	vsFile(vsFileLineEdit->text());
-};//update the XML three with the file if it is correct, autocomplete would be nice, prior model vs file
-
-void Main_crava::on_vsBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
-	if(!fileName.isNull()){
-		vsFileLineEdit->setText(fileName);
-		vsFile(fileName);
-	}
-};//browse for the prior model vs file then update the XML file if the above is not triggered, update the field
-
-void Main_crava::on_densityConstantLineEdit_editingFinished(){
+void Main_crava::on_densityFile1LineEdit_editingFinished(){
+	densityFile(densityFile1LineEdit->text());
+};//update the XML three with the file if it is correct, autocomplete would be nice, prior model density file
+void Main_crava::on_densityConstant1LineEdit_editingFinished(){
 	// should remove the file from the tree
-	background_density_constantPointer->setText( 1, densityConstantLineEdit->text() );
+	background_density_constantPointer->setText( 1, densityConstant1LineEdit->text() );
 	background_density_filePointer->setText( 1, QString() );
 };//update the XML three with constant density for the background model
+void Main_crava::on_densityFile1BrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		densityFile1LineEdit->setText(fileName);
+		densityFile(fileName);
+	}
+};//browse for the prior model density file then update the XML file if the above is not triggered, update the field
+
+void Main_crava::on_densityFile2LineEdit_editingFinished(){
+	densityFile(densityFile2LineEdit->text());
+};//update the XML three with the file if it is correct, autocomplete would be nice, prior model density file
+void Main_crava::on_densityConstant2LineEdit_editingFinished(){
+	// should remove the file from the tree
+	background_density_constantPointer->setText( 1, densityConstant2LineEdit->text() );
+	background_density_filePointer->setText( 1, QString() );
+};//update the XML three with constant density for the background model
+void Main_crava::on_densityFile2BrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		densityFile2LineEdit->setText(fileName);
+		densityFile(fileName);
+	}
+};//browse for the prior model density file then update the XML file if the above is not triggered, update the field
+
+void Main_crava::on_densityFile3LineEdit_editingFinished(){
+	densityFile(densityFile3LineEdit->text());
+};//update the XML three with the file if it is correct, autocomplete would be nice, prior model density file
+void Main_crava::on_densityConstant3LineEdit_editingFinished(){
+	// should remove the file from the tree
+	background_density_constantPointer->setText( 1, densityConstant3LineEdit->text() );
+	background_density_filePointer->setText( 1, QString() );
+};//update the XML three with constant density for the background model
+void Main_crava::on_densityFile3BrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		densityFile3LineEdit->setText(fileName);
+		densityFile(fileName);
+	}
+};//browse for the prior model density file then update the XML file if the above is not triggered, update the field
 
 void Main_crava::densityFile(const QString &value){
 	// should remove the constant from the tree
@@ -3631,18 +4188,68 @@ void Main_crava::densityFile(const QString &value){
 		background_density_constantPointer->setText( 1, QString() );
 	}
 }
-
-void Main_crava::on_densityFileLineEdit_editingFinished(){
-	densityFile(densityFileLineEdit->text());	
-};//update the XML tree with the file if it is correct, prior model density file
-
-void Main_crava::on_densityBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+void Main_crava::on_aiFile2LineEdit_editingFinished(){
+        aiFile(aiFile2LineEdit->text());
+};//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model AI file
+void Main_crava::on_aiFile2BrowsePushButton_clicked(){
+  	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		densityFileLineEdit->setText(fileName);
-		densityFile(fileName);
+		aiFile2LineEdit->setText(fileName);
+		aiFile(fileName);
 	}
-};//browse for the prior model density file then update the XML file if the above is not triggered, update the field
+};//browse for the prior model AI file then update the XML file if the above is not triggered, update the field
+void Main_crava::on_aiFile3LineEdit_editingFinished(){
+        aiFile(aiFile3LineEdit->text());
+};//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model AI file
+void Main_crava::on_aiFile3BrowsePushButton_clicked(){
+  	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		aiFile3LineEdit->setText(fileName);
+		aiFile(fileName);
+	}
+};//browse for the prior model AI file then update the XML file if the above is not triggered, update the field
+
+void Main_crava::aiFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+		background_ai_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
+}
+
+void Main_crava::on_siFile3LineEdit_editingFinished(){
+        siFile(siFile3LineEdit->text());
+};//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model SI file
+void Main_crava::on_siFile3BrowsePushButton_clicked(){
+  	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		siFile3LineEdit->setText(fileName);
+		siFile(fileName);
+	}
+};//browse for the prior model SI file then update the XML file if the above is not triggered, update the field
+
+void Main_crava::siFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+		background_si_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
+}
+
+void Main_crava::on_vpVsFile2LineEdit_editingFinished(){
+        vpVsFile(vpVsFile2LineEdit->text());
+};//update the XML-tree with the file if it is correct, autocomplete would be nice, prior model Vp/Vs file
+void Main_crava::on_vpVsFile2BrowsePushButton_clicked(){
+  	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		vpVsFile2LineEdit->setText(fileName);
+		vpVsFile(fileName);
+	}
+};//browse for the prior model Vp/Vs file then update the XML file if the above is not triggered, update the field
+
+void Main_crava::vpVsFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+		background_vp_vs_ratio_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
+}
+
+
 void Main_crava::on_backgroundEstimatedConfigurationCheckBox_toggled(bool checked){//does not modify the tree in any way, just changes what widgets are displayed.
 	velocityFieldLabel->setVisible(checked);
 	velocityFieldPriorFileLineEdit->setVisible(checked);
@@ -3688,6 +4295,191 @@ void Main_crava::on_lateralCorrelationBackgroundPushButton_clicked(){
 void Main_crava::on_highCutFrequencyLineEdit_editingFinished(){
 	background_high_cut_background_modellingPointer->setText( 1, highCutFrequencyLineEdit->text() );
 };//update the XML three with the high cut frequency
+
+void Main_crava::on_topSurfaceFileLineEdit_editingFinished(){
+         topSurfaceFile(topSurfaceFileLineEdit->text());
+};//update the XML tree with the top surface file
+
+void Main_crava::on_topSurfaceFileBrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		topSurfaceFileLineEdit->setText(fileName);
+		topSurfaceFile(fileName);
+	}
+};//browse for the top surface file and update the XML tree if the above is not triggered.
+
+void Main_crava::topSurfaceFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+		background_top_surface_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
+}
+
+void Main_crava::on_topPrioritySpinBox_editingFinished(){
+        background_top_surface_erosion_priorityPointer->setText(1,QString::number(topPrioritySpinBox->value()));
+}
+
+void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
+	if(currentRow==-1){//disable if there are no items left.
+		baseSurfaceFileLineEdit->setText(QString());
+		basePrioritySpinBox->setValue(1);
+		topCorrelationRadioButton->setChecked(true);
+		surfaceUncertaintyLineEdit->setText(QString());
+		zoneFrame->setEnabled(false);
+		deleteZonePushButton->setEnabled(false);
+		insertZonePushButton->setEnabled(false);
+		return;
+	}
+	if(currentRow==zoneListWidget->count()-1){//The last zone has to have a surface uncertainty equal to zero
+	  surfaceUncertaintyLineEdit->setReadOnly(true);
+	}
+	else{
+	  surfaceUncertaintyLineEdit->setReadOnly(false);
+	}
+
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+	//the selected zone, current row is updated after 
+
+	//move to base-surface-file
+	QString baseSurfaceFile;
+	getValueFromZone(zone, QString("base-surface-file"), baseSurfaceFile);
+	baseSurfaceFileLineEdit->setText(baseSurfaceFile);
+
+	//move to erosion-priority
+	QString baseErosionPriority;
+	getValueFromZone(zone, QString("erosion-priority"), baseErosionPriority);
+	if(!baseErosionPriority.isEmpty()){
+	  basePrioritySpinBox->setValue(baseErosionPriority.toInt());
+	}
+	else{
+	  basePrioritySpinBox->setValue(1);
+	}
+
+	//move to correlation-structure
+	QString correlationStructure;
+	getValueFromZone(zone, QString("correlation-structure"), correlationStructure);
+	if(correlationStructure==QString("top")){
+		topCorrelationRadioButton->setChecked(true);
+
+	}
+	else if(correlationStructure==QString("base")){
+		baseCorrelationRadioButton->setChecked(true);
+	}
+	else if(correlationStructure==QString("compaction")){
+	        compactionCorrelationRadioButton->setChecked(true);
+	}
+
+	//move to surface uncertainty
+	QString surfaceUncertainty;
+	getValueFromZone(zone, QString("surface-uncertainty"), surfaceUncertainty);
+	surfaceUncertaintyLineEdit->setText(surfaceUncertainty);
+	
+	zoneFrame->setEnabled(true);
+	deleteZonePushButton->setEnabled(true);
+	insertZonePushButton->setEnabled(true);
+}
+
+void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.			   
+        zoneListWidget->addItem(QString("zone ") + QString::number(zoneListWidget->count()+1));
+	addZone();
+	zoneListWidget->setCurrentItem(zoneListWidget->item(zoneListWidget->count()-1));
+	basePrioritySpinBox->setValue(1);
+	on_basePrioritySpinBox_editingFinished();
+	topCorrelationRadioButton->setChecked(true);
+	basePrioritySpinBox->setFocus();
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+	setValueInZone(zone, QString("surface-uncertainty"), QString("0"));
+	surfaceUncertaintyLineEdit->setText(QString("0"));
+	
+};//adds a new zone for multizone model
+
+void Main_crava::on_insertZonePushButton_clicked(){
+         int insertIndex = zoneListWidget->currentRow();
+	 insertZone();
+	 zoneListWidget->insertItem(insertIndex,QString("zone ")+QString::number(insertIndex+1));
+	 for(int i=insertIndex+1;i<zoneListWidget->count();i++){
+	  zoneListWidget->item(i)->setText(QString("zone ")+QString::number(i+1));
+	 }
+	 zoneListWidget->setCurrentItem(zoneListWidget->item(insertIndex));
+	 basePrioritySpinBox->setValue(1);
+	 on_basePrioritySpinBox_editingFinished();
+	 topCorrelationRadioButton->setChecked(true);
+	 QTreeWidgetItem* zone;
+	 findCorrectZone(&zone);
+	 setValueInZone(zone,QString("correlation-structure"), QString("top"));
+
+};//inserts a new zone for multizone model
+
+void Main_crava::on_deleteZonePushButton_clicked(){
+
+         int row = zoneListWidget->currentRow();
+         QTreeWidgetItem* zone;
+	 findCorrectZone(&zone);
+	 
+	 delete zoneListWidget->takeItem(row);
+	 delete zone;
+
+	 for(int i=row;i<zoneListWidget->count();i++){
+	   zoneListWidget->item(i)->setText(QString("zone ") + QString::number(i+1));
+	 }
+}
+
+void Main_crava::on_baseSurfaceFileLineEdit_editingFinished(){
+	baseSurfaceFile(baseSurfaceFileLineEdit->text());
+};//changes the base surface file for the selected zone in XML
+void Main_crava::on_baseSurfaceFileBrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	if(!fileName.isNull()){
+		baseSurfaceFileLineEdit->setText(fileName);
+		baseSurfaceFile(fileName);
+	}
+};//browse for the top surface file and update the XML tree if the above is not triggered.
+
+void Main_crava::baseSurfaceFile(const QString &value){
+	if (standard->StandardStrings::fileExists(value)){
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	  setValueInZone(zone, QString("base-surface-file"), standard->StandardStrings::relativeFileName(value) );
+	}
+}
+
+void Main_crava::on_surfaceUncertaintyLineEdit_editingFinished(){
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+	QString value=surfaceUncertaintyLineEdit->text();
+	setValueInZone(zone, QString("surface-uncertainty"), value);
+};//changes the surface uncertainty for the selected zone in XML
+
+void Main_crava::on_topCorrelationRadioButton_toggled(bool checked){
+        if(checked){
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	  setValueInZone(zone, QString("correlation-structure"), QString("top"));
+        }
+};//changes the correlation structure to "top" in XML
+void Main_crava::on_baseCorrelationRadioButton_toggled(bool checked){
+        if(checked){
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	  setValueInZone(zone, QString("correlation-structure"), QString("base"));
+	}
+};//changes the correlation structure to "base" in XML
+void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
+        if(checked){
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	  setValueInZone(zone, QString("correlation-structure"), QString("compaction"));
+	}
+};//changes the correlation structure to "compaction" in XML
+
+void Main_crava::on_basePrioritySpinBox_editingFinished(){
+   QTreeWidgetItem* zone;
+   findCorrectZone(&zone);
+   setValueInZone(zone, QString("erosion-priority"), QString::number(basePrioritySpinBox->value()));
+
+   
+ };//changes the erosion priority for a given zone in XML
 
 void Main_crava::on_correlationLocalWaveletCheckBox_toggled(bool checked){
 	lateralCorrelationWaveletPushButton->setVisible(checked);
@@ -3763,14 +4555,14 @@ void Main_crava::correlationDirectionFile(const QString &value){
 	}
 }
 
-void Main_crava::on_correlationDirectionLineEdit_editingFinished(){
-	correlationDirectionFile(correlationDirectionLineEdit->text());
+void Main_crava::on_correlationDirectionFileLineEdit_editingFinished(){
+	correlationDirectionFile(correlationDirectionFileLineEdit->text());
 };//update the XML three with the file if it is correct, autocomplete would be nice, prior model corr direction
 
 void Main_crava::on_correlationDirectionBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::correlationFormat());
 	if(!fileName.isNull()){
-		correlationDirectionLineEdit->setText(fileName);
+		correlationDirectionFileLineEdit->setText(fileName);
 		correlationDirectionFile(fileName);
 	}
 };//browse for prior model corr direction file then update the XML file and the above field
@@ -3782,8 +4574,8 @@ void Main_crava::on_faciesEstimateCheckBox_toggled(bool checked){
 	if(checked){
 		//clear the list
 		faciesListWidget->clear();
-		// insert an empty prior-probabilities node
-		prior_probabilitesPointer->setText( 1, QString() );
+		// clear tree of facies
+		deleteAllFacies();
 	}
 	else{
 		// clears all estimate-facis options, no estimate-only options currently
@@ -3950,30 +4742,10 @@ void Main_crava::on_uncertaintyLevelLineEdit_editingFinished(){
 };//update the XML file with the uncertainty level
 
 void Main_crava::on_writeXmlPushButton_clicked(){
-	bool pressedOK = false; //bool that becomes true if the users presses the Ok button
-	QString *xmlFilename = new QString; //the name of the xml file
-	QPointer<OutputDialog> output = new OutputDialog(this, xmlFilename, this, faciesProbabilitiesOn(),forwardMode(),estimationMode());
-	if(output->exec()){
-		output->updateOutput();//updates the tree
-		output->updateXmlName(); //updates the xml filename
-		QSettings settings("Statoil","CRAVA");
-		settings.beginGroup("crava");
-		settings.beginGroup("GUI");
-		settings.setValue(QString("xmlName"), *xmlFilename);
-		settings.endGroup();
-		settings.endGroup();
-		delete output;
-		pressedOK = true;
+	      if (okToRun()){ //has to save the file to run
+		on_runAction_triggered();
+		statusBar()->showMessage("Running CRAVA",2000);
 	}
-	delete output;
-	//cout << pressedOK << endl;
-	if (pressedOK == true){
-		//saves the file and then runs
-		if( saveFile( top_directoryPointer->text(1) + output_directoryPointer->text(1) + QString("/") + *xmlFilename + QString(".xml") ) ){ //the full path + the name of the xml file + .xml 
-			on_runAction_triggered();
-		}
-	}
-	delete xmlFilename;
 }
 
 void Main_crava::on_areaSeismicRadioButton_toggled(bool checked){
@@ -3991,6 +4763,8 @@ void Main_crava::on_areaFileRadioButton_toggled(bool checked){
 	if(!checked){
 		areaSurfaceFile(QString(""));
 		areaSurfaceLineEdit->clear();
+    		surfaceSnapCheckBox->setChecked(false);
+		area_from_surface_snap_to_seismic_dataPointer->setText(1,QString(""));
 	}
 }
 
@@ -3998,6 +4772,7 @@ void Main_crava::on_areaUtmRadioButton_toggled(bool checked){
 	areaUtmFrame->setVisible(checked);
 	areaUtmFrame->setEnabled(checked);
 	if(!checked){
+	        utmSnapCheckBox->setChecked(false);
 		for (int i=0;i<utm_coordinatesPointer->childCount();i++){//remove the values if unchecked, both tree and displayed.
 			utm_coordinatesPointer->child(i)->setText(1,QString(""));
 		}
@@ -4040,6 +4815,10 @@ void Main_crava::on_areaSurfaceFileBrowsePushButton_clicked(){
 	}
 }
 
+void Main_crava::on_surfaceSnapCheckBox_toggled(bool checked){
+        area_from_surface_snap_to_seismic_dataPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
 void Main_crava::on_areaXRefLineEdit_editingFinished(){
 	utm_coordinates_reference_point_xPointer->setText( 1, areaXRefLineEdit->text() );
 }
@@ -4064,8 +4843,22 @@ void Main_crava::on_areaYSampleDensityLineEdit_editingFinished(){
 	utm_coordinates_sample_density_yPointer->setText( 1, areaYSampleDensityLineEdit->text() );
 }
 
-void Main_crava::on_areaUtmAngleLabelineEdit_editingFinished(){
-	utm_coordinates_anglePointer->setText( 1, areaUtmAngleLabelineEdit->text() );
+void Main_crava::on_areaUtmAngleLineEdit_editingFinished(){
+	utm_coordinates_anglePointer->setText( 1, areaUtmAngleLineEdit->text() );
+}
+
+void Main_crava::on_utmSnapCheckBox_toggled(bool checked){
+        utm_coordinates_snap_to_seismic_dataPointer->setText(1,StandardStrings::checkedString(checked));
+	areaXSampleDensityLabel->setEnabled(!checked);
+	areaXSampleDensityLineEdit->setEnabled(!checked);
+	areaYSampleDensityLineEdit->setEnabled(!checked);
+	areaYSampleDensityLabel->setEnabled(!checked);
+	if(checked){
+	  areaXSampleDensityLineEdit->setText(QString(""));
+	  areaYSampleDensityLineEdit->setText(QString(""));
+	  on_areaXSampleDensityLineEdit_editingFinished();
+	  on_areaYSampleDensityLineEdit_editingFinished();
+	}
 }
 
 void Main_crava::on_inlineStartLineEdit_editingFinished(){
@@ -4093,51 +4886,292 @@ void Main_crava::on_crosslineStepLineEdit_editingFinished(){
 }
 
 void Main_crava::earthVpFile(const QString & value){
-	earth_model_vp_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	if (standard->StandardStrings::fileExists(value)){
+	  earth_model_vp_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
 }
 
 void Main_crava::earthVsFile(const QString & value){
-	earth_model_vs_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+        if (standard->StandardStrings::fileExists(value)){
+	  earth_model_vs_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
 }
 
 void Main_crava::earthDensityFile(const QString & value){
-	earth_model_density_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+        if (standard->StandardStrings::fileExists(value)){
+	  earth_model_density_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+	}
 }
 
-void Main_crava::on_earthVpFileLineEdit_editingFinished(){
-	earthVpFile(earthVpFileLineEdit->text());
+void Main_crava::earthAiFile(const QString & value){
+	if (standard->StandardStrings::fileExists(value)){
+	  earth_model_ai_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+       	}
 }
 
-void Main_crava::on_earthVsFileLineEdit_editingFinished(){
-	earthVsFile(earthVsFileLineEdit->text());
+void Main_crava::earthSiFile(const QString & value){
+	if (standard->StandardStrings::fileExists(value)){
+	  earth_model_si_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+       	}
 }
 
-void Main_crava::on_earthDensityFileLineEdit_editingFinished(){
-	earthDensityFile(earthDensityFileLineEdit->text());
+void Main_crava::earthVpVsFile(const QString & value){
+	if (standard->StandardStrings::fileExists(value)){
+	  earth_model_vp_vs_ratio_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+       	}
 }
 
-void Main_crava::on_earthVpFileBrowsePushButton_clicked(){
+void Main_crava::on_earthVpAiLineEdit_editingFinished(){
+        if(vpComboBox->currentIndex() == 0){
+	  earthVpFile(earthVpAiLineEdit->text());
+	}
+	else if(vpComboBox->currentIndex() == 1){
+	  earthAiFile(earthVpAiLineEdit->text());
+        }
+}
+
+void Main_crava::on_earthVsSiVpVsLineEdit_editingFinished(){
+	if(vsComboBox->currentIndex() == 0){
+          	earthVsFile(earthVsSiVpVsLineEdit->text());
+	}
+	else if(vsComboBox->currentIndex() == 1){
+	        earthSiFile(earthVsSiVpVsLineEdit->text());
+	}
+	else if(vsComboBox->currentIndex() == 2){
+	        earthVpVsFile(earthVsSiVpVsLineEdit->text());
+	}
+}
+
+void Main_crava::on_earthDensityLineEdit_editingFinished(){
+	earthDensityFile(earthDensityLineEdit->text());
+}
+
+void Main_crava::on_earthVpAiBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		earthVpFileLineEdit->setText(fileName);
+	  if(vpComboBox->currentIndex() == 0){
+		earthVpAiLineEdit->setText(fileName);
 		earthVpFile(fileName);
+	  }
+	  else if(vpComboBox->currentIndex() == 1){
+	        earthVpAiLineEdit->setText(fileName);
+		earthAiFile(fileName);
+	  }
 	}
 }
 
-void Main_crava::on_earthVsFileBrowsePushButton_clicked(){
+void Main_crava::on_earthVsSiVpVsBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		earthVsFileLineEdit->setText(fileName);
+	  if(vsComboBox->currentIndex() == 0){
+		earthVsSiVpVsLineEdit->setText(fileName);
 		earthVsFile(fileName);
+	  }
+	  else if(vsComboBox->currentIndex() == 1){
+	        earthVsSiVpVsLineEdit->setText(fileName);
+		earthSiFile(fileName);
+	  }
+	  else if(vsComboBox->currentIndex() == 2){
+	        earthVsSiVpVsLineEdit->setText(fileName);
+		earthVpVsFile(fileName);
+	  }
 	}
 }
 
-void Main_crava::on_earthDensityFileBrowsePushButton_clicked(){
+void Main_crava::on_earthDensityBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
 	if(!fileName.isNull()){
-		earthDensityFileLineEdit->setText(fileName);
+		earthDensityLineEdit->setText(fileName);
 		earthDensityFile(fileName);
 	}
+}
+
+void Main_crava::on_vpComboBox_currentIndexChanged(int index){
+       earthVpAiLineEdit->setText(QString(""));
+
+       if(index == 0){
+                earth_model_ai_filePointer->setText(1,QString(""));
+       }
+       else if(index == 1){
+	        earth_model_vp_filePointer->setText(1,QString(""));
+       }
+}
+
+void Main_crava::on_vsComboBox_currentIndexChanged(int index){
+       earthVsSiVpVsLineEdit->setText(QString(""));
+
+       if(index == 0){
+                earth_model_si_filePointer->setText(1,QString(""));
+		earth_model_vp_vs_ratio_filePointer->setText(1,QString(""));
+       }
+       else if(index == 1){
+	        earth_model_vs_filePointer->setText(1,QString(""));
+		earth_model_vp_vs_ratio_filePointer->setText(1,QString(""));
+       }
+       else if(index == 2){
+	        earth_model_vs_filePointer->setText(1,QString(""));
+		earth_model_si_filePointer->setText(1,QString(""));
+       }
+}
+
+void Main_crava::on_oOutputDirectoryBrowsePushButton_clicked(){
+	QString dirName = QFileDialog::getExistingDirectory( this, QString("Open File"),top_directoryPointer->text(1) );
+	if(!dirName.isNull()){
+	      oOutputDirectoryLineEdit->setText(dirName);
+	      QDir topDirectory(top_directoryPointer->text(1));
+	      QString outputDir = topDirectory.relativeFilePath(dirName);
+	      output_directoryPointer->setText(1,outputDir);
+	}
+}
+
+void Main_crava::on_oOutputDirectoryLineEdit_editingFinished(){
+        QDir topDirectory(top_directoryPointer->text(1));
+	QString outputDir = topDirectory.relativeFilePath(oOutputDirectoryLineEdit->text());
+	output_directoryPointer->setText(1,outputDir);
+}
+
+void Main_crava::on_oPrefixLineEdit_editingFinished(){
+        io_settings_file_output_prefixPointer->setText(1,oPrefixLineEdit->text());
+}
+
+void Main_crava::on_oDomainDepthCheckBox_toggled(bool checked){
+        grid_output_depthPointer->setText(1,StandardStrings::checkedString(checked));//depth
+}
+
+void Main_crava::on_oDomainTimeCheckBox_toggled(bool checked){
+        grid_output_timePointer->setText(1,StandardStrings::checkedString(checked));//time
+}
+
+void Main_crava::on_oSeismicOriginalCheckBox_toggled(bool checked){
+        seismic_data_originalPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oSeismicSyntheticCheckBox_toggled(bool checked){
+        seismic_data_syntheticPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oSeismicResidualCheckBox_toggled(bool checked){
+        seismic_data_residualsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oSeismicSyntheticResidualCheckBox_toggled(bool checked){
+  seismic_data_synthetic_residualsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oVpCheckBox_toggled(bool checked){
+        elastic_parameters_vpPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oVsCheckBox_toggled(bool checked){
+        elastic_parameters_vsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oDensityCheckBox_toggled(bool checked){
+        elastic_parameters_densityPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oAiCheckBox_toggled(bool checked){
+        elastic_parameters_aiPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oSiCheckBox_toggled(bool checked){
+        elastic_parameters_siPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oPoissonRatioCheckBox_toggled(bool checked){
+        elastic_parameters_poisson_ratioPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oVpVsRatioCheckBox_toggled(bool checked){
+        elastic_parameters_vp_vs_ratioPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oLameLamCheckBox_toggled(bool checked){
+        elastic_parameters_lame_lambdaPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oLameMuCheckBox_toggled(bool checked){
+        elastic_parameters_lame_muPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oLambdaRhoCheckBox_toggled(bool checked){
+        elastic_parameters_lambdarhoPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oMuRhoCheckBox_toggled(bool checked){
+        elastic_parameters_murhoPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oBackgroundCheckBox_toggled(bool checked){
+        elastic_parameters_backgroundPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oBackgroundTrendCheckBox_toggled(bool checked){
+        elastic_parameters_background_trendPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oExtraGridsCheckBox_toggled(bool checked){
+        grid_output_extra_gridsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oBackgroundTrend1DCheckBox_toggled(bool checked){
+        io_settings_background_trend_1dPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oWellCheckBox_toggled(bool checked){
+        well_output_wellsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oBlockedWellCheckBox_toggled(bool checked){
+        well_output_blocked_wellsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oWaveletWellCheckBox_toggled(bool checked){
+        wavelet_output_well_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oWaveletGlobalCheckBox_toggled(bool checked){
+        wavelet_output_global_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oWaveletLocalCheckBox_toggled(bool checked){
+        wavelet_output_local_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oTimeDepthCheckBox_toggled(bool checked){
+        grid_output_time_to_depth_velocityPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oCorrelationsCheckBox_toggled(bool checked){
+        grid_output_correlationsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oFaciesProbabilitiesCheckBox_toggled(bool checked){
+        grid_output_facies_probabilitiesPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oFaciesProbabilitiesUndefinedCheckBox_toggled(bool checked){
+        grid_output_facies_probabilities_with_undefPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oFaciesLikelihoodCheckBox_toggled(bool checked){
+        grid_output_facies_likelihoodPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oFaciesQualityGridCheckBox_toggled(bool checked){
+        grid_output_seismic_quality_gridPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oPriorCorrelationCheckBox_toggled(bool checked){
+        io_settings_prior_correlationsPointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oLocalNoiseCheckBox_toggled(bool checked){
+        io_settings_local_noisePointer->setText(1,StandardStrings::checkedString(checked));
+}
+
+void Main_crava::on_oRockPhysicsCheckBox_toggled(bool checked){
+        io_settings_rock_physics_distributionsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
 void Main_crava::showContextMenu(const QPoint& pos)
@@ -4225,6 +5259,10 @@ void Main_crava::findCorrectOptimizePosition(QTreeWidgetItem** itemParent){
 	*itemParent = xmlTreeWidget->topLevelItem(0)->child(2)->child( 1+wellListWidget->currentRow() )->child( 6+optimizePositionListWidget->currentRow() ); //changes the pointer
 }
 
+void Main_crava::findCorrectZone(QTreeWidgetItem** itemParent){
+  *itemParent = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(2+zoneListWidget->currentRow()); //changes the pointer
+}
+
 void Main_crava::findCorrectFacies(QTreeWidgetItem** itemParent){
 	*itemParent = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(4)->child( faciesListWidget->currentRow() ); //changes the pointer
 }
@@ -4233,6 +5271,29 @@ QList<QTreeWidgetItem*> Main_crava::getAllAngleGathers(){
 	QList<QTreeWidgetItem*> items = xmlTreeWidget->findItems( QString("angle-gather"), Qt::MatchExactly | Qt::MatchRecursive, 0);
 	return items;
 }
+
+void Main_crava::deleteAllZones(){
+	QList<QTreeWidgetItem*> items = xmlTreeWidget->findItems( QString("zone"), Qt::MatchExactly | Qt::MatchRecursive, 0);
+	foreach(QTreeWidgetItem* item,items){
+	  delete item;
+	}
+}// deletes all zones
+
+void Main_crava::deleteAllFacies(){
+        QList<QTreeWidgetItem*> items = xmlTreeWidget->findItems(QString("facies"), Qt::MatchExactly | Qt::MatchRecursive, 0);
+	foreach(QTreeWidgetItem* item, items){
+	  if(item->parent()->text(0) == QString("prior-probabilities")){
+	    delete item;
+	  }
+	}
+}//deletes all facies
+
+void Main_crava::deleteAllOptimizePosition(){
+	QList<QTreeWidgetItem*> items = xmlTreeWidget->findItems( QString("optimize-position"), Qt::MatchExactly | Qt::MatchRecursive, 0);
+	foreach(QTreeWidgetItem* item,items){
+	  delete item;
+	}
+}// deletes all optimize position
 
 void Main_crava::getValueFromAngleGather(QTreeWidgetItem* item, QString itemInAngleGather, QString &value, QString parentName){
 	if (item->text(0) == itemInAngleGather){
@@ -4265,6 +5326,15 @@ void Main_crava::getValueFromOptimizePosition(QTreeWidgetItem* item, QString ite
 	}
 	for(int i=0; i<item->childCount(); i++){
 		getValueFromOptimizePosition(item->child(i), itemInOptimizePosition, value); //recursive call to all the children
+	}
+}
+
+void Main_crava::getValueFromZone(QTreeWidgetItem* item, QString itemInZone, QString &value){
+        if(item->text(0) == itemInZone){
+                 value = item->text(1);
+	}
+	for(int i=0; i<item->childCount(); i++){
+	  getValueFromZone(item->child(i), itemInZone, value);//recursive call to all children
 	}
 }
 
@@ -4311,6 +5381,15 @@ void Main_crava::setValueInOptimizePosition(QTreeWidgetItem* item, QString itemI
 	}
 }
 
+void Main_crava::setValueInZone(QTreeWidgetItem* item, QString itemInZone, QString value){
+        if(item->text(0) == itemInZone){
+                item->setText(1,value);
+	}
+	for(int i=0; i<item->childCount(); i++){
+                setValueInZone(item->child(i), itemInZone, value);//recursive call to all children
+	}
+}
+
 void Main_crava::setValueInFacies(QTreeWidgetItem* item, QString itemInFacies, QString value){
 	if (item->text(0) == itemInFacies){
 		item->setText(1, value);
@@ -4341,6 +5420,9 @@ void Main_crava::setDefaultValues(){
 	maximum_merge_distancePointer->setText( 1, QString("0.01") );
 	maximum_offsetPointer->setText( 1, QString("250.0") );
 	maximum_shiftPointer->setText( 1, QString("11.0") );
+
+	guard_zonePointer->setText( 1, QString("100.0"));
+	high_cut_seismic_resolutionPointer->setText( 1, QString(""));
 
 }
 
@@ -4411,24 +5493,33 @@ void Main_crava::activateTable(){
 	//prior-model
 	prior_modelPointer = xmlTreeWidget->topLevelItem(0)->child(3);
 		backgroundPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0);
-			background_vp_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(0);
-			background_vs_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(1);
-			background_density_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(2);
-			background_vp_constantPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(3);
-			background_vs_constantPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(4);
-			background_density_constantPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(5);
-			background_velocity_fieldPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(6);
-			background_lateral_correlationPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(7);
-				background_variogram_typePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(7)->child(0);
-				background_anglePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(7)->child(1);
-				background_rangePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(7)->child(2);
-				background_subrangePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(7)->child(3);
-				background_powerPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(7)->child(4);
-			background_high_cut_background_modellingPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(8);
+                        background_ai_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(0);
+			background_si_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(1);
+			background_vp_vs_ratio_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(2);
+			background_vp_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(3);
+			background_vs_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(4);
+			background_density_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(5);
+			background_vp_constantPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(6);
+			background_vs_constantPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(7);
+			background_density_constantPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(8);
+			background_velocity_fieldPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(9);
+			background_lateral_correlationPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(10);
+				background_variogram_typePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(10)->child(0);
+				background_anglePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(10)->child(1);
+				background_rangePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(10)->child(2);
+				background_subrangePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(10)->child(3);
+				background_powerPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(10)->child(4);
+			background_high_cut_background_modellingPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(11);
+			background_multizone_modelPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12);
+		         	background_top_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(0);
+				background_top_surface_erosion_priorityPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(1);
 		earth_modelPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1);
 			earth_model_vp_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(0);
 			earth_model_vs_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(1);
 			earth_model_density_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(2);
+		       	earth_model_ai_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(3);
+			earth_model_si_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(4);
+			earth_model_vp_vs_ratio_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(5);
 		local_waveletPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(2);
 			local_wavelet_lateral_correlationPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(2)->child(0);
 				local_wavelet_variogram_typePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(2)->child(0)->child(0);
@@ -4479,6 +5570,7 @@ void Main_crava::activateTable(){
 				interval_one_surface_sample_densityPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(1)->child(3);
 			area_from_surfacePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2);
 				area_from_surface_file_namePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(0);
+			       	area_from_surface_snap_to_seismic_dataPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(1);
 			utm_coordinatesPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3);
 				utm_coordinates_reference_point_xPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(0);
 				utm_coordinates_reference_point_yPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(1);
@@ -4487,6 +5579,7 @@ void Main_crava::activateTable(){
 				utm_coordinates_sample_density_xPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(4);
 				utm_coordinates_sample_density_yPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(5);
 				utm_coordinates_anglePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(6);
+			       	utm_coordinates_snap_to_seismic_dataPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(7);
 			inline_crossline_numbersPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4);
 				il_startPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(0);
 				il_endPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(1);
@@ -4540,12 +5633,15 @@ void Main_crava::activateTable(){
 					seismic_data_originalPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(3)->child(0);
 					seismic_data_syntheticPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(3)->child(1);
 					seismic_data_residualsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(3)->child(2);
+					seismic_data_synthetic_residualsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(3)->child(3);
 				grid_output_other_parametersPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4);
 					grid_output_facies_probabilitiesPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(0);
 					grid_output_facies_probabilities_with_undefPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(1);
-					grid_output_time_to_depth_velocityPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(2);
-					grid_output_extra_gridsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(3);
-					grid_output_correlationsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(4);
+					grid_output_facies_likelihoodPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(2);
+					grid_output_time_to_depth_velocityPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(3);
+					grid_output_extra_gridsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(4);
+					grid_output_correlationsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(5);
+				       	grid_output_seismic_quality_gridPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(3)->child(4)->child(6);
 			well_outputPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(4);
 				well_output_formatPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(4)->child(0);
 					well_output_rmsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(4)->child(0)->child(0);
@@ -4565,6 +5661,7 @@ void Main_crava::activateTable(){
 				io_settings_prior_correlationsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(1);
 				io_settings_background_trend_1dPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(2);
 				io_settings_local_noisePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(3);
+			       	io_settings_rock_physics_distributionsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(4);
 			io_settings_file_output_prefixPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(7);
 			io_settings_log_levelPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(8);
 		//project-settings/advanced-settings
@@ -4574,17 +5671,85 @@ void Main_crava::activateTable(){
 				y_fractionPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(0)->child(1);
 				z_fractionPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(0)->child(2);
 			use_intermediate_disk_storagePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(1);
-			maximum_relative_thickness_differencePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(2);
-			frequency_bandPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(3);
-				frequency_band_low_cutPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(3)->child(0);
-				frequency_band_high_cutPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(3)->child(1);
-			energy_tresholdPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(4);
-			wavelet_tapering_lengthPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(5);
-			minimum_relative_wavelet_amplitudePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(6);
-			maximum_wavelet_shiftPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(7);
-			white_noise_component_cutPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(8);
-			reflection_matrixPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(9);
-			kriging_data_limitPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(10);
-			debug_levelPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(11);
-			smooth_kriged_parametersPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(12);
+			vp_vs_ratioPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(2);
+			vp_vs_ratio_from_wellsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(3);
+			maximum_relative_thickness_differencePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(4);
+			frequency_bandPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(5);
+				frequency_band_low_cutPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(5)->child(0);
+				frequency_band_high_cutPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(5)->child(1);
+			energy_tresholdPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(6);
+			wavelet_tapering_lengthPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(7);
+			minimum_relative_wavelet_amplitudePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(8);
+			maximum_wavelet_shiftPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(9);
+			white_noise_component_cutPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(10);
+			reflection_matrixPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(11);
+			kriging_data_limitPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(12);
+			debug_levelPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(13);
+			smooth_kriged_parametersPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(14);
+			guard_zonePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(3)->child(15);
 }
+
+bool Main_crava::eventFilter(QObject *obj, QEvent *event){
+    if(event->type() == QEvent::FocusIn){
+         QList<QObject*> fields = getNecessaryFields();
+         if(fields.contains(obj)){
+	     QLineEdit *object = qobject_cast<QLineEdit*>(obj);
+	     object->setStyleSheet("");
+	     return false;
+	 }
+    }
+    else if(event->type() == QEvent::FocusOut){
+         QList<QObject*> fields = getNecessaryFields();
+         if(fields.contains(obj)){
+	     QLineEdit *object = qobject_cast<QLineEdit*>(obj);
+	     if(object->text().isEmpty()) object->setStyleSheet("QLineEdit {border: 2px ridge red; border-radius:5px; margin:2px}");
+	     if(!object->text().isEmpty() && object->objectName().contains("File") && !standard->StandardStrings::fileExists(object->text())){
+	       object->setStyleSheet("QLineEdit {border: 2px ridge red; border-radius:5px; margin:2px}");//draw border if the text of a necessary QLineEdit providing a file is not a path to an existing file.
+	     }
+	     return false;
+	 }
+    }
+    else if(event->type() == QEvent::HoverEnter){
+         QList<QObject*> fields = getNecessaryFields();
+         if(fields.contains(obj)){
+	    QLineEdit *object = qobject_cast<QLineEdit*>(obj);
+	    object->setStyleSheet("");
+	    return false;
+	 }
+    }
+    else if(event->type() == QEvent::HoverLeave){
+         QList<QObject*> fields = getNecessaryFields();
+         if(fields.contains(obj)){
+	    QLineEdit *object = qobject_cast<QLineEdit*>(obj);
+	    if(object->text().isEmpty() && !object->hasFocus() && object->isEnabled()) object->setStyleSheet("QLineEdit {border: 2px ridge red; border-radius:5px; margin: 2px}");
+	    if(!object->text().isEmpty() && !object->hasFocus() && object->isEnabled() && object->objectName().contains("File") && !standard->StandardStrings::fileExists(object->text())){
+	       object->setStyleSheet("QLineEdit {border: 2px ridge red; border-radius:5px; margin:2px}");//draw border if the text of a necessary QLineEdit providing a file is not a path to an existing file.
+	    }
+	    return false;
+	 }
+    }
+}//handles the necessary fields
+
+QList<QObject*> Main_crava::getNecessaryFields(){
+          QList<QObject*> list;
+	  list << angleLineEdit << inlineLineEdit << crosslineLineEdit << xCoordLineEdit << yCoordLineEdit;
+	  list << timeLineEdit << densityLineEdit << faciesLineEdit << topTimeFileLineEdit << bottomTimeFileLineEdit;
+	  list << topTimeValueLineEdit << bottomTimeValueLineEdit << correlationDirectionFileLineEdit << layersLineEdit;
+	  list << referenceSurfaceFileLineEdit << distanceTopLineEdit << thicknessLineEdit << layerThicknessLineEdit;
+	  return list;
+}//returns a list of all necessary objects.
+
+void Main_crava::necessaryFieldGui(){
+  QList<QObject*> list = getNecessaryFields();
+  foreach (QObject *object,list){
+    if(object->objectName().contains("LineEdit")){
+      QLineEdit *field = qobject_cast<QLineEdit*>(object);
+      if(field->text().isEmpty() && field->isEnabled()){
+	field->setStyleSheet("QLineEdit{border: 2px ridge red; border-radius: 5px; margin: 2px}");
+      }
+      else{
+	field->setStyleSheet("");
+      }
+    }
+  }
+}//provide red borders to necessary fields that are empty

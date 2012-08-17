@@ -34,7 +34,6 @@ set(cravagui_sources
   Main.cpp
   VariogramDialog.cpp
   ModeDialog.cpp
-  OutputDialog.cpp
   SettingsDialog.cpp
   StandardStrings.cpp
 )
@@ -44,7 +43,6 @@ set(cravagui_headers
   Main_crava.h
   VariogramDialog.h
   ModeDialog.h
-  OutputDialog.h
   SettingsDialog.h
   StandardStrings.h
 )
@@ -54,7 +52,6 @@ set(cravagui_forms
   Main_crava.ui
   VariogramDialog.ui
   ModeDialog.ui
-  OutputDialog.ui
   SettingsDialog.ui
 )
 
