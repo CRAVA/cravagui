@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>890</width>
-    <height>556</height>
+    <width>901</width>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
    <property name="geometry">
     <rect>
      <x>700</x>
-     <y>520</y>
+     <y>530</y>
      <width>175</width>
      <height>25</height>
     </rect>
@@ -73,8 +73,8 @@
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>100</y>
+     <x>240</x>
+     <y>110</y>
      <width>20</width>
      <height>411</height>
     </rect>
@@ -86,10 +86,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>260</x>
      <y>100</y>
-     <width>601</width>
-     <height>411</height>
+     <width>621</width>
+     <height>432</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -518,10 +518,10 @@
   <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>20</x>
      <y>100</y>
-     <width>188</width>
-     <height>411</height>
+     <width>231</width>
+     <height>421</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -580,6 +580,12 @@
     </item>
    </layout>
   </widget>
+  <zorder>buttonBox</zorder>
+  <zorder>frame_2</zorder>
+  <zorder>line</zorder>
+  <zorder>verticalLayoutWidget</zorder>
+  <zorder>verticalLayoutWidget_2</zorder>
+  <zorder>newProjectWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>openProjectLineEdit</tabstop>
