@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>901</width>
-    <height>572</height>
+    <width>892</width>
+    <height>568</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -580,12 +580,6 @@
     </item>
    </layout>
   </widget>
-  <zorder>buttonBox</zorder>
-  <zorder>frame_2</zorder>
-  <zorder>line</zorder>
-  <zorder>verticalLayoutWidget</zorder>
-  <zorder>verticalLayoutWidget_2</zorder>
-  <zorder>newProjectWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>openProjectLineEdit</tabstop>
