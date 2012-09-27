@@ -121,27 +121,27 @@
            </property>
            <item>
             <property name="text">
-             <string>Low</string>
+             <string>low</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Medium</string>
+             <string>medium</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>High</string>
+             <string>high</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Error</string>
+             <string>error</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Warning</string>
+             <string>warning</string>
             </property>
            </item>
           </widget>
