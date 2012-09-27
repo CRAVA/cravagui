@@ -1036,7 +1036,8 @@ bool Main_crava::okToRun(){//makes the program prompt for save on run crava
 		else if (r == QMessageBox::Cancel) {
 			return false;
 		}
-	} 
+	}
+	return 0;
 }
 void Main_crava::on_settingsAction_triggered(){
 
@@ -5728,6 +5729,7 @@ bool Main_crava::eventFilter(QObject *obj, QEvent *event){
 	    return false;
 	 }
     }
+    return 0;
 }//handles the necessary fields
 
 QList<QObject*> Main_crava::getNecessaryFields(){
