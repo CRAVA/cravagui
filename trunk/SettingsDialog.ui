@@ -1814,7 +1814,7 @@ p, li { white-space: pre-wrap; }
          <item row="9" column="1">
           <widget class="QLineEdit" name="shiftLineEdit">
            <property name="toolTip">
-            <string>&lt;qt&gt;The maximum allowed vertical shift for moving wells.</string>
+            <string>&lt;qt&gt;The maximum allowed vertical shift for moving wells in milliseconds.</string>
            </property>
           </widget>
          </item>
