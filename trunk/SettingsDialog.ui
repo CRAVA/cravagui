@@ -1628,7 +1628,7 @@ p, li { white-space: pre-wrap; }
          <item row="9" column="0">
           <widget class="QLabel" name="shift_label">
            <property name="toolTip">
-            <string>&lt;qt&gt;The maximum allowed vertical shift for moving wells.</string>
+            <string>&lt;qt&gt;The maximum allowed vertical shift for moving wells in milliseconds.</string>
            </property>
            <property name="text">
             <string>&lt;qt&gt;Maximum shift</string>

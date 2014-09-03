@@ -4892,7 +4892,7 @@ p, li { white-space: pre-wrap; }
                   <string>When estimating wavelets or facies probabilities, the number of layers should be chosen so as to give a sampling density of at least 4 ms.</string>
                  </property>
                  <property name="text">
-                  <string>Numer of layers:</string>
+                  <string>Number of layers:</string>
                  </property>
                  <property name="buddy">
                   <cstring>layersLineEdit</cstring>
