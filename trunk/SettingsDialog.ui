@@ -983,7 +983,7 @@ p, li { white-space: pre-wrap; }
            <item>
             <widget class="QLabel" name="waveletLengthLabel">
              <property name="toolTip">
-              <string>Giving the length of the wavelet to be estimated in ms. For a 1D wavelet this is the width of the Papoulis taper used, when tapering of auto-correlation of reflection co-efficients, and cross-correlation of reflection-coefficients and seismic data, before doing the spectral division. Increasing this value will give less bias (i.e. less energy at low frequencies), but larger variance in the estimate (i.e. secondary oscillations). For a 3D wavelet this gives the length of the source-wavelet, by dividing this length by the vertical sampling interval we find the the </string>
+              <string>&lt;qt&gt;Giving the length of the wavelet to be estimated in ms. For a 1D wavelet this is the width of the Papoulis taper used, when tapering of auto-correlation of reflection co-efficients, and cross-correlation of reflection-coefficients and seismic data, before doing the spectral division. Increasing this value will give less bias (i.e. less energy at low frequencies), but larger variance in the estimate (i.e. secondary oscillations). For a 3D wavelet this gives the length of the source-wavelet, by dividing this length by the vertical sampling interval we find the the </string>
              </property>
              <property name="text">
               <string>&lt;qt&gt;Length of wavelet to be estimated, in ms</string>
