@@ -4333,7 +4333,7 @@ p, li { white-space: pre-wrap; }
              <item row="2" column="1">
               <widget class="QLineEdit" name="distanceTopLineEdit">
                <property name="toolTip">
-                <string>The distance from the reference surface to the top surface, this value is added to the reference surface to create the top surface.</string>
+                <string>The distance from the reference surface to the top surface in milliseconds, this value is added to the reference surface to create the top surface.</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -4343,7 +4343,7 @@ p, li { white-space: pre-wrap; }
              <item row="3" column="1">
               <widget class="QLineEdit" name="thicknessLineEdit">
                <property name="toolTip">
-                <string>The value for the thickness of the inversion interval. This value is added to the top surface to create the base surface.</string>
+                <string>The value for the thickness of the inversion interval in milliseconds. This value is added to the top surface to create the base surface.</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -4353,7 +4353,7 @@ p, li { white-space: pre-wrap; }
              <item row="2" column="0">
               <widget class="QLabel" name="distance_top_label">
                <property name="toolTip">
-                <string>The distance from the reference surface to the top surface, this value is added to the reference surface to create the top surface.</string>
+                <string>The distance from the reference surface to the top surface in milliseconds, this value is added to the reference surface to create the top surface.</string>
                </property>
                <property name="text">
                 <string>Distance to top:</string>
@@ -4366,7 +4366,7 @@ p, li { white-space: pre-wrap; }
              <item row="4" column="1">
               <widget class="QLineEdit" name="layerThicknessLineEdit">
                <property name="toolTip">
-                <string>The thickness of a layer in the inversion interval. The interval thickness should be divisible by this value.</string>
+                <string>The thickness of a layer in the inversion interval in milliseconds. The interval thickness should be divisible by this value.</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -4382,7 +4382,7 @@ p, li { white-space: pre-wrap; }
                 </size>
                </property>
                <property name="toolTip">
-                <string>The value for the thickness of the inversion interval. This value is added to the top surface to create the base surface.</string>
+                <string>The value for the thickness of the inversion interval in milliseconds. This value is added to the top surface to create the base surface.</string>
                </property>
                <property name="text">
                 <string>Total interval thickness:</string>
@@ -4408,7 +4408,7 @@ p, li { white-space: pre-wrap; }
              <item row="4" column="0">
               <widget class="QLabel" name="layer_thickness_label">
                <property name="toolTip">
-                <string>The thickness of a layer in the inversion interval. The interval thickness should be divisible by this value.</string>
+                <string>The thickness of a layer in the inversion interval in milliseconds. The interval thickness should be divisible by this value.</string>
                </property>
                <property name="text">
                 <string>Sampling density:</string>
