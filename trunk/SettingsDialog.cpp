@@ -60,9 +60,6 @@ void SettingsDialog::updateFields(){
 	settings.beginGroup("crava");
 	cravaPathLineEdit->setText(settings.value(QString("executable"),QString("/project/res/x86_64_RH_5/bin/crava")).toString());
 	textEditorLineEdit->setText(settings.value(QString("editor"),QString("emacs")).toString());
-	terminalPathLineEdit->setText(settings.value(QString("terminal"),QString("konsole")).toString());
-	terminalCheckBox->setChecked(settings.value(QString("useterminal"),true).toBool());
-	on_terminalCheckBox_toggled(terminalCheckBox->isChecked());
 	wikiPathLineEdit->setText(settings.value(QString("wiki"),QString()).toString());
 	manualPathLineEdit->setText(settings.value(QString("manual"),QString("manual/CRAVA_user_manual.pdf")).toString());
 	settings.beginGroup("GUI");
@@ -254,8 +251,6 @@ void SettingsDialog::updateSettings(){
 		settings.setValue(QString("executable"),cravaPathLineEdit->text());
 	}
 	settings.setValue( QString("editor"), textEditorLineEdit->text() );
-	settings.setValue(QString("terminal"),terminalPathLineEdit->text());
-	settings.setValue(QString("useterminal"),terminalCheckBox->isChecked());
 	settings.setValue(QString("wiki"),wikiPathLineEdit->text());
 	settings.setValue(QString("manual"),manualPathLineEdit->text());
 	settings.beginGroup("GUI");
@@ -449,13 +444,6 @@ void SettingsDialog::on_textEditorBrowsePushButton_clicked(){
 	}
 }
 
-void SettingsDialog::on_terminalPathBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Terminal"), standard->StandardStrings::inputPath(), QString("All files(*)"));//fix the file...
-	if(!fileName.isNull()){
-		terminalPathLineEdit->setText(fileName);
-	}
-}
-
 void SettingsDialog::on_seedFileBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Seed file"), standard->StandardStrings::inputPath(), StandardStrings::asciiFormat());
 	if(!fileName.isNull()){
@@ -476,11 +464,6 @@ void SettingsDialog::on_manualPathBrowsePushButton_clicked(){
 	}
  }
 
-void SettingsDialog::on_terminalCheckBox_toggled(bool checked){
-	terminalPathLineEdit->setEnabled(checked);
-	terminalPathBrowsePushButton->setEnabled(checked);
-	terminalPathLabel->setEnabled(checked);
-}
 void SettingsDialog::on_segyCheckBox_toggled(bool checked){
 	if(!checked){
 		headerSeisWorksRadioButton->setChecked(true);

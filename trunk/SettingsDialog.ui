@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author>Øystein Monsrud Arneson and Andreas B. Lindblad</author>
+ <author>Alf Birger Rustad Øystein Monsrud Arneson and Andreas B. Lindblad</author>
  <class>SettingsDialog</class>
  <widget class="QDialog" name="SettingsDialog">
   <property name="geometry">
@@ -2002,43 +2002,6 @@ p, li { white-space: pre-wrap; }
           <widget class="QPushButton" name="textEditorBrowsePushButton">
            <property name="toolTip">
             <string>&lt;qt&gt;Choose the text editor which is to be used.</string>
-           </property>
-           <property name="text">
-            <string>Browse...</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QCheckBox" name="terminalCheckBox">
-           <property name="toolTip">
-            <string>&lt;qt&gt; Control whether CRAVA should run in the terminal or not.</string>
-           </property>
-           <property name="text">
-            <string>Run CRAVA in terminal</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="terminalPathLabel">
-           <property name="toolTip">
-            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
-           </property>
-           <property name="text">
-            <string>Terminal application:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="terminalPathLineEdit">
-           <property name="toolTip">
-            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QPushButton" name="terminalPathBrowsePushButton">
-           <property name="toolTip">
-            <string>&lt;qt&gt;The terminal application used for running CRAVA.</string>
            </property>
            <property name="text">
             <string>Browse...</string>
