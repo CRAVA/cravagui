@@ -893,44 +893,23 @@ void Main_crava::on_wikiAction_triggered(){
 	}
 }
 void Main_crava::on_runAction_triggered(){
-	if(!currentFile().isEmpty()){//this is nowhere near platform independent... only works on linux, unfortunately the terminals do not have the same syntax so require hacks to get it to work properly, if there was a terminal widget that might have been better.
+	if(!currentFile().isEmpty()){//only works on linux
 		QSettings settings("Statoil","CRAVA");
 		settings.beginGroup("crava");
-		QString program;
+		QString program = "konsole";
 		QStringList arguments;
-		if(settings.value(QString("useterminal"),true).toBool()){
-			program=settings.value(QString("terminal"),QString("konsole")).toString();
-			if(program==QString("gnome-terminal")){//sets title of window
-				arguments << QString("-t");
-			}
-			else{
-				arguments << QString("-T");
-			}
-			arguments << QString(StandardStrings::cravaVersion() + QString(" ") + StandardStrings::strippedName(currentFile()));
-			if(program==QString("konsole")){//these flags only work for konsole
-				arguments << QString("--workdir");//sets working directory
-				if(!top_directoryPointer->text(1).isEmpty()){
-					arguments << top_directoryPointer->text(1);
-				}
-				else{
-					arguments << QString(".");
-				}
-				arguments << QString("--noclose");//makes the terminal not close on exit
-			}
-			
-			if(program==QString("gnome-terminal")){//sets executable
-				arguments << QString("-x");
-				arguments << QString(settings.value(QString("executable"),QString()).toString());
-			}
-			else{
-				arguments << QString("-e");
-				arguments << settings.value(QString("executable"),QString()).toString();
-			}
+		arguments << QString("--workdir");//sets working directory
+		// Set working directory to top-directory tag if it exists, else use current directory
+		if(!top_directoryPointer->text(1).isEmpty()){
+			arguments << top_directoryPointer->text(1);
 		}
-		else{//if it is to not run in terminal, just start the program directly
-			program=settings.value(QString("executable"),QString()).toString();
+		else{
+		  arguments << QString(".");
 		}
-		arguments << currentFile();
+		arguments << QString("--noclose"); //makes the terminal not close on exit
+		arguments << QString("-e"); //command to execute in konsole
+		arguments << settings.value(QString("executable"),QString()).toString(); //append executable tag
+		arguments << currentFile(); //append xml-file name
 		QProcess *cravaRun = new QProcess();
 		cravaRun->start(program,arguments);
 	}
@@ -4743,10 +4722,9 @@ void Main_crava::on_uncertaintyLevelLineEdit_editingFinished(){
 };//update the XML file with the uncertainty level
 
 void Main_crava::on_writeXmlPushButton_clicked(){
-	      if (okToRun()){ //has to save the file to run
-		on_runAction_triggered();
-		statusBar()->showMessage("Running CRAVA",2000);
-	}
+        okToRun(); //prompt to save crava if modified
+        on_runAction_triggered();//run crava 
+	statusBar()->showMessage("Running CRAVA",2000);
 }
 
 void Main_crava::on_areaSeismicRadioButton_toggled(bool checked){
