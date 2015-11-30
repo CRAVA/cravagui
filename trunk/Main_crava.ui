@@ -3347,21 +3347,98 @@ p, li { white-space: pre-wrap; }
           </layout>
          </widget>
         </item>
-        <item row="5" column="0">
-         <spacer>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="4" column="0" colspan="3">
+         <layout class="QGridLayout">
+          <property name="margin">
+           <number>0</number>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
+          <property name="spacing">
+           <number>3</number>
           </property>
-         </spacer>
+          <item row="2" column="0">
+           <widget class="QLabel" name="waveletBottomSurfaceLabel">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Time base surface</string>
+            </property>
+            <property name="buddy">
+             <cstring>waveletBottomLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="waveletIntervalLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+              <underline>false</underline>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Surface files for limiting the region in wavelet and noise are estimated. Wavelet and noise are estimated together.</string>
+            </property>
+            <property name="text">
+             <string>Wavelet and noise estimation interval</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="waveletTopBrowsePushButton">
+            <property name="toolTip">
+             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="waveletBottomBrowsePushButton">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="waveletTopLineEdit">
+            <property name="toolTip">
+             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="waveletBottomLineEdit">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="waveletTopSurfaceLabel">
+            <property name="toolTip">
+             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Time top surface</string>
+            </property>
+            <property name="buddy">
+             <cstring>waveletTopLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
-        <item row="4" column="0">
-         <spacer name="verticalSpacer_5">
+        <item row="17" column="0">
+         <spacer>
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -4077,173 +4154,6 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="9" column="0">
-         <layout class="QGridLayout">
-          <property name="margin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>6</number>
-          </property>
-          <item row="2" column="0">
-           <widget class="QLabel" name="waveletBottomSurfaceLabel">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Time base surface</string>
-            </property>
-            <property name="buddy">
-             <cstring>waveletBottomLineEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" colspan="3">
-           <widget class="QLabel" name="waveletIntervalLabel">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-              <underline>false</underline>
-             </font>
-            </property>
-            <property name="toolTip">
-             <string>Surface files for limiting the region in wavelet and noise are estimated. Wavelet and noise are estimated together.</string>
-            </property>
-            <property name="text">
-             <string>Wavelet and noise estimation interval</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="waveletTopBrowsePushButton">
-            <property name="toolTip">
-             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Browse...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="faciesTopLabel">
-            <property name="toolTip">
-             <string>Top surface file for limiting the region where facies are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Time top surface</string>
-            </property>
-            <property name="buddy">
-             <cstring>faciesTopLineEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QPushButton" name="waveletBottomBrowsePushButton">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Browse...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="waveletTopLineEdit">
-            <property name="toolTip">
-             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="2">
-           <widget class="QPushButton" name="faciesBottomBrowsePushButton">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where facies are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Browse...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="waveletBottomLineEdit">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="waveletTopSurfaceLabel">
-            <property name="toolTip">
-             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Time top surface</string>
-            </property>
-            <property name="buddy">
-             <cstring>waveletTopLineEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="faciesBottomLabel">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where facies are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Time base surface</string>
-            </property>
-            <property name="buddy">
-             <cstring>faciesBottomLineEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="3">
-           <widget class="QLabel" name="faciesIntervalLabel">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-              <underline>false</underline>
-             </font>
-            </property>
-            <property name="text">
-             <string>Facies estimation interval</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QPushButton" name="faciesTopBrowsePushButton">
-            <property name="toolTip">
-             <string>Top surface file for limiting the region where facies are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Browse...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLineEdit" name="faciesBottomLineEdit">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where facies are estimated.</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="faciesTopLineEdit">
-            <property name="toolTip">
-             <string>Top surface file for limiting the region where facies are estimated.</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
         <item row="10" column="0">
          <spacer>
           <property name="orientation">
@@ -4256,6 +4166,157 @@ p, li { white-space: pre-wrap; }
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_21">
+          <item>
+           <widget class="QLabel" name="inversionLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+              <underline>false</underline>
+             </font>
+            </property>
+            <property name="text">
+             <string>Vertical inversion geometry</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="twoSurfaceRadioButton">
+            <property name="toolTip">
+             <string>Top and base independent, correlation direction equal to top surface at top and equal to base surface at the base.</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="cravaguiresources.qrc">
+              <normaloff>:/images/two_surface.png</normaloff>:/images/two_surface.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="correlationSurfaceRadioButton">
+            <property name="toolTip">
+             <string>Top and base independent, correlation direction defined by a seperate correlation surface.</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="cravaguiresources.qrc">
+              <normaloff>:/images/correlation_direction.png</normaloff>:/images/correlation_direction.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="topSurfaceRadioButton">
+            <property name="toolTip">
+             <string>The top of the inversion interval is defined by a surface and the base by the end of the seismic data. The correlation direction is equal to the surface.</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="cravaguiresources.qrc">
+              <normaloff>:/images/surface_top.png</normaloff>:/images/surface_top.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="baseSurfaceRadioButton">
+            <property name="toolTip">
+             <string>The base of the inversion interval is defined by a surface and the top by the end of the seismic data. The correlation direction is equal to the surface.</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="cravaguiresources.qrc">
+              <normaloff>:/images/surface_base.png</normaloff>:/images/surface_base.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="oneSurfaceRadioButton">
+            <property name="toolTip">
+             <string>The inversion interval and is defined by a surface and distance to top and base of the interval. The correlation direction is equal to the surface.</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="cravaguiresources.qrc">
+              <normaloff>:/images/one_surface_paralell.png</normaloff>:/images/one_surface_paralell.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="constantInversionRadioButton">
+            <property name="toolTip">
+             <string>The top and base of the inversion interval are constant.</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="cravaguiresources.qrc">
+              <normaloff>:/images/surface_constant.png</normaloff>:/images/surface_constant.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="6" column="0">
          <widget class="QFrame" name="areaFileFrame">
@@ -5362,163 +5423,7 @@ p, li { white-space: pre-wrap; }
           </layout>
          </widget>
         </item>
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_21">
-          <item>
-           <widget class="QLabel" name="inversionLabel">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-              <underline>false</underline>
-             </font>
-            </property>
-            <property name="text">
-             <string>Vertical inversion geometry</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout">
-          <property name="spacing">
-           <number>6</number>
-          </property>
-          <property name="margin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="twoSurfaceRadioButton">
-            <property name="toolTip">
-             <string>Top and base independent, correlation direction equal to top surface at top and equal to base surface at the base.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/two_surface.png</normaloff>:/images/two_surface.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="correlationSurfaceRadioButton">
-            <property name="toolTip">
-             <string>Top and base independent, correlation direction defined by a seperate correlation surface.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/correlation_direction.png</normaloff>:/images/correlation_direction.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="topSurfaceRadioButton">
-            <property name="toolTip">
-             <string>The top of the inversion interval is defined by a surface and the base by the end of the seismic data. The correlation direction is equal to the surface.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/surface_top.png</normaloff>:/images/surface_top.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="baseSurfaceRadioButton">
-            <property name="toolTip">
-             <string>The base of the inversion interval is defined by a surface and the top by the end of the seismic data. The correlation direction is equal to the surface.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/surface_base.png</normaloff>:/images/surface_base.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="oneSurfaceRadioButton">
-            <property name="toolTip">
-             <string>The inversion interval and is defined by a surface and distance to top and base of the interval. The correlation direction is equal to the surface.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/one_surface_paralell.png</normaloff>:/images/one_surface_paralell.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="constantInversionRadioButton">
-            <property name="toolTip">
-             <string>The top and base of the inversion interval are constant.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/surface_constant.png</normaloff>:/images/surface_constant.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
        </layout>
-       <zorder>areaFileFrame</zorder>
-       <zorder>surfaceOneFrame</zorder>
-       <zorder>surfaceTwoFrame</zorder>
-       <zorder>areaInCrossFrame</zorder>
-       <zorder>areaUtmFrame</zorder>
       </widget>
       <widget class="QWidget" name="priorModelTab">
        <attribute name="title">
@@ -5628,7 +5533,7 @@ p, li { white-space: pre-wrap; }
           <item>
            <spacer name="horizontalSpacer_4">
             <property name="orientation">
-             <enum>Qt::Horizonal</enum>
+             <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -5682,6 +5587,106 @@ p, li { white-space: pre-wrap; }
            </spacer>
           </item>
          </layout>
+        </item>
+        <item row="14" column="0">
+         <layout class="QGridLayout">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <item row="1" column="0">
+           <widget class="QLabel" name="faciesTopLabel">
+            <property name="toolTip">
+             <string>Top surface file for limiting the region where facies are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Time top surface</string>
+            </property>
+            <property name="buddy">
+             <cstring>faciesTopLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="faciesBottomBrowsePushButton">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where facies are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="faciesBottomLabel">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where facies are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Time base surface</string>
+            </property>
+            <property name="buddy">
+             <cstring>faciesBottomLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="faciesIntervalLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+              <underline>false</underline>
+             </font>
+            </property>
+            <property name="text">
+             <string>Facies estimation interval</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="faciesTopBrowsePushButton">
+            <property name="toolTip">
+             <string>Top surface file for limiting the region where facies are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="faciesBottomLineEdit">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where facies are estimated.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="faciesTopLineEdit">
+            <property name="toolTip">
+             <string>Top surface file for limiting the region where facies are estimated.</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="15" column="0">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>120</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="prior_model_label">
@@ -6842,7 +6847,7 @@ p, li { white-space: pre-wrap; }
              <x>20</x>
              <y>90</y>
              <width>751</width>
-             <height>101</height>
+             <height>194</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -7171,30 +7176,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </widget>
         </item>
-        <item row="13" column="0">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>120</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
-       <zorder>prior_model_label</zorder>
-       <zorder>backgroundModelFrame</zorder>
-       <zorder>backgroundEstimateFrame</zorder>
-       <zorder>correlationElasticParametersCheckBox</zorder>
-       <zorder>parameterCorrelationFrame</zorder>
-       <zorder>faciesProbabilityLabel</zorder>
-       <zorder>faciesEstimateCheckBox</zorder>
-       <zorder>faciesGivenFrame</zorder>
-       <zorder>faciesEstimateFrame</zorder>
-       <zorder>backgroundMultizoneFrame</zorder>
       </widget>
       <widget class="QWidget" name="earthModelTab">
        <attribute name="title">
@@ -7549,7 +7531,7 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>602</width>
+               <width>557</width>
                <height>84</height>
               </rect>
              </property>
@@ -7742,7 +7724,7 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>332</width>
+               <width>312</width>
                <height>163</height>
               </rect>
              </property>
@@ -7865,7 +7847,7 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>571</width>
+               <width>523</width>
                <height>76</height>
               </rect>
              </property>
@@ -7942,7 +7924,7 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>416</width>
+               <width>379</width>
                <height>49</height>
               </rect>
              </property>
@@ -8029,7 +8011,7 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>532</width>
+               <width>494</width>
                <height>49</height>
               </rect>
              </property>
@@ -8126,8 +8108,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>955</width>
-               <height>176</height>
+               <width>636</width>
+               <height>167</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8369,13 +8351,13 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-<widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>1284</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
@@ -8595,10 +8577,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>waveletTopBrowsePushButton</tabstop>
   <tabstop>waveletBottomLineEdit</tabstop>
   <tabstop>waveletBottomBrowsePushButton</tabstop>
-  <tabstop>faciesTopLineEdit</tabstop>
-  <tabstop>faciesTopBrowsePushButton</tabstop>
-  <tabstop>faciesBottomLineEdit</tabstop>
-  <tabstop>faciesBottomBrowsePushButton</tabstop>
   <tabstop>backgroundEstimatedConfigurationCheckBox</tabstop>
   <tabstop>velocityFieldPriorFileLineEdit</tabstop>
   <tabstop>velocityFieldPriorFileBrowsePushButton</tabstop>
@@ -8632,4 +8610,3 @@ p, li { white-space: pre-wrap; }
  </resources>
  <connections/>
 </ui>
-
