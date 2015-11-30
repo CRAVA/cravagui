@@ -10,9 +10,8 @@ git clone git://github.com/CRAVA/cravagui.git
 
 BUILD INSTRUCTIONS
 To build cravagui using cmake, run
- cd cravagui/trunk
- mkdir build
- cd build
+ mkdir cravagui/build
+ cd cravagui/build
  cmake ..
  make
 You will find the cravagui binary in the build folder.
