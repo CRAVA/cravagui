@@ -5533,12 +5533,12 @@ p, li { white-space: pre-wrap; }
           <item>
            <spacer name="horizontalSpacer_4">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
-              <height>20</height>
+              <width>20</width>
+              <height>40</height>
              </size>
             </property>
            </spacer>
@@ -8108,8 +8108,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>636</width>
-               <height>167</height>
+               <width>904</width>
+               <height>182</height>
               </rect>
              </property>
              <attribute name="label">
