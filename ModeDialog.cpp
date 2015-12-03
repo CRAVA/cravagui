@@ -33,7 +33,7 @@ ModeDialog::ModeDialog(Main_crava *main_crava, bool started, bool *pressedOpen, 
 	this->main_crava = main_crava;
 	setupUi( this );
 	setWindowTitle(QString("%1[*] - %2").arg(windowTitle()).arg(StandardStrings::cravaVersion()));
-	titleLabel->setText("<h2>" + StandardStrings::cravaGuiVersion() + " for " +StandardStrings::cravaVersion() + "</h2><p>CRAVA (<b>C</b>ondition <b>R</b>eservoir variables on <b>A</b>mplitude <b>V</b>ersus <b>A</b>ngle)");
+	titleLabel->setText("<h2>" + StandardStrings::cravaVersion() + "</h2><p>CRAVA (<b>C</b>ondition <b>R</b>eservoir variables on <b>A</b>mplitude <b>V</b>ersus <b>A</b>ngle)");
 	//this makes sure the pages switch as apropriate and display the correct widgets for each mode.
 	QSignalMapper *signalMapper=new QSignalMapper(this);
 	signalMapper->setMapping(inversionRadioButton,0);
