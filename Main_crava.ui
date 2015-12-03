@@ -6845,9 +6845,9 @@ p, li { white-space: pre-wrap; }
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>90</y>
-             <width>751</width>
-             <height>194</height>
+             <y>80</y>
+             <width>761</width>
+             <height>111</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
