@@ -547,6 +547,11 @@ void Main_crava::updateGuiToTree(){
 		else if(base_surface_time_filePointer->text(1).isEmpty()){//bottom
 			topSurfaceRadioButton->setChecked(true);
 		}
+		//Check if correlation direction surface is set, set geometry accordingly
+		else if(!correlation_directionPointer->text(1).isEmpty()){
+			correlationSurfaceRadioButton->setChecked(true);
+		}
+
 		else{
 			twoSurfaceRadioButton->setChecked(true);
 		}
