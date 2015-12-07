@@ -207,6 +207,9 @@ void Main_crava::setupButtonGroups(){
 	vsFormat->addButton(vsRadioButton);
 	vsFormat->addButton(dtsRadioButton);
 	//horizon
+	QButtonGroup *singleMultizone = new QButtonGroup(horizonsTab);
+	singleMultizone->addButton(singleZoneInversionRadioButton);
+	singleMultizone->addButton(multizoneInversionRadioButton);
 	QButtonGroup *verticalInterval = new QButtonGroup(horizonsTab);
 	verticalInterval->addButton(twoSurfaceRadioButton);
 	verticalInterval->addButton(topSurfaceRadioButton);
@@ -220,6 +223,9 @@ void Main_crava::setupButtonGroups(){
 	lateralInterval->addButton(areaUtmRadioButton);
 	lateralInterval->addButton(areaInCrossRadioButton);
 	//prior model
+	QButtonGroup *background = new QButtonGroup(priorModelTab);
+	background->addButton(estimateBackgroundRadioButton);
+	background->addButton(backgroundRadioButton);
 	QButtonGroup *vp1Prior = new QButtonGroup(vpVsRhoFrame);
 	vp1Prior->addButton(vpConstant1RadioButton);
 	vp1Prior->addButton(vpFile1RadioButton);
@@ -3857,7 +3863,6 @@ void Main_crava::on_singleZoneInversionRadioButton_toggled(bool checked){
        multizoneInversionFrame->setVisible(false);//remove the multizone gui
        twoSurfaceRadioButton->setChecked(true);//set the default geometry radio button 
        surfaceTwoFrame->setVisible(true);
-       //       necessaryFieldGui();
 }
 void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	if(checked){
