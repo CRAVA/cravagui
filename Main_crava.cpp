@@ -571,7 +571,7 @@ void Main_crava::updateGuiToTree(){
 	//zone list is handled by the reading of the tree
 
 	if(zoneListWidget->count()>1 || !background_top_surface_filePointer->text(1).isEmpty() || !background_top_surface_erosion_priorityPointer->text(1).isEmpty()){ //checks if the multizone background model radio button should be checked.
-	        multizoneBackgroundRadioButton->setChecked(true);
+	        multizoneInversionRadioButton->setChecked(true);
 		topSurfaceFileLineEdit->setText(background_top_surface_filePointer->text(1));
 		topPrioritySpinBox->setValue(background_top_surface_erosion_priorityPointer->text(1).toInt());
 	}
@@ -597,6 +597,7 @@ void Main_crava::updateGuiToTree(){
 	  
 	}
 	else{
+          singleZoneInversionRadioButton->setChecked(true);
 	  backgroundRadioButton->setChecked(true);
 	  if(!background_vp_filePointer->text(1).isEmpty()){
 	    vpVsRhoRadioButton->setChecked(true);
@@ -1635,7 +1636,7 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			recursiveXmlRead(xmlChild,treeItem->child(5+optimizePositionListWidget->count()));
 		}
 	     	else if(xmlChild.toElement().tagName() == QString("zone")){
-		        multizoneBackgroundRadioButton->setChecked(true);
+		        multizoneInversionRadioButton->setChecked(true);
 			zoneListWidget->addItem(QString("zone " + QString::number(zoneListWidget->count()+1)));
 			addZone();
 			zoneListWidget->setCurrentRow(zoneListWidget->count()-1);
@@ -3802,7 +3803,6 @@ void Main_crava::on_backgroundRadioButton_toggled(bool checked){
 	if(checked){
                 backgroundModelFrame->setVisible(true);
 		backgroundEstimateFrame->setVisible(false);
-		MultizoneInversionFrame->setVisible(false);
 		//Clears the background estimation fields
 		velocityFieldPriorFileLineEdit->setText(QString(""));
 		highCutFrequencyLineEdit->setText(QString(""));
@@ -3818,11 +3818,11 @@ void Main_crava::on_backgroundRadioButton_toggled(bool checked){
 	}
 
 }
-void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
+void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked){
         if(checked){
-	        backgroundModelFrame->setVisible(false);
-		backgroundEstimateFrame->setVisible(false);
-		MultizoneInversionFrame->setVisible(true);
+		surfaceOneFrame->setVisible(false);
+		surfaceTwoFrame->setVisible(false);
+		multizoneInversionFrame->setVisible(true);
 		vpVsRhoRadioButton->setChecked(true);
 		deleteZonePushButton->setEnabled(false);
 		insertZonePushButton->setEnabled(false);
@@ -3833,12 +3833,12 @@ void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
 		on_topPrioritySpinBox_editingFinished();
 		zoneFrame->setEnabled(false);
 	
-		QList<QLineEdit*> fields1=backgroundModelFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		QList<QLineEdit*> fields1=backgroundModelFrame->QObject::findChildren<QLineEdit*>();
 		foreach (QLineEdit* field1, fields1){
 			field1->clear();
 		}
 
-		QList<QLineEdit*> field2=backgroundEstimateFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		QList<QLineEdit*> field2=backgroundEstimateFrame->QObject::findChildren<QLineEdit*>();
 		foreach (QLineEdit* field2, field2){
 			field2->clear();
 		}
@@ -3853,11 +3853,17 @@ void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
 	       zoneFrame->setEnabled(false);
 	}
 }
+void Main_crava::on_singleZoneInversionRadioButton_toggled(bool checked){
+       multizoneInversionFrame->setVisible(false);//remove the multizone gui
+       twoSurfaceRadioButton->setChecked(true);//set the default geometry radio button 
+       surfaceTwoFrame->setVisible(true);
+       //       necessaryFieldGui();
+}
 void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	if(checked){
                 backgroundModelFrame->setVisible(false);
 		backgroundEstimateFrame->setVisible(true);
-		MultizoneInversionFrame->setVisible(false);
+		multizoneInversionFrame->setVisible(false);
 		vpVsRhoRadioButton->setChecked(true);
 		backgroundEstimatedConfigurationCheckBox->setChecked(false);
 		

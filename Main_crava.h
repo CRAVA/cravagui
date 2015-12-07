@@ -596,7 +596,8 @@ private slots:
 	//prior model
 	void on_backgroundRadioButton_toggled(bool checked);//determines whether the regular background model should be given or not.
 	void on_estimateBackgroundRadioButton_toggled(bool checked);//determines whether the beckground model should be estimated or not.
-	void on_multizoneBackgroundRadioButton_toggled(bool checked);//determines whether the multizone background model should be given or not.
+	void on_multizoneInversionRadioButton_toggled(bool checked);//determines whether multizone inversion should be used
+        void on_singleZoneInversionRadioButton_toggled(bool checked);//determines whether multizone inversion should be used
 	void on_vpVsRhoRadioButton_toggled(bool checked);//determines whether it is the combination Vp,Vs and density that should be given as parameters.
 	void on_aiVpVsRhoRadioButton_toggled(bool checked);//determines whether it is the combination AI,Vp/Vs and density that should be given as parameters.
 	void on_aiSiRhoRadioButton_toggled(bool checked);//determines whether it is the combination AI,SI and density that should be given as parameters.

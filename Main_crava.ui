@@ -2031,7 +2031,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -4115,7 +4115,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_multizone">
           <item>
-           <widget class="QRadioButton" name="SingleZoneInversionRadioButton">
+           <widget class="QRadioButton" name="singleZoneInversionRadioButton">
             <property name="toolTip">
              <string>Only one interval given for the inversion.</string>
             </property>
@@ -4125,7 +4125,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="MultizoneInversionRadioButton">
+           <widget class="QRadioButton" name="multizoneInversionRadioButton">
             <property name="toolTip">
              <string>Two or more intervals given to perform inversion on.</string>
             </property>
@@ -4137,7 +4137,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_21">
+         <layout class="QHBoxLayout" name="inversionBoxLayout">
           <item>
            <widget class="QLabel" name="inversionLabel">
             <property name="font">
@@ -4158,7 +4158,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout">
+         <layout class="QHBoxLayout" name="inversionGeometryButtons">
           <property name="spacing">
            <number>6</number>
           </property>
@@ -4912,7 +4912,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QFrame" name="MultizoneInversionFrame">
+           <widget class="QFrame" name="multizoneInversionFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -5035,7 +5035,7 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>20</x>
                <y>80</y>
-               <width>751</width>
+               <width>459</width>
                <height>121</height>
               </rect>
              </property>
@@ -5091,7 +5091,7 @@ p, li { white-space: pre-wrap; }
               <item>
                <widget class="QListWidget" name="zoneListWidget">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -5990,16 +5990,6 @@ p, li { white-space: pre-wrap; }
              </size>
             </property>
            </spacer>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="multizoneBackgroundRadioButton">
-            <property name="toolTip">
-             <string>&lt;qt&gt;The background is given by a user defined multizone model.</string>
-            </property>
-            <property name="text">
-             <string>Multizone background model</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </item>
