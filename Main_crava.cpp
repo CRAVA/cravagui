@@ -3826,6 +3826,7 @@ void Main_crava::on_backgroundRadioButton_toggled(bool checked){
 }
 void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked){
         if(checked){
+	        inversionLabelFrame->setVisible(false);
 		surfaceOneFrame->setVisible(false);
 		surfaceTwoFrame->setVisible(false);
 		multizoneInversionFrame->setVisible(true);
@@ -3863,6 +3864,7 @@ void Main_crava::on_singleZoneInversionRadioButton_toggled(bool checked){
        multizoneInversionFrame->setVisible(false);//remove the multizone gui
        twoSurfaceRadioButton->setChecked(true);//set the default geometry radio button 
        surfaceTwoFrame->setVisible(true);
+       inversionLabelFrame->setVisible(true);
 }
 void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	if(checked){

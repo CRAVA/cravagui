@@ -2031,7 +2031,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -4137,155 +4137,154 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="inversionBoxLayout">
-          <item>
-           <widget class="QLabel" name="inversionLabel">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-              <underline>false</underline>
-             </font>
-            </property>
-            <property name="text">
-             <string>Vertical inversion geometry</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="inversionGeometryButtons">
-          <property name="spacing">
-           <number>6</number>
-          </property>
-          <property name="margin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="twoSurfaceRadioButton">
-            <property name="toolTip">
-             <string>Top and base independent, correlation direction equal to top surface at top and equal to base surface at the base.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/two_surface.png</normaloff>:/images/two_surface.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="correlationSurfaceRadioButton">
-            <property name="toolTip">
-             <string>Top and base independent, correlation direction defined by a seperate correlation surface.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/correlation_direction.png</normaloff>:/images/correlation_direction.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="topSurfaceRadioButton">
-            <property name="toolTip">
-             <string>The top of the inversion interval is defined by a surface and the base by the end of the seismic data. The correlation direction is equal to the surface.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/surface_top.png</normaloff>:/images/surface_top.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="baseSurfaceRadioButton">
-            <property name="toolTip">
-             <string>The base of the inversion interval is defined by a surface and the top by the end of the seismic data. The correlation direction is equal to the surface.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/surface_base.png</normaloff>:/images/surface_base.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="oneSurfaceRadioButton">
-            <property name="toolTip">
-             <string>The inversion interval and is defined by a surface and distance to top and base of the interval. The correlation direction is equal to the surface.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/one_surface_paralell.png</normaloff>:/images/one_surface_paralell.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="constantInversionRadioButton">
-            <property name="toolTip">
-             <string>The top and base of the inversion interval are constant.</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="cravaguiresources.qrc">
-              <normaloff>:/images/surface_constant.png</normaloff>:/images/surface_constant.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>100</width>
-              <height>50</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QFrame" name="inversionLabelFrame">
+          <layout class="QVBoxLayout" name="inversionBoxLayout">
+           <item>
+            <widget class="QLabel" name="inversionLabel">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <underline>false</underline>
+              </font>
+             </property>
+             <property name="text">
+              <string>Vertical inversion geometry</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="twoSurfaceRadioButton">
+               <property name="toolTip">
+                <string>Top and base independent, correlation direction equal to top surface at top and equal to base surface at the base.</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="cravaguiresources.qrc">
+                 <normaloff>:/images/two_surface.png</normaloff>:/images/two_surface.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>100</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="correlationSurfaceRadioButton">
+               <property name="toolTip">
+                <string>Top and base independent, correlation direction defined by a seperate correlation surface.</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="cravaguiresources.qrc">
+                 <normaloff>:/images/correlation_direction.png</normaloff>:/images/correlation_direction.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>100</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QRadioButton" name="topSurfaceRadioButton">
+               <property name="toolTip">
+                <string>The top of the inversion interval is defined by a surface and the base by the end of the seismic data. The correlation direction is equal to the surface.</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="cravaguiresources.qrc">
+                 <normaloff>:/images/surface_top.png</normaloff>:/images/surface_top.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>100</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QRadioButton" name="baseSurfaceRadioButton">
+               <property name="toolTip">
+                <string>The base of the inversion interval is defined by a surface and the top by the end of the seismic data. The correlation direction is equal to the surface.</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="cravaguiresources.qrc">
+                 <normaloff>:/images/surface_base.png</normaloff>:/images/surface_base.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>100</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QRadioButton" name="oneSurfaceRadioButton">
+               <property name="toolTip">
+                <string>The inversion interval and is defined by a surface and distance to top and base of the interval. The correlation direction is equal to the surface.</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="cravaguiresources.qrc">
+                 <normaloff>:/images/one_surface_paralell.png</normaloff>:/images/one_surface_paralell.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>100</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QRadioButton" name="constantInversionRadioButton">
+               <property name="toolTip">
+                <string>The top and base of the inversion interval are constant.</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="cravaguiresources.qrc">
+                 <normaloff>:/images/surface_constant.png</normaloff>:/images/surface_constant.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>100</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </item>
         <item>
          <widget class="QFrame" name="surfaceTwoFrame">
@@ -5956,19 +5955,6 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
            <widget class="QRadioButton" name="backgroundRadioButton">
             <property name="toolTip">
              <string>&lt;qt&gt;The background model is given by the user. The user has to specify which combination of input he/she will provide.</string>
@@ -5977,19 +5963,6 @@ p, li { white-space: pre-wrap; }
              <string>Background model from file</string>
             </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
