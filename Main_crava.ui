@@ -1055,6 +1055,41 @@
            </item>
            <item>
             <property name="text">
+             <string>multiple-intervals</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>top-surface</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>interval</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>name</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>base-surface</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>erosion-priority</string>
+               </property>
+              </item>
+             </item>
+             <item>
+              <property name="text">
+               <string>number-of-layers</string>
+              </property>
+             </item>
+            </item>
+           </item>
+           <item>
+            <property name="text">
              <string>area-from-surface</string>
             </property>
             <property name="text">
@@ -1996,7 +2031,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -4076,98 +4111,32 @@ p, li { white-space: pre-wrap; }
        <attribute name="title">
         <string>Horizons</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_14">
-        <item row="4" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_multizone">
           <item>
-           <widget class="QLabel" name="lateralGeometryLabel">
-            <property name="font">
-             <font>
-              <family>Sans Serif</family>
-              <pointsize>9</pointsize>
-              <weight>75</weight>
-              <italic>false</italic>
-              <bold>true</bold>
-             </font>
+           <widget class="QRadioButton" name="SingleZoneInversionRadioButton">
+            <property name="toolTip">
+             <string>Only one interval given for the inversion.</string>
             </property>
             <property name="text">
-             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:600; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Lateral inversion geometry&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>Single zone inversion</string>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="MultizoneInversionRadioButton">
+            <property name="toolTip">
+             <string>Two or more intervals given to perform inversion on.</string>
+            </property>
+            <property name="text">
+             <string>Multizone inversion</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
-        <item row="5" column="0">
-         <layout class="QHBoxLayout">
-          <property name="spacing">
-           <number>6</number>
-          </property>
-          <property name="margin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="areaSeismicRadioButton">
-            <property name="toolTip">
-             <string>Use the area from the seismic datafile as the lateral inversion area.</string>
-            </property>
-            <property name="text">
-             <string>Use area from seismic data file</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="areaFileRadioButton">
-            <property name="toolTip">
-             <string>Use the area of a given surface file as the lateral inversion area.</string>
-            </property>
-            <property name="text">
-             <string>Area from surface file</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="areaUtmRadioButton">
-            <property name="toolTip">
-             <string>A rectangle given in UTM coordinates which may be rotated relative to the seismic data. Any output SegY cubes will count inline and crossline correctly if angles are the same.</string>
-            </property>
-            <property name="text">
-             <string>Area in UTM coordinates</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="areaInCrossRadioButton">
-            <property name="toolTip">
-             <string>Specification of the lateral inversion geometry in inline and crossline. Any numbers not specified will be taken from the seismic cubes.</string>
-            </property>
-            <property name="text">
-             <string>Inline and crossline for SegY format</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="10" column="0">
-         <spacer>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0">
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_21">
           <item>
            <widget class="QLabel" name="inversionLabel">
@@ -4188,7 +4157,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="1" column="0">
+        <item>
          <layout class="QHBoxLayout">
           <property name="spacing">
            <number>6</number>
@@ -4318,206 +4287,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="6" column="0">
-         <widget class="QFrame" name="areaFileFrame">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_11">
-           <item row="1" column="1">
-            <layout class="QHBoxLayout" name="horizontalLayout_16">
-             <item>
-              <widget class="QLabel" name="areaFileLabel">
-               <property name="toolTip">
-                <string>&lt;qt&gt;Storm surface file defining the lateral extent of the inversion volume.</string>
-               </property>
-               <property name="text">
-                <string>Surface file for area</string>
-               </property>
-               <property name="buddy">
-                <cstring>areaSurfaceLineEdit</cstring>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="areaSurfaceLineEdit">
-               <property name="toolTip">
-                <string>&lt;qt&gt;Storm surface file defining the lateral extent of the inversion volume.</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="areaSurfaceFileBrowsePushButton">
-               <property name="toolTip">
-                <string>&lt;qt&gt;Storm surface file defining the lateral extent of the inversion volume.</string>
-               </property>
-               <property name="text">
-                <string>Browse...</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="2" column="1">
-            <widget class="QCheckBox" name="surfaceSnapCheckBox">
-             <property name="toolTip">
-              <string>Find the smallest rectangular IL-XL box enclosing the entire surface and do the inversion using these IL-XL values. </string>
-             </property>
-             <property name="text">
-              <string>Use the smallest IL-XL rectangle enclosing the entire surface</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QFrame" name="surfaceOneFrame">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_29">
-           <item row="0" column="0">
-            <layout class="QGridLayout">
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="distanceTopLineEdit">
-               <property name="toolTip">
-                <string>The distance from the reference surface to the top surface in milliseconds, this value is added to the reference surface to create the top surface.</string>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="thicknessLineEdit">
-               <property name="toolTip">
-                <string>The value for the thickness of the inversion interval in milliseconds. This value is added to the top surface to create the base surface.</string>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="distance_top_label">
-               <property name="toolTip">
-                <string>The distance from the reference surface to the top surface in milliseconds, this value is added to the reference surface to create the top surface.</string>
-               </property>
-               <property name="text">
-                <string>Distance to top:</string>
-               </property>
-               <property name="buddy">
-                <cstring>distanceTopLineEdit</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="layerThicknessLineEdit">
-               <property name="toolTip">
-                <string>The thickness of a layer in the inversion interval in milliseconds. The interval thickness should be divisible by this value.</string>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="thicknessLabel">
-               <property name="minimumSize">
-                <size>
-                 <width>167</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>The value for the thickness of the inversion interval in milliseconds. This value is added to the top surface to create the base surface.</string>
-               </property>
-               <property name="text">
-                <string>Total interval thickness:</string>
-               </property>
-               <property name="buddy">
-                <cstring>thicknessLineEdit</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="reference_surface_label">
-               <property name="toolTip">
-                <string>File for storm surface. Top and base surfaces for the inversion interval will be parallel to this.</string>
-               </property>
-               <property name="text">
-                <string>Reference surface:</string>
-               </property>
-               <property name="buddy">
-                <cstring>referenceSurfaceFileLineEdit</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="layer_thickness_label">
-               <property name="toolTip">
-                <string>The thickness of a layer in the inversion interval in milliseconds. The interval thickness should be divisible by this value.</string>
-               </property>
-               <property name="text">
-                <string>Sampling density:</string>
-               </property>
-               <property name="buddy">
-                <cstring>layerThicknessLineEdit</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QPushButton" name="referenceSurfaceBrowsePushButton">
-               <property name="toolTip">
-                <string>File for storm surface. Top and base surfaces for the inversion interval will be parallel to this.</string>
-               </property>
-               <property name="text">
-                <string>Browse...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" colspan="2">
-              <widget class="QLineEdit" name="referenceSurfaceFileLineEdit">
-               <property name="toolTip">
-                <string>File for storm surface. Top and base surfaces for the inversion interval will be parallel to this.</string>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <spacer>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="2" column="0">
+        <item>
          <widget class="QFrame" name="surfaceTwoFrame">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -4996,171 +4766,737 @@ p, li { white-space: pre-wrap; }
           </layout>
          </widget>
         </item>
-        <item row="8" column="0">
-         <widget class="QFrame" name="areaInCrossFrame">
-          <property name="toolTip">
-           <string/>
-          </property>
+        <item>
+         <widget class="QFrame" name="surfaceOneFrame">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QGridLayout" name="gridLayout_15">
+          <layout class="QGridLayout" name="gridLayout_29">
            <item row="0" column="0">
-            <widget class="QLabel" name="inlineStartLabel">
-             <property name="toolTip">
-              <string>The start value for inline.</string>
+            <layout class="QGridLayout">
+             <property name="margin">
+              <number>0</number>
              </property>
-             <property name="text">
-              <string>Inline start           </string>
+             <property name="spacing">
+              <number>6</number>
              </property>
-             <property name="buddy">
-              <cstring>inlineStartLineEdit</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="inlineStartLineEdit">
-             <property name="toolTip">
-              <string>The start value for inline.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QLabel" name="crosslineStartLabel">
-             <property name="toolTip">
-              <string>The start value for crossline.</string>
-             </property>
-             <property name="text">
-              <string>Crossline start    </string>
-             </property>
-             <property name="buddy">
-              <cstring>crosslineStartLineEdit</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="4">
-            <widget class="QLineEdit" name="crosslineStartLineEdit">
-             <property name="toolTip">
-              <string>The start value for crossline.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="5">
-            <spacer>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="inlineEndLabel">
-             <property name="toolTip">
-              <string>The end value for inline.</string>
-             </property>
-             <property name="text">
-              <string>Inline end</string>
-             </property>
-             <property name="buddy">
-              <cstring>inlineEndLineEdit</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="inlineEndLineEdit">
-             <property name="toolTip">
-              <string>The end value for inline.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="3">
-            <widget class="QLabel" name="crosslineEndLabel">
-             <property name="toolTip">
-              <string>The end value for crossline.</string>
-             </property>
-             <property name="text">
-              <string>Crossline end</string>
-             </property>
-             <property name="buddy">
-              <cstring>crosslineEndLineEdit</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="4">
-            <widget class="QLineEdit" name="crosslineEndLineEdit">
-             <property name="toolTip">
-              <string>The end value for crossline.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="inlineStepLabel">
-             <property name="toolTip">
-              <string>The step value for inline.</string>
-             </property>
-             <property name="text">
-              <string>Inline step</string>
-             </property>
-             <property name="buddy">
-              <cstring>inlineStepLineEdit</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="inlineStepLineEdit">
-             <property name="toolTip">
-              <string>The step value for inline.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="3">
-            <widget class="QLabel" name="crosslineStepLabel">
-             <property name="toolTip">
-              <string>The step value for crossline.</string>
-             </property>
-             <property name="text">
-              <string>Crossline step</string>
-             </property>
-             <property name="buddy">
-              <cstring>crosslineStepLineEdit</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="4">
-            <widget class="QLineEdit" name="crosslineStepLineEdit">
-             <property name="toolTip">
-              <string>The step value for crossline.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <spacer name="horizontalSpacer_16">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Preferred</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="distanceTopLineEdit">
+               <property name="toolTip">
+                <string>The distance from the reference surface to the top surface in milliseconds, this value is added to the reference surface to create the top surface.</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="thicknessLineEdit">
+               <property name="toolTip">
+                <string>The value for the thickness of the inversion interval in milliseconds. This value is added to the top surface to create the base surface.</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="distance_top_label">
+               <property name="toolTip">
+                <string>The distance from the reference surface to the top surface in milliseconds, this value is added to the reference surface to create the top surface.</string>
+               </property>
+               <property name="text">
+                <string>Distance to top:</string>
+               </property>
+               <property name="buddy">
+                <cstring>distanceTopLineEdit</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="layerThicknessLineEdit">
+               <property name="toolTip">
+                <string>The thickness of a layer in the inversion interval in milliseconds. The interval thickness should be divisible by this value.</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="thicknessLabel">
+               <property name="minimumSize">
+                <size>
+                 <width>167</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>The value for the thickness of the inversion interval in milliseconds. This value is added to the top surface to create the base surface.</string>
+               </property>
+               <property name="text">
+                <string>Total interval thickness:</string>
+               </property>
+               <property name="buddy">
+                <cstring>thicknessLineEdit</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="reference_surface_label">
+               <property name="toolTip">
+                <string>File for storm surface. Top and base surfaces for the inversion interval will be parallel to this.</string>
+               </property>
+               <property name="text">
+                <string>Reference surface:</string>
+               </property>
+               <property name="buddy">
+                <cstring>referenceSurfaceFileLineEdit</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="layer_thickness_label">
+               <property name="toolTip">
+                <string>The thickness of a layer in the inversion interval in milliseconds. The interval thickness should be divisible by this value.</string>
+               </property>
+               <property name="text">
+                <string>Sampling density:</string>
+               </property>
+               <property name="buddy">
+                <cstring>layerThicknessLineEdit</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QPushButton" name="referenceSurfaceBrowsePushButton">
+               <property name="toolTip">
+                <string>File for storm surface. Top and base surfaces for the inversion interval will be parallel to this.</string>
+               </property>
+               <property name="text">
+                <string>Browse...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="2">
+              <widget class="QLineEdit" name="referenceSurfaceFileLineEdit">
+               <property name="toolTip">
+                <string>File for storm surface. Top and base surfaces for the inversion interval will be parallel to this.</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QFrame" name="backgroundMultizoneFrame">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>800</width>
+              <height>380</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QWidget" name="gridLayoutWidget_2">
+             <property name="geometry">
+              <rect>
+               <x>19</x>
+               <y>19</y>
+               <width>751</width>
+               <height>62</height>
+              </rect>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <widget class="QLabel" name="topSurfaceFileLabel">
+                <property name="toolTip">
+                 <string>&lt;qt&gt;The time top surface file.</string>
+                </property>
+                <property name="text">
+                 <string>Top surface file</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="topSurfaceFileLineEdit">
+                <property name="toolTip">
+                 <string>&lt;qt&gt;The time top surface file.</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="topSurfaceFileBrowsePushButton">
+                <property name="toolTip">
+                 <string>&lt;qt&gt;The time top surface file.</string>
+                </property>
+                <property name="text">
+                 <string>Browse...</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="topPriorityLabel">
+                <property name="toolTip">
+                 <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Erosion priority of the top surface file. The top surface file and all base surface files in the zones need to be given &lt;span style=&quot; text-decoration: underline;&quot;&gt;different&lt;/span&gt; priority.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Top surface erosion priority</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <item>
+                 <widget class="QSpinBox" name="topPrioritySpinBox">
+                  <property name="toolTip">
+                   <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Erosion priority of the top surface file. The top surface file and all base surface files in the zones need to be given &lt;span style=&quot; text-decoration: underline;&quot;&gt;different&lt;/span&gt; priority.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Minimum</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>190</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_5">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>190</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="horizontalLayoutWidget_3">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>80</y>
+               <width>751</width>
+               <height>121</height>
+              </rect>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                 <layout class="QGridLayout" name="gridLayout_6">
+                  <item row="0" column="0">
+                   <widget class="QPushButton" name="addZonePushButton">
+                    <property name="minimumSize">
+                     <size>
+                      <width>175</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="toolTip">
+                     <string>Add a new zone to the inversion. The zones have to be given in descending order in the reservoir. The added zone is the zone furthest down in the model/reservoir, and must have a surface uncertainty equal to zero.</string>
+                    </property>
+                    <property name="text">
+                     <string>Add zone</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QPushButton" name="deleteZonePushButton">
+                    <property name="toolTip">
+                     <string>&lt;qt&gt;Delete a zone in the multizone background model. </string>
+                    </property>
+                    <property name="text">
+                     <string>Delete zone</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <layout class="QHBoxLayout" name="horizontalLayout_18">
+                    <item>
+                     <widget class="QPushButton" name="insertZonePushButton">
+                      <property name="toolTip">
+                       <string>&lt;qt&gt;Insert a new zone in the multizone background model. The zone will be inserted above the currently marked zone. The zones have to be given in descending order in the reservoir. The inserted zone must be placed correctly according to its location.</string>
+                      </property>
+                      <property name="text">
+                       <string>Insert zone</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QListWidget" name="zoneListWidget">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>List of all zones in the multizone background model. The zone order corresponds to the zone order in the reservoar,</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_17">
+                <item>
+                 <spacer name="horizontalSpacer_13">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>12</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QFrame" name="zoneFrame">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>200</y>
+               <width>761</width>
+               <height>161</height>
+              </rect>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QWidget" name="gridLayoutWidget_3">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>741</width>
+                <height>141</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <widget class="QLabel" name="baseSurfaceFileLabel">
+                 <property name="toolTip">
+                  <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
+                 </property>
+                 <property name="text">
+                  <string>Base surface file</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="correlationStructureLabel">
+                 <property name="toolTip">
+                  <string>&lt;qt&gt;The correlation structure of the given zone.</string>
+                 </property>
+                 <property name="text">
+                  <string>Correlation structure</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="surfaceUncertaintyLabel">
+                 <property name="toolTip">
+                  <string>&lt;qt&gt; Beta distributed uncertainty for the base surface of the given zone. Needs to be zero for the surface in the last zone, which is the zone furthest down in the reservoir.</string>
+                 </property>
+                 <property name="text">
+                  <string>Surface uncertainty</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLineEdit" name="baseSurfaceFileLineEdit">
+                 <property name="toolTip">
+                  <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QPushButton" name="baseSurfaceFileBrowsePushButton">
+                 <property name="toolTip">
+                  <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
+                 </property>
+                 <property name="text">
+                  <string>Browse...</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <layout class="QHBoxLayout" name="horizontalLayout_5">
+                 <item>
+                  <widget class="QRadioButton" name="topCorrelationRadioButton">
+                   <property name="toolTip">
+                    <string>&lt;qt&gt;Top correlation structure.</string>
+                   </property>
+                   <property name="text">
+                    <string>Top</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="baseCorrelationRadioButton">
+                   <property name="toolTip">
+                    <string>&lt;qt&gt;Base correlation structure.</string>
+                   </property>
+                   <property name="text">
+                    <string>Base</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="compactionCorrelationRadioButton">
+                   <property name="toolTip">
+                    <string>&lt;qt&gt;Compaction correlation structure.</string>
+                   </property>
+                   <property name="text">
+                    <string>Compaction</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_7">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item row="3" column="2">
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <item>
+                  <widget class="QLineEdit" name="surfaceUncertaintyLineEdit">
+                   <property name="toolTip">
+                    <string>&lt;qt&gt; Beta distributed uncertainty for the base surface of the given zone. Needs to be zero for the surface in the last zone, which is the zone furthest down in the reservoir.</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_8">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>190</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_12">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>190</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item row="1" column="2">
+                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                 <item>
+                  <widget class="QSpinBox" name="basePrioritySpinBox">
+                   <property name="toolTip">
+                    <string>&lt;qt&gt;Erosion priority of the base surface file of the given zone. The top surface file and all base surface files in the zones need to be given different priority.</string>
+                   </property>
+                   <property name="minimum">
+                    <number>1</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_11">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Expanding</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>190</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_9">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>190</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="basePriorityLabel">
+                 <property name="toolTip">
+                  <string>&lt;qt&gt;Erosion priority of the base surface file of the given zone. The top surface file and all base surface files in the zones need to be given different priority.</string>
+                 </property>
+                 <property name="text">
+                  <string>Erosion priority</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>30</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="lateralGeometryLabel">
+          <property name="font">
+           <font>
+            <family>Sans Serif</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Lateral inversion geometry&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="areaSeismicRadioButton">
+            <property name="toolTip">
+             <string>Use the area from the seismic datafile as the lateral inversion area.</string>
+            </property>
+            <property name="text">
+             <string>Use area from seismic data file</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="areaFileRadioButton">
+            <property name="toolTip">
+             <string>Use the area of a given surface file as the lateral inversion area.</string>
+            </property>
+            <property name="text">
+             <string>Area from surface file</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="areaUtmRadioButton">
+            <property name="toolTip">
+             <string>A rectangle given in UTM coordinates which may be rotated relative to the seismic data. Any output SegY cubes will count inline and crossline correctly if angles are the same.</string>
+            </property>
+            <property name="text">
+             <string>Area in UTM coordinates</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="areaInCrossRadioButton">
+            <property name="toolTip">
+             <string>Specification of the lateral inversion geometry in inline and crossline. Any numbers not specified will be taken from the seismic cubes.</string>
+            </property>
+            <property name="text">
+             <string>Inline and crossline for SegY format</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QFrame" name="areaFileFrame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="1" column="1">
+            <layout class="QHBoxLayout" name="horizontalLayout_16">
+             <item>
+              <widget class="QLabel" name="areaFileLabel">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Storm surface file defining the lateral extent of the inversion volume.</string>
+               </property>
+               <property name="text">
+                <string>Surface file for area</string>
+               </property>
+               <property name="buddy">
+                <cstring>areaSurfaceLineEdit</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="areaSurfaceLineEdit">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Storm surface file defining the lateral extent of the inversion volume.</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="areaSurfaceFileBrowsePushButton">
+               <property name="toolTip">
+                <string>&lt;qt&gt;Storm surface file defining the lateral extent of the inversion volume.</string>
+               </property>
+               <property name="text">
+                <string>Browse...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="1">
+            <widget class="QCheckBox" name="surfaceSnapCheckBox">
+             <property name="toolTip">
+              <string>Find the smallest rectangular IL-XL box enclosing the entire surface and do the inversion using these IL-XL values. </string>
+             </property>
+             <property name="text">
+              <string>Use the smallest IL-XL rectangle enclosing the entire surface</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
          <widget class="QFrame" name="areaUtmFrame">
           <property name="toolTip">
            <string/>
@@ -5423,6 +5759,183 @@ p, li { white-space: pre-wrap; }
           </layout>
          </widget>
         </item>
+        <item>
+         <widget class="QFrame" name="areaInCrossFrame">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_15">
+           <item row="0" column="0">
+            <widget class="QLabel" name="inlineStartLabel">
+             <property name="toolTip">
+              <string>The start value for inline.</string>
+             </property>
+             <property name="text">
+              <string>Inline start           </string>
+             </property>
+             <property name="buddy">
+              <cstring>inlineStartLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="inlineStartLineEdit">
+             <property name="toolTip">
+              <string>The start value for inline.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLabel" name="crosslineStartLabel">
+             <property name="toolTip">
+              <string>The start value for crossline.</string>
+             </property>
+             <property name="text">
+              <string>Crossline start    </string>
+             </property>
+             <property name="buddy">
+              <cstring>crosslineStartLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QLineEdit" name="crosslineStartLineEdit">
+             <property name="toolTip">
+              <string>The start value for crossline.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <spacer>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="inlineEndLabel">
+             <property name="toolTip">
+              <string>The end value for inline.</string>
+             </property>
+             <property name="text">
+              <string>Inline end</string>
+             </property>
+             <property name="buddy">
+              <cstring>inlineEndLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="inlineEndLineEdit">
+             <property name="toolTip">
+              <string>The end value for inline.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QLabel" name="crosslineEndLabel">
+             <property name="toolTip">
+              <string>The end value for crossline.</string>
+             </property>
+             <property name="text">
+              <string>Crossline end</string>
+             </property>
+             <property name="buddy">
+              <cstring>crosslineEndLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QLineEdit" name="crosslineEndLineEdit">
+             <property name="toolTip">
+              <string>The end value for crossline.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="inlineStepLabel">
+             <property name="toolTip">
+              <string>The step value for inline.</string>
+             </property>
+             <property name="text">
+              <string>Inline step</string>
+             </property>
+             <property name="buddy">
+              <cstring>inlineStepLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="inlineStepLineEdit">
+             <property name="toolTip">
+              <string>The step value for inline.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QLabel" name="crosslineStepLabel">
+             <property name="toolTip">
+              <string>The step value for crossline.</string>
+             </property>
+             <property name="text">
+              <string>Crossline step</string>
+             </property>
+             <property name="buddy">
+              <cstring>crosslineStepLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QLineEdit" name="crosslineStepLineEdit">
+             <property name="toolTip">
+              <string>The step value for crossline.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <spacer name="horizontalSpacer_16">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Preferred</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="priorModelTab">
@@ -5490,7 +6003,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="5" column="0">
+        <item row="4" column="0">
          <layout class="QHBoxLayout">
           <property name="spacing">
            <number>6</number>
@@ -5545,7 +6058,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="12" column="0">
+        <item row="11" column="0">
          <layout class="QHBoxLayout">
           <property name="spacing">
            <number>6</number>
@@ -5588,7 +6101,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="14" column="0">
+        <item row="13" column="0">
          <layout class="QGridLayout">
           <property name="margin">
            <number>0</number>
@@ -5675,7 +6188,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="15" column="0">
+        <item row="14" column="0">
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -6324,7 +6837,7 @@ p, li { white-space: pre-wrap; }
           </layout>
          </widget>
         </item>
-        <item row="6" column="0">
+        <item row="5" column="0">
          <widget class="QCheckBox" name="correlationElasticParametersCheckBox">
           <property name="toolTip">
            <string>Correlations for elastic parameters or not?</string>
@@ -6334,7 +6847,7 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item row="6" column="0">
          <widget class="QFrame" name="parameterCorrelationFrame">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -6445,7 +6958,7 @@ p, li { white-space: pre-wrap; }
           </layout>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="7" column="0">
          <widget class="QLabel" name="faciesProbabilityLabel">
           <property name="font">
            <font>
@@ -6462,7 +6975,7 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="9" column="0">
+        <item row="8" column="0">
          <widget class="QCheckBox" name="faciesEstimateCheckBox">
           <property name="toolTip">
            <string>With this checked CRAVA computes the average fraction of each facies in the relevant interval of the wells. If unchecked all facies present in well logs must be given.</string>
@@ -6475,7 +6988,7 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="10" column="0">
+        <item row="9" column="0">
          <widget class="QFrame" name="faciesGivenFrame">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -6671,7 +7184,7 @@ p, li { white-space: pre-wrap; }
           </layout>
          </widget>
         </item>
-        <item row="11" column="0">
+        <item row="10" column="0">
          <widget class="QFrame" name="faciesEstimateFrame">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -6720,460 +7233,6 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QFrame" name="backgroundMultizoneFrame">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>800</width>
-            <height>380</height>
-           </size>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <widget class="QWidget" name="gridLayoutWidget_2">
-           <property name="geometry">
-            <rect>
-             <x>19</x>
-             <y>19</y>
-             <width>751</width>
-             <height>62</height>
-            </rect>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_2">
-            <item row="0" column="0">
-             <widget class="QLabel" name="topSurfaceFileLabel">
-              <property name="toolTip">
-               <string>&lt;qt&gt;The time top surface file.</string>
-              </property>
-              <property name="text">
-               <string>Top surface file</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="topSurfaceFileLineEdit">
-              <property name="toolTip">
-               <string>&lt;qt&gt;The time top surface file.</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QPushButton" name="topSurfaceFileBrowsePushButton">
-              <property name="toolTip">
-               <string>&lt;qt&gt;The time top surface file.</string>
-              </property>
-              <property name="text">
-               <string>Browse...</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="topPriorityLabel">
-              <property name="toolTip">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Erosion priority of the top surface file. The top surface file and all base surface files in the zones need to be given &lt;span style=&quot; text-decoration: underline;&quot;&gt;different&lt;/span&gt; priority.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Top surface erosion priority</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
-               <widget class="QSpinBox" name="topPrioritySpinBox">
-                <property name="toolTip">
-                 <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Erosion priority of the top surface file. The top surface file and all base surface files in the zones need to be given &lt;span style=&quot; text-decoration: underline;&quot;&gt;different&lt;/span&gt; priority.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_10">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Minimum</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>190</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_5">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>190</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="horizontalLayoutWidget_3">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>80</y>
-             <width>761</width>
-             <height>111</height>
-            </rect>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout">
-              <item>
-               <layout class="QGridLayout" name="gridLayout_6">
-                <item row="0" column="0">
-                 <widget class="QPushButton" name="addZonePushButton">
-                  <property name="minimumSize">
-                   <size>
-                    <width>175</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="toolTip">
-                   <string>Add a new zone to the multizone background model. The zones have to be given in descending order in the reservoir. The added zone is the zone furthest down in the model/reservoir, and must have a surface uncertainty equal to zero.</string>
-                  </property>
-                  <property name="text">
-                   <string>Add zone</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QPushButton" name="deleteZonePushButton">
-                  <property name="toolTip">
-                   <string>&lt;qt&gt;Delete a zone in the multizone background model. </string>
-                  </property>
-                  <property name="text">
-                   <string>Delete zone</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <layout class="QHBoxLayout" name="horizontalLayout_18">
-                  <item>
-                   <widget class="QPushButton" name="insertZonePushButton">
-                    <property name="toolTip">
-                     <string>&lt;qt&gt;Insert a new zone in the multizone background model. The zone will be inserted above the currently marked zone. The zones have to be given in descending order in the reservoir. The inserted zone must be placed correctly according to its location.</string>
-                    </property>
-                    <property name="text">
-                     <string>Insert zone</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QListWidget" name="zoneListWidget">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>List of all zones in the multizone background model. The zone order corresponds to the zone order in the reservoar,</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_17">
-              <item>
-               <spacer name="horizontalSpacer_13">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>12</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QFrame" name="zoneFrame">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>200</y>
-             <width>761</width>
-             <height>161</height>
-            </rect>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-           <widget class="QWidget" name="gridLayoutWidget_3">
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>10</y>
-              <width>741</width>
-              <height>141</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QLabel" name="baseSurfaceFileLabel">
-               <property name="toolTip">
-                <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
-               </property>
-               <property name="text">
-                <string>Base surface file</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="correlationStructureLabel">
-               <property name="toolTip">
-                <string>&lt;qt&gt;The correlation structure of the given zone.</string>
-               </property>
-               <property name="text">
-                <string>Correlation structure</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="surfaceUncertaintyLabel">
-               <property name="toolTip">
-                <string>&lt;qt&gt; Beta distributed uncertainty for the base surface of the given zone. Needs to be zero for the surface in the last zone, which is the zone furthest down in the reservoir.</string>
-               </property>
-               <property name="text">
-                <string>Surface uncertainty</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLineEdit" name="baseSurfaceFileLineEdit">
-               <property name="toolTip">
-                <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QPushButton" name="baseSurfaceFileBrowsePushButton">
-               <property name="toolTip">
-                <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
-               </property>
-               <property name="text">
-                <string>Browse...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <item>
-                <widget class="QRadioButton" name="topCorrelationRadioButton">
-                 <property name="toolTip">
-                  <string>&lt;qt&gt;Top correlation structure.</string>
-                 </property>
-                 <property name="text">
-                  <string>Top</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="baseCorrelationRadioButton">
-                 <property name="toolTip">
-                  <string>&lt;qt&gt;Base correlation structure.</string>
-                 </property>
-                 <property name="text">
-                  <string>Base</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="compactionCorrelationRadioButton">
-                 <property name="toolTip">
-                  <string>&lt;qt&gt;Compaction correlation structure.</string>
-                 </property>
-                 <property name="text">
-                  <string>Compaction</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_7">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item row="3" column="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <item>
-                <widget class="QLineEdit" name="surfaceUncertaintyLineEdit">
-                 <property name="toolTip">
-                  <string>&lt;qt&gt; Beta distributed uncertainty for the base surface of the given zone. Needs to be zero for the surface in the last zone, which is the zone furthest down in the reservoir.</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Minimum</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>190</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Minimum</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>190</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_15">
-               <item>
-                <widget class="QSpinBox" name="basePrioritySpinBox">
-                 <property name="toolTip">
-                  <string>&lt;qt&gt;Erosion priority of the base surface file of the given zone. The top surface file and all base surface files in the zones need to be given different priority.</string>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Expanding</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>190</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_9">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Minimum</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>190</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="basePriorityLabel">
-               <property name="toolTip">
-                <string>&lt;qt&gt;Erosion priority of the base surface file of the given zone. The top surface file and all base surface files in the zones need to be given different priority.</string>
-               </property>
-               <property name="text">
-                <string>Erosion priority</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <spacer name="horizontalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Minimum</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>30</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </widget>
          </widget>
         </item>
        </layout>
