@@ -4912,7 +4912,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QFrame" name="backgroundMultizoneFrame">
+           <widget class="QFrame" name="MultizoneInversionFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>

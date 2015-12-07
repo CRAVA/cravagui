@@ -3802,7 +3802,7 @@ void Main_crava::on_backgroundRadioButton_toggled(bool checked){
 	if(checked){
                 backgroundModelFrame->setVisible(true);
 		backgroundEstimateFrame->setVisible(false);
-		backgroundMultizoneFrame->setVisible(false);
+		MultizoneInversionFrame->setVisible(false);
 		//Clears the background estimation fields
 		velocityFieldPriorFileLineEdit->setText(QString(""));
 		highCutFrequencyLineEdit->setText(QString(""));
@@ -3822,7 +3822,7 @@ void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
         if(checked){
 	        backgroundModelFrame->setVisible(false);
 		backgroundEstimateFrame->setVisible(false);
-		backgroundMultizoneFrame->setVisible(true);
+		MultizoneInversionFrame->setVisible(true);
 		vpVsRhoRadioButton->setChecked(true);
 		deleteZonePushButton->setEnabled(false);
 		insertZonePushButton->setEnabled(false);
@@ -3857,7 +3857,7 @@ void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	if(checked){
                 backgroundModelFrame->setVisible(false);
 		backgroundEstimateFrame->setVisible(true);
-		backgroundMultizoneFrame->setVisible(false);
+		MultizoneInversionFrame->setVisible(false);
 		vpVsRhoRadioButton->setChecked(true);
 		backgroundEstimatedConfigurationCheckBox->setChecked(false);
 		
