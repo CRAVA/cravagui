@@ -506,63 +506,81 @@ void Main_crava::updateGuiToTree(){
 		vsLineEdit->setText(log_names_vsPointer->text(1));
 	}
 
-	//the huge nested ifs check which vertical inversion interval frames should be visible.
+	/*************************************************************************************
+         * Huge nested ifs check which vertical inversion interval frames should be visible. *
+         * and fills in all information from the xml-tree in the user interface              *
+         *************************************************************************************/         
+
+        //constant top and base
 	if((!top_surface_time_valuePointer->text(1).isEmpty()) ||
-	 (!base_surface_time_valuePointer->text(1).isEmpty())){//constant
+	 (!base_surface_time_valuePointer->text(1).isEmpty())){
 		constantInversionRadioButton->setChecked(true);
 		topTimeValueLineEdit->setText(top_surface_time_valuePointer->text(1));
 		bottomTimeValueLineEdit->setText(base_surface_time_valuePointer->text(1));
 		on_oneSurfaceRadioButton_toggled(false);
+                singleZoneInversionRadioButton->setChecked(true);
+                layersLineEdit->setText(interval_two_surfaces_number_of_layersPointer->text(1) );
 	}
+        //check if inversion is defined by one surface and distance to top and base
 	else if((!(interval_one_surface_reference_surfacePointer->text(1).isEmpty())) ||
-			 (!(interval_one_surface_shift_to_interval_topPointer->text(1).isEmpty() )) ||
-			 (!(interval_one_surface_thicknessPointer->text(1).isEmpty())) ||
-			 (!(interval_one_surface_sample_densityPointer->text(1).isEmpty()))){
-			on_constantInversionRadioButton_toggled(false);
-			oneSurfaceRadioButton->setChecked(true);
-			referenceSurfaceFileLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
-			distanceTopLineEdit->setText(interval_one_surface_shift_to_interval_topPointer->text(1));
-			thicknessLineEdit->setText(interval_one_surface_thicknessPointer->text(1));
-			layerThicknessLineEdit->setText(interval_one_surface_sample_densityPointer->text(1));
-		}
-	else{
-		topTimeFileLineEdit->setText(top_surface_time_filePointer->text(1));
-		bottomTimeFileLineEdit->setText(base_surface_time_filePointer->text(1));
-
-		if(!top_surface_depth_filePointer->text(1).isEmpty()||
+		(!(interval_one_surface_shift_to_interval_topPointer->text(1).isEmpty() )) ||
+		(!(interval_one_surface_thicknessPointer->text(1).isEmpty())) ||
+		(!(interval_one_surface_sample_densityPointer->text(1).isEmpty()))){
+		on_constantInversionRadioButton_toggled(false);
+		oneSurfaceRadioButton->setChecked(true);
+		referenceSurfaceFileLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
+		distanceTopLineEdit->setText(interval_one_surface_shift_to_interval_topPointer->text(1));
+		thicknessLineEdit->setText(interval_one_surface_thicknessPointer->text(1));
+		layerThicknessLineEdit->setText(interval_one_surface_sample_densityPointer->text(1));
+                singleZoneInversionRadioButton->setChecked(true);
+	}
+        //check for two surface inversion, correlation following both
+        else if(!top_surface_time_filePointer->text(1).isEmpty() &&
+                correlation_directionPointer->text(1).isEmpty()){
+                singleZoneInversionRadioButton->setChecked(true);
+                twoSurfaceRadioButton->setChecked(true);
+		on_constantInversionRadioButton_toggled(false);//do not show user interface
+		on_oneSurfaceRadioButton_toggled(false);//do not show user interface
+                topTimeFileLineEdit->setText(top_surface_time_filePointer->text(1));
+                bottomTimeFileLineEdit->setText(base_surface_time_filePointer->text(1));
+                layersLineEdit->setText(interval_two_surfaces_number_of_layersPointer->text(1) );
+		if(!top_surface_depth_filePointer->text(1).isEmpty()||//check if Time to depth conversion ticked
 		!base_surface_depth_filePointer->text(1).isEmpty()){
 			depthSurfacesCheckBox->setChecked(true);
 			topDepthFileLineEdit->setText(top_surface_depth_filePointer->text(1));
 			bottomDepthFileLineEdit->setText(base_surface_depth_filePointer->text(1));
 		}
-		else{
+                else{
 			depthSurfacesCheckBox->setChecked(false);
-			on_depthSurfacesCheckBox_toggled(false);//this should work by default...
+                }
+        }
+	//check for two surface inversion, separate correlation surface 
+        else if(!correlation_directionPointer->text(1).isEmpty()){
+                singleZoneInversionRadioButton->setChecked(true);
+		correlationSurfaceRadioButton->setChecked(true);
+		on_constantInversionRadioButton_toggled(false);//do not show user interface
+		on_oneSurfaceRadioButton_toggled(false);//do not show user interface
+                topTimeFileLineEdit->setText(top_surface_time_filePointer->text(1));
+                bottomTimeFileLineEdit->setText(base_surface_time_filePointer->text(1));
+                layersLineEdit->setText(interval_two_surfaces_number_of_layersPointer->text(1) );
+		if(!top_surface_depth_filePointer->text(1).isEmpty()||//check if Time to depth conversion ticked
+		!base_surface_depth_filePointer->text(1).isEmpty()){
+			depthSurfacesCheckBox->setChecked(true);
+			topDepthFileLineEdit->setText(top_surface_depth_filePointer->text(1));
+			bottomDepthFileLineEdit->setText(base_surface_depth_filePointer->text(1));
 		}
-		//the depth is checked first because it is cleared if the other buttons are checked..
-		on_oneSurfaceRadioButton_toggled(false);
-		on_constantInversionRadioButton_toggled(false);
-		if(top_surface_time_filePointer->text(1).isEmpty()){//top
-			if(base_surface_time_filePointer->text(1).isEmpty()){
-				twoSurfaceRadioButton->setChecked(true);
-			}
-			else{
-				baseSurfaceRadioButton->setChecked(true);
-			}
-		}
-		else if(base_surface_time_filePointer->text(1).isEmpty()){//bottom
-			topSurfaceRadioButton->setChecked(true);
-		}
-		//Check if correlation direction surface is set, set geometry accordingly
-		else if(!correlation_directionPointer->text(1).isEmpty()){
-			correlationSurfaceRadioButton->setChecked(true);
-		}
+                else{
+			depthSurfacesCheckBox->setChecked(false);
+                }
+        }
 
-		else{
-			twoSurfaceRadioButton->setChecked(true);
-		}
-	}
-	layersLineEdit->setText( interval_two_surfaces_number_of_layersPointer->text(1) );
+        // else if(multizone inversion)
+
+	else{
+                singleZoneInversionRadioButton->setChecked(true);
+                twoSurfaceRadioButton->setChecked(true);
+        }
+        //fill in velocity field information (only relevant when Time to depth is ticked)
 	if(!interval_two_surfaces_velocity_fieldPointer->text(1).isEmpty()){
 		velocityFieldFileRadioButton->setChecked(true);
 		velocityFieldLineEdit->setText(interval_two_surfaces_velocity_fieldPointer->text(1));
@@ -573,8 +591,11 @@ void Main_crava::updateGuiToTree(){
 	else {//default
 		velocityFieldNoneRadioButton->setChecked(true);
 	}
-	//prior-model
-	//zone list is handled by the reading of the tree
+
+        /***********************************************************************
+         *         prior-model                                                 *
+	 * zone list is handled by the reading of the tree                     *
+         ***********************************************************************/
 
 	if(zoneListWidget->count()>1 || !background_top_surface_filePointer->text(1).isEmpty() || !background_top_surface_erosion_priorityPointer->text(1).isEmpty()){ //checks if the multizone background model radio button should be checked.
 	        multizoneInversionRadioButton->setChecked(true);
