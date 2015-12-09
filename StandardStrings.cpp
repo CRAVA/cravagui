@@ -60,12 +60,12 @@ const QString& StandardStrings::asciiFormat(){
 }
 
 const QString& StandardStrings::cravaVersion(){
-	static QString* version = new QString("CRAVA version 3.0");
+	static QString* version = new QString("CRAVA version 4.0 Beta");
 	return *version;
 };
 
 const QString& StandardStrings::cravaGuiVersion(){
-	static QString* version = new QString("CRAVA GUI v.3.0");
+	static QString* version = new QString("CRAVA GUI v.4.0 Beta");
 	return *version;
 };
 const QString& StandardStrings::StandardStrings::inputPath(){

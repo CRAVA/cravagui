@@ -178,7 +178,11 @@ private:
 
 	void necessaryFieldGui();// sets borders on the necessary fields when empty
 
-	//Table: This is a table which contains a pointer to all the nodes in tree (except for those what are added during the program). Gives easy access to all the values in the tree. The values are set in activateTable. Those that are added during the program have their own functions (for instance findCorrectAngleGather).
+	/**********************************************************************************************************************************
+         * Table: This is a table which contains a pointer to all the nodes in tree (except for those what are added during the program). *
+         * Gives easy access to all the values in the tree. The values are set in activateTable. Those that are added during the program  *
+         * have their own functions (for instance findCorrectAngleGather).                                                                *
+         **********************************************************************************************************************************/
 
 	//actions
 	QTreeWidgetItem *actionsPointer;
@@ -263,9 +267,6 @@ private:
 				QTreeWidgetItem *background_subrangePointer;
 				QTreeWidgetItem *background_powerPointer;
 			QTreeWidgetItem *background_high_cut_background_modellingPointer;
-				QTreeWidgetItem *background_multizone_modelPointer;
-			        QTreeWidgetItem *background_top_surface_filePointer;
-				QTreeWidgetItem *background_top_surface_erosion_priorityPointer;
 		QTreeWidgetItem *earth_modelPointer;
 			QTreeWidgetItem *earth_model_vp_filePointer;
 			QTreeWidgetItem *earth_model_vs_filePointer;
@@ -321,6 +322,13 @@ private:
 				QTreeWidgetItem *interval_one_surface_shift_to_interval_topPointer;
 				QTreeWidgetItem *interval_one_surface_thicknessPointer;
 				QTreeWidgetItem *interval_one_surface_sample_densityPointer;
+			QTreeWidgetItem *multiple_intervalsPointer;
+                                QTreeWidgetItem *top_surface_multizonePointer;
+                                QTreeWidgetItem *interval_multizonePointer;
+				        QTreeWidgetItem *name_multizonePointer;
+				        QTreeWidgetItem *base_surface_multizonePointer;
+				                QTreeWidgetItem *erosion_priority_multizonePointer;
+				        QTreeWidgetItem *number_of_layers_multizonePointer;
 			QTreeWidgetItem *area_from_surfacePointer;
 				QTreeWidgetItem *area_from_surface_file_namePointer;
 				QTreeWidgetItem *area_from_surface_snap_to_seismic_dataPointer;
