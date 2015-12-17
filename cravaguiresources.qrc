@@ -6,5 +6,6 @@
         <file>images/surface_constant.png</file>
         <file>images/surface_top.png</file>
         <file>images/two_surface.png</file>
+	<file>images/correlation_proportional_timecut.png</file>
     </qresource>
 </RCC>

@@ -207,6 +207,9 @@ void Main_crava::setupButtonGroups(){
 	vsFormat->addButton(vsRadioButton);
 	vsFormat->addButton(dtsRadioButton);
 	//horizon
+	QButtonGroup *singleMultizone = new QButtonGroup(horizonsTab);
+	singleMultizone->addButton(singleZoneInversionRadioButton);
+	singleMultizone->addButton(multizoneInversionRadioButton);
 	QButtonGroup *verticalInterval = new QButtonGroup(horizonsTab);
 	verticalInterval->addButton(twoSurfaceRadioButton);
 	verticalInterval->addButton(topSurfaceRadioButton);
@@ -219,7 +222,16 @@ void Main_crava::setupButtonGroups(){
 	lateralInterval->addButton(areaFileRadioButton);
 	lateralInterval->addButton(areaUtmRadioButton);
 	lateralInterval->addButton(areaInCrossRadioButton);
+        QButtonGroup *multizoneCorrelationButtons = new QButtonGroup(horizonsTab);
+        multizoneCorrelationButtons->addButton(topCorrelationRadioButton);
+        multizoneCorrelationButtons->addButton(baseCorrelationRadioButton);
+        multizoneCorrelationButtons->addButton(compactionCorrelationRadioButton);
+        multizoneCorrelationButtons->addButton(singleCorrelationSurfaceRadioButton);
+        multizoneCorrelationButtons->addButton(twoCorrelationSurfacesRadioButton);
 	//prior model
+	QButtonGroup *background = new QButtonGroup(priorModelTab);
+	background->addButton(estimateBackgroundRadioButton);
+	background->addButton(backgroundRadioButton);
 	QButtonGroup *vp1Prior = new QButtonGroup(vpVsRhoFrame);
 	vp1Prior->addButton(vpConstant1RadioButton);
 	vp1Prior->addButton(vpFile1RadioButton);
@@ -500,63 +512,84 @@ void Main_crava::updateGuiToTree(){
 		vsLineEdit->setText(log_names_vsPointer->text(1));
 	}
 
-	//the huge nested ifs check which vertical inversion interval frames should be visible.
+	/*************************************************************************************
+         * Huge nested ifs check which vertical inversion interval frames should be visible. *
+         * and fills in all information from the xml-tree in the user interface              *
+         *************************************************************************************/         
+
+        //constant top and base
 	if((!top_surface_time_valuePointer->text(1).isEmpty()) ||
-	 (!base_surface_time_valuePointer->text(1).isEmpty())){//constant
+	 (!base_surface_time_valuePointer->text(1).isEmpty())){
 		constantInversionRadioButton->setChecked(true);
 		topTimeValueLineEdit->setText(top_surface_time_valuePointer->text(1));
 		bottomTimeValueLineEdit->setText(base_surface_time_valuePointer->text(1));
-		on_oneSurfaceRadioButton_toggled(false);
+		on_oneSurfaceRadioButton_toggled(false);//hide surfaceOneFrame
+                singleZoneInversionRadioButton->setChecked(true);
+                layersLineEdit->setText(interval_two_surfaces_number_of_layersPointer->text(1) );
 	}
+        //check if inversion is defined by one surface and distance to top and base
 	else if((!(interval_one_surface_reference_surfacePointer->text(1).isEmpty())) ||
-			 (!(interval_one_surface_shift_to_interval_topPointer->text(1).isEmpty() )) ||
-			 (!(interval_one_surface_thicknessPointer->text(1).isEmpty())) ||
-			 (!(interval_one_surface_sample_densityPointer->text(1).isEmpty()))){
-			on_constantInversionRadioButton_toggled(false);
-			oneSurfaceRadioButton->setChecked(true);
-			referenceSurfaceFileLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
-			distanceTopLineEdit->setText(interval_one_surface_shift_to_interval_topPointer->text(1));
-			thicknessLineEdit->setText(interval_one_surface_thicknessPointer->text(1));
-			layerThicknessLineEdit->setText(interval_one_surface_sample_densityPointer->text(1));
-		}
-	else{
-		topTimeFileLineEdit->setText(top_surface_time_filePointer->text(1));
-		bottomTimeFileLineEdit->setText(base_surface_time_filePointer->text(1));
-
-		if(!top_surface_depth_filePointer->text(1).isEmpty()||
+		(!(interval_one_surface_shift_to_interval_topPointer->text(1).isEmpty() )) ||
+		(!(interval_one_surface_thicknessPointer->text(1).isEmpty())) ||
+		(!(interval_one_surface_sample_densityPointer->text(1).isEmpty()))){
+                singleZoneInversionRadioButton->setChecked(true);
+	        on_constantInversionRadioButton_toggled(false);//do not show user interface
+		oneSurfaceRadioButton->setChecked(true);
+		referenceSurfaceFileLineEdit->setText(interval_one_surface_reference_surfacePointer->text(1));
+		distanceTopLineEdit->setText(interval_one_surface_shift_to_interval_topPointer->text(1));
+		thicknessLineEdit->setText(interval_one_surface_thicknessPointer->text(1));
+		layerThicknessLineEdit->setText(interval_one_surface_sample_densityPointer->text(1));
+	}
+        //check for two surface inversion, correlation following both
+        else if(!top_surface_time_filePointer->text(1).isEmpty() &&
+                correlation_directionPointer->text(1).isEmpty()){
+                singleZoneInversionRadioButton->setChecked(true);
+                twoSurfaceRadioButton->setChecked(true);
+		on_constantInversionRadioButton_toggled(false);//do not show user interface
+		on_oneSurfaceRadioButton_toggled(false);//do not show user interface
+                topTimeFileLineEdit->setText(top_surface_time_filePointer->text(1));
+                bottomTimeFileLineEdit->setText(base_surface_time_filePointer->text(1));
+                layersLineEdit->setText(interval_two_surfaces_number_of_layersPointer->text(1) );
+		if(!top_surface_depth_filePointer->text(1).isEmpty()||//check if Time to depth conversion ticked
 		!base_surface_depth_filePointer->text(1).isEmpty()){
 			depthSurfacesCheckBox->setChecked(true);
 			topDepthFileLineEdit->setText(top_surface_depth_filePointer->text(1));
 			bottomDepthFileLineEdit->setText(base_surface_depth_filePointer->text(1));
 		}
-		else{
+                else{
 			depthSurfacesCheckBox->setChecked(false);
-			on_depthSurfacesCheckBox_toggled(false);//this should work by default...
+                }
+        }
+	//check for two surface inversion, separate correlation surface 
+        else if(!correlation_directionPointer->text(1).isEmpty()){
+                singleZoneInversionRadioButton->setChecked(true);
+		correlationSurfaceRadioButton->setChecked(true);
+		on_constantInversionRadioButton_toggled(false);//do not show user interface
+		on_oneSurfaceRadioButton_toggled(false);//do not show user interface
+                topTimeFileLineEdit->setText(top_surface_time_filePointer->text(1));
+                bottomTimeFileLineEdit->setText(base_surface_time_filePointer->text(1));
+                layersLineEdit->setText(interval_two_surfaces_number_of_layersPointer->text(1) );
+		if(!top_surface_depth_filePointer->text(1).isEmpty()||//check if Time to depth conversion ticked
+		!base_surface_depth_filePointer->text(1).isEmpty()){
+			depthSurfacesCheckBox->setChecked(true);
+			topDepthFileLineEdit->setText(top_surface_depth_filePointer->text(1));
+			bottomDepthFileLineEdit->setText(base_surface_depth_filePointer->text(1));
 		}
-		//the depth is checked first because it is cleared if the other buttons are checked..
-		on_oneSurfaceRadioButton_toggled(false);
-		on_constantInversionRadioButton_toggled(false);
-		if(top_surface_time_filePointer->text(1).isEmpty()){//top
-			if(base_surface_time_filePointer->text(1).isEmpty()){
-				twoSurfaceRadioButton->setChecked(true);
-			}
-			else{
-				baseSurfaceRadioButton->setChecked(true);
-			}
-		}
-		else if(base_surface_time_filePointer->text(1).isEmpty()){//bottom
-			topSurfaceRadioButton->setChecked(true);
-		}
-		//Check if correlation direction surface is set, set geometry accordingly
-		else if(!correlation_directionPointer->text(1).isEmpty()){
-			correlationSurfaceRadioButton->setChecked(true);
-		}
-
-		else{
-			twoSurfaceRadioButton->setChecked(true);
-		}
+                else{
+			depthSurfacesCheckBox->setChecked(false);
+                }
+        }
+	//check for multizone
+	else if(zoneListWidget->count()>1 || !top_surface_multizonePointer->text(1).isEmpty()){ 
+	        multizoneInversionRadioButton->setChecked(true);
+		topSurfaceFileLineEdit->setText(top_surface_multizonePointer->text(1));
 	}
-	layersLineEdit->setText( interval_two_surfaces_number_of_layersPointer->text(1) );
+
+	else{//if nothing is set-up, we start with default empty two surface inversion
+                singleZoneInversionRadioButton->setChecked(true);
+                twoSurfaceRadioButton->setChecked(true);
+        }
+        //fill in velocity field information (only relevant when Time to depth is ticked)
 	if(!interval_two_surfaces_velocity_fieldPointer->text(1).isEmpty()){
 		velocityFieldFileRadioButton->setChecked(true);
 		velocityFieldLineEdit->setText(interval_two_surfaces_velocity_fieldPointer->text(1));
@@ -567,17 +600,21 @@ void Main_crava::updateGuiToTree(){
 	else {//default
 		velocityFieldNoneRadioButton->setChecked(true);
 	}
-	//prior-model
-	//zone list is handled by the reading of the tree
 
-	if(zoneListWidget->count()>1 || !background_top_surface_filePointer->text(1).isEmpty() || !background_top_surface_erosion_priorityPointer->text(1).isEmpty()){ //checks if the multizone background model radio button should be checked.
-	        multizoneBackgroundRadioButton->setChecked(true);
-		topSurfaceFileLineEdit->setText(background_top_surface_filePointer->text(1));
-		topPrioritySpinBox->setValue(background_top_surface_erosion_priorityPointer->text(1).toInt());
-	}
-	else if(background_vs_filePointer->text(1).isEmpty() && background_vp_filePointer->text(1).isEmpty() && background_density_filePointer->text(1).isEmpty() && background_ai_filePointer->text(1).isEmpty() && background_si_filePointer->text(1).isEmpty() && background_vp_vs_ratio_filePointer->text(1).isEmpty() && background_vp_constantPointer->text(1).isEmpty() && background_vs_constantPointer->text(1).isEmpty() && background_density_constantPointer->text(1).isEmpty()){//checks whether the estimate background model radio button should be checked or not.	
+        /***********************************************************************
+         *         prior-model                                                 *
+	 * zone list is handled by the reading of the tree                     *
+         ***********************************************************************/
+
+        //checks whether the estimate background model radio button is checked
+	if(background_vs_filePointer->text(1).isEmpty() && background_vp_filePointer->text(1).isEmpty() && 
+           background_density_filePointer->text(1).isEmpty() && background_ai_filePointer->text(1).isEmpty() && 
+           background_si_filePointer->text(1).isEmpty() && background_vp_vs_ratio_filePointer->text(1).isEmpty() && 
+           background_vp_constantPointer->text(1).isEmpty() && background_vs_constantPointer->text(1).isEmpty() && 
+           background_density_constantPointer->text(1).isEmpty()){
 
 	  estimateBackgroundRadioButton->setChecked(true);
+          //check if Configure the estimated background is checked
 	  if(background_velocity_fieldPointer->text(1).isEmpty() && background_high_cut_background_modellingPointer->text(1).isEmpty()){
 	    backgroundEstimatedConfigurationCheckBox->setChecked(false);
 	    velocityFieldLabel->setVisible(false);
@@ -1635,7 +1672,7 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			recursiveXmlRead(xmlChild,treeItem->child(5+optimizePositionListWidget->count()));
 		}
 	     	else if(xmlChild.toElement().tagName() == QString("zone")){
-		        multizoneBackgroundRadioButton->setChecked(true);
+		        multizoneInversionRadioButton->setChecked(true);
 			zoneListWidget->addItem(QString("zone " + QString::number(zoneListWidget->count()+1)));
 			addZone();
 			zoneListWidget->setCurrentRow(zoneListWidget->count()-1);
@@ -1838,41 +1875,39 @@ void Main_crava::addOptimizePosition(){
 }
 void Main_crava::insertZone(){
   //the strings make it obvious what items are inserted. this creates all the needed children.
-	QTreeWidgetItem* zone;
-	findCorrectZone(&zone);
+	QTreeWidgetItem* interval;
+	findCorrectZone(&interval);
 
-	int childNumber = zone->parent()->indexOfChild(zone);
+	int childNumber = interval->parent()->indexOfChild(interval);
 
-        QString label = QString("zone");
-	QTreeWidgetItem* parent = background_multizone_modelPointer;//move to the parent
-	QTreeWidgetItem* precedingItem = background_multizone_modelPointer->child(childNumber-1);//which node will it precede.
+        QString label = QString("interval");
+	QTreeWidgetItem* parent = multiple_intervalsPointer;//move to the parent
+	QTreeWidgetItem* precedingItem = multiple_intervalsPointer->child(childNumber-1);//which node will it precede.
 	QTreeWidgetItem* item = new QTreeWidgetItem(parent,precedingItem);//insert another zone
 
 	item->setText(0,label);
                 QTreeWidgetItem* child = new QTreeWidgetItem(item);
-		child->setText(0,QString("base-surface-file"));
+		child->setText(0,QString("name"));
 		child = new QTreeWidgetItem(item);
-		child->setText(0,QString("erosion-priority"));
+		child->setText(0,QString("base-surface"));
 		child = new QTreeWidgetItem(item);
-		child->setText(0,QString("correlation-structure"));
-		child = new QTreeWidgetItem(item);
-		child->setText(0,QString("surface-uncertainty"));
+		child->setText(0,QString("number-of-layers"));
 }
 
 void Main_crava::addZone(){
   //the strings make it obvious what items are added. this creates all the needed children.
-        QString label = QString("zone");
-	QTreeWidgetItem* parent = background_multizone_modelPointer;//move to the parent
+        QString label = QString("interval");
+	QTreeWidgetItem* parent = multiple_intervalsPointer;//move to the parent
 	QTreeWidgetItem* item = new QTreeWidgetItem(parent);//insert another zone
 	item->setText(0,label);
                 QTreeWidgetItem* child = new QTreeWidgetItem(item);
-		child->setText(0,QString("base-surface-file"));
+		child->setText(0,QString("name"));
 		child = new QTreeWidgetItem(item);
-		child->setText(0,QString("erosion-priority"));
+		child->setText(0,QString("base-surface"));
+		        QTreeWidgetItem* nestedChild = new QTreeWidgetItem(child);
+		        nestedChild->setText(0,QString("erosion-priority"));
 		child = new QTreeWidgetItem(item);
-		child->setText(0,QString("correlation-structure"));
-		child = new QTreeWidgetItem(item);
-		child->setText(0,QString("surface-uncertainty"));
+		child->setText(0,QString("number-of-layers"));
 }
 
 void Main_crava::addFacies(){
@@ -3802,43 +3837,37 @@ void Main_crava::on_backgroundRadioButton_toggled(bool checked){
 	if(checked){
                 backgroundModelFrame->setVisible(true);
 		backgroundEstimateFrame->setVisible(false);
-		backgroundMultizoneFrame->setVisible(false);
 		//Clears the background estimation fields
 		velocityFieldPriorFileLineEdit->setText(QString(""));
 		highCutFrequencyLineEdit->setText(QString(""));
 		background_velocity_fieldPointer->setText(1,QString(""));
 		background_high_cut_background_modellingPointer->setText(1,QString(""));
-		//Clears the multizone background model fields
-		background_top_surface_filePointer->setText(1,QString(""));
-		topSurfaceFileLineEdit->setText(QString(""));
-		background_top_surface_erosion_priorityPointer->setText(1,QString(""));
-		topPrioritySpinBox->setValue(1);
-		deleteAllZones();
-		zoneListWidget->clear();
 	}
 
 }
-void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
+void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked){
         if(checked){
-	        backgroundModelFrame->setVisible(false);
-		backgroundEstimateFrame->setVisible(false);
-		backgroundMultizoneFrame->setVisible(true);
+	        inversionLabelFrame->setVisible(false);
+		surfaceOneFrame->setVisible(false);
+		surfaceTwoFrame->setVisible(false);
+		multizoneInversionFrame->setVisible(true);
+                singleCorrelationSurfaceFrame->setVisible(false);
+                twoSurfaceCorrelationFrame->setVisible(false);
 		vpVsRhoRadioButton->setChecked(true);
 		deleteZonePushButton->setEnabled(false);
 		insertZonePushButton->setEnabled(false);
-		if(background_top_surface_filePointer->text(1).isEmpty()){
+		if(top_surface_multizonePointer->text(1).isEmpty()){
 		  topSurfaceFileLineEdit->setText(top_surface_time_filePointer->text(1));
 		  on_topSurfaceFileLineEdit_editingFinished();
 		}
-		on_topPrioritySpinBox_editingFinished();
 		zoneFrame->setEnabled(false);
 	
-		QList<QLineEdit*> fields1=backgroundModelFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		QList<QLineEdit*> fields1=backgroundModelFrame->QObject::findChildren<QLineEdit*>();
 		foreach (QLineEdit* field1, fields1){
 			field1->clear();
 		}
 
-		QList<QLineEdit*> field2=backgroundEstimateFrame->QObject::findChildren<QLineEdit*>();//this causes some sort of warning... bad cast of void pointer with qt 4.2?
+		QList<QLineEdit*> field2=backgroundEstimateFrame->QObject::findChildren<QLineEdit*>();
 		foreach (QLineEdit* field2, field2){
 			field2->clear();
 		}
@@ -3853,11 +3882,16 @@ void Main_crava::on_multizoneBackgroundRadioButton_toggled(bool checked){
 	       zoneFrame->setEnabled(false);
 	}
 }
+void Main_crava::on_singleZoneInversionRadioButton_toggled(bool checked){
+       multizoneInversionFrame->setVisible(false);//remove the multizone gui
+       twoSurfaceRadioButton->setChecked(true);//set the default geometry radio button 
+       surfaceTwoFrame->setVisible(true);
+       inversionLabelFrame->setVisible(true);
+}
 void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	if(checked){
                 backgroundModelFrame->setVisible(false);
 		backgroundEstimateFrame->setVisible(true);
-		backgroundMultizoneFrame->setVisible(false);
 		vpVsRhoRadioButton->setChecked(true);
 		backgroundEstimatedConfigurationCheckBox->setChecked(false);
 		
@@ -3873,13 +3907,6 @@ void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 		    }
 		  }
 		}
-		//Clears the multizone background model fields
-		background_top_surface_filePointer->setText(1,QString(""));
-		topSurfaceFileLineEdit->setText(QString(""));
-		background_top_surface_erosion_priorityPointer->setText(1,QString(""));
-		topPrioritySpinBox->setValue(1);
-		deleteAllZones();
-		zoneListWidget->clear();
 	}
 
 }
@@ -4295,12 +4322,8 @@ void Main_crava::on_topSurfaceFileBrowsePushButton_clicked(){
 
 void Main_crava::topSurfaceFile(const QString &value){
 	if (standard->StandardStrings::fileExists(value)){
-		background_top_surface_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+		top_surface_multizonePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
 	}
-}
-
-void Main_crava::on_topPrioritySpinBox_editingFinished(){
-        background_top_surface_erosion_priorityPointer->setText(1,QString::number(topPrioritySpinBox->value()));
 }
 
 void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
@@ -4365,16 +4388,17 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 }
 
 void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.			   
-        zoneListWidget->addItem(QString("zone ") + QString::number(zoneListWidget->count()+1));
+        zoneListWidget->addItem(QString("interval ") + QString::number(zoneListWidget->count()+1));
 	addZone();
 	zoneListWidget->setCurrentItem(zoneListWidget->item(zoneListWidget->count()-1));
 	basePrioritySpinBox->setValue(1);
 	on_basePrioritySpinBox_editingFinished();
 	topCorrelationRadioButton->setChecked(true);
 	basePrioritySpinBox->setFocus();
-	QTreeWidgetItem* zone;
-	findCorrectZone(&zone);
-	setValueInZone(zone, QString("surface-uncertainty"), QString("0"));
+	QTreeWidgetItem* interval;
+	findCorrectZone(&interval);
+        setValueInZone(interval, QString("name"), QString("interval ") + QString::number(zoneListWidget->count()));
+	setValueInZone(interval, QString("surface-uncertainty"), QString("0"));
 	surfaceUncertaintyLineEdit->setText(QString("0"));
 	
 };//adds a new zone for multizone model
@@ -4382,18 +4406,18 @@ void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.
 void Main_crava::on_insertZonePushButton_clicked(){
          int insertIndex = zoneListWidget->currentRow();
 	 insertZone();
-	 zoneListWidget->insertItem(insertIndex,QString("zone ")+QString::number(insertIndex+1));
+	 zoneListWidget->insertItem(insertIndex,QString("interval ")+QString::number(insertIndex+1));
 	 for(int i=insertIndex+1;i<zoneListWidget->count();i++){
-	  zoneListWidget->item(i)->setText(QString("zone ")+QString::number(i+1));
+	  zoneListWidget->item(i)->setText(QString("interval ")+QString::number(i+1));
 	 }
 	 zoneListWidget->setCurrentItem(zoneListWidget->item(insertIndex));
 	 basePrioritySpinBox->setValue(1);
 	 on_basePrioritySpinBox_editingFinished();
 	 topCorrelationRadioButton->setChecked(true);
-	 QTreeWidgetItem* zone;
-	 findCorrectZone(&zone);
-	 setValueInZone(zone,QString("correlation-structure"), QString("top"));
-
+	 QTreeWidgetItem* interval;
+	 findCorrectZone(&interval);
+         setValueInZone(interval, QString("surface-uncertainty"), QString("0"));
+	 surfaceUncertaintyLineEdit->setText(QString("0"));
 };//inserts a new zone for multizone model
 
 void Main_crava::on_deleteZonePushButton_clicked(){
@@ -4425,8 +4449,14 @@ void Main_crava::baseSurfaceFile(const QString &value){
 	if (standard->StandardStrings::fileExists(value)){
 	  QTreeWidgetItem* zone;
 	  findCorrectZone(&zone);
-	  setValueInZone(zone, QString("base-surface-file"), standard->StandardStrings::relativeFileName(value) );
+	  setValueInZone(zone, QString("base-surface"), standard->StandardStrings::relativeFileName(value) );
 	}
+}
+
+void Main_crava::on_layersMultizoneLineEdit_editingFinished(){
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);
+	setValueInZone(zone, QString("number-of-layers"), layersMultizoneLineEdit->text());
 }
 
 void Main_crava::on_surfaceUncertaintyLineEdit_editingFinished(){
@@ -4457,6 +4487,22 @@ void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
 	  setValueInZone(zone, QString("correlation-structure"), QString("compaction"));
 	}
 };//changes the correlation structure to "compaction" in XML
+
+void Main_crava::on_singleCorrelationSurfaceRadioButton_toggled(bool checked){
+        if(checked){
+          singleCorrelationSurfaceFrame->setVisible(true);
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	}
+};
+
+void Main_crava::on_twoCorrelationSurfacesRadioButton_toggled(bool checked){
+        if(checked){
+          twoSurfaceCorrelationFrame->setVisible(true);
+	  QTreeWidgetItem* zone;
+	  findCorrectZone(&zone);
+	}
+};
 
 void Main_crava::on_basePrioritySpinBox_editingFinished(){
    QTreeWidgetItem* zone;
@@ -5244,7 +5290,7 @@ void Main_crava::findCorrectOptimizePosition(QTreeWidgetItem** itemParent){
 }
 
 void Main_crava::findCorrectZone(QTreeWidgetItem** itemParent){
-  *itemParent = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(2+zoneListWidget->currentRow()); //changes the pointer
+  *itemParent = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(1+zoneListWidget->currentRow()); //changes the pointer
 }
 
 void Main_crava::findCorrectFacies(QTreeWidgetItem** itemParent){
@@ -5494,9 +5540,6 @@ void Main_crava::activateTable(){
 				background_subrangePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(10)->child(3);
 				background_powerPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(10)->child(4);
 			background_high_cut_background_modellingPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(11);
-			background_multizone_modelPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12);
-		         	background_top_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(0);
-				background_top_surface_erosion_priorityPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(0)->child(12)->child(1);
 		earth_modelPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1);
 			earth_model_vp_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(0);
 			earth_model_vs_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(1)->child(1);
@@ -5552,25 +5595,27 @@ void Main_crava::activateTable(){
 				interval_one_surface_shift_to_interval_topPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(1)->child(1);
 				interval_one_surface_thicknessPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(1)->child(2);
 				interval_one_surface_sample_densityPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(1)->child(3);
-			area_from_surfacePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2);
-				area_from_surface_file_namePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(0);
-			       	area_from_surface_snap_to_seismic_dataPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(1);
-			utm_coordinatesPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3);
-				utm_coordinates_reference_point_xPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(0);
-				utm_coordinates_reference_point_yPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(1);
-				utm_coordinates_length_xPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(2);
-				utm_coordinates_length_yPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(3);
-				utm_coordinates_sample_density_xPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(4);
-				utm_coordinates_sample_density_yPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(5);
-				utm_coordinates_anglePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(6);
-			       	utm_coordinates_snap_to_seismic_dataPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(7);
-			inline_crossline_numbersPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4);
-				il_startPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(0);
-				il_endPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(1);
-				xl_startPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(2);
-				xl_endPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(3);
-				il_stepPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(4);
-				xl_stepPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(5);
+                        multiple_intervalsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2);
+			        top_surface_multizonePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(0);
+			area_from_surfacePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3);
+				area_from_surface_file_namePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(0);
+			       	area_from_surface_snap_to_seismic_dataPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(1);
+			utm_coordinatesPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4);
+				utm_coordinates_reference_point_xPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(0);
+				utm_coordinates_reference_point_yPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(1);
+				utm_coordinates_length_xPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(2);
+				utm_coordinates_length_yPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(3);
+				utm_coordinates_sample_density_xPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(4);
+				utm_coordinates_sample_density_yPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(5);
+				utm_coordinates_anglePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(6);
+			       	utm_coordinates_snap_to_seismic_dataPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(4)->child(7);
+			inline_crossline_numbersPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(5);
+				il_startPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(5)->child(0);
+				il_endPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(5)->child(1);
+				xl_startPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(5)->child(2);
+				xl_endPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(5)->child(3);
+				il_stepPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(5)->child(4);
+				xl_stepPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(5)->child(5);
 		//project-settings/time-3D-mapping
 		time_3D_mappingPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(1);
 			time_3D_mapping_reference_depthPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(1)->child(0);
