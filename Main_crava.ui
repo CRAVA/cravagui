@@ -1047,31 +1047,6 @@
               <string>top-surface</string>
              </property>
             </item>
-            <item>
-             <property name="text">
-              <string>interval</string>
-             </property>
-             <item>
-              <property name="text">
-               <string>name</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>base-surface</string>
-              </property>
-              <item>
-               <property name="text">
-                <string>erosion-priority</string>
-               </property>
-              </item>
-             </item>
-             <item>
-              <property name="text">
-               <string>number-of-layers</string>
-              </property>
-             </item>
-            </item>
            </item>
            <item>
             <property name="text">
@@ -4898,15 +4873,15 @@ p, li { white-space: pre-wrap; }
           <item>
            <widget class="QFrame" name="multizoneInversionFrame">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>750</width>
-              <height>550</height>
+              <width>755</width>
+              <height>660</height>
              </size>
             </property>
             <property name="frameShape">
@@ -4921,7 +4896,7 @@ p, li { white-space: pre-wrap; }
                <x>19</x>
                <y>10</y>
                <width>851</width>
-               <height>62</height>
+               <height>41</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_2">
@@ -4952,73 +4927,13 @@ p, li { white-space: pre-wrap; }
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="topPriorityLabel">
-                <property name="toolTip">
-                 <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Erosion priority of the top surface file. The top surface file and all base surface files in the zones need to be given &lt;span style=&quot; text-decoration: underline;&quot;&gt;different&lt;/span&gt; priority.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
-                <property name="text">
-                 <string>Top surface erosion priority</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_3">
-                <item>
-                 <widget class="QSpinBox" name="topPrioritySpinBox">
-                  <property name="toolTip">
-                   <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Erosion priority of the top surface file. The top surface file and all base surface files in the zones need to be given &lt;span style=&quot; text-decoration: underline;&quot;&gt;different&lt;/span&gt; priority.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                  </property>
-                  <property name="minimum">
-                   <number>1</number>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_10">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Minimum</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>190</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_5">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>190</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="horizontalLayoutWidget_3">
              <property name="geometry">
               <rect>
                <x>20</x>
-               <y>80</y>
+               <y>50</y>
                <width>851</width>
                <height>162</height>
               </rect>
@@ -5107,10 +5022,10 @@ p, li { white-space: pre-wrap; }
             <widget class="QFrame" name="zoneFrame">
              <property name="geometry">
               <rect>
-               <x>9</x>
-               <y>250</y>
+               <x>10</x>
+               <y>220</y>
                <width>871</width>
-               <height>291</height>
+               <height>251</height>
               </rect>
              </property>
              <property name="frameShape">
@@ -5124,8 +5039,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>10</x>
                 <y>10</y>
-                <width>851</width>
-                <height>251</height>
+                <width>838</width>
+                <height>228</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -5243,7 +5158,7 @@ p, li { white-space: pre-wrap; }
                    </property>
                    <property name="iconSize">
                     <size>
-                     <width>85</width>
+                     <width>90</width>
                      <height>50</height>
                     </size>
                    </property>
@@ -5263,7 +5178,7 @@ p, li { white-space: pre-wrap; }
                    </property>
                    <property name="iconSize">
                     <size>
-                     <width>85</width>
+                     <width>90</width>
                      <height>50</height>
                     </size>
                    </property>
@@ -5272,7 +5187,7 @@ p, li { white-space: pre-wrap; }
                  <item>
                   <widget class="QRadioButton" name="compactionCorrelationRadioButton">
                    <property name="toolTip">
-                    <string>Compaction correlation structure following top and base surface..</string>
+                    <string>Compaction correlation structure following top and base surface.</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -5283,14 +5198,14 @@ p, li { white-space: pre-wrap; }
                    </property>
                    <property name="iconSize">
                     <size>
-                     <width>85</width>
+                     <width>90</width>
                      <height>50</height>
                     </size>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QRadioButton" name="singleCorrelationSurface">
+                  <widget class="QRadioButton" name="singleCorrelationSurfaceRadioButton">
                    <property name="toolTip">
                     <string>Top and base independent, correlation direction defined by a seperate correlation surface.</string>
                    </property>
@@ -5303,14 +5218,14 @@ p, li { white-space: pre-wrap; }
                    </property>
                    <property name="iconSize">
                     <size>
-                     <width>85</width>
+                     <width>90</width>
                      <height>50</height>
                     </size>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QRadioButton" name="twoCorrelationSurfaces">
+                  <widget class="QRadioButton" name="twoCorrelationSurfacesRadioButton">
                    <property name="toolTip">
                     <string>Two separate surfaces defining correlation at top and base.</string>
                    </property>
@@ -5323,7 +5238,7 @@ p, li { white-space: pre-wrap; }
                    </property>
                    <property name="iconSize">
                     <size>
-                     <width>85</width>
+                     <width>90</width>
                      <height>50</height>
                     </size>
                    </property>
@@ -5372,13 +5287,198 @@ p, li { white-space: pre-wrap; }
                  </item>
                 </layout>
                </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_31">
+                 <item>
+                  <widget class="QLabel" name="layers_label_2">
+                   <property name="toolTip">
+                    <string>When estimating wavelets or facies probabilities, the number of layers should be chosen so as to give a sampling density of at least 4 ms.</string>
+                   </property>
+                   <property name="text">
+                    <string>Number of layers:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>layersLineEdit</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="layersMultizoneLineEdit">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>When estimating wavelets or facies probabilities, the number of layers should be chosen so as to give a sampling density of at least 4 ms.</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="spacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>500</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
               </layout>
              </widget>
             </widget>
-            <zorder>gridLayoutWidget_2</zorder>
-            <zorder>horizontalLayoutWidget_3</zorder>
-            <zorder>zoneFrame</zorder>
-            <zorder>verticalLayoutWidget</zorder>
+            <widget class="QFrame" name="singleCorrelationSurfaceFrame">
+             <property name="geometry">
+              <rect>
+               <x>9</x>
+               <y>475</y>
+               <width>871</width>
+               <height>61</height>
+              </rect>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_7">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>841</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_32">
+               <item>
+                <widget class="QLabel" name="singleCorrelationSurfaceLabel">
+                 <property name="toolTip">
+                  <string>Choose a surface to use for lateral correlation during inversion for this zone.</string>
+                 </property>
+                 <property name="text">
+                  <string>Correlation surface:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="singleCorrelationSurfaceLineEdit">
+                 <property name="toolTip">
+                  <string>Path to file with surface used for lateral correlation.in this zone.</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="singleCorrelationSurfaceFileBrowsePushButton">
+                 <property name="toolTip">
+                  <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
+                 </property>
+                 <property name="text">
+                  <string>Browse...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+            <widget class="QFrame" name="twoSurfaceCorrelationFrame">
+             <property name="geometry">
+              <rect>
+               <x>9</x>
+               <y>540</y>
+               <width>871</width>
+               <height>101</height>
+              </rect>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QWidget" name="gridLayoutWidget">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>841</width>
+                <height>80</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <widget class="QLabel" name="topCorrelationSurfaceLabel">
+                 <property name="toolTip">
+                  <string>Choose which surface to use for lateral correlation at the top of the zone.</string>
+                 </property>
+                 <property name="text">
+                  <string>Top correlation surface:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="baseCorrelationSurfaceLabel">
+                 <property name="toolTip">
+                  <string>Choose which surface to use for lateral correlation at the bottom of the zone.</string>
+                 </property>
+                 <property name="text">
+                  <string>Base correlation surface:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="topCorrelationSurfaceLineEdit">
+                 <property name="toolTip">
+                  <string>Path to surface file used for lateral correation at the top of the zone.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="baseCorrelationSurfaceLineEdit">
+                 <property name="toolTip">
+                  <string>Path to surface file used for lateral correation at the bottom of the zone.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QPushButton" name="topSurfaceCorrelationFileBrowsePushButton">
+                 <property name="toolTip">
+                  <string>The surface file for lateral correlation at the top of the zone.</string>
+                 </property>
+                 <property name="text">
+                  <string>Browse...</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QPushButton" name="baseCorrelationSurfaceFileBrowsePushButton">
+                 <property name="toolTip">
+                  <string>The surface file for lateral correlation at the bottom of the zone.</string>
+                 </property>
+                 <property name="text">
+                  <string>Browse...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
            </widget>
           </item>
          </layout>

@@ -145,7 +145,6 @@ private:
 
 	QList<QTreeWidgetItem*> getAllAngleGathers(); // returns a list of all angle gathers in the tree.
 
-       	void deleteAllZones(); //deletes alle zones in the tree
 
 	void deleteAllFacies(); //deletes all facies in the tree
 
@@ -178,11 +177,12 @@ private:
 
 	void necessaryFieldGui();// sets borders on the necessary fields when empty
 
-	/**********************************************************************************************************************************
-         * Table: This is a table which contains a pointer to all the nodes in tree (except for those what are added during the program). *
-         * Gives easy access to all the values in the tree. The values are set in activateTable. Those that are added during the program  *
-         * have their own functions (for instance findCorrectAngleGather).                                                                *
-         **********************************************************************************************************************************/
+	/****************************************************************************************
+         * Table: This is a table which contains a pointer to all the nodes in tree (except for *
+         * those what are added during the program). Gives easy access to all the values in the *
+         * tree. The values are set in activateTable. Those that are added during the program   *
+         * have their own functions (for instance findCorrectAngleGather).                      *
+         ****************************************************************************************/
 
 	//actions
 	QTreeWidgetItem *actionsPointer;
@@ -324,11 +324,6 @@ private:
 				QTreeWidgetItem *interval_one_surface_sample_densityPointer;
 			QTreeWidgetItem *multiple_intervalsPointer;
                                 QTreeWidgetItem *top_surface_multizonePointer;
-                                QTreeWidgetItem *interval_multizonePointer;
-				        QTreeWidgetItem *name_multizonePointer;
-				        QTreeWidgetItem *base_surface_multizonePointer;
-				                QTreeWidgetItem *erosion_priority_multizonePointer;
-				        QTreeWidgetItem *number_of_layers_multizonePointer;
 			QTreeWidgetItem *area_from_surfacePointer;
 				QTreeWidgetItem *area_from_surface_file_namePointer;
 				QTreeWidgetItem *area_from_surface_snap_to_seismic_dataPointer;
@@ -648,20 +643,6 @@ private slots:
 	void on_velocityFieldPriorFileBrowsePushButton_clicked();//browse for the prior model velocity field file then update the XML tree and the above field
 	void on_lateralCorrelationBackgroundPushButton_clicked();//pop up the variogram edit window for background
 	void on_highCutFrequencyLineEdit_editingFinished();//update the XML tree with the high cut frequency
-       	void on_topSurfaceFileLineEdit_editingFinished();//update the XML tree with top surface file
-       	void on_topSurfaceFileBrowsePushButton_clicked();//browse for the top surface file, then update the XML tree and the above field.
-	void on_topPrioritySpinBox_editingFinished();//update the XML tree with the erosion priority
-	void on_addZonePushButton_clicked();//adds a new zone for multizone background model
-	void on_insertZonePushButton_clicked();//inserts a new zone for multizone background model
-	void on_deleteZonePushButton_clicked();//remove the selected zone, should be undoable
-	void on_zoneListWidget_currentRowChanged(int currentRow);//makes sure the correct widgets and information is displayed depending on which zone is selected
-	void on_baseSurfaceFileLineEdit_editingFinished();//updates the XML with the base surface file
-	void on_baseSurfaceFileBrowsePushButton_clicked();//browse for the base surface file, then update the XML tree and the above field.
-	void on_basePrioritySpinBox_editingFinished();//updates the XML with the base surface file
-	void on_topCorrelationRadioButton_toggled(bool checked);//updates the XML with "top" at correlation structure
-	void on_baseCorrelationRadioButton_toggled(bool checked);//updates the XML with "base" at correlation structure
-	void on_compactionCorrelationRadioButton_toggled(bool checked);//updates the XML with "compaction" at correlation structure
-	void on_surfaceUncertaintyLineEdit_editingFinished();//updates the XML with the surface uncertainty
 	void on_correlationLocalWaveletCheckBox_toggled(bool checked);//shows the proper widgets for inputting correlation for wavelet info, does not modify the tree in any way.
 	void on_lateralCorrelationWaveletPushButton_clicked();//pop up the variogram edit window for wavelet
 	void on_correlationElasticParametersCheckBox_toggled(bool checked);//shows the proper widgets for inputting correlation of parameters info, does not modify the tree in any way.
@@ -756,6 +737,31 @@ private slots:
 	void on_oFaciesQualityGridCheckBox_toggled(bool checked);//updates the tree - should seismic quality grid be a part of the output?
 	void on_oRockPhysicsCheckBox_toggled(bool checked);//updates the tree - should rock physics distributions of each facies be a part of the output?
 	void showContextMenu(const QPoint& pos); //used to activate right clicking for wellHeaderListWidget
+
+        //buttons and fields for multizone inversion
+        void on_singleCorrelationSurfaceRadioButton_toggled(bool checked);
+        void on_twoCorrelationSurfacesRadioButton_toggled(bool checked);
+        //void on_singleSurfaceFileBrowseButton_clicked();
+        //void on_topSurfaceCorrelationFileBrowseButton_clicked();
+        //void on_baseSurfaceCorrelationFileBrowseButton_clicked();
+        //void on_singleCorrelationSurfaceLineEdit_editingFinished();
+        //void on_topCorrelationSurfaceLineEdit_editingFinished();
+        //void on_baseCorrelationSurfaceLineEdit_editingFinished();
+        void on_layersMultizoneLineEdit_editingFinished();
+       	void deleteAllZones(); //deletes alle zones in the tree
+	void on_addZonePushButton_clicked();//adds a new zone for multizone background model
+	void on_insertZonePushButton_clicked();//inserts a new zone for multizone background model
+	void on_deleteZonePushButton_clicked();//remove the selected zone, should be undoable
+	void on_zoneListWidget_currentRowChanged(int currentRow);//makes sure the correct widgets and information is displayed depending on which zone is selected
+	void on_baseSurfaceFileLineEdit_editingFinished();//updates the XML with the base surface file
+	void on_baseSurfaceFileBrowsePushButton_clicked();//browse for the base surface file, then update the XML tree and the above field.
+	void on_basePrioritySpinBox_editingFinished();//updates the XML with the base surface file
+	void on_topCorrelationRadioButton_toggled(bool checked);//updates the XML with "top" at correlation structure
+	void on_baseCorrelationRadioButton_toggled(bool checked);//updates the XML with "base" at correlation structure
+	void on_compactionCorrelationRadioButton_toggled(bool checked);//updates the XML with "compaction" at correlation structure
+	void on_surfaceUncertaintyLineEdit_editingFinished();//updates the XML with the surface uncertainty
+       	void on_topSurfaceFileLineEdit_editingFinished();//update the XML tree with top surface file
+       	void on_topSurfaceFileBrowsePushButton_clicked();//browse for the top surface file, then update the XML tree and the above field.
 };
 
 #endif
