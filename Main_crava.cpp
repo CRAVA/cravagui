@@ -4350,7 +4350,7 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 
 	//move to base-surface-file
 	QString baseSurfaceFile;
-	getValueFromZone(zone, QString("base-surface-file"), baseSurfaceFile);
+	getValueFromZone(zone, QString("base-surface"), baseSurfaceFile);
 	baseSurfaceFileLineEdit->setText(baseSurfaceFile);
 
 	//move to erosion-priority
@@ -4381,6 +4381,11 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	QString surfaceUncertainty;
 	getValueFromZone(zone, QString("surface-uncertainty"), surfaceUncertainty);
 	surfaceUncertaintyLineEdit->setText(surfaceUncertainty);
+
+        //move to number of layers
+        QString layersMultizone;
+	getValueFromZone(zone, QString("number-of-layers"), layersMultizone);
+	layersMultizoneLineEdit->setText(layersMultizone);
 	
 	zoneFrame->setEnabled(true);
 	deleteZonePushButton->setEnabled(true);
@@ -4468,6 +4473,8 @@ void Main_crava::on_surfaceUncertaintyLineEdit_editingFinished(){
 
 void Main_crava::on_topCorrelationRadioButton_toggled(bool checked){
         if(checked){
+          singleCorrelationSurfaceFrame->setVisible(false);
+          twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
 	  findCorrectZone(&zone);
 	  setValueInZone(zone, QString("correlation-structure"), QString("top"));
@@ -4475,6 +4482,8 @@ void Main_crava::on_topCorrelationRadioButton_toggled(bool checked){
 };//changes the correlation structure to "top" in XML
 void Main_crava::on_baseCorrelationRadioButton_toggled(bool checked){
         if(checked){
+          singleCorrelationSurfaceFrame->setVisible(false);
+          twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
 	  findCorrectZone(&zone);
 	  setValueInZone(zone, QString("correlation-structure"), QString("base"));
@@ -4482,6 +4491,8 @@ void Main_crava::on_baseCorrelationRadioButton_toggled(bool checked){
 };//changes the correlation structure to "base" in XML
 void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
         if(checked){
+          singleCorrelationSurfaceFrame->setVisible(false);
+          twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
 	  findCorrectZone(&zone);
 	  setValueInZone(zone, QString("correlation-structure"), QString("compaction"));
@@ -4491,6 +4502,7 @@ void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
 void Main_crava::on_singleCorrelationSurfaceRadioButton_toggled(bool checked){
         if(checked){
           singleCorrelationSurfaceFrame->setVisible(true);
+          twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
 	  findCorrectZone(&zone);
 	}
@@ -4498,6 +4510,7 @@ void Main_crava::on_singleCorrelationSurfaceRadioButton_toggled(bool checked){
 
 void Main_crava::on_twoCorrelationSurfacesRadioButton_toggled(bool checked){
         if(checked){
+          singleCorrelationSurfaceFrame->setVisible(false);
           twoSurfaceCorrelationFrame->setVisible(true);
 	  QTreeWidgetItem* zone;
 	  findCorrectZone(&zone);
