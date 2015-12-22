@@ -3889,6 +3889,7 @@ void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked){
 		  on_topSurfaceFileLineEdit_editingFinished();
 		}
 		zoneFrame->setEnabled(false);
+                necessaryFieldGui();
 		        
 	}
 	else{
@@ -4563,8 +4564,17 @@ void Main_crava::on_topCorrelationRadioButton_toggled(bool checked){
           singleCorrelationSurfaceFrame->setVisible(false);
           twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
-	  findCorrectZone(&zone);
-	  setValueInZone(zone, QString("correlation-structure"), QString("top"));
+	  findCorrectCorrelationZone(&zone);
+	  setValueInZone(zone, QString("top-conform"), QString("yes"));
+          //clear other fields
+	  setValueInZone(zone, QString("single-surface"), QString(""));
+	  setValueInZone(zone, QString("top-surface"), QString(""));
+	  setValueInZone(zone, QString("base-surface"), QString(""));
+	  setValueInZone(zone, QString("base-conform"), QString(""));
+          singleCorrelationSurfaceLineEdit->clear();
+          topCorrelationSurfaceLineEdit->clear();
+          baseCorrelationSurfaceLineEdit->clear();
+          necessaryFieldGui();
         }
 };//changes the correlation structure to "top" in XML
 void Main_crava::on_baseCorrelationRadioButton_toggled(bool checked){
@@ -4572,8 +4582,17 @@ void Main_crava::on_baseCorrelationRadioButton_toggled(bool checked){
           singleCorrelationSurfaceFrame->setVisible(false);
           twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
-	  findCorrectZone(&zone);
-	  setValueInZone(zone, QString("correlation-structure"), QString("base"));
+	  findCorrectCorrelationZone(&zone);
+	  setValueInZone(zone, QString("base-conform"), QString("yes"));
+          //clear other fields
+	  setValueInZone(zone, QString("single-surface"), QString(""));
+	  setValueInZone(zone, QString("top-surface"), QString(""));
+	  setValueInZone(zone, QString("base-surface"), QString(""));
+	  setValueInZone(zone, QString("top-conform"), QString(""));
+          singleCorrelationSurfaceLineEdit->clear();
+          topCorrelationSurfaceLineEdit->clear();
+          baseCorrelationSurfaceLineEdit->clear();
+          necessaryFieldGui();
 	}
 };//changes the correlation structure to "base" in XML
 void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
@@ -4581,8 +4600,17 @@ void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
           singleCorrelationSurfaceFrame->setVisible(false);
           twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
-	  findCorrectZone(&zone);
-	  setValueInZone(zone, QString("correlation-structure"), QString("compaction"));
+	  findCorrectCorrelationZone(&zone);
+	  setValueInZone(zone, QString("top-conform"), QString("yes"));
+	  setValueInZone(zone, QString("base-conform"), QString("yes"));
+          //clear other fields
+	  setValueInZone(zone, QString("single-surface"), QString(""));
+	  setValueInZone(zone, QString("top-surface"), QString(""));
+	  setValueInZone(zone, QString("base-surface"), QString(""));
+          singleCorrelationSurfaceLineEdit->clear();
+          topCorrelationSurfaceLineEdit->clear();
+          baseCorrelationSurfaceLineEdit->clear();
+          necessaryFieldGui();
 	}
 };//changes the correlation structure to "compaction" in XML
 
@@ -4591,7 +4619,15 @@ void Main_crava::on_singleCorrelationSurfaceRadioButton_toggled(bool checked){
           singleCorrelationSurfaceFrame->setVisible(true);
           twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
-	  findCorrectZone(&zone);
+	  findCorrectCorrelationZone(&zone);
+          //clear other fields
+	  setValueInZone(zone, QString("top-conform"), QString(""));
+	  setValueInZone(zone, QString("base-conform"), QString(""));
+	  setValueInZone(zone, QString("top-surface"), QString(""));
+	  setValueInZone(zone, QString("base-surface"), QString(""));
+          topCorrelationSurfaceLineEdit->clear();
+          baseCorrelationSurfaceLineEdit->clear();
+          necessaryFieldGui();
 	}
 };
 
@@ -4600,7 +4636,13 @@ void Main_crava::on_twoCorrelationSurfacesRadioButton_toggled(bool checked){
           singleCorrelationSurfaceFrame->setVisible(false);
           twoSurfaceCorrelationFrame->setVisible(true);
 	  QTreeWidgetItem* zone;
-	  findCorrectZone(&zone);
+	  findCorrectCorrelationZone(&zone);
+          //clear other fields
+	  setValueInZone(zone, QString("top-conform"), QString(""));
+	  setValueInZone(zone, QString("base-conform"), QString(""));
+	  setValueInZone(zone, QString("single-surface"), QString(""));
+          singleCorrelationSurfaceLineEdit->clear();
+          necessaryFieldGui();
 	}
 };
 
@@ -5870,6 +5912,8 @@ QList<QObject*> Main_crava::getNecessaryFields(){
 	  list << timeLineEdit << densityLineEdit << faciesLineEdit << topTimeFileLineEdit << bottomTimeFileLineEdit;
 	  list << topTimeValueLineEdit << bottomTimeValueLineEdit << correlationDirectionFileLineEdit << layersLineEdit;
 	  list << referenceSurfaceFileLineEdit << distanceTopLineEdit << thicknessLineEdit << layerThicknessLineEdit;
+          list << singleCorrelationSurfaceLineEdit << topCorrelationSurfaceLineEdit << baseCorrelationSurfaceLineEdit;
+          list << topSurfaceFileLineEdit << baseSurfaceFileLineEdit << layersMultizoneLineEdit;
 	  return list;
 }//returns a list of all necessary objects.
 
