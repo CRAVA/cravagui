@@ -1884,7 +1884,6 @@ void Main_crava::insertZone(){
 	QTreeWidgetItem* parent = multiple_intervalsPointer;//move to the parent
 	QTreeWidgetItem* precedingItem = multiple_intervalsPointer->child(childNumber-1);//which node will it precede.
 	QTreeWidgetItem* item = new QTreeWidgetItem(parent,precedingItem);//insert another zone
-
 	item->setText(0,label);
                 QTreeWidgetItem* child = new QTreeWidgetItem(item);
 		child->setText(0,QString("name"));
@@ -1892,6 +1891,11 @@ void Main_crava::insertZone(){
 		child->setText(0,QString("base-surface"));
 		child = new QTreeWidgetItem(item);
 		child->setText(0,QString("number-of-layers"));
+	parent = correlation_directionPointer;//move to the parent
+	precedingItem = correlation_directionPointer->child(childNumber-1);//which node will it precede.
+	item = new QTreeWidgetItem(parent,precedingItem);//insert another zone
+	item->setText(0,label);
+                child = new QTreeWidgetItem(item);
 }
 
 void Main_crava::addZone(){
@@ -1908,6 +1912,11 @@ void Main_crava::addZone(){
 		        nestedChild->setText(0,QString("erosion-priority"));
 		child = new QTreeWidgetItem(item);
 		child->setText(0,QString("number-of-layers"));
+	parent = correlation_directionPointer;//moves to parent
+	item = new QTreeWidgetItem(parent);//insert another zone
+	item->setText(0,label);
+                child = new QTreeWidgetItem(item);
+		child->setText(0,QString("name"));
 }
 
 void Main_crava::addFacies(){
@@ -4393,7 +4402,8 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 }
 
 void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.			   
-        zoneListWidget->addItem(QString("interval ") + QString::number(zoneListWidget->count()+1));
+        QString label = QString("interval ") + QString::number(zoneListWidget->count()+1);
+        zoneListWidget->addItem(label);
 	addZone();
 	zoneListWidget->setCurrentItem(zoneListWidget->item(zoneListWidget->count()-1));
 	basePrioritySpinBox->setValue(1);
@@ -4402,27 +4412,29 @@ void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.
 	basePrioritySpinBox->setFocus();
 	QTreeWidgetItem* interval;
 	findCorrectZone(&interval);
-        setValueInZone(interval, QString("name"), QString("interval ") + QString::number(zoneListWidget->count()));
+        setValueInZone(interval, QString("name"), label);
 	setValueInZone(interval, QString("surface-uncertainty"), QString("0"));
 	surfaceUncertaintyLineEdit->setText(QString("0"));
-	
+        findCorrectCorrelationZone(&interval);
+        setValueInZone(interval, QString("name"), label);	
 };//adds a new zone for multizone model
 
 void Main_crava::on_insertZonePushButton_clicked(){
-         int insertIndex = zoneListWidget->currentRow();
-	 insertZone();
-	 zoneListWidget->insertItem(insertIndex,QString("interval ")+QString::number(insertIndex+1));
-	 for(int i=insertIndex+1;i<zoneListWidget->count();i++){
-	  zoneListWidget->item(i)->setText(QString("interval ")+QString::number(i+1));
-	 }
-	 zoneListWidget->setCurrentItem(zoneListWidget->item(insertIndex));
-	 basePrioritySpinBox->setValue(1);
-	 on_basePrioritySpinBox_editingFinished();
-	 topCorrelationRadioButton->setChecked(true);
-	 QTreeWidgetItem* interval;
-	 findCorrectZone(&interval);
-         setValueInZone(interval, QString("surface-uncertainty"), QString("0"));
-	 surfaceUncertaintyLineEdit->setText(QString("0"));
+        int insertIndex = zoneListWidget->currentRow();
+	insertZone();
+        QString label = QString("interval ")+QString::number(insertIndex+1);
+	zoneListWidget->insertItem(insertIndex,label);
+	for(int i=insertIndex+1;i<zoneListWidget->count();i++){
+	 zoneListWidget->item(i)->setText(QString("interval ")+QString::number(i+1));
+	}
+	zoneListWidget->setCurrentItem(zoneListWidget->item(insertIndex));
+	basePrioritySpinBox->setValue(1);
+	on_basePrioritySpinBox_editingFinished();
+	topCorrelationRadioButton->setChecked(true);
+	QTreeWidgetItem* interval;
+	findCorrectZone(&interval);
+        setValueInZone(interval, QString("surface-uncertainty"), QString("0"));
+	surfaceUncertaintyLineEdit->setText(QString("0"));
 };//inserts a new zone for multizone model
 
 void Main_crava::on_deleteZonePushButton_clicked(){
@@ -4438,6 +4450,27 @@ void Main_crava::on_deleteZonePushButton_clicked(){
 	   zoneListWidget->item(i)->setText(QString("zone ") + QString::number(i+1));
 	 }
 }
+void Main_crava::singleCorrelationSurface(const QString & value){
+	if (standard->StandardStrings::fileExists(value)){
+        QTreeWidgetItem* interval;
+	findCorrectZone(&interval);
+	QTreeWidgetItem* child = new QTreeWidgetItem(interval);//adds child
+	child->setText(0,QString("single-surface"));
+        setValueInZone(interval, QString("single-surface"), standard->StandardStrings::relativeFileName(value));
+	}
+};
+
+void Main_crava::on_singleCorrelationSurfaceFileBrowsePushButton_clicked(){
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::surfaceFormat());
+	if(!fileName.isNull()){
+		singleCorrelationSurfaceLineEdit->setText(fileName);
+		singleCorrelationSurface(fileName);
+		singleCorrelationSurfaceLineEdit->setFocus();
+	}
+}
+void Main_crava::on_singleCorrelationSurfaceLineEdit_editingFinished(){
+        singleCorrelationSurface(singleCorrelationSurfaceLineEdit->text());
+};//update the XML three with the filename
 
 void Main_crava::on_baseSurfaceFileLineEdit_editingFinished(){
 	baseSurfaceFile(baseSurfaceFileLineEdit->text());
@@ -5304,6 +5337,10 @@ void Main_crava::findCorrectOptimizePosition(QTreeWidgetItem** itemParent){
 
 void Main_crava::findCorrectZone(QTreeWidgetItem** itemParent){
   *itemParent = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(1+zoneListWidget->currentRow()); //changes the pointer
+}
+
+void Main_crava::findCorrectCorrelationZone(QTreeWidgetItem** itemParent){
+  *itemParent = xmlTreeWidget->topLevelItem(0)->child(3)->child(6)->child(zoneListWidget->currentRow()); //changes the pointer
 }
 
 void Main_crava::findCorrectFacies(QTreeWidgetItem** itemParent){

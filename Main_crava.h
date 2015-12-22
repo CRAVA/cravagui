@@ -140,6 +140,7 @@ private:
 	void findCorrectOptimizePosition(QTreeWidgetItem** itemParent); //finds the optimize position which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the optimize position. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
 
 	void findCorrectZone(QTreeWidgetItem** itemParent);//finds the zone which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the facies. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
+	void findCorrectCorrelationZone(QTreeWidgetItem** itemParent);//finds the zone which is selected in the list widget under correlation. The argument is a pointer to the pointer that one wants to change to the facies. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
 
 	void findCorrectFacies(QTreeWidgetItem** itemParent); //finds the facies which is selected in the list widget. The argument is a pointer to the pointer that one wants to change to the facies. IF THE TREE STRUCTURE IS CHANGED, THE INDICES HAVE TO BE CHANGED
 
@@ -741,10 +742,14 @@ private slots:
         //buttons and fields for multizone inversion
         void on_singleCorrelationSurfaceRadioButton_toggled(bool checked);
         void on_twoCorrelationSurfacesRadioButton_toggled(bool checked);
-        //void on_singleSurfaceFileBrowseButton_clicked();
+        void on_singleCorrelationSurfaceFileBrowsePushButton_clicked();
+        void singleCorrelationSurface(const QString & value);//updates tree with file
+
+
+
         //void on_topSurfaceCorrelationFileBrowseButton_clicked();
         //void on_baseSurfaceCorrelationFileBrowseButton_clicked();
-        //void on_singleCorrelationSurfaceLineEdit_editingFinished();
+        void on_singleCorrelationSurfaceLineEdit_editingFinished();
         //void on_topCorrelationSurfaceLineEdit_editingFinished();
         //void on_baseCorrelationSurfaceLineEdit_editingFinished();
         void on_layersMultizoneLineEdit_editingFinished();
