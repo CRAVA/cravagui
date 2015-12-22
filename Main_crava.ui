@@ -5399,8 +5399,6 @@ p, li { white-space: pre-wrap; }
                </item>
               </layout>
              </widget>
-             <zorder>horizontalLayoutWidget_7</zorder>
-             <zorder>twoSurfaceCorrelationFrame</zorder>
             </widget>
             <widget class="QFrame" name="twoSurfaceCorrelationFrame">
              <property name="geometry">
@@ -5462,7 +5460,7 @@ p, li { white-space: pre-wrap; }
                 </widget>
                </item>
                <item row="0" column="2">
-                <widget class="QPushButton" name="topSurfaceCorrelationFileBrowsePushButton">
+                <widget class="QPushButton" name="topCorrelationSurfaceFileBrowsePushButton">
                  <property name="toolTip">
                   <string>The surface file for lateral correlation at the top of the zone.</string>
                  </property>
@@ -5555,7 +5553,7 @@ p, li { white-space: pre-wrap; }
              <string>Specification of the lateral inversion geometry in inline and crossline. Any numbers not specified will be taken from the seismic cubes.</string>
             </property>
             <property name="text">
-             <string>Inline and crossline for SegY format</string>
+             <string>Inline and crossline from SegY format</string>
             </property>
            </widget>
           </item>
