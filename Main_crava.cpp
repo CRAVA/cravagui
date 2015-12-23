@@ -4429,6 +4429,7 @@ void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.
 	surfaceUncertaintyLineEdit->setText(QString("0"));
         findCorrectCorrelationZone(&interval);
         setValueInZone(interval, QString("name"), label);	
+        setValueInZone(interval, QString("top-conform"), QString("yes"));	
 };//adds a new zone for multizone model
 
 void Main_crava::on_insertZonePushButton_clicked(){
@@ -4457,20 +4458,32 @@ void Main_crava::on_insertZonePushButton_clicked(){
 	surfaceUncertaintyLineEdit->setText(QString("0"));
         findCorrectCorrelationZone(&interval);
         setValueInZone(interval, QString("name"), label);
+        setValueInZone(interval, QString("top-conform"), QString("yes"));	
 };//inserts a new zone for multizone model
 
-void Main_crava::on_deleteZonePushButton_clicked(){
-
+void Main_crava::deleteZone(){
          int row = zoneListWidget->currentRow();
          QTreeWidgetItem* zone;
+         QTreeWidgetItem* correlationZone;
 	 findCorrectZone(&zone);
-	 
-	 delete zoneListWidget->takeItem(row);
-	 delete zone;
-
-	 for(int i=row;i<zoneListWidget->count();i++){
-	   zoneListWidget->item(i)->setText(QString("zone ") + QString::number(i+1));
+         findCorrectCorrelationZone(&correlationZone);
+    	 delete zoneListWidget->takeItem(row);//remove zone from list widget
+	 delete zone;//remove zone from xml-tree
+	 delete correlationZone;//remove zone from xml-tree
+         QString label;
+	 for(int i=row;i<zoneListWidget->count();i++){//fix numbering in list and xml-tree
+                label = QString("zone ") + QString::number(i+1);
+	        zoneListWidget->item(i)->setText(label);
+                zoneListWidget->setCurrentItem(zoneListWidget->item(i));//go to zone number
+                findCorrectZone(&zone);
+                setValueInZone(zone, QString("name"), label);
+                findCorrectCorrelationZone(&zone);
+                setValueInZone(zone, QString("name"), label);
 	 }
+}        
+
+void Main_crava::on_deleteZonePushButton_clicked(){
+         deleteZone();
 }
 void Main_crava::singleCorrelationSurface(const QString & value){
 	if (standard->StandardStrings::fileExists(value)){
