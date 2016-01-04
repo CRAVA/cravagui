@@ -4614,9 +4614,9 @@ void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
           twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
 	  findCorrectCorrelationZone(&zone);
-	  setValueInZone(zone, QString("top-conform"), QString("yes"));
-	  setValueInZone(zone, QString("base-conform"), QString("yes"));
-          //clear other fields
+	  //clear all fields
+	  setValueInZone(zone, QString("top-conform"), QString(""));
+	  setValueInZone(zone, QString("base-conform"), QString(""));
 	  setValueInZone(zone, QString("single-surface"), QString(""));
 	  setValueInZone(zone, QString("top-surface"), QString(""));
 	  setValueInZone(zone, QString("base-surface"), QString(""));
