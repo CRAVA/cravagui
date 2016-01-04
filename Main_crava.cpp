@@ -3908,6 +3908,12 @@ void Main_crava::on_singleZoneInversionRadioButton_toggled(bool checked){
         bottomTimeValueLineEdit->setVisible(false);
         topTimeValueLineEdit->setVisible(false);
         //need to clear multizone fields
+	int numberOfRows = zoneListWidget->count();
+	for (int i=0;i<numberOfRows;i++){//delete all zones
+	  deleteZone();
+	}
+	topSurfaceFileLineEdit->clear();
+	top_surface_multizonePointer->setText(1, "");
 }
 void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	if(checked){
