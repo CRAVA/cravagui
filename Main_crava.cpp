@@ -4426,7 +4426,7 @@ void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.
 	findCorrectZone(&interval);
         setValueInZone(interval, QString("name"), label);
 	setValueInZone(interval, QString("uncertainty"), QString("0"));
-	surfaceUncertaintyLineEdit->setText(QString("0"));
+	surfaceUncertaintyLineEdit->setText(QString("10"));
         findCorrectCorrelationZone(&interval);
         setValueInZone(interval, QString("name"), label);	
         setValueInZone(interval, QString("top-conform"), QString("yes"));	
