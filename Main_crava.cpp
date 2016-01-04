@@ -3525,6 +3525,8 @@ void Main_crava::on_correlationSurfaceRadioButton_toggled(bool checked){
 	correlationDirectionLabel->setEnabled(checked);
 	correlationDirectionFileLineEdit->setEnabled(checked);
 	correlationDirectionBrowsePushButton->setEnabled(checked);
+  	surfaceOneFrame->setVisible(!checked);
+	surfaceOneFrame->setEnabled(!checked);
 	if(!checked){
 		correlationDirectionFileLineEdit->setText(QString(""));
 		correlationDirectionFile(QString(""));
@@ -3541,29 +3543,10 @@ void Main_crava::on_oneSurfaceRadioButton_toggled(bool checked){
 	surfaceOneFrame->setVisible(checked);
 	surfaceOneFrame->setEnabled(checked);
 	if(!checked){//clears one surface;
-		for (int i=0;i<interval_one_surfacePointer->childCount();i++){
-				interval_one_surfacePointer->child(i)->setText(1,QString(""));
-		}
-		QList<QLineEdit*> fields=surfaceOneFrame->findChildren<QLineEdit*>();
-		foreach (QLineEdit* field, fields){
-			field->clear();
-		}
+	        clearIntervalOneSurfaceTags();
 	}
 	else {//clears two surface
-		for (int i=0;i<interval_two_surfacesPointer->childCount();i++){
-			if(interval_two_surfacesPointer->child(i)->childCount()>0){
-				for (int j=0;j<interval_two_surfacesPointer->child(i)->childCount();j++){
-					interval_two_surfacesPointer->child(i)->child(j)->setText(1,QString(""));
-				}
-			}
-			else {
-				interval_two_surfacesPointer->child(i)->setText(1,QString(""));
-			}
-		}
-		QList<QLineEdit*> fields=surfaceTwoFrame->QObject::findChildren<QLineEdit*>();
-		foreach (QLineEdit* field, fields){
-			field->clear();
-		}
+	        clearIntervalTwoSurfacesTags();
 	       	necessaryFieldGui();
 	}
 }
@@ -3896,6 +3879,33 @@ void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked){
 	       zoneFrame->setEnabled(false);
 	}
         //need to clear singleZone fields
+	clearIntervalTwoSurfacesTags();
+	clearIntervalOneSurfaceTags();
+}
+void Main_crava::clearIntervalTwoSurfacesTags(){
+        for (int i=0;i<interval_two_surfacesPointer->childCount();i++){
+                if(interval_two_surfacesPointer->child(i)->childCount()>0){
+                        for (int j=0;j<interval_two_surfacesPointer->child(i)->childCount();j++){
+                                interval_two_surfacesPointer->child(i)->child(j)->setText(1,QString(""));
+                        }
+                }
+                else {
+                        interval_two_surfacesPointer->child(i)->setText(1,QString(""));
+                }
+        }
+        QList<QLineEdit*> fields=surfaceTwoFrame->QObject::findChildren<QLineEdit*>();
+        foreach (QLineEdit* field, fields){
+                field->clear();
+        }
+}
+void Main_crava::clearIntervalOneSurfaceTags(){
+        for (int i=0;i<interval_one_surfacePointer->childCount();i++){
+                        interval_one_surfacePointer->child(i)->setText(1,QString(""));
+        }
+        QList<QLineEdit*> fields=surfaceOneFrame->findChildren<QLineEdit*>();
+        foreach (QLineEdit* field, fields){
+                field->clear();
+        }
 }
 void Main_crava::on_singleZoneInversionRadioButton_toggled(bool checked){
         multizoneInversionFrame->setVisible(false);//remove the multizone gui
@@ -3908,6 +3918,13 @@ void Main_crava::on_singleZoneInversionRadioButton_toggled(bool checked){
         bottomTimeValueLineEdit->setVisible(false);
         topTimeValueLineEdit->setVisible(false);
         //need to clear multizone fields
+	int numberOfRows = zoneListWidget->count();
+	for (int i=0;i<numberOfRows;i++){//delete all zones
+	  deleteZone();
+	}
+	//keep tag, but delete content
+	topSurfaceFileLineEdit->clear();
+	top_surface_multizonePointer->setText(1, QString(""));
 }
 void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	if(checked){
@@ -4426,7 +4443,7 @@ void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.
 	findCorrectZone(&interval);
         setValueInZone(interval, QString("name"), label);
 	setValueInZone(interval, QString("uncertainty"), QString("0"));
-	surfaceUncertaintyLineEdit->setText(QString("0"));
+	surfaceUncertaintyLineEdit->setText(QString("10"));
         findCorrectCorrelationZone(&interval);
         setValueInZone(interval, QString("name"), label);	
         setValueInZone(interval, QString("top-conform"), QString("yes"));	
@@ -4614,9 +4631,9 @@ void Main_crava::on_compactionCorrelationRadioButton_toggled(bool checked){
           twoSurfaceCorrelationFrame->setVisible(false);
 	  QTreeWidgetItem* zone;
 	  findCorrectCorrelationZone(&zone);
-	  setValueInZone(zone, QString("top-conform"), QString("yes"));
-	  setValueInZone(zone, QString("base-conform"), QString("yes"));
-          //clear other fields
+	  //clear all fields
+	  setValueInZone(zone, QString("top-conform"), QString(""));
+	  setValueInZone(zone, QString("base-conform"), QString(""));
 	  setValueInZone(zone, QString("single-surface"), QString(""));
 	  setValueInZone(zone, QString("top-surface"), QString(""));
 	  setValueInZone(zone, QString("base-surface"), QString(""));

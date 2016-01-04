@@ -767,6 +767,8 @@ private slots:
        	void on_topSurfaceFileLineEdit_editingFinished();//update the XML tree with top surface file
        	void on_topSurfaceFileBrowsePushButton_clicked();//browse for the top surface file, then update the XML tree and the above field.
         void deleteZone();//deletes current zone from list widget and xml-tree
+	void clearIntervalOneSurfaceTags();//clears all tags related to single surface correlation
+	void clearIntervalTwoSurfacesTags();//clears all tags related to two surfaces correlations
 };
 
 #endif
