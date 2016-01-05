@@ -87,7 +87,7 @@ Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) 
 	if(!filename.isEmpty()){//used on loading
 		int r = QMessageBox::warning(this, QString("Overwrite settings"), QString("Do you want to overwrite the settings by loading the settings in the specified file?"),
 						QMessageBox::Yes | QMessageBox::No);
-		writeXmlToTree(filename,xmlTreeWidget);
+		writeXmlToTree(filename,xmlTreeWidget);//note that xmlTreeWidget is the tree from the Qt ui-file
 		QDir dir(top_directoryPointer->text(1));
 		dir.cd(input_directoryPointer->text(1));
 		standard->StandardStrings::setinputPath(dir.path());
@@ -259,7 +259,7 @@ void Main_crava::setupButtonGroups(){
 	wellHeaderPushButton->setEnabled(false);//should only be clickable if there are any items in the well list widget.
 }
 
-void  Main_crava::readGuiSpecificSettings(){//makes the program remember how it looked like last time it was ran. Does not work correctly with 2 screens for xwin for some reason.
+void  Main_crava::readGuiSpecificSettings(){//makes the program remember how it looked like last time it was ran
 	QSettings settings("Statoil","CRAVA");
 	settings.beginGroup("crava");
 	settings.beginGroup("GUI");
@@ -580,7 +580,7 @@ void Main_crava::updateGuiToTree(){
                 }
         }
 	//check for multizone
-	else if(zoneListWidget->count()>1 || !top_surface_multizonePointer->text(1).isEmpty()){ 
+	else if(zoneListWidget->count()>0 || !top_surface_multizonePointer->text(1).isEmpty()){ 
 	        multizoneInversionRadioButton->setChecked(true);
 		topSurfaceFileLineEdit->setText(top_surface_multizonePointer->text(1));
 	}
@@ -591,10 +591,12 @@ void Main_crava::updateGuiToTree(){
         }
         //fill in velocity field information (only relevant when Time to depth is ticked)
 	if(!interval_two_surfaces_velocity_fieldPointer->text(1).isEmpty()){
+	        depthSurfacesCheckBox->setChecked(true);
 		velocityFieldFileRadioButton->setChecked(true);
 		velocityFieldLineEdit->setText(interval_two_surfaces_velocity_fieldPointer->text(1));
 	}
 	else if(interval_two_surfaces_velocity_field_from_inversionPointer->text(1)==QString("yes")){
+	        depthSurfacesCheckBox->setChecked(true);
 		velocityFieldInvesionRadioButton->setChecked(true);
 	}
 	else {//default
@@ -1572,19 +1574,19 @@ bool Main_crava::getWellHeaders(const QString &fileName){
 }
 
 bool Main_crava::writeXmlToTree(const QString &fileName, QTreeWidget *tree){
-	//this might as well not have a pointer to the tree as it is very gui specific... will only work if the correct tree is specified.
+	//open xml file
 	QFile file(fileName);
 	if (!file.open(QFile::ReadOnly | QFile::Text)) {
 		QMessageBox::warning(this, QString("Unable to open file"), QString("Could not open the file."), QMessageBox::Ok);
 		return false;
 	}
-	//needs to clear the comments that crava support, they are not normal comments.
+	//needs to clear the comment lines that crava support, they are not normal comments.
 	QString comentlessDocument("");
 	QTextStream originalStream(&file);
 	QTextStream commentlessStream(&comentlessDocument);
 	while(!originalStream.atEnd()){
 		QString line = originalStream.readLine().trimmed();
-		if(line[0] != QChar('#')){
+		if(line[0] != QChar('#')){//remove lines starting with #
 			commentlessStream << line;
 		}
 	}
@@ -1598,11 +1600,12 @@ bool Main_crava::writeXmlToTree(const QString &fileName, QTreeWidget *tree){
 		return false;
 	}
 	QDomElement root = doc.documentElement();
-	if (root.tagName() != "crava") {//is this a crava xml file
-		QMessageBox::warning(this, QString("Invalid file"), QString("This is not a crava xml file."), QMessageBox::Ok);
+	if (root.tagName() != "crava") {//root tag should be crava
+		QMessageBox::warning(this, QString("Invalid file"), QString("This is not a CRAVA xml file."), QMessageBox::Ok);
 		return false;
 	}
 	QDir dir;
+        //check if top directory is set in the xml-file, store path in dir
 	if(!root.firstChildElement("project-settings").firstChildElement("io-settings").firstChildElement("top-directory").text().trimmed().isEmpty()){
 		dir=QDir(root.firstChildElement("project-settings").firstChildElement("io-settings").firstChildElement("top-directory").text().trimmed());
 	}
@@ -1628,8 +1631,6 @@ bool Main_crava::writeXmlToTree(const QString &fileName, QTreeWidget *tree){
 }
 
 void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *treeItem){
-	//this assumes the tree is fresh, no variograms, angle-gather, wells and facies
-
 	QDomNode  xmlChild = xmlItem.firstChild();
 	if(xmlChild.isText ()){//a node can only have one child text node and all nodes without children are text nodes
 		treeItem->setText(1,xmlItem.toElement().text().trimmed());
@@ -1637,7 +1638,7 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 	}
 	QTreeWidgetItem* treeChild;
 	while(!xmlChild.isNull()){
-		//since there can be multiple angle-gather, wells, optimize positions, zones and facies as well as variograms...
+		//since there can be multiple angle-gather, wells, optimize positions, zones and facies as well as variograms
 		//these checks could all cause trouble if the names are changed
 		if(xmlChild.toElement().tagName() == QString("angle-gather")){
 			//angle gathers are not in the tree already and needs to be added before they can be populated
@@ -1656,7 +1657,7 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			  stackListWidget->currentItem()->setText(name);
 			}
 		}
-		else if(xmlChild.toElement().tagName() == QString("well")&& (xmlItem.toElement().tagName()==QString("well-data"))){
+		else if(xmlChild.toElement().tagName() == QString("well") && (xmlItem.toElement().tagName()==QString("well-data"))){
 			//wells are not in the tree already and needs to be added before they can be populated
 			wellListWidget->addItem(QString("well log"));
 			addWell();
@@ -1671,13 +1672,13 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			addOptimizePosition();
 			recursiveXmlRead(xmlChild,treeItem->child(5+optimizePositionListWidget->count()));
 		}
-	     	else if(xmlChild.toElement().tagName() == QString("zone")){
+	     	else if(xmlChild.toElement().tagName() == QString("interval") && (xmlItem.toElement().tagName()==QString("multiple-intervals"))){
 		        multizoneInversionRadioButton->setChecked(true);
 			zoneListWidget->addItem(QString("zone " + QString::number(zoneListWidget->count()+1)));
 			addZone();
 			zoneListWidget->setCurrentRow(zoneListWidget->count()-1);
-			recursiveXmlRead(xmlChild,treeItem->child(1+zoneListWidget->count()));
-			on_zoneListWidget_currentRowChanged(zoneListWidget->currentRow());
+			recursiveXmlRead(xmlChild,treeItem->child(zoneListWidget->count()));
+			on_zoneListWidget_currentRowChanged(zoneListWidget->currentRow());//fill in fields in gui
 		}
 		else if( (xmlChild.toElement().tagName() == QString("facies")) && (xmlItem.toElement().tagName() == QString("prior-probabilities")) ){
 			//facies are no in the tree already and needs to be added before they can be populated
@@ -3440,6 +3441,7 @@ void Main_crava::on_twoSurfaceRadioButton_toggled(bool checked){
 		topDepthFileBrowsePushButton->setEnabled(true);
 		//velocityFieldNoneRadioButton->setChecked(true);
 		on_depthSurfacesCheckBox_toggled(depthSurfacesCheckBox->isChecked());//might break loading, handled
+                surfaceOneFrame->setVisible(false);//do not show single surface frame
 		necessaryFieldGui();
 	}
 }
@@ -3525,8 +3527,7 @@ void Main_crava::on_correlationSurfaceRadioButton_toggled(bool checked){
 	correlationDirectionLabel->setEnabled(checked);
 	correlationDirectionFileLineEdit->setEnabled(checked);
 	correlationDirectionBrowsePushButton->setEnabled(checked);
-  	surfaceOneFrame->setVisible(!checked);
-	surfaceOneFrame->setEnabled(!checked);
+  	surfaceOneFrame->setVisible(false);
 	if(!checked){
 		correlationDirectionFileLineEdit->setText(QString(""));
 		correlationDirectionFile(QString(""));
@@ -3867,10 +3868,6 @@ void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked){
 		vpVsRhoRadioButton->setChecked(true);
 		deleteZonePushButton->setEnabled(false);
 		insertZonePushButton->setEnabled(false);
-		if(top_surface_multizonePointer->text(1).isEmpty()){
-		  topSurfaceFileLineEdit->setText(top_surface_time_filePointer->text(1));
-		  on_topSurfaceFileLineEdit_editingFinished();
-		}
 		zoneFrame->setEnabled(false);
                 necessaryFieldGui();
 		        
@@ -4383,16 +4380,11 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	}
 
 	QTreeWidgetItem* zone;
-	findCorrectZone(&zone);
-	//the selected zone, current row is updated after 
-
-	//move to base-surface-file
-	QString baseSurfaceFile;
+	findCorrectZone(&zone);//move pointer to zone
+	QString baseSurfaceFile;//fill in base-surface-file
 	getValueFromZone(zone, QString("base-surface"), baseSurfaceFile);
 	baseSurfaceFileLineEdit->setText(baseSurfaceFile);
-
-	//move to erosion-priority
-	QString baseErosionPriority;
+	QString baseErosionPriority;//fill in erosion-priority
 	getValueFromZone(zone, QString("erosion-priority"), baseErosionPriority);
 	if(!baseErosionPriority.isEmpty()){
 	  basePrioritySpinBox->setValue(baseErosionPriority.toInt());
@@ -4400,34 +4392,43 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	else{
 	  basePrioritySpinBox->setValue(1);
 	}
-
-	//move to correlation-structure
-	QString correlationStructure;
-	getValueFromZone(zone, QString("correlation-structure"), correlationStructure);
-	if(correlationStructure==QString("top")){
-		topCorrelationRadioButton->setChecked(true);
-
-	}
-	else if(correlationStructure==QString("base")){
-		baseCorrelationRadioButton->setChecked(true);
-	}
-	else if(correlationStructure==QString("compaction")){
-	        compactionCorrelationRadioButton->setChecked(true);
-	}
-
-	//move to surface uncertainty
-	QString surfaceUncertainty;
-	getValueFromZone(zone, QString("surface-uncertainty"), surfaceUncertainty);
+	QString surfaceUncertainty;//fill in surface uncertainty
+	getValueFromZone(zone, QString("uncertainty"), surfaceUncertainty);
 	surfaceUncertaintyLineEdit->setText(surfaceUncertainty);
-
-        //move to number of layers
-        QString layersMultizone;
+        QString layersMultizone;//fill in number of layers
 	getValueFromZone(zone, QString("number-of-layers"), layersMultizone);
 	layersMultizoneLineEdit->setText(layersMultizone);
-	
+	findCorrectCorrelationZone(&zone);//move to correlation-direction
+        //determine which correlation radio button to check, and fill in fields
+	QString top_conform, base_conform, single_surface, top_surface, base_surface;
+	getValueFromZone(zone, QString("top-conform"), top_conform);
+	getValueFromZone(zone, QString("base-conform"), base_conform);
+	getValueFromZone(zone, QString("single-surface"), single_surface);
+	getValueFromZone(zone, QString("top-surface"), top_surface);
+	getValueFromZone(zone, QString("base-surface"), base_surface);
+	if(top_conform==QString("yes")){
+		topCorrelationRadioButton->setChecked(true);
+	}
+	else if(base_conform==QString("yes")){
+		baseCorrelationRadioButton->setChecked(true);
+	}
+	else if(!single_surface.isEmpty()){
+		singleCorrelationSurfaceRadioButton->setChecked(true);
+                singleCorrelationSurfaceLineEdit->setText(single_surface);
+	}
+	else if(!top_surface.isEmpty() || !base_surface.isEmpty()){
+		twoCorrelationSurfacesRadioButton->setChecked(true);
+                topCorrelationSurfaceLineEdit->setText(top_surface);
+                baseCorrelationSurfaceLineEdit->setText(base_surface);
+	}
+	else{
+	        compactionCorrelationRadioButton->setChecked(true);
+	}
+        //set remaining gui elements enabled
 	zoneFrame->setEnabled(true);
 	deleteZonePushButton->setEnabled(true);
 	insertZonePushButton->setEnabled(true);
+        necessaryFieldGui();
 }
 
 void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.			   
@@ -4442,7 +4443,7 @@ void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.
 	QTreeWidgetItem* interval;
 	findCorrectZone(&interval);
         setValueInZone(interval, QString("name"), label);
-	setValueInZone(interval, QString("uncertainty"), QString("0"));
+	setValueInZone(interval, QString("uncertainty"), QString("10"));
 	surfaceUncertaintyLineEdit->setText(QString("10"));
         findCorrectCorrelationZone(&interval);
         setValueInZone(interval, QString("name"), label);	
