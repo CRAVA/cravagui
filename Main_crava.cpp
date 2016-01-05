@@ -3867,10 +3867,6 @@ void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked){
 		vpVsRhoRadioButton->setChecked(true);
 		deleteZonePushButton->setEnabled(false);
 		insertZonePushButton->setEnabled(false);
-		if(top_surface_multizonePointer->text(1).isEmpty()){
-		  topSurfaceFileLineEdit->setText(top_surface_time_filePointer->text(1));
-		  on_topSurfaceFileLineEdit_editingFinished();
-		}
 		zoneFrame->setEnabled(false);
                 necessaryFieldGui();
 		        
