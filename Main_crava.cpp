@@ -259,7 +259,7 @@ void Main_crava::setupButtonGroups(){
 	wellHeaderPushButton->setEnabled(false);//should only be clickable if there are any items in the well list widget.
 }
 
-void  Main_crava::readGuiSpecificSettings(){//makes the program remember how it looked like last time it was ran. Does not work correctly with 2 screens for xwin for some reason.
+void  Main_crava::readGuiSpecificSettings(){//makes the program remember how it looked like last time it was ran
 	QSettings settings("Statoil","CRAVA");
 	settings.beginGroup("crava");
 	settings.beginGroup("GUI");
@@ -591,10 +591,12 @@ void Main_crava::updateGuiToTree(){
         }
         //fill in velocity field information (only relevant when Time to depth is ticked)
 	if(!interval_two_surfaces_velocity_fieldPointer->text(1).isEmpty()){
+	        depthSurfacesCheckBox->setChecked(true);
 		velocityFieldFileRadioButton->setChecked(true);
 		velocityFieldLineEdit->setText(interval_two_surfaces_velocity_fieldPointer->text(1));
 	}
 	else if(interval_two_surfaces_velocity_field_from_inversionPointer->text(1)==QString("yes")){
+	        depthSurfacesCheckBox->setChecked(true);
 		velocityFieldInvesionRadioButton->setChecked(true);
 	}
 	else {//default
