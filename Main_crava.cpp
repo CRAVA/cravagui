@@ -3440,6 +3440,7 @@ void Main_crava::on_twoSurfaceRadioButton_toggled(bool checked){
 		topDepthFileBrowsePushButton->setEnabled(true);
 		//velocityFieldNoneRadioButton->setChecked(true);
 		on_depthSurfacesCheckBox_toggled(depthSurfacesCheckBox->isChecked());//might break loading, handled
+                surfaceOneFrame->setVisible(false);//do not show single surface frame
 		necessaryFieldGui();
 	}
 }
@@ -3525,8 +3526,7 @@ void Main_crava::on_correlationSurfaceRadioButton_toggled(bool checked){
 	correlationDirectionLabel->setEnabled(checked);
 	correlationDirectionFileLineEdit->setEnabled(checked);
 	correlationDirectionBrowsePushButton->setEnabled(checked);
-  	surfaceOneFrame->setVisible(!checked);
-	surfaceOneFrame->setEnabled(!checked);
+  	surfaceOneFrame->setVisible(false);
 	if(!checked){
 		correlationDirectionFileLineEdit->setText(QString(""));
 		correlationDirectionFile(QString(""));
