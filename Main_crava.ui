@@ -4881,7 +4881,7 @@ p, li { white-space: pre-wrap; }
             <property name="minimumSize">
              <size>
               <width>894</width>
-              <height>660</height>
+              <height>590</height>
              </size>
             </property>
             <property name="frameShape">
@@ -5349,7 +5349,7 @@ p, li { white-space: pre-wrap; }
              <property name="geometry">
               <rect>
                <x>9</x>
-               <y>475</y>
+               <y>480</y>
                <width>871</width>
                <height>61</height>
               </rect>
@@ -5404,7 +5404,7 @@ p, li { white-space: pre-wrap; }
              <property name="geometry">
               <rect>
                <x>9</x>
-               <y>540</y>
+               <y>475</y>
                <width>871</width>
                <height>101</height>
               </rect>
