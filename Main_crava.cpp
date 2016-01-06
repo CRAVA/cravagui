@@ -4396,7 +4396,7 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	QTreeWidgetItem* zone;
 	findCorrectZone(&zone);//move pointer to zone
 	QString baseSurfaceFile;//fill in base-surface-file
-	getValueFromZone(zone, QString("base-surface"), baseSurfaceFile);
+	getValueFromZone(zone, QString("time-file"), baseSurfaceFile);
 	baseSurfaceFileLineEdit->setText(baseSurfaceFile);
 	QString baseErosionPriority;//fill in erosion-priority
 	getValueFromZone(zone, QString("erosion-priority"), baseErosionPriority);
@@ -4587,7 +4587,7 @@ void Main_crava::baseSurfaceFile(const QString &value){
 	if (standard->StandardStrings::fileExists(value)){
 	  QTreeWidgetItem* zone;
 	  findCorrectZone(&zone);
-	  setValueInZone(zone, QString("base-surface"), standard->StandardStrings::relativeFileName(value) );
+	  setValueInZone(zone, QString("time-file"), standard->StandardStrings::relativeFileName(value) );
 	}
 }
 
