@@ -31,7 +31,8 @@
 /**
 	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
-Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) :QMainWindow(parent){
+Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) :QMainWindow(parent)
+{
 
 	setupUi( this );
 	standard=new StandardStrings();//makes sure that the filepaths are relative to this instance.
@@ -1632,12 +1633,17 @@ bool Main_crava::writeXmlToTree(const QString &fileName, QTreeWidget *tree){
 
 void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *treeItem){
 	QDomNode  xmlChild = xmlItem.firstChild();
+        //if dom node has text child, then add text child to TreeWidget
 	if(xmlChild.isText ()){//a node can only have one child text node and all nodes without children are text nodes
 		treeItem->setText(1,xmlItem.toElement().text().trimmed());
 		return;
 	}
 	QTreeWidgetItem* treeChild;
 	while(!xmlChild.isNull()){
+	        //need to set first row to current row when multiple-intervals is encountered
+	        if(xmlChild.toElement().tagName() == QString("multiple-intervals")){
+		        zoneListWidget->setCurrentRow(0);
+                }
 		//since there can be multiple angle-gather, wells, optimize positions, zones and facies as well as variograms
 		//these checks could all cause trouble if the names are changed
 		if(xmlChild.toElement().tagName() == QString("angle-gather")){
@@ -1672,12 +1678,19 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			addOptimizePosition();
 			recursiveXmlRead(xmlChild,treeItem->child(5+optimizePositionListWidget->count()));
 		}
-	     	else if(xmlChild.toElement().tagName() == QString("interval") && (xmlItem.toElement().tagName()==QString("multiple-intervals"))){
+	     	else if(xmlChild.toElement().tagName() == QString("interval") && (xmlItem.toElement().tagName()==QString("correlation-direction"))){
 		        multizoneInversionRadioButton->setChecked(true);
 			zoneListWidget->addItem(QString("zone " + QString::number(zoneListWidget->count()+1)));
 			addZone();
 			zoneListWidget->setCurrentRow(zoneListWidget->count()-1);
-			recursiveXmlRead(xmlChild,treeItem->child(zoneListWidget->count()));
+			recursiveXmlRead(xmlChild,treeItem->child(zoneListWidget->count()-1));//fill node text in tree
+		}
+	     	else if(xmlChild.toElement().tagName() == QString("interval") && (xmlItem.toElement().tagName()==QString("multiple-intervals"))){
+		        //all nodes are already created, and zoneListWidget starts with first row on first interval
+			recursiveXmlRead(xmlChild,treeItem->child(zoneListWidget->currentRow()+1));//fill node text in tree
+                        if(zoneListWidget->currentRow() < zoneListWidget->count()-1){//are we at last row yet?
+			        zoneListWidget->setCurrentRow(zoneListWidget->currentRow()+1);
+                        }
 			on_zoneListWidget_currentRowChanged(zoneListWidget->currentRow());//fill in fields in gui
 		}
 		else if( (xmlChild.toElement().tagName() == QString("facies")) && (xmlItem.toElement().tagName() == QString("prior-probabilities")) ){

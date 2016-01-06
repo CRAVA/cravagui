@@ -4906,7 +4906,7 @@ p, li { white-space: pre-wrap; }
                  <string>&lt;qt&gt;The time top surface file.</string>
                 </property>
                 <property name="text">
-                 <string>Top surface file</string>
+                 <string>Top surface file for first zone </string>
                 </property>
                </widget>
               </item>
@@ -4996,7 +4996,7 @@ p, li { white-space: pre-wrap; }
                  </sizepolicy>
                 </property>
                 <property name="toolTip">
-                 <string>List of all zones in the multizone background model. The zone order corresponds to the zone order in the reservoar,</string>
+                 <string>List of all zones in the multizone background model. The zone order corresponds to the zone order in the reservoar.</string>
                 </property>
                 <property name="editTriggers">
                  <set>QAbstractItemView::AllEditTriggers</set>
@@ -5052,7 +5052,7 @@ p, li { white-space: pre-wrap; }
                  <item>
                   <widget class="QLabel" name="baseSurfaceFileLabel">
                    <property name="toolTip">
-                    <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
+                    <string>&lt;qt&gt;The base surface file of the given zone in the multizone inversion. Note that this will be the top surface for the next zone.</string>
                    </property>
                    <property name="text">
                     <string>Base surface file</string>
@@ -5062,14 +5062,14 @@ p, li { white-space: pre-wrap; }
                  <item>
                   <widget class="QLineEdit" name="baseSurfaceFileLineEdit">
                    <property name="toolTip">
-                    <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
+                    <string>&lt;qt&gt;The base surface file of the given zone in the multizone inversion. Note that this will be the top surface for the next zone.</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="baseSurfaceFileBrowsePushButton">
                    <property name="toolTip">
-                    <string>&lt;qt&gt;The base surface file of the given zone in the multizone background model.</string>
+                    <string>&lt;qt&gt;The base surface file of the given zone in the multizone inversion. Note that this will be the top surface for the next zone.</string>
                    </property>
                    <property name="text">
                     <string>Browse...</string>
@@ -5254,7 +5254,7 @@ p, li { white-space: pre-wrap; }
                  <item>
                   <widget class="QLabel" name="surfaceUncertaintyLabel">
                    <property name="toolTip">
-                    <string>&lt;qt&gt; Beta distributed uncertainty for the base surface of the given zone. Needs to be zero for the surface in the last zone, which is the zone furthest down in the reservoir.</string>
+                    <string>&lt;qt&gt; Beta distributed uncertainty for the base surface of the given zone.  Uncertainty for the lowest base surface will be ignored.</string>
                    </property>
                    <property name="text">
                     <string>Surface uncertainty</string>
@@ -5266,7 +5266,7 @@ p, li { white-space: pre-wrap; }
                    <item>
                     <widget class="QLineEdit" name="surfaceUncertaintyLineEdit">
                      <property name="toolTip">
-                      <string>&lt;qt&gt; Beta distributed uncertainty for the base surface of the given zone. Needs to be zero for the surface in the last zone, which is the zone furthest down in the reservoir.</string>
+                      <string>&lt;qt&gt; Beta distributed uncertainty for the base surface of the given zone. Uncertainty for the lowest base surface will be ignored.</string>
                      </property>
                     </widget>
                    </item>
