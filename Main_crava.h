@@ -325,6 +325,9 @@ private:
 				QTreeWidgetItem *interval_one_surface_sample_densityPointer;
 			QTreeWidgetItem *multiple_intervalsPointer;
                                 QTreeWidgetItem *top_surface_multizonePointer;
+				        QTreeWidgetItem *top_surface_time_multizone_filePointer;
+				        QTreeWidgetItem *top_surface_time_multizone_valuePointer;
+				        QTreeWidgetItem *top_surface_depth_multizone_filePointer;
 			QTreeWidgetItem *area_from_surfacePointer;
 				QTreeWidgetItem *area_from_surface_file_namePointer;
 				QTreeWidgetItem *area_from_surface_snap_to_seismic_dataPointer;

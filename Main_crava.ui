@@ -1046,6 +1046,21 @@
              <property name="text">
               <string>top-surface</string>
              </property>
+             <item>
+              <property name="text">
+               <string>time-file</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>time-value</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>depth-file</string>
+              </property>
+             </item>
             </item>
            </item>
            <item>

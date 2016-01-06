@@ -33,7 +33,6 @@
 */
 Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) :QMainWindow(parent)
 {
-
 	setupUi( this );
 	standard=new StandardStrings();//makes sure that the filepaths are relative to this instance.
 	setCurrentFile(filename);
@@ -581,9 +580,9 @@ void Main_crava::updateGuiToTree(){
                 }
         }
 	//check for multizone
-	else if(zoneListWidget->count()>0 || !top_surface_multizonePointer->text(1).isEmpty()){ 
+	else if(zoneListWidget->count()>0 || !top_surface_time_multizone_filePointer->text(1).isEmpty()){ 
 	        multizoneInversionRadioButton->setChecked(true);
-		topSurfaceFileLineEdit->setText(top_surface_multizonePointer->text(1));
+		topSurfaceFileLineEdit->setText(top_surface_time_multizone_filePointer->text(1));
 	}
 
 	else{//if nothing is set-up, we start with default empty two surface inversion
@@ -3934,7 +3933,9 @@ void Main_crava::on_singleZoneInversionRadioButton_toggled(bool checked){
 	}
 	//keep tag, but delete content
 	topSurfaceFileLineEdit->clear();
-	top_surface_multizonePointer->setText(1, QString(""));
+	top_surface_time_multizone_filePointer->setText(1, QString(""));
+        top_surface_time_multizone_valuePointer->setText(1, QString(""));
+        top_surface_depth_multizone_filePointer->setText(1, QString(""));
 }
 void Main_crava::on_estimateBackgroundRadioButton_toggled(bool checked){
 	if(checked){
@@ -4368,9 +4369,9 @@ void Main_crava::on_topSurfaceFileBrowsePushButton_clicked(){
 	}
 };//browse for the top surface file and update the XML tree if the above is not triggered.
 
-void Main_crava::topSurfaceFile(const QString &value){
+void Main_crava::topSurfaceFile(const QString &value){//set relative path instead of full path in tree
 	if (standard->StandardStrings::fileExists(value)){
-		top_surface_multizonePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
+		top_surface_time_multizone_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
 	}
 }
 
@@ -4385,7 +4386,7 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 		insertZonePushButton->setEnabled(false);
 		return;
 	}
-	if(currentRow==zoneListWidget->count()-1){//The last zone has to have a surface uncertainty equal to zero
+	if(currentRow==zoneListWidget->count()-1){//surface uncertainty is ignored for last zone
 	  surfaceUncertaintyLineEdit->setReadOnly(true);
 	}
 	else{
@@ -4395,7 +4396,7 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	QTreeWidgetItem* zone;
 	findCorrectZone(&zone);//move pointer to zone
 	QString baseSurfaceFile;//fill in base-surface-file
-	getValueFromZone(zone, QString("base-surface"), baseSurfaceFile);
+	getValueFromZone(zone, QString("time-file"), baseSurfaceFile);
 	baseSurfaceFileLineEdit->setText(baseSurfaceFile);
 	QString baseErosionPriority;//fill in erosion-priority
 	getValueFromZone(zone, QString("erosion-priority"), baseErosionPriority);
@@ -4586,7 +4587,7 @@ void Main_crava::baseSurfaceFile(const QString &value){
 	if (standard->StandardStrings::fileExists(value)){
 	  QTreeWidgetItem* zone;
 	  findCorrectZone(&zone);
-	  setValueInZone(zone, QString("base-surface"), standard->StandardStrings::relativeFileName(value) );
+	  setValueInZone(zone, QString("time-file"), standard->StandardStrings::relativeFileName(value) );
 	}
 }
 
@@ -5787,6 +5788,10 @@ void Main_crava::activateTable(){
 				interval_one_surface_sample_densityPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(1)->child(3);
                         multiple_intervalsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2);
 			        top_surface_multizonePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(0);
+				        top_surface_time_multizone_filePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(0)->child(0);
+				        top_surface_time_multizone_valuePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(0)->child(1);
+				        top_surface_depth_multizone_filePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(2)->child(0)->child(2);
+
 			area_from_surfacePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3);
 				area_from_surface_file_namePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(0);
 			       	area_from_surface_snap_to_seismic_dataPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(0)->child(3)->child(1);
@@ -5973,5 +5978,5 @@ void Main_crava::necessaryFieldGui(){
 	field->setStyleSheet("");
       }
     }
-  }
-}//provide red borders to necessary fields that are empty
+  }//provide red borders to necessary fields that are empty
+}
