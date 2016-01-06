@@ -157,7 +157,7 @@ private:
 
 	void getValueFromOptimizePosition(QTreeWidgetItem* item, QString itemInWell, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the optimize position. First argument is the optimize position. The second argument is the quantity one wants (for instance angle). The third argument is the return value. Recursive.
 
-	void getValueFromZone(QTreeWidgetItem* item, QString itemInZone, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the facies. First argument is the zone. The second argument is the quantity one wants (for instance name). The third argument is the return value. Recursive.
+	void getValueFromZone(QTreeWidgetItem* item, QString itemInZone, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the zones/intervals. First argument is the zone. The second argument is the quantity one wants (for instance name). The third argument is the return value. Recursive.
 
 	void getValueFromFacies(QTreeWidgetItem* item, QString itemInWell, QString &value); //gets the wanted value in the tree, but only searches through the subtree consisting of the facies. First argument is the facies. The second argument is the quantity one wants (for instance name). The third argument is the return value. Recursive.
 
