@@ -23,13 +23,15 @@
 #include "StandardStrings.h"
 
 /**
-	@author Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>
+	@author Alf Birger Rustad (Statoil R&D) <abir@statoil.com>, Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>
 */
 VariogramDialog::VariogramDialog(QWidget *parent,bool genexp, QString angle, QString range, QString subrange, QString power) : QDialog(parent){
 	setupUi( this );
 	setWindowTitle(QString("%1[*] - %2").arg(windowTitle()).arg(StandardStrings::cravaVersion()));
-	genexpRadioButton->setChecked(genexp);
-	sphericalRadioButton->setChecked(!genexp);
+	QButtonGroup *variogramDialogueButtons = new QButtonGroup();
+	variogramDialogueButtons->addButton(genexpRadioButton);
+	variogramDialogueButtons->addButton(sphericalRadioButton);
+	genexpRadioButton->setChecked(true);
 	angleLineEdit->setText(angle);
 	rangeLineEdit->setText(range);
 	normalRangeLineEdit->setText(subrange);
@@ -61,4 +63,14 @@ void VariogramDialog::on_buttonBox_accepted() {
 		return;
 	}
 	accept();
+}
+void VariogramDialog::on_genexpRadioButton_toggled(bool checked){
+        powerLabel->setEnabled(true);
+        powerLineEdit->setEnabled(true);
+
+}
+void VariogramDialog::on_sphericalRadioButton_toggled(bool checked){
+        powerLineEdit->clear();
+        powerLabel->setEnabled(false);
+        powerLineEdit->setEnabled(false);
 }
