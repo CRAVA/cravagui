@@ -3889,6 +3889,7 @@ void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked){
 		surfaceOneFrame->setVisible(false);
 		surfaceTwoFrame->setVisible(false);
 		multizoneInversionFrame->setVisible(true);
+                topTimeValueMultizoneLineEdit->setVisible(false);
                 singleCorrelationSurfaceFrame->setVisible(false);
                 twoSurfaceCorrelationFrame->setVisible(false);
 		vpVsRhoRadioButton->setChecked(true);
@@ -4432,15 +4433,12 @@ void Main_crava::on_baseTimeValueMultizoneLineEdit_editingFinished(){
 void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	if(currentRow==-1){//disable if there are no items left.
 		baseSurfaceFileLineEdit->setText(QString());
-		basePrioritySpinBox->setValue(1);
+		basePrioritySpinBox->clear();
 		topCorrelationRadioButton->setChecked(true);
 		surfaceUncertaintyLineEdit->setText(QString());
 		zoneFrame->setEnabled(false);
 		deleteZonePushButton->setEnabled(false);
 		insertZonePushButton->setEnabled(false);
-                baseTimeValueMultizoneLineEdit->setVisible(false);
-                baseTimeValueMultizoneCheckBox->setChecked(false);
-                necessaryFieldGui();
 		return;
 	}
 	if(currentRow==zoneListWidget->count()-1){//surface uncertainty is ignored for last zone
@@ -4474,10 +4472,10 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	QString baseErosionPriority;//fill in erosion-priority
 	getValueFromZone(zone, QString("erosion-priority"), baseErosionPriority);
 	if(!baseErosionPriority.isEmpty()){
-	  basePrioritySpinBox->setValue(baseErosionPriority.toInt());
+	        basePrioritySpinBox->setValue(baseErosionPriority.toInt());
 	}
 	else{
-	  basePrioritySpinBox->setValue(1);
+	        basePrioritySpinBox->setValue(zoneListWidget->count()+1);
 	}
 	QString surfaceUncertainty;//fill in surface uncertainty
 	getValueFromZone(zone, QString("uncertainty"), surfaceUncertainty);
@@ -4523,7 +4521,7 @@ void Main_crava::on_addZonePushButton_clicked(){//update the tree and the list.
         zoneListWidget->addItem(label);
 	addZone();
 	zoneListWidget->setCurrentItem(zoneListWidget->item(zoneListWidget->count()-1));
-	basePrioritySpinBox->setValue(1);
+	basePrioritySpinBox->setValue(zoneListWidget->count()+1);
 	on_basePrioritySpinBox_editingFinished();
 	topCorrelationRadioButton->setChecked(true);
 	basePrioritySpinBox->setFocus();
@@ -4554,7 +4552,7 @@ void Main_crava::on_insertZonePushButton_clicked(){
                 setValueInZone(interval, QString("name"), labeln);
 	}
 	zoneListWidget->setCurrentItem(zoneListWidget->item(insertIndex));//go to inserted zone
-	basePrioritySpinBox->setValue(1);
+	basePrioritySpinBox->setValue(zoneListWidget->count()+1);
 	on_basePrioritySpinBox_editingFinished();
 	topCorrelationRadioButton->setChecked(true);
 	findCorrectZone(&interval);
@@ -4585,6 +4583,11 @@ void Main_crava::deleteZone(){
                 findCorrectCorrelationZone(&zone);
                 setValueInZone(zone, QString("name"), label);
 	 }
+	 //if last zone, make sure currentRow change is triggered (needed for single zone added
+	 if(0==zoneListWidget->count()){
+	   on_zoneListWidget_currentRowChanged(-1);
+	 }
+         necessaryFieldGui();
 }        
 
 void Main_crava::on_deleteZonePushButton_clicked(){
