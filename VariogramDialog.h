@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2010 by Statoil
- *   sebn@statoil.com   *
+ *   Copyright (C) 2010 by Statoil                                         *
+ *   abir@statoil.com                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -25,13 +25,14 @@
 #include "Main_crava.h"
 
 /**
-	@author Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>
+	@author Alf Birger Rustad (Statoil R&D) <abir@statoil.com>, Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>
 */
 class VariogramDialog : public QDialog, private Ui::VariogramDialog{
 	Q_OBJECT
 
 public:
-	VariogramDialog(QWidget *parent =0,bool genexp=true, QString angle=QString(), QString range=QString(), QString subrange=QString(), QString power=QString());//constructor, makes sure that the values in the dialog match the values in the tree
+        //constructor, makes sure that the values in the dialog match the values in the tree
+	VariogramDialog(QWidget *parent =0,bool genexp=true, QString angle=QString(), QString range=QString(), QString subrange=QString(), QString power=QString());
 	friend class Main_crava;
 
 private:
@@ -39,5 +40,7 @@ private:
 
 private slots:
 	void on_buttonBox_accepted();//makes it possible to validate that the output is valid before confirming
+	void on_genexpRadioButton_toggled(bool checked);//radio button for general exponential variogram
+	void on_sphericalRadioButton_toggled(bool checked);//radio button for spherical variogram
 };
 #endif
