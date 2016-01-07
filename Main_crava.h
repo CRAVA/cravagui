@@ -743,6 +743,11 @@ private slots:
 	void showContextMenu(const QPoint& pos); //used to activate right clicking for wellHeaderListWidget
 
         //buttons and fields for multizone inversion
+	void on_topTimeValueMultizoneCheckBox_toggled(bool checked);
+	void on_topTimeValueMultizoneLineEdit_editingFinished();
+	void on_baseTimeValueMultizoneCheckBox_toggled(bool checked);
+	void on_baseTimeValueMultizoneLineEdit_editingFinished();
+
         void on_singleCorrelationSurfaceRadioButton_toggled(bool checked);
         void on_twoCorrelationSurfacesRadioButton_toggled(bool checked);
         void on_singleCorrelationSurfaceFileBrowsePushButton_clicked();

@@ -580,9 +580,25 @@ void Main_crava::updateGuiToTree(){
                 }
         }
 	//check for multizone
-	else if(zoneListWidget->count()>0 || !top_surface_time_multizone_filePointer->text(1).isEmpty()){ 
+	else if(zoneListWidget->count()>0 || !top_surface_time_multizone_filePointer->text(1).isEmpty() ||
+                !top_surface_time_multizone_valuePointer->text(1).isEmpty()){ 
 	        multizoneInversionRadioButton->setChecked(true);
-		topSurfaceFileLineEdit->setText(top_surface_time_multizone_filePointer->text(1));
+                if(!top_surface_time_multizone_filePointer->text(1).isEmpty()){ //are we using a top surface file?
+		        topSurfaceFileLineEdit->setText(top_surface_time_multizone_filePointer->text(1));
+                        topTimeValueMultizoneLineEdit->setVisible(false);
+                        topTimeValueMultizoneCheckBox->setChecked(false);
+		}
+		else if(!top_surface_time_multizone_valuePointer->text(1).isEmpty()){//are we using constant time top?
+		        topTimeValueMultizoneLineEdit->setText(top_surface_time_multizone_valuePointer->text(1));
+                        topSurfaceFileLabel->setEnabled(false);
+                        topSurfaceFileLineEdit->setEnabled(false);
+                        topSurfaceFileBrowsePushButton->setEnabled(false);
+                        topTimeValueMultizoneCheckBox->setChecked(true);
+		}
+		else{//no top surface provided yet
+                        topTimeValueMultizoneLineEdit->setVisible(false);
+                        topTimeValueMultizoneCheckBox->setChecked(false);
+		}
 	}
 
 	else{//if nothing is set-up, we start with default empty two surface inversion
@@ -1890,9 +1906,7 @@ void Main_crava::insertZone(){
   //the strings make it obvious what items are inserted. this creates all the needed children.
 	QTreeWidgetItem* interval;
 	findCorrectZone(&interval);
-
 	int childNumber = interval->parent()->indexOfChild(interval);
-
         QString label = QString("interval");
 	QTreeWidgetItem* parent = multiple_intervalsPointer;//move to the parent
 	QTreeWidgetItem* precedingItem = multiple_intervalsPointer->child(childNumber-1);//which node will it precede.
@@ -4367,6 +4381,7 @@ void Main_crava::on_topSurfaceFileBrowsePushButton_clicked(){
 		topSurfaceFileLineEdit->setText(fileName);
 		topSurfaceFile(fileName);
 	}
+        necessaryFieldGui();
 };//browse for the top surface file and update the XML tree if the above is not triggered.
 
 void Main_crava::topSurfaceFile(const QString &value){//set relative path instead of full path in tree
@@ -4374,7 +4389,46 @@ void Main_crava::topSurfaceFile(const QString &value){//set relative path instea
 		top_surface_time_multizone_filePointer->setText( 1, standard->StandardStrings::relativeFileName(value) );
 	}
 }
-
+void Main_crava::on_topTimeValueMultizoneCheckBox_toggled(bool checked){//use constant time top surface instead of file
+        topTimeValueMultizoneLineEdit->setVisible(checked);
+        topSurfaceFileLineEdit->clear();
+        topSurfaceFileLabel->setEnabled(!checked);
+        topSurfaceFileLineEdit->setEnabled(!checked);
+        topSurfaceFileBrowsePushButton->setEnabled(!checked);
+        if(checked){
+                top_surface_time_multizone_filePointer->setText(1,QString(""));
+        }
+        else{
+	        top_surface_time_multizone_valuePointer->setText(1, QString(""));
+                topTimeValueMultizoneLineEdit->clear();
+        }
+        necessaryFieldGui();
+}
+void Main_crava::on_topTimeValueMultizoneLineEdit_editingFinished(){
+	top_surface_time_multizone_valuePointer->setText( 1, topTimeValueMultizoneLineEdit->text() );
+}
+void Main_crava::on_baseTimeValueMultizoneCheckBox_toggled(bool checked){//use constant time top surface instead of file
+        baseTimeValueMultizoneLineEdit->setVisible(checked);
+        baseSurfaceFileLineEdit->clear();
+        baseSurfaceFileLabel->setEnabled(!checked);
+        baseSurfaceFileLineEdit->setEnabled(!checked);
+        baseSurfaceFileBrowsePushButton->setEnabled(!checked);
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);//move pointer to zone
+        if(checked){
+	       setValueInZone(zone, QString("time-file"), QString(""));
+        }
+	else{
+               setValueInZone(zone, QString("time-value"), QString(""));
+               baseTimeValueMultizoneLineEdit->clear();
+        }
+	necessaryFieldGui();
+}
+void Main_crava::on_baseTimeValueMultizoneLineEdit_editingFinished(){
+	QTreeWidgetItem* zone;
+	findCorrectZone(&zone);//move pointer to zone
+        setValueInZone(zone, QString("time-value"), baseTimeValueMultizoneLineEdit->text());
+}
 void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	if(currentRow==-1){//disable if there are no items left.
 		baseSurfaceFileLineEdit->setText(QString());
@@ -4384,6 +4438,9 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 		zoneFrame->setEnabled(false);
 		deleteZonePushButton->setEnabled(false);
 		insertZonePushButton->setEnabled(false);
+                baseTimeValueMultizoneLineEdit->setVisible(false);
+                baseTimeValueMultizoneCheckBox->setChecked(false);
+                necessaryFieldGui();
 		return;
 	}
 	if(currentRow==zoneListWidget->count()-1){//surface uncertainty is ignored for last zone
@@ -4392,12 +4449,28 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	else{
 	  surfaceUncertaintyLineEdit->setReadOnly(false);
 	}
-
+        //need to set up zone specific GUI
 	QTreeWidgetItem* zone;
 	findCorrectZone(&zone);//move pointer to zone
-	QString baseSurfaceFile;//fill in base-surface-file
+	QString baseSurfaceFile, baseSurfaceValue;//base surface file or constant time
 	getValueFromZone(zone, QString("time-file"), baseSurfaceFile);
-	baseSurfaceFileLineEdit->setText(baseSurfaceFile);
+	getValueFromZone(zone, QString("time-value"), baseSurfaceValue);
+	if(baseSurfaceFile!=""){//has base surface been provided?
+	        baseSurfaceFileLineEdit->setText(baseSurfaceFile);
+                baseTimeValueMultizoneLineEdit->setVisible(false);
+                baseTimeValueMultizoneCheckBox->setChecked(false);
+	}
+	else if(baseSurfaceValue!=""){//has constant base time been provided?
+		baseTimeValueMultizoneLineEdit->setText(baseSurfaceValue);
+                baseSurfaceFileLabel->setEnabled(false);
+                baseSurfaceFileLineEdit->setEnabled(false);
+                baseSurfaceFileBrowsePushButton->setEnabled(false);
+                baseTimeValueMultizoneCheckBox->setChecked(true);
+	}
+	else{//start with empty base surface
+                baseTimeValueMultizoneLineEdit->setVisible(false);
+                baseTimeValueMultizoneCheckBox->setChecked(false);
+	}
 	QString baseErosionPriority;//fill in erosion-priority
 	getValueFromZone(zone, QString("erosion-priority"), baseErosionPriority);
 	if(!baseErosionPriority.isEmpty()){
@@ -4581,6 +4654,7 @@ void Main_crava::on_baseSurfaceFileBrowsePushButton_clicked(){
 		baseSurfaceFileLineEdit->setText(fileName);
 		baseSurfaceFile(fileName);
 	}
+        necessaryFieldGui();
 };//browse for the top surface file and update the XML tree if the above is not triggered.
 
 void Main_crava::baseSurfaceFile(const QString &value){
@@ -5962,7 +6036,8 @@ QList<QObject*> Main_crava::getNecessaryFields(){
 	  list << topTimeValueLineEdit << bottomTimeValueLineEdit << correlationDirectionFileLineEdit << layersLineEdit;
 	  list << referenceSurfaceFileLineEdit << distanceTopLineEdit << thicknessLineEdit << layerThicknessLineEdit;
           list << singleCorrelationSurfaceLineEdit << topCorrelationSurfaceLineEdit << baseCorrelationSurfaceLineEdit;
-          list << topSurfaceFileLineEdit << baseSurfaceFileLineEdit << layersMultizoneLineEdit;
+          list << topSurfaceFileLineEdit << baseSurfaceFileLineEdit << layersMultizoneLineEdit << topTimeValueMultizoneLineEdit;
+          list << baseTimeValueMultizoneLineEdit;
 	  return list;
 }//returns a list of all necessary objects.
 

@@ -4896,7 +4896,7 @@ p, li { white-space: pre-wrap; }
             <property name="minimumSize">
              <size>
               <width>894</width>
-              <height>590</height>
+              <height>625</height>
              </size>
             </property>
             <property name="frameShape">
@@ -4911,7 +4911,7 @@ p, li { white-space: pre-wrap; }
                <x>19</x>
                <y>10</y>
                <width>851</width>
-               <height>41</height>
+               <height>31</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_2">
@@ -4948,7 +4948,7 @@ p, li { white-space: pre-wrap; }
              <property name="geometry">
               <rect>
                <x>20</x>
-               <y>50</y>
+               <y>80</y>
                <width>851</width>
                <height>162</height>
               </rect>
@@ -5041,9 +5041,9 @@ p, li { white-space: pre-wrap; }
              <property name="geometry">
               <rect>
                <x>10</x>
-               <y>220</y>
+               <y>250</y>
                <width>871</width>
-               <height>251</height>
+               <height>261</height>
               </rect>
              </property>
              <property name="frameShape">
@@ -5058,7 +5058,7 @@ p, li { white-space: pre-wrap; }
                 <x>10</x>
                 <y>10</y>
                 <width>838</width>
-                <height>228</height>
+                <height>241</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -5090,6 +5090,40 @@ p, li { white-space: pre-wrap; }
                     <string>Browse...</string>
                    </property>
                   </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_30">
+                 <item>
+                  <widget class="QCheckBox" name="baseTimeValueMultizoneCheckBox">
+                   <property name="toolTip">
+                    <string>Set a time in milliseconds directly for the base of the zone instead of using a surface file.</string>
+                   </property>
+                   <property name="text">
+                    <string>Use constant time value for base surface </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="baseTimeValueMultizoneLineEdit">
+                   <property name="toolTip">
+                    <string>The constant time value for base of the zone.</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>350</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </item>
@@ -5364,7 +5398,7 @@ p, li { white-space: pre-wrap; }
              <property name="geometry">
               <rect>
                <x>9</x>
-               <y>480</y>
+               <y>515</y>
                <width>871</width>
                <height>61</height>
               </rect>
@@ -5419,7 +5453,7 @@ p, li { white-space: pre-wrap; }
              <property name="geometry">
               <rect>
                <x>9</x>
-               <y>475</y>
+               <y>512</y>
                <width>871</width>
                <height>101</height>
               </rect>
@@ -5496,6 +5530,48 @@ p, li { white-space: pre-wrap; }
                </item>
               </layout>
              </widget>
+            </widget>
+            <widget class="QWidget" name="horizontalLayoutWidget">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>40</y>
+               <width>851</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QCheckBox" name="topTimeValueMultizoneCheckBox">
+                <property name="toolTip">
+                 <string>Set a time in milliseconds directly for the top of the inversion interval instead of using a surface file.</string>
+                </property>
+                <property name="text">
+                 <string>Use constant time value for top surface </string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="topTimeValueMultizoneLineEdit">
+                <property name="toolTip">
+                 <string>The constant time value for the top of the inversion volume.</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>350</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </widget>
            </widget>
           </item>
