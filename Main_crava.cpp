@@ -4453,12 +4453,15 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	QString baseSurfaceFile, baseSurfaceValue;//base surface file or constant time
 	getValueFromZone(zone, QString("time-file"), baseSurfaceFile);
 	getValueFromZone(zone, QString("time-value"), baseSurfaceValue);
-	if(baseSurfaceFile!=""){//has base surface been provided?
-	        baseSurfaceFileLineEdit->setText(baseSurfaceFile);
+	if(!baseSurfaceFile.isEmpty()){//has base surface been provided?
                 baseTimeValueMultizoneLineEdit->setVisible(false);
                 baseTimeValueMultizoneCheckBox->setChecked(false);
+                baseSurfaceFileLabel->setEnabled(true);
+                baseSurfaceFileLineEdit->setEnabled(true);
+                baseSurfaceFileBrowsePushButton->setEnabled(true);
+	        baseSurfaceFileLineEdit->setText(baseSurfaceFile);
 	}
-	else if(baseSurfaceValue!=""){//has constant base time been provided?
+	else if(!baseSurfaceValue.isEmpty()){//has constant base time been provided?
 		baseTimeValueMultizoneLineEdit->setText(baseSurfaceValue);
                 baseSurfaceFileLabel->setEnabled(false);
                 baseSurfaceFileLineEdit->setEnabled(false);
@@ -4468,6 +4471,7 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	else{//start with empty base surface
                 baseTimeValueMultizoneLineEdit->setVisible(false);
                 baseTimeValueMultizoneCheckBox->setChecked(false);
+		baseSurfaceFileLineEdit->clear();
 	}
 	QString baseErosionPriority;//fill in erosion-priority
 	getValueFromZone(zone, QString("erosion-priority"), baseErosionPriority);
