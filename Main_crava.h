@@ -26,7 +26,7 @@
 
 
 /**
-	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
+	@author Alf Birger Rustad (Statoil R&D) <abir@statoil.com>, Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
 class Main_crava : public QMainWindow, private Ui::Main_crava{
 	Q_OBJECT
@@ -710,7 +710,7 @@ private slots:
 	void on_oSeismicOriginalCheckBox_toggled(bool checked);//updates the tree - should the original seismic cube be a part of the output?
 	void on_oSeismicSyntheticCheckBox_toggled(bool checked);//updates the tree - should a synthetic cube be generated in the output?
 	void on_oSeismicResidualCheckBox_toggled(bool checked);//updates the tree - should a residual seismic cube be generated in the output?
-	void on_oSeismicSyntheticResidualCheckBox_toggled(bool checked);//updates the tree - should a synthetic residual seismic cube be generated in the output?
+	void on_oSeismicFourierResidualCheckBox_toggled(bool checked);//updates the tree - should a synthetic residual seismic cube be generated in the output?
 	void on_oVpCheckBox_toggled(bool checked);//updates the tree - should the velocity of pressure waves be a part of the output?
 	void on_oVsCheckBox_toggled(bool checked);//updates the tree - should the velocity of shear waves be a part of the output?
 	void on_oDensityCheckBox_toggled(bool checked);//updates the tree - should the density be a part of the output?

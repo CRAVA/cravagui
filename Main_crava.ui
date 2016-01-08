@@ -1561,7 +1561,7 @@
              </item>
              <item>
               <property name="text">
-               <string>synthetic-residuals</string>
+               <string>fourier-residuals</string>
               </property>
              </item>
             </item>
@@ -2006,7 +2006,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -7757,15 +7757,15 @@ p, li { white-space: pre-wrap; }
              </size>
             </property>
             <property name="currentIndex">
-             <number>5</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="seismicPage_3">
              <property name="geometry">
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>557</width>
-               <height>84</height>
+               <width>904</width>
+               <height>124</height>
               </rect>
              </property>
              <attribute name="label">
@@ -7906,12 +7906,12 @@ p, li { white-space: pre-wrap; }
                      </widget>
                     </item>
                     <item>
-                     <widget class="QCheckBox" name="oSeismicSyntheticResidualCheckBox">
+                     <widget class="QCheckBox" name="oSeismicFourierResidualCheckBox">
                       <property name="toolTip">
-                       <string>&lt;qt&gt;Control whether synthetic residuals should be generated. The residuals are computed by taking the original seismic and subtracting the synthetic seismic. These parameters are then matched sets.</string>
+                       <string>&lt;qt&gt;Control whether residuals should be generated after the Fourier tranform. The residuals are computed by taking the original seismic and subtracting the synthetic seismic in the Fourier domain. These parameters are then matched sets.</string>
                       </property>
                       <property name="text">
-                       <string>Synthetic residual</string>
+                       <string>Fourier residual</string>
                       </property>
                      </widget>
                     </item>

@@ -852,7 +852,7 @@ void Main_crava::updateGuiToTree(){
 		oSeismicOriginalCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_originalPointer->text(1)));//original
 		oSeismicSyntheticCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_syntheticPointer->text(1)));//synthetic
 		oSeismicResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_residualsPointer->text(1)));//residual
-		oSeismicSyntheticResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_synthetic_residualsPointer->text(1)));//synthetic residual
+		oSeismicFourierResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_synthetic_residualsPointer->text(1)));//synthetic residual
 
 		oVpCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vpPointer->text(1),QString("yes")));//vp
 		oVsCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vsPointer->text(1),QString("yes")));//vs
@@ -1788,7 +1788,7 @@ bool Main_crava::noXmlInfo(QTreeWidgetItem *item){
 void Main_crava::variogram(QTreeWidgetItem *item){//the item is the parent of the dialog 
 	//variogram-type=0 angle=1 range=2 subrange=3 power=4
 	QPointer<VariogramDialog> dialog;
-	dialog = new VariogramDialog(this, !(item->child(0)->text(1)==QString("shperical")), item->child(1)->text(1),
+	dialog = new VariogramDialog(this, !(item->child(0)->text(1)==QString("spherical")), item->child(1)->text(1),
 				     item->child(2)->text(1), item->child(3)->text(1), item->child(4)->text(1));//initialize the dialog
 	if(dialog->exec() == QDialog::Accepted){
 		QList<QString> list=dialog->variogramValues();//get the values from the dialog and set them under
@@ -5357,7 +5357,7 @@ void Main_crava::on_oSeismicResidualCheckBox_toggled(bool checked){
         seismic_data_residualsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
-void Main_crava::on_oSeismicSyntheticResidualCheckBox_toggled(bool checked){
+void Main_crava::on_oSeismicFourierResidualCheckBox_toggled(bool checked){
   seismic_data_synthetic_residualsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
@@ -5430,15 +5430,60 @@ void Main_crava::on_oBlockedWellCheckBox_toggled(bool checked){
 }
 
 void Main_crava::on_oWaveletWellCheckBox_toggled(bool checked){
-        wavelet_output_well_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+        if(checked){
+	       wavelet_output_well_waveletsPointer->setText(1, QString("yes"));
+	       if(wavelet_output_norsarPointer->text(1)!="yes"){//ensure that one output format is chosen
+		 wavelet_output_jasonPointer->setText(1, QString("yes"));
+	      }
+        }
+	else{//ensure empty tag if not toggled
+	  wavelet_output_well_waveletsPointer->setText(1, QString(""));
+                //need to check if any wavelets are output
+		//and disable formats if not
+	  if(wavelet_output_global_waveletsPointer->text(1).isEmpty() &&
+	     wavelet_output_local_waveletsPointer->text(1).isEmpty()){
+                  wavelet_output_jasonPointer->setText(1, QString(""));
+		  wavelet_output_norsarPointer->setText(1, QString(""));
+		}
+	}
 }
 
 void Main_crava::on_oWaveletGlobalCheckBox_toggled(bool checked){
-        wavelet_output_global_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+        if(checked){
+	       wavelet_output_global_waveletsPointer->setText(1, QString("yes"));
+	       if(wavelet_output_norsarPointer->text(1)!="yes"){//ensure that one output format is chosen
+		 wavelet_output_jasonPointer->setText(1, QString("yes"));
+	      }
+        }
+	else{//ensure empty tag if not toggled
+	  wavelet_output_global_waveletsPointer->setText(1, QString(""));
+                //need to check if any wavelets are output
+		//and disable formats if not
+	  if(wavelet_output_well_waveletsPointer->text(1).isEmpty() &&
+	     wavelet_output_local_waveletsPointer->text(1).isEmpty()){
+                  wavelet_output_jasonPointer->setText(1, QString(""));
+		  wavelet_output_norsarPointer->setText(1, QString(""));
+		}
+	}
 }
 
 void Main_crava::on_oWaveletLocalCheckBox_toggled(bool checked){
-        wavelet_output_local_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+        if(checked){
+	       wavelet_output_local_waveletsPointer->setText(1, QString("yes"));
+	       if(wavelet_output_norsarPointer->text(1)!="yes"){//ensure that one output format is chosen
+		 wavelet_output_jasonPointer->setText(1, QString("yes"));
+	      }
+        }
+	else{//ensure empty tag if not toggled
+	  wavelet_output_local_waveletsPointer->setText(1, QString(""));
+                //need to check if any wavelets are output
+		//and disable formats if not
+	  if(wavelet_output_global_waveletsPointer->text(1).isEmpty() &&
+	     wavelet_output_well_waveletsPointer->text(1).isEmpty()){
+                  wavelet_output_jasonPointer->setText(1, QString(""));
+		  wavelet_output_norsarPointer->setText(1, QString(""));
+		}
+	}
 }
 
 void Main_crava::on_oTimeDepthCheckBox_toggled(bool checked){
