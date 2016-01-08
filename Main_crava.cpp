@@ -4495,8 +4495,8 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
 	getValueFromZone(zone, QString("single-surface"), single_surface);
 	getValueFromZone(zone, QString("top-surface"), top_surface);
 	getValueFromZone(zone, QString("base-surface"), base_surface);
-	if(top_conform==QString("yes")){
-		topCorrelationRadioButton->setChecked(true);
+	if(top_conform==QString("yes") && base_conform==QString("yes")){
+		compactionCorrelationRadioButton->setChecked(true);
 	}
 	else if(base_conform==QString("yes")){
 		baseCorrelationRadioButton->setChecked(true);
@@ -4511,7 +4511,7 @@ void Main_crava::on_zoneListWidget_currentRowChanged ( int currentRow ){
                 baseCorrelationSurfaceLineEdit->setText(base_surface);
 	}
 	else{
-	        compactionCorrelationRadioButton->setChecked(true);
+	        topCorrelationRadioButton->setChecked(true);
 	}
         //set remaining gui elements enabled
 	zoneFrame->setEnabled(true);
