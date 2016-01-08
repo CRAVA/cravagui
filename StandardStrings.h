@@ -25,7 +25,7 @@
 
 
 /**
-	@author Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>
+	@author Alf Birger Rustad (Statoil R&D) <abir@statoil.com>, Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>
 */
 class StandardStrings
 //this class handles the string operations that are similar for the entire program and stores fileformats. With multiple windows open it is needed to have one per run

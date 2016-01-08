@@ -29,7 +29,7 @@
 
 
 /**
-	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
+	@author Alf Birger Rustad (Statoil R&D) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
 Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) :QMainWindow(parent)
 {
@@ -4377,7 +4377,7 @@ void Main_crava::on_topSurfaceFileLineEdit_editingFinished(){
 };//update the XML tree with the top surface file
 
 void Main_crava::on_topSurfaceFileBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::surfaceFormat());
 	if(!fileName.isNull()){
 		topSurfaceFileLineEdit->setText(fileName);
 		topSurfaceFile(fileName);
@@ -4621,6 +4621,7 @@ void Main_crava::baseCorrelationSurface(const QString & value){
 void Main_crava::on_singleCorrelationSurfaceLineEdit_editingFinished(){
         singleCorrelationSurface(singleCorrelationSurfaceLineEdit->text());
 };//update the XML three with the filename
+
 void Main_crava::on_singleCorrelationSurfaceFileBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::surfaceFormat());
 	if(!fileName.isNull()){
@@ -4629,9 +4630,11 @@ void Main_crava::on_singleCorrelationSurfaceFileBrowsePushButton_clicked(){
 		singleCorrelationSurfaceLineEdit->setFocus();
 	}
 }
+
 void Main_crava::on_topCorrelationSurfaceLineEdit_editingFinished(){
         topCorrelationSurface(topCorrelationSurfaceLineEdit->text());
 };//update the XML three with the filename
+
 void Main_crava::on_topCorrelationSurfaceFileBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::surfaceFormat());
 	if(!fileName.isNull()){
@@ -4643,6 +4646,7 @@ void Main_crava::on_topCorrelationSurfaceFileBrowsePushButton_clicked(){
 void Main_crava::on_baseCorrelationSurfaceLineEdit_editingFinished(){
         baseCorrelationSurface(baseCorrelationSurfaceLineEdit->text());
 };//update the XML three with the filename
+
 void Main_crava::on_baseCorrelationSurfaceFileBrowsePushButton_clicked(){
 	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::surfaceFormat());
 	if(!fileName.isNull()){
@@ -4655,8 +4659,9 @@ void Main_crava::on_baseCorrelationSurfaceFileBrowsePushButton_clicked(){
 void Main_crava::on_baseSurfaceFileLineEdit_editingFinished(){
 	baseSurfaceFile(baseSurfaceFileLineEdit->text());
 };//changes the base surface file for the selected zone in XML
+
 void Main_crava::on_baseSurfaceFileBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::seismicFormat());
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::surfaceFormat());
 	if(!fileName.isNull()){
 		baseSurfaceFileLineEdit->setText(fileName);
 		baseSurfaceFile(fileName);
@@ -4859,7 +4864,7 @@ void Main_crava::on_correlationDirectionFileLineEdit_editingFinished(){
 };//update the XML three with the file if it is correct, autocomplete would be nice, prior model corr direction
 
 void Main_crava::on_correlationDirectionBrowsePushButton_clicked(){
-	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::correlationFormat());
+	QString fileName = QFileDialog::getOpenFileName(this, QString("Open File"), standard->StandardStrings::inputPath(), StandardStrings::surfaceFormat());
 	if(!fileName.isNull()){
 		correlationDirectionFileLineEdit->setText(fileName);
 		correlationDirectionFile(fileName);
