@@ -5430,15 +5430,60 @@ void Main_crava::on_oBlockedWellCheckBox_toggled(bool checked){
 }
 
 void Main_crava::on_oWaveletWellCheckBox_toggled(bool checked){
-        wavelet_output_well_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+        if(checked){
+	       wavelet_output_well_waveletsPointer->setText(1, QString("yes"));
+	       if(wavelet_output_norsarPointer->text(1)!="yes"){//ensure that one output format is chosen
+		 wavelet_output_jasonPointer->setText(1, QString("yes"));
+	      }
+        }
+	else{//ensure empty tag if not toggled
+	  wavelet_output_well_waveletsPointer->setText(1, QString(""));
+                //need to check if any wavelets are output
+		//and disable formats if not
+	  if(wavelet_output_global_waveletsPointer->text(1).isEmpty() &&
+	     wavelet_output_local_waveletsPointer->text(1).isEmpty()){
+                  wavelet_output_jasonPointer->setText(1, QString(""));
+		  wavelet_output_norsarPointer->setText(1, QString(""));
+		}
+	}
 }
 
 void Main_crava::on_oWaveletGlobalCheckBox_toggled(bool checked){
-        wavelet_output_global_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+        if(checked){
+	       wavelet_output_global_waveletsPointer->setText(1, QString("yes"));
+	       if(wavelet_output_norsarPointer->text(1)!="yes"){//ensure that one output format is chosen
+		 wavelet_output_jasonPointer->setText(1, QString("yes"));
+	      }
+        }
+	else{//ensure empty tag if not toggled
+	  wavelet_output_global_waveletsPointer->setText(1, QString(""));
+                //need to check if any wavelets are output
+		//and disable formats if not
+	  if(wavelet_output_well_waveletsPointer->text(1).isEmpty() &&
+	     wavelet_output_local_waveletsPointer->text(1).isEmpty()){
+                  wavelet_output_jasonPointer->setText(1, QString(""));
+		  wavelet_output_norsarPointer->setText(1, QString(""));
+		}
+	}
 }
 
 void Main_crava::on_oWaveletLocalCheckBox_toggled(bool checked){
-        wavelet_output_local_waveletsPointer->setText(1,StandardStrings::checkedString(checked));
+        if(checked){
+	       wavelet_output_local_waveletsPointer->setText(1, QString("yes"));
+	       if(wavelet_output_norsarPointer->text(1)!="yes"){//ensure that one output format is chosen
+		 wavelet_output_jasonPointer->setText(1, QString("yes"));
+	      }
+        }
+	else{//ensure empty tag if not toggled
+	  wavelet_output_local_waveletsPointer->setText(1, QString(""));
+                //need to check if any wavelets are output
+		//and disable formats if not
+	  if(wavelet_output_global_waveletsPointer->text(1).isEmpty() &&
+	     wavelet_output_well_waveletsPointer->text(1).isEmpty()){
+                  wavelet_output_jasonPointer->setText(1, QString(""));
+		  wavelet_output_norsarPointer->setText(1, QString(""));
+		}
+	}
 }
 
 void Main_crava::on_oTimeDepthCheckBox_toggled(bool checked){
