@@ -852,7 +852,7 @@ void Main_crava::updateGuiToTree(){
 		oSeismicOriginalCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_originalPointer->text(1)));//original
 		oSeismicSyntheticCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_syntheticPointer->text(1)));//synthetic
 		oSeismicResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_residualsPointer->text(1)));//residual
-		oSeismicSyntheticResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_synthetic_residualsPointer->text(1)));//synthetic residual
+		oSeismicFourierResidualCheckBox->setChecked(StandardStrings::checkedBool(seismic_data_synthetic_residualsPointer->text(1)));//synthetic residual
 
 		oVpCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vpPointer->text(1),QString("yes")));//vp
 		oVsCheckBox->setChecked(StandardStrings::checkedBool(elastic_parameters_vsPointer->text(1),QString("yes")));//vs
@@ -5357,7 +5357,7 @@ void Main_crava::on_oSeismicResidualCheckBox_toggled(bool checked){
         seismic_data_residualsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
-void Main_crava::on_oSeismicSyntheticResidualCheckBox_toggled(bool checked){
+void Main_crava::on_oSeismicFourierResidualCheckBox_toggled(bool checked){
   seismic_data_synthetic_residualsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
