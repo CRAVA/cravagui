@@ -41,7 +41,7 @@ QList<QString> VariogramDialog::variogramValues(){
 	//variogram-type=0; angle=1; range=2; subrange=3; power=4
 	QList<QString> values;
 	if(sphericalRadioButton->isChecked()){
-		values.append(QString("shperical"));
+		values.append(QString("spherical"));
 	}
 	else{
 		values.append(QString("genexp"));

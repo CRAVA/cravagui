@@ -1788,7 +1788,7 @@ bool Main_crava::noXmlInfo(QTreeWidgetItem *item){
 void Main_crava::variogram(QTreeWidgetItem *item){//the item is the parent of the dialog 
 	//variogram-type=0 angle=1 range=2 subrange=3 power=4
 	QPointer<VariogramDialog> dialog;
-	dialog = new VariogramDialog(this, !(item->child(0)->text(1)==QString("shperical")), item->child(1)->text(1),
+	dialog = new VariogramDialog(this, !(item->child(0)->text(1)==QString("spherical")), item->child(1)->text(1),
 				     item->child(2)->text(1), item->child(3)->text(1), item->child(4)->text(1));//initialize the dialog
 	if(dialog->exec() == QDialog::Accepted){
 		QList<QString> list=dialog->variogramValues();//get the values from the dialog and set them under
