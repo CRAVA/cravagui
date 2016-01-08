@@ -24,7 +24,8 @@
 /**
 	@author Alf Birger Rustad (RD IRE FRM) <abir@statoil.com> Øystein Arneson (RD IRE FRM) <oyarn@statoil.com>, Erik Bakken <eriba@statoil.com>, Andreas B. Lindblad <al587793@statoil.com>
 */
-SettingsDialog::SettingsDialog(Main_crava *main_crava, QWidget *parent, bool forwardOn, bool estimationOn, StandardStrings *standard):QDialog(parent){
+SettingsDialog::SettingsDialog(Main_crava *main_crava, QWidget *parent, bool forwardOn, bool estimationOn, StandardStrings *standard):QDialog(parent)
+{
 	this->standard=standard;
 	this->main_crava = main_crava;
 	setupUi(this);
@@ -42,7 +43,8 @@ SettingsDialog::SettingsDialog(Main_crava *main_crava, QWidget *parent, bool for
 	updateFields();
 }
 
-void SettingsDialog::updateFields(){
+void SettingsDialog::updateFields()
+{
 
 	referenceDepth3DLineEdit->setText(main_crava->time_3D_mapping_reference_depthPointer->text(1));
 	averageVelocity3DLineEdit->setText(main_crava->time_3D_mappingPointer_average_velocity->text(1));
@@ -107,7 +109,7 @@ void SettingsDialog::updateFields(){
 		on_segyCheckBox_toggled(segyCheckBox->isChecked());
 		rmsCheckBox->setChecked(StandardStrings::checkedBool(main_crava->well_output_rmsPointer->text(1),QString("yes")));
 		norsarWellCheckBox->setChecked(StandardStrings::checkedBool(main_crava->well_output_norsarPointer->text(1)));
-		jasonCheckBox->setChecked(StandardStrings::checkedBool(main_crava->wavelet_output_jasonPointer->text(1),QString("yes")));
+		jasonCheckBox->setChecked(StandardStrings::checkedBool(main_crava->wavelet_output_jasonPointer->text(1)));
 		norsarWaveletCheckBox->setChecked(StandardStrings::checkedBool(main_crava->wavelet_output_norsarPointer->text(1)));
 
 		if(!estimation){
@@ -304,8 +306,19 @@ void SettingsDialog::updateSettings(){
 		main_crava->well_output_rmsPointer->setText(1,StandardStrings::checkedString(rmsCheckBox->isChecked()));
 		main_crava->well_output_norsarPointer->setText(1,StandardStrings::checkedString(norsarWellCheckBox->isChecked()));
 
-		main_crava->wavelet_output_jasonPointer->setText(1,StandardStrings::checkedString(jasonCheckBox->isChecked()));
-		main_crava->wavelet_output_norsarPointer->setText(1,StandardStrings::checkedString(norsarWaveletCheckBox->isChecked()));
+                //set wavelet formats, empty string if format is not chosen
+		if(jasonCheckBox->isChecked()){
+		  main_crava->wavelet_output_jasonPointer->setText(1,QString("yes"));
+	        }
+		else{//empty string to ensure the tag is not written to xml
+		  main_crava->wavelet_output_jasonPointer->setText(1,QString(""));
+		}
+		if(norsarWaveletCheckBox->isChecked()){
+		  main_crava->wavelet_output_norsarPointer->setText(1,QString("yes"));
+		}
+		else{//empty string to ensure the tag is not written to xml
+		  main_crava->wavelet_output_norsarPointer->setText(1,QString(""));
+	        }
 
 		main_crava->io_settings_log_levelPointer->setText(1,logComboBox->currentText());
 
