@@ -2006,7 +2006,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -7358,17 +7358,43 @@ p, li { white-space: pre-wrap; }
             <number>9</number>
            </property>
            <item>
-            <widget class="QCheckBox" name="vsForFaciesCheckBox">
-             <property name="toolTip">
-              <string>If Vs information should be used for computing facies probabilities.</string>
+            <layout class="QHBoxLayout" name="horizontalLayout_34">
+             <property name="spacing">
+              <number>-1</number>
              </property>
-             <property name="text">
-              <string>Use Vs for facies probability</string>
+             <property name="sizeConstraint">
+              <enum>QLayout::SetMinimumSize</enum>
              </property>
-             <property name="checked">
-              <bool>false</bool>
+             <property name="topMargin">
+              <number>0</number>
              </property>
-            </widget>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="vsForFaciesCheckBox">
+               <property name="toolTip">
+                <string>If Vs information should be used for computing facies probabilities.</string>
+               </property>
+               <property name="text">
+                <string>Use Vs for facies probability</string>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="useAbsoluteElasticParametersCheckBox">
+               <property name="toolTip">
+                <string>Use absolute elastic parameters.</string>
+               </property>
+               <property name="text">
+                <string>Use absolute elastic parameters</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QCheckBox" name="predictionFaciesCheckBox">
@@ -7748,8 +7774,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>880</width>
-               <height>120</height>
+               <width>524</width>
+               <height>80</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8814,7 +8840,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>probabiltyCubeRadioButton</tabstop>
   <tabstop>probabilityCubeLineEdit</tabstop>
   <tabstop>probabilityCubeBrowsePushButton</tabstop>
-  <tabstop>vsForFaciesCheckBox</tabstop>
   <tabstop>predictionFaciesCheckBox</tabstop>
   <tabstop>absoluteParametersCheckBox</tabstop>
   <tabstop>uncertaintyLevelLineEdit</tabstop>

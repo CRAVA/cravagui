@@ -660,6 +660,7 @@ private slots:
 	void on_faciesEstimateCheckBox_toggled(bool checked);//should the prior model for facies be estimated or given
 	void on_vsForFaciesCheckBox_toggled(bool checked);//should vs be used for facies estimaton, update XML tree
 	void on_predictionFaciesCheckBox_toggled(bool checked);//should sampled inversion logs be used instead of filtered logs for facies estimaton, update XML tree
+        void on_useAbsoluteElasticParametersCheckBox_toggled(bool checked);//check box for using absolute elastic parameters
 	void on_absoluteParametersCheckBox_toggled(bool checked);//should absolute parameters be used instead of parameters minus trend for facies estimaton, update XML tree
 	void on_faciesListWidget_currentRowChanged ( int currentRow );//makes sure the correct widgets and information is displayed depending on which facies is selected.
 	void on_addFaciesPushButton_clicked();//adds a new facies for prior probabilities

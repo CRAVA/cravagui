@@ -2001,7 +2001,7 @@ void Main_crava::addFacies(){
 
 void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 	//survey=1 angle-gather = 2+stackListWidget->currentRow()
-	if(currentRow == -1){
+        if(currentRow == -1){//no more stacks left
 		seismicDataFrame->setEnabled(false);
 		deleteStackPushButton->setEnabled(false);
 		applyToAllStacksPushButton->setEnabled(false);
@@ -2863,6 +2863,15 @@ void Main_crava::on_scaleFileBrowsePushButton_clicked(){
 		scaleFileLineEdit->setText(fileName);
 	}
 }//browse for the local wavelet scale file then update the XML file, update the field
+
+void Main_crava::on_useAbsoluteElasticParametersCheckBox_toggled(bool checked){
+  if(checked){
+    facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString("yes"));
+  }
+  else{
+    facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString(""));
+  }
+}
 
 //signal to noise ratio buttons
 void Main_crava::on_signalToNoiseCheckBox_toggled(bool checked){
