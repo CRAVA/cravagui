@@ -2006,7 +2006,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -2089,32 +2089,6 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QPushButton" name="applyToAllStacksPushButton">
-            <property name="toolTip">
-             <string>&lt;qt&gt; Copies all stack properties of this stack to the other stacks. Does not copy File name and Offset angle, and only copies wavelet filename to the stacks with no current wavelet filename</string>
-            </property>
-            <property name="text">
-             <string>Apply to all stacks</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <spacer name="horizontalSpacer_19">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="2" column="0">
            <widget class="QLabel" name="angularCorrelationLabel">
             <property name="toolTip">
              <string>&lt;qt&gt;The noise correlation between survey angles</string>
@@ -2124,7 +2098,7 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QPushButton" name="angularCorrelationPushButton">
             <property name="toolTip">
              <string>&lt;qt&gt;The noise correlation between survey angles</string>
@@ -2640,6 +2614,16 @@ p, li { white-space: pre-wrap; }
                 <property name="margin">
                  <number>0</number>
                 </property>
+                <item>
+                 <widget class="QPushButton" name="applyToAllStacksPushButton">
+                  <property name="toolTip">
+                   <string>&lt;qt&gt; Copies all stack properties of this stack to the other stacks. Does not copy File name and Offset angle, and only copies wavelet filename to the stacks with no current wavelet filename</string>
+                  </property>
+                  <property name="text">
+                   <string>Apply to format all stacks</string>
+                  </property>
+                 </widget>
+                </item>
                 <item>
                  <widget class="QLabel" name="location_scaling_label">
                   <property name="toolTip">
@@ -7374,17 +7358,43 @@ p, li { white-space: pre-wrap; }
             <number>9</number>
            </property>
            <item>
-            <widget class="QCheckBox" name="vsForFaciesCheckBox">
-             <property name="toolTip">
-              <string>If Vs information should be used for computing facies probabilities.</string>
+            <layout class="QHBoxLayout" name="horizontalLayout_34">
+             <property name="spacing">
+              <number>-1</number>
              </property>
-             <property name="text">
-              <string>Use Vs for facies probability</string>
+             <property name="sizeConstraint">
+              <enum>QLayout::SetMinimumSize</enum>
              </property>
-             <property name="checked">
-              <bool>false</bool>
+             <property name="topMargin">
+              <number>0</number>
              </property>
-            </widget>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="vsForFaciesCheckBox">
+               <property name="toolTip">
+                <string>If Vs information should be used for computing facies probabilities.</string>
+               </property>
+               <property name="text">
+                <string>Use Vs for facies probability</string>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="useAbsoluteElasticParametersCheckBox">
+               <property name="toolTip">
+                <string>Use absolute elastic parameters.</string>
+               </property>
+               <property name="text">
+                <string>Use absolute elastic parameters</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QCheckBox" name="predictionFaciesCheckBox">
@@ -7674,10 +7684,10 @@ p, li { white-space: pre-wrap; }
             <item row="2" column="1">
              <widget class="QLabel" name="oXmlFilenameLabel">
               <property name="toolTip">
-               <string>&lt;qt&gt;Name of the crava input file. The file is saved in the output directory.</string>
+               <string>&lt;qt&gt;Name of the crava input xml file. The file is saved in the output directory.</string>
               </property>
               <property name="text">
-               <string>Input xml-filename:</string>
+               <string>Project name:</string>
               </property>
              </widget>
             </item>
@@ -7764,8 +7774,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>904</width>
-               <height>124</height>
+               <width>524</width>
+               <height>80</height>
               </rect>
              </property>
              <attribute name="label">
@@ -7957,8 +7967,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>312</width>
-               <height>163</height>
+               <width>303</width>
+               <height>153</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8080,8 +8090,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>523</width>
-               <height>76</height>
+               <width>512</width>
+               <height>72</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8157,8 +8167,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>379</width>
-               <height>49</height>
+               <width>368</width>
+               <height>47</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8244,8 +8254,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>494</width>
-               <height>49</height>
+               <width>472</width>
+               <height>47</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8341,8 +8351,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>904</width>
-               <height>182</height>
+               <width>624</width>
+               <height>157</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8590,7 +8600,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1284</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
@@ -8694,7 +8704,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>deleteStackPushButton</tabstop>
   <tabstop>stackListWidget</tabstop>
   <tabstop>defaultStartTimeLineEdit</tabstop>
-  <tabstop>applyToAllStacksPushButton</tabstop>
   <tabstop>angularCorrelationPushButton</tabstop>
   <tabstop>angleLineEdit</tabstop>
   <tabstop>ppRadioButton</tabstop>
@@ -8831,7 +8840,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>probabiltyCubeRadioButton</tabstop>
   <tabstop>probabilityCubeLineEdit</tabstop>
   <tabstop>probabilityCubeBrowsePushButton</tabstop>
-  <tabstop>vsForFaciesCheckBox</tabstop>
   <tabstop>predictionFaciesCheckBox</tabstop>
   <tabstop>absoluteParametersCheckBox</tabstop>
   <tabstop>uncertaintyLevelLineEdit</tabstop>

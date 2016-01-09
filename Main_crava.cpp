@@ -2001,7 +2001,7 @@ void Main_crava::addFacies(){
 
 void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow ){
 	//survey=1 angle-gather = 2+stackListWidget->currentRow()
-	if(currentRow == -1){
+        if(currentRow == -1){//no more stacks left
 		seismicDataFrame->setEnabled(false);
 		deleteStackPushButton->setEnabled(false);
 		applyToAllStacksPushButton->setEnabled(false);
@@ -2343,16 +2343,6 @@ void Main_crava::on_applyToAllStacksPushButton_clicked(){
 		QTreeWidgetItem* angleGather;
 		findCorrectAngleGather(&angleGather);
 
-		//start time
-		QString startTime;
-		getValueFromAngleGather(angleGather, QString("start-time"), startTime);
-		setValueInAngleGather(angleGathers.at(i), QString("start-time"), startTime);
-
-		//segy-format
-		QString standardFormat;
-		getValueFromAngleGather(angleGather, QString("standard-format"), standardFormat);
-		setValueInAngleGather(angleGathers.at(i), QString("standard-format"), standardFormat);
-
 		QString locationX;
 		getValueFromAngleGather(angleGather, QString("location-x"), locationX);
 		setValueInAngleGather(angleGathers.at(i), QString("location-x"), locationX);
@@ -2376,76 +2366,7 @@ void Main_crava::on_applyToAllStacksPushButton_clicked(){
 		QString locationScalingCoefficient;
 		getValueFromAngleGather(angleGather, QString("location-scaling-coefficient"), locationScalingCoefficient);
 		setValueInAngleGather(angleGathers.at(i), QString("location-scaling-coefficient"), locationScalingCoefficient);
-
-		//type
-		QString type;
-		getValueFromAngleGather(angleGather, QString("type"), type);
-		setValueInAngleGather(angleGathers.at(i), QString("type"), type);
-
-		//wavelet
-		QString waveletFileName;
-		getValueFromAngleGather( angleGather, QString("file-name"), waveletFileName, QString("wavelet") );
-		QString waveletFileNameInList;
-		getValueFromAngleGather( angleGathers.at(i), QString("file-name"), waveletFileNameInList, QString("wavelet") );
-		if ( waveletFileNameInList.isEmpty() ){ //only changes the wavelet filename if the current filename is empty.
-			setValueInAngleGather( angleGathers.at(i), QString("file-name"), waveletFileName, QString("wavelet") );
-		}
-
-		QString rickerPointFrequency;
-		getValueFromAngleGather(angleGather, QString("ricker"), rickerPointFrequency);
-		setValueInAngleGather(angleGathers.at(i), QString("ricker"), rickerPointFrequency);
-
-		QString scale;
-		getValueFromAngleGather(angleGather, QString("scale"), scale);
-		setValueInAngleGather(angleGathers.at(i), QString("scale"), scale);
-
-		QString waveletEstimateScale;
-		getValueFromAngleGather( angleGather, QString("estimate-scale"), waveletEstimateScale, QString("wavelet") );
-		setValueInAngleGather( angleGathers.at(i), QString("estimate-scale"), waveletEstimateScale, QString("wavelet") );
-
-		//local-wavelet
-		QString shiftFile;
-		getValueFromAngleGather(angleGather, QString("shift-file"), shiftFile);
-		setValueInAngleGather(angleGathers.at(i), QString("shift-file"), shiftFile);
-
-		QString scaleFile;
-		getValueFromAngleGather(angleGather, QString("scale-file"), scaleFile);
-		setValueInAngleGather(angleGathers.at(i), QString("scale-file"), scaleFile);
-
-		QString estimateShift;
-		getValueFromAngleGather(angleGather, QString("estimate-shift"), estimateShift);
-		setValueInAngleGather(angleGathers.at(i), QString("estimate-shift"), estimateShift);
-
-		QString localWaveletEstimateScale;
-		getValueFromAngleGather( angleGather, QString("estimate-scale"), localWaveletEstimateScale, QString("local-wavelet") );
-		setValueInAngleGather( angleGathers.at(i), QString("estimate-scale"), localWaveletEstimateScale, QString("local-wavelet") );
-
- 		//wavelet-3d
-		QString wavelet3d;
-		getValueFromAngleGather(angleGather, QString("wavelet-3d"), wavelet3d);
-		setValueInAngleGather(angleGathers.at(i), QString("wavelet-3d"), wavelet3d);
-
-		//match-energies
-		QString matchEnergies;
-		getValueFromAngleGather(angleGather, QString("match-energies"), matchEnergies);
-		setValueInAngleGather(angleGathers.at(i), QString("match-energies"), matchEnergies);
-
-		//signal-to-noise-ratio
-		QString signalToNoiseRatio;
-		getValueFromAngleGather(angleGather, QString("signal-to-noise-ratio"), signalToNoiseRatio);
-		setValueInAngleGather(angleGathers.at(i), QString("signal-to-noise-ratio"), signalToNoiseRatio);
-
-		//local-noise-scaled
-		QString localNoiseScaled;
-		getValueFromAngleGather(angleGather, QString("local-noise-scaled"), localNoiseScaled);
-		setValueInAngleGather(angleGathers.at(i), QString("local-noise-scaled"), localNoiseScaled);
-
-		//estimate-local-noise
-		QString estimateLocalNoise;
-		getValueFromAngleGather(angleGather, QString("estimate-local-noise"), estimateLocalNoise);
-		setValueInAngleGather(angleGathers.at(i), QString("estimate-local-noise"), estimateLocalNoise);
 	}
-
 }
 
 //PP - PS buttons 
@@ -2942,6 +2863,15 @@ void Main_crava::on_scaleFileBrowsePushButton_clicked(){
 		scaleFileLineEdit->setText(fileName);
 	}
 }//browse for the local wavelet scale file then update the XML file, update the field
+
+void Main_crava::on_useAbsoluteElasticParametersCheckBox_toggled(bool checked){
+  if(checked){
+    facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString("yes"));
+  }
+  else{
+    facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString(""));
+  }
+}
 
 //signal to noise ratio buttons
 void Main_crava::on_signalToNoiseCheckBox_toggled(bool checked){
