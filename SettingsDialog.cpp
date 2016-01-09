@@ -66,7 +66,7 @@ void SettingsDialog::updateFields()
 	manualPathLineEdit->setText(settings.value(QString("manual"),QString("manual/CRAVA_user_manual.pdf")).toString());
 	settings.beginGroup("GUI");
 	xmlTreeCheckBox->setChecked(settings.value(QString("showtree"),true).toBool());
-	if(!forward){
+	if(!forward){//if inversion or estimation mode is chosen
 		if(main_crava->segy_format_standard_formatPointer->text(1)==QString("seisworks")){
 			headerSeisWorksRadioButton->setChecked(true);
 		}
@@ -112,7 +112,7 @@ void SettingsDialog::updateFields()
 		jasonCheckBox->setChecked(StandardStrings::checkedBool(main_crava->wavelet_output_jasonPointer->text(1)));
 		norsarWaveletCheckBox->setChecked(StandardStrings::checkedBool(main_crava->wavelet_output_norsarPointer->text(1)));
 
-		if(!estimation){
+		if(!estimation){//inversion mode is chosen
 
 			settings.beginGroup("tree");
 			settings.beginGroup(main_crava->simulationPointer->text(0));
@@ -137,7 +137,7 @@ void SettingsDialog::updateFields()
 			lowCutFrequencyBandLineEdit->setText(main_crava->frequency_band_low_cutPointer->text(1));
 			highCutFrequencyBandLineEdit->setText(main_crava->frequency_band_high_cutPointer->text(1));
 		}
-		else{
+		else{//if estimation mode is chosen
 			fftPaddingLabel->setVisible(false);
 			xFractionLabel->setVisible(false);
 			yFractionLabel->setVisible(false);
@@ -162,8 +162,8 @@ void SettingsDialog::updateFields()
 			diskStorageCheckBox->setEnabled(false);
 			maximumRelativeThicknessLabel->setEnabled(false);
 			maximumRelativeThicknessLineEdit->setEnabled(false);
-			vpVsRatioLabel->setEnabled(false);
-			vpVsRatioFrame->setEnabled(false);
+			vpVsRatioLabel->setVisible(true);
+			vpVsRatioFrame->setVisible(true);
 			frequencyBandLabel->setEnabled(false);
 			frequencyBandFrame->setEnabled(false);
 		}
