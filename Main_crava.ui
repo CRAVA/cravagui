@@ -7674,10 +7674,10 @@ p, li { white-space: pre-wrap; }
             <item row="2" column="1">
              <widget class="QLabel" name="oXmlFilenameLabel">
               <property name="toolTip">
-               <string>&lt;qt&gt;Name of the crava input file. The file is saved in the output directory.</string>
+               <string>&lt;qt&gt;Name of the crava input xml file. The file is saved in the output directory.</string>
               </property>
               <property name="text">
-               <string>Input xml-filename:</string>
+               <string>Project name:</string>
               </property>
              </widget>
             </item>
@@ -7764,8 +7764,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>904</width>
-               <height>124</height>
+               <width>880</width>
+               <height>120</height>
               </rect>
              </property>
              <attribute name="label">
@@ -7957,8 +7957,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>312</width>
-               <height>163</height>
+               <width>303</width>
+               <height>153</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8080,8 +8080,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>523</width>
-               <height>76</height>
+               <width>512</width>
+               <height>72</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8157,8 +8157,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>379</width>
-               <height>49</height>
+               <width>368</width>
+               <height>47</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8244,8 +8244,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>494</width>
-               <height>49</height>
+               <width>472</width>
+               <height>47</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8341,8 +8341,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>904</width>
-               <height>182</height>
+               <width>624</width>
+               <height>157</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8590,7 +8590,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1284</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
