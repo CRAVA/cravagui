@@ -34,6 +34,7 @@ class Main_crava : public QMainWindow, private Ui::Main_crava{
 	friend class ModeDialog;
 	friend class SettingsDialog;
 	friend class VariogramDialog;
+	friend class VariogramDialog1d;
 
 public:
 	Main_crava(QWidget *parent =0,bool existing=false,const QString &filename=QString());
@@ -54,6 +55,7 @@ private:
 	void recursiveXmlWrite(QDomDocument *xmlDocument, QDomNode *parent, QTreeWidgetItem *item); //used on saving, this creates the domtree with all the non-empty values from the treewidget
 	bool noXmlInfo(QTreeWidgetItem *item);//this is used to check whether things should be written to xml, as only non-empty items should be written.
 	void variogram(QTreeWidgetItem *item);//this method opens a variogram modifying the correct data in the xml treewidget
+	void variogram1d(QTreeWidgetItem *item);//this method opens a variogram modifying the correct data in the xml treewidget
 	bool okToCloseCurrent();//this promts the user to save to xml before exiting.
        	bool okToRun();//this prompts the user to save to xml before running crava.
 	//file handlers is probably wrong as what they actually handle is putting things in the tree, each is used by at least 2 slots(the line and the browse button).

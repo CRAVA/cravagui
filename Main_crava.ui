@@ -194,23 +194,7 @@
            </item>
            <item>
             <property name="text">
-             <string>angle</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text">
              <string>range</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>subrange</string>
             </property>
             <property name="text">
              <string/>
@@ -2006,7 +1990,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -4116,7 +4100,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <layout class="QGridLayout" name="gridLayout">
+            <layout class="QGridLayout" name="gridLayout_correlationbuttons">
              <property name="margin">
               <number>0</number>
              </property>
@@ -7774,8 +7758,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>524</width>
-               <height>80</height>
+               <width>880</width>
+               <height>120</height>
               </rect>
              </property>
              <attribute name="label">
