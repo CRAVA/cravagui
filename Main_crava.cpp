@@ -22,6 +22,7 @@
 #include <QtGui>
 #include <QObject>
 #include "VariogramDialog.h"
+#include "VariogramDialog1d.h"
 #include "ModeDialog.h"
 #include "SettingsDialog.h"
 
@@ -1801,6 +1802,20 @@ void Main_crava::variogram(QTreeWidgetItem *item){//the item is the parent of th
 	delete dialog;
 }
 
+void Main_crava::variogram1d(QTreeWidgetItem *item){//the item is the parent of the dialog 
+	//variogram-type=0 range=1 power=2
+	QPointer<VariogramDialog1d> dialog;
+	dialog = new VariogramDialog1d(this, !(item->child(0)->text(1)==QString("spherical")), item->child(1)->text(1),
+				       item->child(2)->text(1));//initialize the dialog
+	if(dialog->exec() == QDialog::Accepted){
+		QList<QString> list=dialog->variogramValues();//get the values from the dialog and set them under
+		item->child(0)->setText(1,list.takeFirst());
+		item->child(1)->setText(1,list.takeFirst());
+		item->child(2)->setText(1,list.takeFirst());
+	}
+	delete dialog;
+}
+
 void Main_crava::addStack(){
 	//the strings makes it obvious what items are added. this creates all the needed children.
 	QString label = QString("angle-gather");
@@ -2992,8 +3007,8 @@ void Main_crava::on_defaultStartTimeLineEdit_editingFinished(){
 }//update the XML three with the new start time
 
 void Main_crava::on_angularCorrelationPushButton_clicked(){
-	variogram(survey_angular_correlationPointer);
-}//open variogram edit window
+	variogram1d(survey_angular_correlationPointer);
+}//open one dimensional variogram edit window
 
 //wells, format info
 
