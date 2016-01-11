@@ -521,11 +521,11 @@ void Main_crava::updateGuiToTree(){
         //constant top and base
 	if((!top_surface_time_valuePointer->text(1).isEmpty()) ||
 	 (!base_surface_time_valuePointer->text(1).isEmpty())){
+                singleZoneInversionRadioButton->setChecked(true);
 		constantInversionRadioButton->setChecked(true);
 		topTimeValueLineEdit->setText(top_surface_time_valuePointer->text(1));
 		bottomTimeValueLineEdit->setText(base_surface_time_valuePointer->text(1));
 		on_oneSurfaceRadioButton_toggled(false);//hide surfaceOneFrame
-                singleZoneInversionRadioButton->setChecked(true);
                 layersLineEdit->setText(interval_two_surfaces_number_of_layersPointer->text(1) );
 	}
         //check if inversion is defined by one surface and distance to top and base
@@ -904,7 +904,6 @@ void Main_crava::updateGuiToTree(){
 		//other-output
 		//extra surface...
 		oPriorCorrelationCheckBox->setChecked(StandardStrings::checkedBool(io_settings_prior_correlationsPointer->text(1)));//prior-correlations
-		oBackgroundTrend1DCheckBox->setChecked(StandardStrings::checkedBool(io_settings_background_trend_1dPointer->text(1)));//background-trend-1d
 		oLocalNoiseCheckBox->setChecked(StandardStrings::checkedBool(io_settings_local_noisePointer->text(1)));//local-noise
 	}
 	else{
@@ -5362,10 +5361,6 @@ void Main_crava::on_oExtraGridsCheckBox_toggled(bool checked){
         grid_output_extra_gridsPointer->setText(1,StandardStrings::checkedString(checked));
 }
 
-void Main_crava::on_oBackgroundTrend1DCheckBox_toggled(bool checked){
-        io_settings_background_trend_1dPointer->setText(1,StandardStrings::checkedString(checked));
-}
-
 void Main_crava::on_oWellCheckBox_toggled(bool checked){
         well_output_wellsPointer->setText(1,StandardStrings::checkedString(checked));
 }
@@ -5959,9 +5954,8 @@ void Main_crava::activateTable(){
 			io_settings_other_outputPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6);
 				io_settings_extra_surfacesPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(0);
 				io_settings_prior_correlationsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(1);
-				io_settings_background_trend_1dPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(2);
-				io_settings_local_noisePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(3);
-			       	io_settings_rock_physics_distributionsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(4);
+				io_settings_local_noisePointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(2);
+			       	io_settings_rock_physics_distributionsPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(6)->child(3);
 			io_settings_file_output_prefixPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(7);
 			io_settings_log_levelPointer = xmlTreeWidget->topLevelItem(0)->child(4)->child(2)->child(8);
 		//project-settings/advanced-settings
