@@ -1873,7 +1873,7 @@
            </item>
            <item>
             <property name="text">
-             <string>energy-treshold</string>
+             <string>energy-threshold</string>
             </property>
             <property name="text">
              <string/>
