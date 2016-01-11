@@ -728,7 +728,6 @@ private slots:
 	void on_oBackgroundCheckBox_toggled(bool checked);//updates the tree - should a background be a part of the output?
 	void on_oBackgroundTrendCheckBox_toggled(bool checked);//updates the tree - should a background trend be a part of the output?
 	void on_oExtraGridsCheckBox_toggled(bool checked);//updates the tree - should estimated background files (extra grids) be a part of the output?
-	void on_oBackgroundTrend1DCheckBox_toggled(bool checked);//updates the tree - should a background trend as a 1D curve be a part of the output?
 	void on_oWellCheckBox_toggled(bool checked);//updates the tree - should the original sampled wells be a part of the output?
 	void on_oBlockedWellCheckBox_toggled(bool checked);//updates the tree - should blocked wells be a part of the output?
 	void on_oWaveletWellCheckBox_toggled(bool checked);//updates the tree - should well wavelet files be a part of the output?
