@@ -257,7 +257,7 @@ void SettingsDialog::updateSettings(){
 	settings.setValue(QString("manual"),manualPathLineEdit->text());
 	settings.beginGroup("GUI");
 	settings.setValue(QString("showtree"),xmlTreeCheckBox->isChecked());
-	if(!forward){
+	if(!forward){//estimation or inversion mode chosen
 		QString headerformat("");
 		if(headerSeisWorksRadioButton->isChecked()){
 			headerformat=QString("seisworks");
@@ -322,8 +322,22 @@ void SettingsDialog::updateSettings(){
 
 		main_crava->io_settings_log_levelPointer->setText(1,logComboBox->currentText());
 
+		//Choose how to estimate Vp/Vs ratio
+		if(vpVsEstimateBackgroundRadioButton->isChecked()){
+		        main_crava->vp_vs_ratioPointer->setText(1,QString(""));
+			main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString(""));
+		}
+		else if(vpVsEstimateWellRadioButton->isChecked()){
+		        main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString("yes"));
+			main_crava->vp_vs_ratioPointer->setText(1,QString(""));
+		}
+		else{
+		        main_crava->vp_vs_ratioPointer->setText(1,vpVsUserDefinedLineEdit->text());
+			main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString(""));
+		}
+
 		QString checker;
-		if(!estimation){
+		if(!estimation){//inversion mode chosen
 			settings.beginGroup("tree");
 			settings.beginGroup(main_crava->simulationPointer->text(0));
 			if(standard->StandardStrings::fileExists(seedFileLineEdit->text())){
@@ -350,18 +364,6 @@ void SettingsDialog::updateSettings(){
 
 			main_crava->frequency_band_low_cutPointer->setText(1,lowCutFrequencyBandLineEdit->text());
 			main_crava->frequency_band_high_cutPointer->setText(1,highCutFrequencyBandLineEdit->text());
-		    	if(vpVsEstimateBackgroundRadioButton->isChecked()){
-			        main_crava->vp_vs_ratioPointer->setText(1,QString(""));
-				main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString(""));
-			}
-			else if(vpVsEstimateWellRadioButton->isChecked()){
-		                main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString("yes"));
-				main_crava->vp_vs_ratioPointer->setText(1,QString(""));
-			}
-			else{
-		                main_crava->vp_vs_ratioPointer->setText(1,vpVsUserDefinedLineEdit->text());
-				main_crava->vp_vs_ratio_from_wellsPointer->setText(1,QString(""));
-			}
 		}
 		//advanced-settings
 		main_crava->high_cut_seismic_resolutionPointer->setText(1,seismicResolutionLineEdit->text());
