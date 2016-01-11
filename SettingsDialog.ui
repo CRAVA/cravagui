@@ -976,7 +976,7 @@ p, li { white-space: pre-wrap; }
               <string>&lt;qt&gt;If the energy in a trace falls below this threshold relative to the average, the trace is interpolated from neighbors</string>
              </property>
              <property name="text">
-              <string>&lt;qt&gt;Trace energy treshold</string>
+              <string>&lt;qt&gt;Trace energy threshold</string>
              </property>
             </widget>
            </item>
