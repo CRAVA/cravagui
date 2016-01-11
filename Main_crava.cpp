@@ -6035,10 +6035,10 @@ QList<QObject*> Main_crava::getNecessaryFields(){
           QList<QObject*> list;
 	  list << angleLineEdit << inlineLineEdit << crosslineLineEdit << xCoordLineEdit << yCoordLineEdit;
 	  list << timeLineEdit << densityLineEdit << faciesLineEdit << topTimeFileLineEdit << bottomTimeFileLineEdit;
-	  list << topTimeValueLineEdit << bottomTimeValueLineEdit << correlationDirectionFileLineEdit << layersLineEdit;
+	  list << topTimeValueLineEdit << bottomTimeValueLineEdit << correlationDirectionFileLineEdit;
 	  list << referenceSurfaceFileLineEdit << distanceTopLineEdit << thicknessLineEdit << layerThicknessLineEdit;
           list << singleCorrelationSurfaceLineEdit << topCorrelationSurfaceLineEdit << baseCorrelationSurfaceLineEdit;
-          list << topSurfaceFileLineEdit << baseSurfaceFileLineEdit << topTimeValueMultizoneLineEdit;
+          list << topSurfaceFileLineEdit << baseSurfaceFileLineEdit << layersMultizoneLineEdit << topTimeValueMultizoneLineEdit;
           list << baseTimeValueMultizoneLineEdit;
 	  return list;
 }//returns a list of all necessary objects.
