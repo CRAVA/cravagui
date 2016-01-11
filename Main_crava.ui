@@ -2604,7 +2604,7 @@ p, li { white-space: pre-wrap; }
                    <string>&lt;qt&gt; Copies all stack properties of this stack to the other stacks. Does not copy File name and Offset angle, and only copies wavelet filename to the stacks with no current wavelet filename</string>
                   </property>
                   <property name="text">
-                   <string>Apply to format all stacks</string>
+                   <string>Apply format to all stacks</string>
                   </property>
                  </widget>
                 </item>
@@ -7758,8 +7758,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>880</width>
-               <height>120</height>
+               <width>541</width>
+               <height>84</height>
               </rect>
              </property>
              <attribute name="label">
@@ -7951,8 +7951,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>303</width>
-               <height>153</height>
+               <width>312</width>
+               <height>163</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8074,8 +8074,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>512</width>
-               <height>72</height>
+               <width>523</width>
+               <height>76</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8151,8 +8151,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>368</width>
-               <height>47</height>
+               <width>379</width>
+               <height>49</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8238,8 +8238,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>472</width>
-               <height>47</height>
+               <width>494</width>
+               <height>49</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8335,8 +8335,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>624</width>
-               <height>157</height>
+               <width>636</width>
+               <height>167</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8584,7 +8584,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1284</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
