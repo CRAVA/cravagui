@@ -6033,7 +6033,7 @@ bool Main_crava::eventFilter(QObject *obj, QEvent *event){
 
 QList<QObject*> Main_crava::getNecessaryFields(){
           QList<QObject*> list;
-	  list << angleLineEdit << inlineLineEdit << crosslineLineEdit << xCoordLineEdit << yCoordLineEdit;
+	  list << angleLineEdit;
 	  list << timeLineEdit << densityLineEdit << faciesLineEdit << topTimeFileLineEdit << bottomTimeFileLineEdit;
 	  list << topTimeValueLineEdit << bottomTimeValueLineEdit << correlationDirectionFileLineEdit;
 	  list << referenceSurfaceFileLineEdit << distanceTopLineEdit << thicknessLineEdit << layerThicknessLineEdit;
