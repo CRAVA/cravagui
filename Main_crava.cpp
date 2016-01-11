@@ -521,11 +521,11 @@ void Main_crava::updateGuiToTree(){
         //constant top and base
 	if((!top_surface_time_valuePointer->text(1).isEmpty()) ||
 	 (!base_surface_time_valuePointer->text(1).isEmpty())){
+                singleZoneInversionRadioButton->setChecked(true);
 		constantInversionRadioButton->setChecked(true);
 		topTimeValueLineEdit->setText(top_surface_time_valuePointer->text(1));
 		bottomTimeValueLineEdit->setText(base_surface_time_valuePointer->text(1));
 		on_oneSurfaceRadioButton_toggled(false);//hide surfaceOneFrame
-                singleZoneInversionRadioButton->setChecked(true);
                 layersLineEdit->setText(interval_two_surfaces_number_of_layersPointer->text(1) );
 	}
         //check if inversion is defined by one surface and distance to top and base
