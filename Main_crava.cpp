@@ -2339,7 +2339,7 @@ void Main_crava::seismicFile(const QString &value){
 }
 
 void Main_crava::on_angleLineEdit_editingFinished(){
-	if(stackListWidget->count()>0){
+        if(stackListWidget->currentRow() != -1){
 		QTreeWidgetItem* angleGather;
 		findCorrectAngleGather(&angleGather);
 		QString value = angleLineEdit->text();
