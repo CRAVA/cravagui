@@ -30,9 +30,14 @@ using namespace std;
 */
 int main(int argc, char *argv[])
 {
-	QApplication app(argc, argv);//starts the application
-	//there should probably be some code that calls Main_crava(0,true,fileName) if a an argument is an exisiting xml file.
-	QPointer<Main_crava> crava=new Main_crava;//creates the application main window
+	QApplication app(argc, argv);//starts the application, argc is QString, argv is QList
+        QPointer<Main_crava> crava;//declare pointer to the main window
+	if(argc==2){//har filename been provided on command line?
+        crava=new Main_crava(0,true,argv[1]);//creates the application main window with file from commandline
+	}
+	else{
+	  crava=new Main_crava;//creates application window with no command line parameters
+	}
 	crava->show();//shows it.
 	return app.exec();//pass control
  }
