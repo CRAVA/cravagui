@@ -2070,12 +2070,8 @@ void Main_crava::on_stackListWidget_currentRowChanged ( int currentRow )
 		return;
 	}
 
-	//debugLabel->setText(QString("%1").arg(currentRow));
 	//moves down the tree to survey
 	QTreeWidgetItem* item;
-	//QTreeWidgetItem** tempItem;
-	//tempItem = &item;
-	//findCorrectAngleGather(tempItem);
 	findCorrectAngleGather(&item); //get the correct angle gather
 		//move to offset-angle
 		QString offsetAngle;
@@ -3296,7 +3292,7 @@ void Main_crava::on_deleteWellPushButton_clicked()
 		wellListWidget->setCurrentItem(wellListWidget->item(1));
 	}
 	else if(deleteIndex==0){
-		wellListWidget->setCurrentRow(-1); //this should not be needed as when there are no items in the list no items should be selected and current row should be -1...
+		wellListWidget->setCurrentRow(-1); //this should not be needed, list with no items should be selected and current row should be -1...
 	}
 	delete well_dataPointer->child(childNumber);
 	delete wellListWidget->takeItem(deleteIndex);
@@ -3440,11 +3436,9 @@ void Main_crava::on_optimizePositionListWidget_currentRowChanged ( int currentRo
 		deleteOptimizationPushButton->setEnabled(false);
 		return;
 	}
-
 	//moves to the correct optimization
 	QTreeWidgetItem* optimizePosition;
 	findCorrectOptimizePosition(&optimizePosition);
-
 	//move to angle
 	QString angle;
 	getValueFromOptimizePosition(optimizePosition, QString("angle"), angle);
@@ -3478,11 +3472,11 @@ void Main_crava::on_deleteOptimizationPushButton_clicked()
 	int childNumber1 = optimizePosition->parent()->indexOfChild(optimizePosition); // finds the index of optimizePosition
 	int childNumber0 = optimizePosition->parent()->parent()->indexOfChild( optimizePosition->parent() );// finds the index of the parent of optimizePosition
 
-	if(deleteIndex==0&&optimizePositionListWidget->count()>1){
+	if(deleteIndex==0 && optimizePositionListWidget->count()>1){
 		optimizePositionListWidget->setCurrentItem(optimizePositionListWidget->item(1));
 	}
-	delete well_dataPointer->child(childNumber0)->child(childNumber1);
 	delete optimizePositionListWidget->takeItem(deleteIndex);
+	delete well_dataPointer->child(childNumber0)->child(childNumber1);
 }//removes the selected position optimization, should be undoable
 
 void Main_crava::on_anglePositionlineEdit_editingFinished()
