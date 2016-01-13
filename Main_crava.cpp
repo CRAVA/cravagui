@@ -4746,7 +4746,7 @@ void Main_crava::deleteZone()
          QTreeWidgetItem* correlationZone;
 	 findCorrectZone(&zone);
          findCorrectCorrelationZone(&correlationZone);
-    	 delete zoneListWidget->takeItem(row);//remove zone from list widget
+   	 delete zoneListWidget->takeItem(row);//remove zone from list widget
 	 delete zone;//remove zone from xml-tree
 	 delete correlationZone;//remove zone from xml-tree
          QString label;
@@ -4759,9 +4759,12 @@ void Main_crava::deleteZone()
                 findCorrectCorrelationZone(&zone);
                 setValueInZone(zone, QString("name"), label);
 	 }
-	 //if last zone, make sure currentRow change is triggered (needed for single zone added
+	 //if last zone, make sure currentRow change is triggered (needed for single zone added)
 	 if(0==zoneListWidget->count()){
 	   on_zoneListWidget_currentRowChanged(-1);
+	 }
+	 else if(row < zoneListWidget->count()){//set current row back to original
+	   zoneListWidget->setCurrentRow(row);
 	 }
          necessaryFieldGui();
 }        
@@ -4883,14 +4886,16 @@ void Main_crava::on_topCorrelationRadioButton_toggled(bool checked)
         if(checked){
           singleCorrelationSurfaceFrame->setVisible(false);
           twoSurfaceCorrelationFrame->setVisible(false);
-	  QTreeWidgetItem* zone;
-	  findCorrectCorrelationZone(&zone);
-	  setValueInZone(zone, QString("top-conform"), QString("yes"));
-          //clear other fields
-	  setValueInZone(zone, QString("single-surface"), QString(""));
-	  setValueInZone(zone, QString("top-surface"), QString(""));
-	  setValueInZone(zone, QString("base-surface"), QString(""));
-	  setValueInZone(zone, QString("base-conform"), QString(""));
+	  if(zoneListWidget->currentRow() > -1){
+	    QTreeWidgetItem* zone;
+	    findCorrectCorrelationZone(&zone);
+	    setValueInZone(zone, QString("top-conform"), QString("yes"));
+            //clear other fields
+	    setValueInZone(zone, QString("single-surface"), QString(""));
+	    setValueInZone(zone, QString("top-surface"), QString(""));
+	    setValueInZone(zone, QString("base-surface"), QString(""));
+	    setValueInZone(zone, QString("base-conform"), QString(""));
+	  }
           singleCorrelationSurfaceLineEdit->clear();
           topCorrelationSurfaceLineEdit->clear();
           baseCorrelationSurfaceLineEdit->clear();
