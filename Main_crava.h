@@ -538,6 +538,7 @@ private slots:
 	//well input
 	void on_wellListWidget_currentRowChanged ( int currentRow );//makes sure the proper widgets are enabled and that the correct information is displayed regarding to the selected well.
 	void on_addWellPushButton_clicked();//add a new well for input
+        void on_useSeparateLogNamesCheckBox_toggled(bool checked);//determine if well will have separate tags for log names
 	void on_deleteWellPushButton_clicked();//remove the selected well
         void on_openWellPushButton_clicked();//opens the selected well in a text editor
 	void on_waveletEstimationCheckBox_toggled(bool checked);//update whether this well should be used for wavelet estimationin XML tree

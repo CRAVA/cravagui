@@ -3180,6 +3180,14 @@ void Main_crava::on_dtsLineEdit_editingFinished()
 	log_names_dtsPointer->setText( 1, dtsLineEdit->text() );
 }//update the XML tree with the new dts format
 
+void Main_crava::on_useSeparateLogNamesCheckBox_toggled(bool checked)
+{
+  if(checked){
+  }
+  else{
+  }
+}
+
 //well input
 void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow )
 {
@@ -3191,8 +3199,7 @@ void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow )
 		openWellPushButton->setEnabled(false);
 		return;
 	}
-	//debugLabel->setText(QString("%1").arg(currentRow));
-
+        wellHeaderListWidget->clear();//clear list of well headers
 	QTreeWidgetItem* item;
 	findCorrectWell(&item); //move to correct well
 
