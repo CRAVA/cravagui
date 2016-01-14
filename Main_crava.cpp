@@ -1934,6 +1934,24 @@ void Main_crava::addWell()
 	QTreeWidgetItem* item = new QTreeWidgetItem(parent,parent->child(wellListWidget->count()-1));//adds another well after log-names, and previous wells
 	item->setText(0,label);
 		QTreeWidgetItem* child = new QTreeWidgetItem(item);//adds first child to the stack, file-name
+		child->setText(0,QString("log-names"));
+			QTreeWidgetItem* nestedChild = new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("time"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("vp"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("dt"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("vs"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("dts"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("density"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("porosity"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("facies"));
+		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("file-name"));
 		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("use-for-wavelet-estimation"));
@@ -2969,12 +2987,12 @@ void Main_crava::on_scaleFileBrowsePushButton_clicked()
 
 void Main_crava::on_useAbsoluteElasticParametersCheckBox_toggled(bool checked)
 {
-  if(checked){
-    facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString("yes"));
-  }
-  else{
-    facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString(""));
-  }
+        if(checked){
+                facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString("yes"));
+        }
+        else{
+                facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString(""));
+        }
 }
 
 //signal to noise ratio buttons
@@ -3182,10 +3200,10 @@ void Main_crava::on_dtsLineEdit_editingFinished()
 
 void Main_crava::on_useSeparateLogNamesCheckBox_toggled(bool checked)
 {
-  if(checked){
-  }
-  else{
-  }
+        if(checked){
+        }
+        else{
+        }
 }
 
 //well input
