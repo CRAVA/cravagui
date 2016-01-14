@@ -45,7 +45,7 @@ const QString& StandardStrings::surfaceFormat(){
 };
 
 const QString& StandardStrings::wellFormat(){
-	static QString* format = new QString("Well file (*rms *rmswell);;Las file (*.las);;All files(*.*)");
+	static QString* format = new QString("Well file (*rms *rmswell *.las);;All files(*.*)");
 	return *format;
 };
 
