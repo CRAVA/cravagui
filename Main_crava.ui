@@ -1982,7 +1982,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -3491,6 +3491,16 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="text">
              <string>Delete well</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="useSeparateLogNamesCheckBox">
+            <property name="toolTip">
+             <string>Use separate names for logs in this well. Log name tags will be added for this well when ticked.</string>
+            </property>
+            <property name="text">
+             <string>Use separate names for logs in this well</string>
             </property>
            </widget>
           </item>
@@ -7750,8 +7760,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>904</width>
-               <height>124</height>
+               <width>541</width>
+               <height>84</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8067,7 +8077,7 @@ p, li { white-space: pre-wrap; }
                <x>0</x>
                <y>0</y>
                <width>904</width>
-               <height>116</height>
+               <height>60</height>
               </rect>
              </property>
              <attribute name="label">

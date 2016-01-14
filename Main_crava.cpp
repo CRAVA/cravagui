@@ -55,6 +55,7 @@ Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) 
 	wellFrame->setEnabled(false);
 	deleteWellPushButton->setEnabled(false);
 	openWellPushButton->setEnabled(false);
+	useSeparateLogNamesCheckBox->setEnabled(false);
 	anglePositionlineEdit->setEnabled(false);
 	weightLineEdit->setEnabled(false);
 	optimizePositionFrame->setVisible(false);
@@ -1717,20 +1718,25 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 			addWell();
 			wellListWidget->setCurrentRow(wellListWidget->count()-1);
 			recursiveXmlRead(xmlChild,treeItem->child(wellListWidget->count()));
-			on_wellListWidget_currentRowChanged(wellListWidget->currentRow());
+
+
+			//update well list entry with log file name
                         QTreeWidgetItem* item;
 	                findCorrectWell(&item); //move to correct well
          		QString fileName;
 	        	getValueFromWell( item, QString("file-name"), fileName );
 		        fileName = StandardStrings::strippedName(fileName);
                         wellListWidget->currentItem()->setText(fileName);
+
+			//update the fields with tree content
+			on_wellListWidget_currentRowChanged(wellListWidget->currentRow());
 		}
 		else if(xmlChild.toElement().tagName() == QString("optimize-position")){
-			//optimized positions are no in the tree already and needs to be added before they can be populated
-			optimizePositionCheckBox->setChecked(false);
+			//optimized positions are not in the tree already and needs to be added before they can be populated
+			optimizePositionCheckBox->setChecked(true);
 			optimizePositionListWidget->addItem(QString("optimization"));
 			addOptimizePosition();
-			recursiveXmlRead(xmlChild,treeItem->child(5+optimizePositionListWidget->count()));
+			recursiveXmlRead(xmlChild,treeItem->child(6+optimizePositionListWidget->count()));
 		}
 	     	else if(xmlChild.toElement().tagName() == QString("interval") && (xmlItem.toElement().tagName()==QString("correlation-direction"))){
 		        multizoneInversionRadioButton->setChecked(true);
@@ -1934,6 +1940,24 @@ void Main_crava::addWell()
 	QTreeWidgetItem* item = new QTreeWidgetItem(parent,parent->child(wellListWidget->count()-1));//adds another well after log-names, and previous wells
 	item->setText(0,label);
 		QTreeWidgetItem* child = new QTreeWidgetItem(item);//adds first child to the stack, file-name
+		child->setText(0,QString("log-names"));
+			QTreeWidgetItem* nestedChild = new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("time"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("vp"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("dt"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("vs"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("dts"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("density"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("porosity"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("facies"));
+		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("file-name"));
 		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("use-for-wavelet-estimation"));
@@ -1945,8 +1969,10 @@ void Main_crava::addWell()
 		child->setText(0,QString("synthetic-vs-log"));
 		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("filter-elastic-logs"));
-		//child=new QTreeWidgetItem(item);
-		//child->setText(0,QString("optimize-position")); added by it's own stack
+
+	//make sure the "Use separate names for logs" is enabled and unticked
+	useSeparateLogNamesCheckBox->setEnabled(true);
+	//useSeparateLogNamesCheckBox->setChecked(false);
 }
 
 void Main_crava::addOptimizePosition()
@@ -1956,7 +1982,7 @@ void Main_crava::addOptimizePosition()
 	QString label = QString("optimize-position");
 	QTreeWidgetItem* parent;
 	findCorrectWell(&parent);
-	QTreeWidgetItem* item = new QTreeWidgetItem(parent,parent->child(optimizePositionListWidget->count()+4));//adds another optimization after last postion
+	QTreeWidgetItem* item = new QTreeWidgetItem(parent,parent->child(optimizePositionListWidget->count()+5));//adds another optimization after last postion
 	item->setText(0,label);
 		QTreeWidgetItem* child = new QTreeWidgetItem(item);//adds first child to the stack, angle
 		child->setText(0,QString("angle"));
@@ -2969,12 +2995,12 @@ void Main_crava::on_scaleFileBrowsePushButton_clicked()
 
 void Main_crava::on_useAbsoluteElasticParametersCheckBox_toggled(bool checked)
 {
-  if(checked){
-    facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString("yes"));
-  }
-  else{
-    facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString(""));
-  }
+        if(checked){
+                facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString("yes"));
+        }
+        else{
+                facies_probabilities_use_absolute_elastic_parametersPointer->setText(1, QString(""));
+        }
 }
 
 //signal to noise ratio buttons
@@ -3113,23 +3139,44 @@ void Main_crava::on_angularCorrelationPushButton_clicked()
 
 void Main_crava::on_timeLineEdit_editingFinished()
 {
-	log_names_timePointer->setText( 1, timeLineEdit->text() );
-}//update the XML three with the new time format
+	if(!useSeparateLogNamesCheckBox->isChecked()){
+        	log_names_timePointer->setText( 1, timeLineEdit->text() );
+	}
+	else{//well specific log names are used
+		QTreeWidgetItem* item;
+		findCorrectWell(&item); //move to correct well
+		setValueInWell( item, QString("time"), timeLineEdit->text() );
+	}
+}//update the XML three with the new time log name
 
 void Main_crava::on_densityLineEdit_editingFinished()
 {
-	log_names_densityPointer->setText(1 , densityLineEdit->text() );
-}//update the XML three with the new density format
+	if(!useSeparateLogNamesCheckBox->isChecked()){
+        	log_names_densityPointer->setText( 1, densityLineEdit->text() );
+	}
+	else{//well specific log names are used
+		QTreeWidgetItem* item;
+		findCorrectWell(&item); //move to correct well
+		setValueInWell( item, QString("density"), densityLineEdit->text() );
+	}
+}//update the XML three with the new density log name
 
 void Main_crava::on_faciesLineEdit_editingFinished()
 {
-	log_names_faciesPointer->setText( 1, faciesLineEdit->text() );
-}//update the XML three with the new facis format
+	if(!useSeparateLogNamesCheckBox->isChecked()){
+        	log_names_faciesPointer->setText( 1, faciesLineEdit->text() );
+	}
+	else{//well specific log names are used
+		QTreeWidgetItem* item;
+		findCorrectWell(&item); //move to correct well
+		setValueInWell( item, QString("facies"), faciesLineEdit->text() );
+	}
+}//update the XML three with the new facis log name
 
 //button vp
 void Main_crava::on_vpRadioButton_toggled(bool checked)
 {
-	//makes sure the correct widgets are visible and the focus makes sure signals trigger to make the info in the tree correct.
+	//makes sure the correct widgets are visible
 	vpLineEdit->setEnabled(checked);
 	dtLineEdit->setEnabled(!checked);
 	if(checked){
@@ -3143,16 +3190,31 @@ void Main_crava::on_vpRadioButton_toggled(bool checked)
 		log_names_vpPointer->setText( 1, QString() );
 	}
 }
+
 void Main_crava::on_vpLineEdit_editingFinished()
 {
-	log_names_vpPointer->setText( 1, vpLineEdit->text() );
+	if(!useSeparateLogNamesCheckBox->isChecked()){
+        	log_names_vpPointer->setText( 1, vpLineEdit->text() );
+	}
+	else{//well specific log names are used
+		QTreeWidgetItem* item;
+		findCorrectWell(&item); //move to correct well
+		setValueInWell( item, QString("vp"), vpLineEdit->text() );
+	}
 }//update the XML tree with the new vp format
-//button dt
+
 void Main_crava::on_dtLineEdit_editingFinished()
 {
-	log_names_dtPointer->setText( 1, dtLineEdit->text() );
+	if(!useSeparateLogNamesCheckBox->isChecked()){
+        	log_names_dtPointer->setText( 1, dtLineEdit->text() );
+	}
+	else{//well specific log names are used
+		QTreeWidgetItem* item;
+		findCorrectWell(&item); //move to correct well
+		setValueInWell( item, QString("dt"), dtLineEdit->text() );
+	}
 }//update the XML three with the new dt format
-//button vs
+
 void Main_crava::on_vsRadioButton_toggled(bool checked)
 {
 	//can either have vs or dts but not both
@@ -3169,16 +3231,72 @@ void Main_crava::on_vsRadioButton_toggled(bool checked)
 		dtsLineEdit->setFocus();
 	}
 }
+
 void Main_crava::on_vsLineEdit_editingFinished()
 {
-	log_names_vsPointer->setText( 1, vsLineEdit->text() );
+	if(!useSeparateLogNamesCheckBox->isChecked()){
+        	log_names_vsPointer->setText( 1, vsLineEdit->text() );
+	}
+	else{//well specific log names are used
+		QTreeWidgetItem* item;
+		findCorrectWell(&item); //move to correct well
+		setValueInWell( item, QString("vs"), vsLineEdit->text() );
+	}
 }//update the XML tree with the new vs format
 
-//button dts
 void Main_crava::on_dtsLineEdit_editingFinished()
 {
-	log_names_dtsPointer->setText( 1, dtsLineEdit->text() );
+	if(!useSeparateLogNamesCheckBox->isChecked()){
+        	log_names_dtsPointer->setText( 1, dtsLineEdit->text() );
+	}
+	else{//well specific log names are used
+		QTreeWidgetItem* item;
+		findCorrectWell(&item); //move to correct well
+		setValueInWell( item, QString("dts"), dtsLineEdit->text() );
+	}
 }//update the XML tree with the new dts format
+
+void Main_crava::on_useSeparateLogNamesCheckBox_toggled(bool checked)
+{
+        if(checked){//clear all fields
+                timeLineEdit->clear();
+	        densityLineEdit->clear();
+	        faciesLineEdit->clear();
+		vpRadioButton->setChecked(true);
+		vsRadioButton->setChecked(true);
+        }
+        else{//clear well tags, fill in common names
+		QTreeWidgetItem* item;
+		findCorrectWell(&item); //move to correct well
+		setValueInWell( item, QString("time"), QString("") );
+		setValueInWell( item, QString("vp"), QString("") );
+		setValueInWell( item, QString("dt"), QString("") );
+		setValueInWell( item, QString("vs"), QString("") );
+		setValueInWell( item, QString("dts"), QString("") );
+		setValueInWell( item, QString("density"), QString("") );
+		setValueInWell( item, QString("facies"), QString("") );
+		timeLineEdit->setText(log_names_timePointer->text(1));
+		densityLineEdit->setText(log_names_densityPointer->text(1));
+		faciesLineEdit->setText(log_names_faciesPointer->text(1));
+		if(!log_names_dtPointer->text(1).isEmpty()){
+			   dtRadioButton->setChecked(true);
+			   dtLineEdit->setText(log_names_dtPointer->text(1));
+		}
+		else{
+			   vpRadioButton->setChecked(true);
+			   vpLineEdit->setText(log_names_vpPointer->text(1));
+	        }
+		if(!log_names_dtsPointer->text(1).isEmpty()){
+			   dtsRadioButton->setChecked(true);
+			   dtsLineEdit->setText(log_names_dtsPointer->text(1));
+		}
+		else{
+			   vsRadioButton->setChecked(true);
+			   vsLineEdit->setText(log_names_vsPointer->text(1));
+		}
+        }
+	necessaryFieldGui();
+}
 
 //well input
 void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow )
@@ -3191,81 +3309,139 @@ void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow )
 		openWellPushButton->setEnabled(false);
 		return;
 	}
-	//debugLabel->setText(QString("%1").arg(currentRow));
-
+        wellHeaderListWidget->clear();//clear list of well headers
 	QTreeWidgetItem* item;
 	findCorrectWell(&item); //move to correct well
 
-		//move to file-name
-		QString fileName;
-		getValueFromWell( item, QString("file-name"), fileName );
-		wellNameLabel->setText(StandardStrings::strippedName(fileName));
-		//move to use-for-wavelet-estimation
-		QString useForWaveletEstimation;
-		getValueFromWell(item, QString("use-for-wavelet-estimation"), useForWaveletEstimation);
-		if(useForWaveletEstimation==QString("no")){
-			waveletEstimationCheckBox->setChecked(false);
+	//check if separate log names are used for this well
+	//and update fields accordingly
+	QString time, vp, dt, vs, dts, density, facies;
+	getValueFromWell( item, QString("time"), time );
+	getValueFromWell( item, QString("vp"), vp );
+	getValueFromWell( item, QString("dt"), dt );
+	getValueFromWell( item, QString("vs"), vs );
+	getValueFromWell( item, QString("dts"), dts );
+	getValueFromWell( item, QString("density"), density );
+	getValueFromWell( item, QString("facies"), facies );
+	if(!time.isEmpty() || !vp.isEmpty() || !dt.isEmpty() ||
+	   !vs.isEmpty() || !dts.isEmpty() || !density.isEmpty() ||
+	   !facies.isEmpty()){//separate log names are used
+		useSeparateLogNamesCheckBox->setChecked(true);
+                timeLineEdit->setText(time);
+		densityLineEdit->setText(density);
+		faciesLineEdit->setText(facies);
+		if(!dt.isEmpty()){
+			   dtRadioButton->setChecked(true);
+			   dtLineEdit->setText(dt);
 		}
-		else {
-			waveletEstimationCheckBox->setChecked(true);
+		else{
+			   vpRadioButton->setChecked(true);
+			   vpLineEdit->setText(vp);
 		}
+		if(!dts.isEmpty()){
+			   dtsRadioButton->setChecked(true);
+			   dtsLineEdit->setText(dt);
+		}
+		else{
+			   vsRadioButton->setChecked(true);
+			   vsLineEdit->setText(vs);
+		}
+	}
+	else{//fill in log names common for all wells instead
+		useSeparateLogNamesCheckBox->setChecked(false);
+		timeLineEdit->setText(log_names_timePointer->text(1));
+		densityLineEdit->setText(log_names_densityPointer->text(1));
+		faciesLineEdit->setText(log_names_faciesPointer->text(1));
+		if(!log_names_dtPointer->text(1).isEmpty()){
+			   dtRadioButton->setChecked(true);
+			   dtLineEdit->setText(log_names_dtPointer->text(1));
+		}
+		else{
+			   vpRadioButton->setChecked(true);
+			   vpLineEdit->setText(log_names_vpPointer->text(1));
+	        }
+		if(!log_names_dtsPointer->text(1).isEmpty()){
+			   dtsRadioButton->setChecked(true);
+			   dtsLineEdit->setText(log_names_dtsPointer->text(1));
+		}
+		else{
+			   vsRadioButton->setChecked(true);
+			   vsLineEdit->setText(log_names_vsPointer->text(1));
+		}
+	}
 
-		QString useForBackgroundTrend;
-		getValueFromWell(item, QString("use-for-background-trend"), useForBackgroundTrend);
-		//move to use-for-background-trend
-		if(useForBackgroundTrend==QString("no")){
-			backgroundTrendCheckBox->setChecked(false);
-		}
-		else {
-			backgroundTrendCheckBox->setChecked(true);
-		}
-		//move to use-for-facies-probabilities , probably need to facies are estimated
-		QString useForFaciesProbabilities;
-		getValueFromWell(item, QString("use-for-facies-probabilities"), useForFaciesProbabilities);
-		if(useForFaciesProbabilities==QString("no")){
-			faciesProbabilitiesCheckBox->setChecked(false);
-		}
-		else {
-			faciesProbabilitiesCheckBox->setChecked(true);
-		}
-		//move to synthetic-vs-log
-		QString syntheticVsLog;
-		getValueFromWell(item, QString("synthetic-vs-log"), syntheticVsLog);
+	//update well label with file-name
+	QString fileName;
+	getValueFromWell( item, QString("file-name"), fileName );
+	wellNameLabel->setText(StandardStrings::strippedName(fileName));
 
-		if(syntheticVsLog==QString("no")){
-			synteticVsNoRadioButton->setChecked(true);
+	//move to use-for-wavelet-estimation
+	QString useForWaveletEstimation;
+	getValueFromWell(item, QString("use-for-wavelet-estimation"), useForWaveletEstimation);
+	if(useForWaveletEstimation==QString("no")){
+		waveletEstimationCheckBox->setChecked(false);
+	}
+	else {
+		waveletEstimationCheckBox->setChecked(true);
+	}
+
+	QString useForBackgroundTrend;
+	getValueFromWell(item, QString("use-for-background-trend"), useForBackgroundTrend);
+	//move to use-for-background-trend
+	if(useForBackgroundTrend==QString("no")){
+		backgroundTrendCheckBox->setChecked(false);
+	}
+	else {
+		backgroundTrendCheckBox->setChecked(true);
+	}
+	//move to use-for-facies-probabilities , probably need to facies are estimated
+	QString useForFaciesProbabilities;
+	getValueFromWell(item, QString("use-for-facies-probabilities"), useForFaciesProbabilities);
+	if(useForFaciesProbabilities==QString("no")){
+		faciesProbabilitiesCheckBox->setChecked(false);
+	}
+	else {
+		faciesProbabilitiesCheckBox->setChecked(true);
+	}
+	//move to synthetic-vs-log
+	QString syntheticVsLog;
+	getValueFromWell(item, QString("synthetic-vs-log"), syntheticVsLog);
+
+	if(syntheticVsLog==QString("no")){
+		synteticVsNoRadioButton->setChecked(true);
+	}
+	else if(syntheticVsLog==QString("yes")){
+		synteticVsYesRadioButton->setChecked(true);
+	}
+	else {
+		synteticVsDetectRadioButton->setChecked(true);
+	}
+	//move to filter-elastic-logs
+	QString filterElasticLogs;
+	getValueFromWell(item, QString("filter-elastic-logs"), filterElasticLogs);
+	if(filterElasticLogs==QString("yes")){
+		filterElasticCheckBox->setChecked(true);
+	}
+	else {
+		filterElasticCheckBox->setChecked(false);
+	}
+	optimizePositionListWidget->clear();
+	if(7<item->childCount()){
+		optimizePositionCheckBox->setChecked(true);
+		for(int i=6;i<item->childCount();i++){//fills the optimize position list widget.
+			optimizePositionListWidget->addItem(QString("optimization"));
+			optimizePositionListWidget->setCurrentItem(optimizePositionListWidget->item(0));//trigger another signal
 		}
-		else if(syntheticVsLog==QString("yes")){
-			synteticVsYesRadioButton->setChecked(true);
-		}
-		else {
-			synteticVsDetectRadioButton->setChecked(true);
-		}
-		//move to filter-elastic-logs
-		QString filterElasticLogs;
-		getValueFromWell(item, QString("filter-elastic-logs"), filterElasticLogs);
-		if(filterElasticLogs==QString("yes")){
-			filterElasticCheckBox->setChecked(true);
-		}
-		else {
-			filterElasticCheckBox->setChecked(false);
-		}
-		optimizePositionListWidget->clear();
-		if(6<item->childCount()){
-			optimizePositionCheckBox->setChecked(true);
-			for(int i=6;i<item->childCount();i++){//fills the optimize position list widget.
-				optimizePositionListWidget->addItem(QString("optimization"));
-				optimizePositionListWidget->setCurrentItem(optimizePositionListWidget->item(0));//trigger another signal
-			}
-		}
-		else {
-			optimizePositionCheckBox->setChecked(false);
-			deleteOptimizationPushButton->setEnabled(false);
-		}
+	}
+	else {
+		optimizePositionCheckBox->setChecked(false);
+		deleteOptimizationPushButton->setEnabled(false);
+	}
 	wellFrame->setEnabled(true);
 	deleteWellPushButton->setEnabled(true);
 	openWellPushButton->setEnabled(true);
 	wellHeaderPushButton->setEnabled(true);
+	necessaryFieldGui();
 }
 void Main_crava::on_addWellPushButton_clicked()
 {
@@ -3470,19 +3646,21 @@ void Main_crava::on_optimizePositionPushButton_clicked()
 
 void Main_crava::on_deleteOptimizationPushButton_clicked()
 {
-	int deleteIndex=optimizePositionListWidget->currentRow();
-
-	QTreeWidgetItem* optimizePosition;
-	findCorrectOptimizePosition(&optimizePosition);
-
-	int childNumber1 = optimizePosition->parent()->indexOfChild(optimizePosition); // finds the index of optimizePosition
-	int childNumber0 = optimizePosition->parent()->parent()->indexOfChild( optimizePosition->parent() );// finds the index of the parent of optimizePosition
-
-	if(deleteIndex==0 && optimizePositionListWidget->count()>1){
-		optimizePositionListWidget->setCurrentItem(optimizePositionListWidget->item(1));
+	if(optimizePositionListWidget->currentRow()!=-1){//at least one left in list
+		int deleteIndex=optimizePositionListWidget->currentRow();
+		
+		QTreeWidgetItem* optimizePosition;
+		findCorrectOptimizePosition(&optimizePosition);
+		
+		int childNumber1 = optimizePosition->parent()->indexOfChild(optimizePosition); // finds the index of optimizePosition
+		int childNumber0 = optimizePosition->parent()->parent()->indexOfChild( optimizePosition->parent() );// finds the index of the parent of optimizePosition
+		
+		if(deleteIndex==0 && optimizePositionListWidget->count()>1){//deleting the first one
+			optimizePositionListWidget->setCurrentItem(optimizePositionListWidget->item(1));
+		}
+		delete optimizePositionListWidget->takeItem(deleteIndex);
+		delete well_dataPointer->child(childNumber0)->child(childNumber1);
 	}
-	delete optimizePositionListWidget->takeItem(deleteIndex);
-	delete well_dataPointer->child(childNumber0)->child(childNumber1);
 }//removes the selected position optimization, should be undoable
 
 void Main_crava::on_anglePositionlineEdit_editingFinished()
@@ -5906,7 +6084,7 @@ void Main_crava::findCorrectWell(QTreeWidgetItem** itemParent)
 
 void Main_crava::findCorrectOptimizePosition(QTreeWidgetItem** itemParent)
 {
-	*itemParent = xmlTreeWidget->topLevelItem(0)->child(2)->child( 1+wellListWidget->currentRow() )->child( 6+optimizePositionListWidget->currentRow() ); //changes the pointer
+	*itemParent = xmlTreeWidget->topLevelItem(0)->child(2)->child( 1+wellListWidget->currentRow() )->child( 7+optimizePositionListWidget->currentRow() ); //changes the pointer
 }
 
 void Main_crava::findCorrectZone(QTreeWidgetItem** itemParent)
