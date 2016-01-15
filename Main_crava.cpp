@@ -60,6 +60,14 @@ Main_crava::Main_crava(QWidget *parent, bool existing, const QString &filename) 
 	weightLineEdit->setEnabled(false);
 	optimizePositionFrame->setVisible(false);
 	optimizePositionFrame->setEnabled(false);
+        xCoordinateRadioButton->setVisible(false);
+        yCoordinateRadioButton->setVisible(false);
+        relativeXCoordinateRadioButton->setVisible(false);
+        relativeYCoordinateRadioButton->setVisible(false);
+        xCoordinateLineEdit->setVisible(false);
+        yCoordinateLineEdit->setVisible(false);
+        relativeXCoordinateLineEdit->setVisible(false);
+        relativeYCoordinateLineEdit->setVisible(false);
 	//horizon
 	velocityFieldLineEdit->setVisible(false);
 	velocityFieldBrowsePushButton->setVisible(false);
@@ -211,6 +219,12 @@ void Main_crava::setupButtonGroups()
 	QButtonGroup *vsFormat = new QButtonGroup(wellsTab);
 	vsFormat->addButton(vsRadioButton);
 	vsFormat->addButton(dtsRadioButton);
+        QButtonGroup *xcoordinatebuttons = new QButtonGroup(wellsTab);
+	xcoordinatebuttons->addButton(xCoordinateRadioButton);
+	xcoordinatebuttons->addButton(relativeXCoordinateRadioButton);
+	QButtonGroup *ycoordinatebuttons = new QButtonGroup(wellsTab);
+	ycoordinatebuttons->addButton(yCoordinateRadioButton);
+	ycoordinatebuttons->addButton(relativeYCoordinateRadioButton);
 	//horizon
 	QButtonGroup *singleMultizone = new QButtonGroup(horizonsTab);
 	singleMultizone->addButton(singleZoneInversionRadioButton);
@@ -498,28 +512,6 @@ void Main_crava::updateGuiToTree()
 	waveletTopLineEdit->setText(survey_top_surface_filePointer->text(1));//wavelet estimation interval
 	waveletBottomLineEdit->setText(survey_base_surface_filePointer->text(1));
 	//well-data
-	//log names
-	timeLineEdit->setText(log_names_timePointer->text(1));
-	densityLineEdit->setText(log_names_densityPointer->text(1));
-	faciesLineEdit->setText(log_names_faciesPointer->text(1));
-	if(!log_names_dtPointer->text(1).isEmpty()){
-		dtRadioButton->setChecked(true);
-		dtLineEdit->setText(log_names_dtPointer->text(1));
-		on_vpRadioButton_toggled(false);
-	}
-	else{//default
-		vpRadioButton->setChecked(true);
-		vpLineEdit->setText(log_names_vpPointer->text(1));
-	}
-	if(!log_names_dtsPointer->text(1).isEmpty()){
-		dtsRadioButton->setChecked(true);
-		dtsLineEdit->setText(log_names_dtsPointer->text(1));
-		on_vsRadioButton_toggled(false);
-	}
-	else{//default
-		vsRadioButton->setChecked(true);
-		vsLineEdit->setText(log_names_vsPointer->text(1));
-	}
 
 	/*************************************************************************************
          * Huge nested ifs check which vertical inversion interval frames should be visible. *
@@ -1715,7 +1707,7 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
 		else if(xmlChild.toElement().tagName() == QString("well") && (xmlItem.toElement().tagName()==QString("well-data"))){
 			//wells are not in the tree already and needs to be added before they can be populated
 			wellListWidget->addItem(QString("well log"));
-			addWell();
+			addWell();//adds all tags for new well in tree
 			wellListWidget->setCurrentRow(wellListWidget->count()-1);
 			recursiveXmlRead(xmlChild,treeItem->child(wellListWidget->count()));
 
@@ -1729,7 +1721,9 @@ void Main_crava::recursiveXmlRead(const QDomNode &xmlItem, QTreeWidgetItem *tree
                         wellListWidget->currentItem()->setText(fileName);
 
 			//update the fields with tree content
+			qDebug()<<"filename"<<fileName<<"  currentrow"<<wellListWidget->currentRow()<<endl;
 			on_wellListWidget_currentRowChanged(wellListWidget->currentRow());
+			qDebug()<<"fileafter"<<fileName<<"  currentrow"<<wellListWidget->currentRow()<<endl;
 		}
 		else if(xmlChild.toElement().tagName() == QString("optimize-position")){
 			//optimized positions are not in the tree already and needs to be added before they can be populated
@@ -1957,6 +1951,14 @@ void Main_crava::addWell()
 			nestedChild->setText(0,QString("porosity"));
 		        nestedChild= new QTreeWidgetItem(child);
 			nestedChild->setText(0,QString("facies"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("x-coordinate"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("y-coordinate"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("relative-x-coordinate"));
+		        nestedChild= new QTreeWidgetItem(child);
+			nestedChild->setText(0,QString("relative-y-coordinate"));
 		child=new QTreeWidgetItem(item);
 		child->setText(0,QString("file-name"));
 		child=new QTreeWidgetItem(item);
@@ -3200,6 +3202,7 @@ void Main_crava::on_vpLineEdit_editingFinished()
 		QTreeWidgetItem* item;
 		findCorrectWell(&item); //move to correct well
 		setValueInWell( item, QString("vp"), vpLineEdit->text() );
+		setValueInWell( item, QString("dt"), QString("") );
 	}
 }//update the XML tree with the new vp format
 
@@ -3212,6 +3215,7 @@ void Main_crava::on_dtLineEdit_editingFinished()
 		QTreeWidgetItem* item;
 		findCorrectWell(&item); //move to correct well
 		setValueInWell( item, QString("dt"), dtLineEdit->text() );
+		setValueInWell( item, QString("vp"), QString("") );
 	}
 }//update the XML three with the new dt format
 
@@ -3232,6 +3236,78 @@ void Main_crava::on_vsRadioButton_toggled(bool checked)
 	}
 }
 
+void Main_crava::on_xCoordinateRadioButton_toggled(bool checked)
+{
+	//can either have x-coordinate or relative x-coordinate but not both
+	//update user interface
+	xCoordinateLineEdit->setEnabled(checked);	
+        xCoordinateLineEdit->setFocus();
+       	relativeXCoordinateLineEdit->setText(QString(""));
+	relativeXCoordinateLineEdit->setEnabled(!checked);
+}
+
+void Main_crava::on_yCoordinateRadioButton_toggled(bool checked)
+{
+	//can either have y-coordinate or relative y-coordinate but not both
+	//update user interface
+	yCoordinateLineEdit->setEnabled(checked);	
+        yCoordinateLineEdit->setFocus();
+       	relativeYCoordinateLineEdit->setText(QString(""));
+	relativeYCoordinateLineEdit->setEnabled(!checked);
+}
+
+void Main_crava::on_relativeYCoordinateRadioButton_toggled(bool checked)
+{
+	//can either have y-coordinate or relative y-coordinate but not both
+	//update user interface
+	relativeYCoordinateLineEdit->setEnabled(checked);	
+        relativeYCoordinateLineEdit->setFocus();
+       	yCoordinateLineEdit->setText(QString(""));
+	yCoordinateLineEdit->setEnabled(!checked);
+}
+
+void Main_crava::on_relativeXCoordinateRadioButton_toggled(bool checked)
+{
+	//can either have x-coordinate or relative x-coordinate but not both
+	//update user interface
+	relativeXCoordinateLineEdit->setEnabled(checked);	
+        relativeXCoordinateLineEdit->setFocus();
+       	xCoordinateLineEdit->setText(QString(""));
+	xCoordinateLineEdit->setEnabled(!checked);
+}
+
+void Main_crava::on_xCoordinateLineEdit_editingFinished()
+{
+	QTreeWidgetItem* item;
+	findCorrectWell(&item); //move to correct well
+	setValueInWell( item, QString("x-coordinate"), xCoordinateLineEdit->text() );
+	setValueInWell( item, QString("relative-x-coordinate"), QString("") );
+}//update the XML tree with the new vs format
+
+void Main_crava::on_yCoordinateLineEdit_editingFinished()
+{
+	QTreeWidgetItem* item;
+	findCorrectWell(&item); //move to correct well
+	setValueInWell( item, QString("y-coordinate"), yCoordinateLineEdit->text() );
+	setValueInWell( item, QString("relative-y-coordinate"), QString("") );
+}//update the XML tree with the new vs format
+
+void Main_crava::on_relativeXCoordinateLineEdit_editingFinished()
+{
+	QTreeWidgetItem* item;
+	findCorrectWell(&item); //move to correct well
+	setValueInWell( item, QString("relative-x-coordinate"), relativeXCoordinateLineEdit->text() );
+	setValueInWell( item, QString("x-coordinate"), QString("") );
+}//update the XML tree with the new vs format
+
+void Main_crava::on_relativeYCoordinateLineEdit_editingFinished()
+{
+	QTreeWidgetItem* item;
+	findCorrectWell(&item); //move to correct well
+	setValueInWell( item, QString("relative-y-coordinate"), relativeYCoordinateLineEdit->text() );
+	setValueInWell( item, QString("y-coordinate"), QString("") );
+}//update the XML tree with the new vs format
+
 void Main_crava::on_vsLineEdit_editingFinished()
 {
 	if(!useSeparateLogNamesCheckBox->isChecked()){
@@ -3241,6 +3317,7 @@ void Main_crava::on_vsLineEdit_editingFinished()
 		QTreeWidgetItem* item;
 		findCorrectWell(&item); //move to correct well
 		setValueInWell( item, QString("vs"), vsLineEdit->text() );
+		setValueInWell( item, QString("dts"), QString("") );
 	}
 }//update the XML tree with the new vs format
 
@@ -3253,6 +3330,7 @@ void Main_crava::on_dtsLineEdit_editingFinished()
 		QTreeWidgetItem* item;
 		findCorrectWell(&item); //move to correct well
 		setValueInWell( item, QString("dts"), dtsLineEdit->text() );
+		setValueInWell( item, QString("vs"), QString("") );
 	}
 }//update the XML tree with the new dts format
 
@@ -3264,10 +3342,25 @@ void Main_crava::on_useSeparateLogNamesCheckBox_toggled(bool checked)
 	        faciesLineEdit->clear();
 		vpRadioButton->setChecked(true);
 		vsRadioButton->setChecked(true);
+		//show the coordinate fields, check defaults
+		xCoordinateRadioButton->setVisible(true);
+		yCoordinateRadioButton->setVisible(true);
+		xCoordinateRadioButton->setChecked(true);
+		yCoordinateRadioButton->setChecked(true);
+		xCoordinateLineEdit->setVisible(true);
+		yCoordinateLineEdit->setVisible(true);
+		relativeXCoordinateLineEdit->setVisible(true);
+		relativeYCoordinateLineEdit->setVisible(true);
+		relativeXCoordinateLineEdit->setEnabled(false);
+		relativeYCoordinateLineEdit->setEnabled(false);
+		relativeXCoordinateRadioButton->setVisible(true);
+		relativeYCoordinateRadioButton->setVisible(true);
         }
         else{//clear well tags, fill in common names
 		QTreeWidgetItem* item;
 		findCorrectWell(&item); //move to correct well
+
+		//clear all well specific tags
 		setValueInWell( item, QString("time"), QString("") );
 		setValueInWell( item, QString("vp"), QString("") );
 		setValueInWell( item, QString("dt"), QString("") );
@@ -3275,6 +3368,26 @@ void Main_crava::on_useSeparateLogNamesCheckBox_toggled(bool checked)
 		setValueInWell( item, QString("dts"), QString("") );
 		setValueInWell( item, QString("density"), QString("") );
 		setValueInWell( item, QString("facies"), QString("") );
+		setValueInWell( item, QString("x-coordinate"), QString("") );
+		setValueInWell( item, QString("y-coordinate"), QString("") );
+		setValueInWell( item, QString("relative-x-coordinate"), QString("") );
+		setValueInWell( item, QString("relative-y-coordinate"), QString("") );
+
+                //clear and hide well specific fields
+		xCoordinateRadioButton->setVisible(false);
+		yCoordinateRadioButton->setVisible(false);
+		xCoordinateLineEdit->clear();
+		yCoordinateLineEdit->clear();
+		xCoordinateLineEdit->setVisible(false);
+		yCoordinateLineEdit->setVisible(false);
+		relativeXCoordinateLineEdit->clear();
+		relativeYCoordinateLineEdit->clear();
+		relativeXCoordinateLineEdit->setVisible(false);
+		relativeYCoordinateLineEdit->setVisible(false);
+		relativeXCoordinateRadioButton->setVisible(false);
+		relativeYCoordinateRadioButton->setVisible(false);
+
+		//populate fields with log names from common list
 		timeLineEdit->setText(log_names_timePointer->text(1));
 		densityLineEdit->setText(log_names_densityPointer->text(1));
 		faciesLineEdit->setText(log_names_faciesPointer->text(1));
@@ -3316,6 +3429,7 @@ void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow )
 	//check if separate log names are used for this well
 	//and update fields accordingly
 	QString time, vp, dt, vs, dts, density, facies;
+	QString xcoordinate, ycoordinate, relativexcoordinate, relativeycoordinate;
 	getValueFromWell( item, QString("time"), time );
 	getValueFromWell( item, QString("vp"), vp );
 	getValueFromWell( item, QString("dt"), dt );
@@ -3323,6 +3437,10 @@ void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow )
 	getValueFromWell( item, QString("dts"), dts );
 	getValueFromWell( item, QString("density"), density );
 	getValueFromWell( item, QString("facies"), facies );
+	getValueFromWell( item, QString("x-coordinate"), xcoordinate );
+	getValueFromWell( item, QString("y-coordinate"), ycoordinate );
+	getValueFromWell( item, QString("relative-x-coordinate"), relativexcoordinate );
+	getValueFromWell( item, QString("relative-y-coordinate"), relativeycoordinate );
 	if(!time.isEmpty() || !vp.isEmpty() || !dt.isEmpty() ||
 	   !vs.isEmpty() || !dts.isEmpty() || !density.isEmpty() ||
 	   !facies.isEmpty()){//separate log names are used
@@ -3345,6 +3463,22 @@ void Main_crava::on_wellListWidget_currentRowChanged ( int currentRow )
 		else{
 			   vsRadioButton->setChecked(true);
 			   vsLineEdit->setText(vs);
+		}
+		if(!relativexcoordinate.isEmpty()){
+			   relativeXCoordinateRadioButton->setChecked(true);
+			   relativeXCoordinateLineEdit->setText(relativexcoordinate);
+		}
+		else{
+			   xCoordinateRadioButton->setChecked(true);
+			   xCoordinateLineEdit->setText(xcoordinate);
+		}
+		if(!relativeycoordinate.isEmpty()){
+			   relativeYCoordinateRadioButton->setChecked(true);
+			   relativeYCoordinateLineEdit->setText(relativeycoordinate);
+		}
+		else{
+			   yCoordinateRadioButton->setChecked(true);
+			   yCoordinateLineEdit->setText(ycoordinate);
 		}
 	}
 	else{//fill in log names common for all wells instead

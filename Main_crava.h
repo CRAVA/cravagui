@@ -525,16 +525,20 @@ private slots:
 	void on_timeLineEdit_editingFinished();//update the XML three with the new time format
 	void on_densityLineEdit_editingFinished();//update the XML tree with the new density format
 	void on_faciesLineEdit_editingFinished();//update the XML tree with the new facis format
-	//button vp
 	void on_vpRadioButton_toggled(bool checked);//handles which of vp/dt are shown and make sure the tree can't be wrong
 	void on_vpLineEdit_editingFinished();//update the XML tree with the new vp format, remove dt
-	//button dt
 	void on_dtLineEdit_editingFinished();//update the XML tree with the new dt format, remove vp
-	//button vs
 	void on_vsRadioButton_toggled(bool checked);//handles which of vs/dts are shown and make sure the tree can't be wrong
 	void on_vsLineEdit_editingFinished();//update the XML tree with the new vs format, remove dts
-	//button dts
 	void on_dtsLineEdit_editingFinished();//update the XML tree with the new dts format, remove vs
+	void on_xCoordinateRadioButton_toggled(bool checked);//provide x-coordinate name
+	void on_yCoordinateRadioButton_toggled(bool checked);//provide y-coordinate name
+	void on_relativeXCoordinateRadioButton_toggled(bool checked);//provide relative x-coordinate name
+	void on_relativeYCoordinateRadioButton_toggled(bool checked);//provide relative y-coordinate name
+	void on_xCoordinateLineEdit_editingFinished();//update the XML tree with the new x-coordinate name
+	void on_yCoordinateLineEdit_editingFinished();//update the XML tree with the new y-coordinate name
+	void on_relativeXCoordinateLineEdit_editingFinished();//update the XML tree with the new relative x-coordinate name
+	void on_relativeYCoordinateLineEdit_editingFinished();//update the XML tree with the new relative y-coordinate name
 	//well input
 	void on_wellListWidget_currentRowChanged ( int currentRow );//makes sure the proper widgets are enabled and that the correct information is displayed regarding to the selected well.
 	void on_addWellPushButton_clicked();//add a new well for input
