@@ -513,6 +513,31 @@ void Main_crava::updateGuiToTree()
 	waveletBottomLineEdit->setText(survey_base_surface_filePointer->text(1));
 	//well-data
 
+	//update log names, but only if there are no wells
+	//recursiveXmlRead will populate these fields if wells are present
+	if(wellListWidget->currentRow() == -1){
+		timeLineEdit->setText(log_names_timePointer->text(1));
+		densityLineEdit->setText(log_names_densityPointer->text(1));
+		faciesLineEdit->setText(log_names_faciesPointer->text(1));
+		if(!log_names_dtPointer->text(1).isEmpty()){
+			dtRadioButton->setChecked(true);
+			dtLineEdit->setText(log_names_dtPointer->text(1));
+			on_vpRadioButton_toggled(false);
+		}
+		else{//default
+			vpRadioButton->setChecked(true);
+			vpLineEdit->setText(log_names_vpPointer->text(1));
+		}
+		if(!log_names_dtsPointer->text(1).isEmpty()){
+			dtsRadioButton->setChecked(true);
+			dtsLineEdit->setText(log_names_dtsPointer->text(1));
+			on_vsRadioButton_toggled(false);
+		}
+		else{//default
+			vsRadioButton->setChecked(true);
+			vsLineEdit->setText(log_names_vsPointer->text(1));
+		}
+	}
 	/*************************************************************************************
          * Huge nested ifs check which vertical inversion interval frames should be visible. *
          * and fills in all information from the xml-tree in the user interface              *
