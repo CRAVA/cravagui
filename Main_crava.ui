@@ -4011,6 +4011,70 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
+          <item row="3" column="0">
+           <widget class="QRadioButton" name="xCoordinateRadioButton">
+            <property name="toolTip">
+             <string>Provide name of the x-coordinate log.</string>
+            </property>
+            <property name="text">
+             <string>x-coordinate</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QRadioButton" name="relativeXCoordinateRadioButton">
+            <property name="toolTip">
+             <string>Provide name of relative x-coordinate log.</string>
+            </property>
+            <property name="text">
+             <string>Relative x-coordinate</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="xCoordinateLineEdit">
+            <property name="toolTip">
+             <string>Name of the x-coordinate log in well file header.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLineEdit" name="relativeXCoordinateLineEdit">
+            <property name="toolTip">
+             <string>Name of log for relative x-coordinate in well log header.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QRadioButton" name="yCoordinateRadioButton">
+            <property name="toolTip">
+             <string>Provide name of y-coordinate log.</string>
+            </property>
+            <property name="text">
+             <string>y-coordinate</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QRadioButton" name="relativeYCoordinateRadioButton">
+            <property name="toolTip">
+             <string>Provide name of relative y-coordinate log.</string>
+            </property>
+            <property name="text">
+             <string>Relative y-coordinate</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="yCoordinateLineEdit"/>
+          </item>
+          <item row="5" column="3">
+           <widget class="QLineEdit" name="relativeYCoordinateLineEdit">
+            <property name="toolTip">
+             <string>Name of relative y-coordinate log from well file header.</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item row="5" column="0">
