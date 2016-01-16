@@ -4344,6 +4344,7 @@ void Main_crava::on_multizoneInversionRadioButton_toggled(bool checked)
 		surfaceTwoFrame->setVisible(false);
 		multizoneInversionFrame->setVisible(true);
                 topTimeValueMultizoneLineEdit->setVisible(false);
+		topTimeValueMultizoneCheckBox->setChecked(false);
                 singleCorrelationSurfaceFrame->setVisible(false);
                 twoSurfaceCorrelationFrame->setVisible(false);
 		vpVsRhoRadioButton->setChecked(true);
