@@ -1982,7 +1982,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -5403,7 +5403,7 @@ p, li { white-space: pre-wrap; }
                     </size>
                    </property>
                    <property name="toolTip">
-                    <string>When estimating wavelets or facies probabilities, the number of layers should be chosen so as to give a sampling density of at least 4 ms.</string>
+                    <string>Enter number of layers within the zone or leave it open to produce inversion grid with the same sampling as the input seismic.</string>
                    </property>
                    <property name="styleSheet">
                     <string notr="true"/>
@@ -8140,8 +8140,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>904</width>
-               <height>60</height>
+               <width>550</width>
+               <height>47</height>
               </rect>
              </property>
              <attribute name="label">
