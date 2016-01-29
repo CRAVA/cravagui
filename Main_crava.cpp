@@ -6753,7 +6753,7 @@ QList<QObject*> Main_crava::getNecessaryFields()
 	  list << topTimeValueLineEdit << bottomTimeValueLineEdit << correlationDirectionFileLineEdit;
 	  list << referenceSurfaceFileLineEdit << distanceTopLineEdit << thicknessLineEdit << layerThicknessLineEdit;
           list << singleCorrelationSurfaceLineEdit << topCorrelationSurfaceLineEdit << baseCorrelationSurfaceLineEdit;
-          list << topSurfaceFileLineEdit << baseSurfaceFileLineEdit << layersMultizoneLineEdit << topTimeValueMultizoneLineEdit;
+          list << topSurfaceFileLineEdit << baseSurfaceFileLineEdit << topTimeValueMultizoneLineEdit;
           list << baseTimeValueMultizoneLineEdit;
 	  return list;
 }//returns a list of all necessary objects.
