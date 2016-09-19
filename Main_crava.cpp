@@ -506,12 +506,34 @@ void Main_crava::writeSettings()
 
 void Main_crava::updateGuiToTree()
 {
-	//survey
+	///////////////
+	//survey    //
+	//////////////
+
 	defaultStartTimeLineEdit->setText(survey_segy_start_timePointer->text(1));//segy-start-time
 	//angle-gather already handled by the slot
+
+	//wavlet estimation interval set-up
 	waveletTopLineEdit->setText(survey_top_surface_filePointer->text(1));//wavelet estimation interval
 	waveletBottomLineEdit->setText(survey_base_surface_filePointer->text(1));
-	//well-data
+	if(!survey_top_surface_valuePointer->text(1).isEmpty()){
+		topTimeValueWaveletEstimationCheckBox->setChecked(true);
+		waveletTopValueLineEdit->setText(survey_top_surface_valuePointer->text(1));
+		}
+	else{
+		waveletTopValueLineEdit->setVisible(false);
+	}
+	if(!survey_base_surface_valuePointer->text(1).isEmpty()){
+		baseTimeValueWaveletEstimationCheckBox->setChecked(true);
+		waveletBaseValueLineEdit->setText(survey_base_surface_valuePointer->text(1));
+		}
+	else{
+		waveletBaseValueLineEdit->setVisible(false);
+	}
+
+	/////////////////
+	//well-data   //
+	////////////////
 
 	//update log names, but only if there are no wells
 	//recursiveXmlRead will populate these fields if wells are present
@@ -538,6 +560,7 @@ void Main_crava::updateGuiToTree()
 			vsLineEdit->setText(log_names_vsPointer->text(1));
 		}
 	}
+
 	/*************************************************************************************
          * Huge nested ifs check which vertical inversion interval frames should be visible. *
          * and fills in all information from the xml-tree in the user interface              *
@@ -794,8 +817,23 @@ void Main_crava::updateGuiToTree()
 		if(facies_probabilities_use_absolute_elastic_parametersPointer->text(1)==QString("yes")){
 			absoluteParametersCheckBox->setChecked(true);//not-default
 		}
+
 		faciesTopLineEdit->setText(facies_probabilities_top_surface_filePointer->text(1));
 		faciesBottomLineEdit->setText(facies_probabilities_base_surface_filePointer->text(1));
+		if(!facies_probabilities_top_surface_valuePointer->text(1).isEmpty()){
+			topValueFaciesEstimationCheckBox->setChecked(true);
+			topValueFaciesEstimationLineEdit->setText(facies_probabilities_top_surface_valuePointer->text(1));
+		}
+		else{
+			topValueFaciesEstimationLineEdit->setVisible(false);
+		}
+		if(!facies_probabilities_base_surface_valuePointer->text(1).isEmpty()){
+			baseValueFaciesEstimationCheckBox->setChecked(true);
+			baseValueFaciesEstimationLineEdit->setText(facies_probabilities_base_surface_valuePointer->text(1));
+		}
+		else{
+			baseValueFaciesEstimationLineEdit->setVisible(false);
+		}
 		uncertaintyLevelLineEdit->setText(uncertainty_levelPointer->text(1));
 	}
        	if(!earth_model_vp_filePointer->text(1).isEmpty()){
@@ -4320,6 +4358,88 @@ void Main_crava::on_faciesBottomBrowsePushButton_clicked()
 	}
 };//browse for the facies bottom time file then update the XML file if the above is not triggered, update the field
 
+void Main_crava::on_topTimeValueWaveletEstimationCheckBox_toggled(bool checked)
+{//use constant time top surface instead of file
+        waveletTopValueLineEdit->setVisible(checked);
+        waveletTopLineEdit->clear();
+        waveletTopSurfaceLabel->setEnabled(!checked);
+        waveletTopLineEdit->setEnabled(!checked);
+        waveletTopBrowsePushButton->setEnabled(!checked);
+        if(checked){
+                survey_top_surface_filePointer->setText(1,QString(""));
+        }
+        else{
+                survey_top_surface_valuePointer->setText(1, QString(""));
+                waveletTopValueLineEdit->clear();
+        }
+        necessaryFieldGui();
+}
+void Main_crava::on_baseTimeValueWaveletEstimationCheckBox_toggled(bool checked)
+{//use constant time base surface instead of file
+        waveletBaseValueLineEdit->setVisible(checked);
+        waveletBottomLineEdit->clear();
+        waveletBottomSurfaceLabel->setEnabled(!checked);
+        waveletBottomLineEdit->setEnabled(!checked);
+        waveletBottomBrowsePushButton->setEnabled(!checked);
+        if(checked){
+                survey_base_surface_filePointer->setText(1,QString(""));
+        }
+        else{
+                survey_base_surface_valuePointer->setText(1, QString(""));
+                waveletBaseValueLineEdit->clear();
+        }
+        necessaryFieldGui();
+}
+void Main_crava::on_waveletTopValueLineEdit_editingFinished()
+{
+        survey_top_surface_valuePointer->setText( 1, waveletTopValueLineEdit->text() );
+}
+void Main_crava::on_waveletBaseValueLineEdit_editingFinished()
+{
+        survey_base_surface_valuePointer->setText( 1, waveletBaseValueLineEdit->text() );
+}
+void Main_crava::on_topValueFaciesEstimationCheckBox_toggled(bool checked)
+{//use constant time top surface instead of file
+        topValueFaciesEstimationLineEdit->setVisible(checked);
+        faciesTopLineEdit->clear();
+        faciesTopLabel->setEnabled(!checked);
+        faciesTopLineEdit->setEnabled(!checked);
+        faciesTopBrowsePushButton->setEnabled(!checked);
+        if(checked){
+                facies_probabilities_top_surface_filePointer->setText(1,QString(""));
+        }
+        else{
+                facies_probabilities_top_surface_valuePointer->setText(1, QString(""));
+                topValueFaciesEstimationLineEdit->clear();
+        }
+        necessaryFieldGui();
+}
+void Main_crava::on_baseValueFaciesEstimationCheckBox_toggled(bool checked)
+{
+        baseValueFaciesEstimationLineEdit->setVisible(checked);
+        faciesBottomLineEdit->clear();
+        faciesBottomLabel->setEnabled(!checked);
+        faciesBottomLineEdit->setEnabled(!checked);
+        faciesBottomBrowsePushButton->setEnabled(!checked);
+        if(checked){
+                facies_probabilities_base_surface_filePointer->setText(1,QString(""));
+        }
+        else{
+                facies_probabilities_base_surface_valuePointer->setText(1, QString(""));
+                baseValueFaciesEstimationLineEdit->clear();
+        }
+        necessaryFieldGui();
+}
+void Main_crava::on_topValueFaciesEstimationLineEdit_editingFinished()
+{
+        facies_probabilities_top_surface_valuePointer->setText( 1, topValueFaciesEstimationLineEdit->text() );
+}
+void Main_crava::on_baseValueFaciesEstimationLineEdit_editingFinished()
+{
+        facies_probabilities_base_surface_valuePointer->setText( 1, baseValueFaciesEstimationLineEdit->text() );
+}
+
+
 	//prior model
 void Main_crava::on_backgroundRadioButton_toggled(bool checked)
 {
@@ -6464,8 +6584,10 @@ void Main_crava::activateTable()
 			survey_powerPointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(0)->child(4);
 		survey_segy_start_timePointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(1);
 		survey_wavelet_estimation_intervalPointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(2);
-			survey_top_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(2)->child(0);
-			survey_base_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(2)->child(1);
+		survey_top_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(2)->child(0)->child(0);
+		survey_top_surface_valuePointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(2)->child(0)->child(1);
+		survey_base_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(2)->child(1)->child(0);
+		survey_base_surface_valuePointer = xmlTreeWidget->topLevelItem(0)->child(1)->child(2)->child(1)->child(1);
 
 	//well-data
 	well_dataPointer = xmlTreeWidget->topLevelItem(0)->child(2);
@@ -6547,8 +6669,10 @@ void Main_crava::activateTable()
 			facies_probabilities_use_predictionPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(1);
 			facies_probabilities_use_absolute_elastic_parametersPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(2);
 			facies_probabilities_estimation_intervalPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(3);
-				facies_probabilities_top_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(3)->child(0);
-				facies_probabilities_base_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(3)->child(1);
+			facies_probabilities_top_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(3)->child(0)->child(0);
+			facies_probabilities_top_surface_valuePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(3)->child(0)->child(1);
+			facies_probabilities_base_surface_filePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(3)->child(1)->child(0);
+			facies_probabilities_base_surface_valuePointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(3)->child(1)->child(1);
 			prior_probabilitesPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(4);
 			uncertainty_levelPointer = xmlTreeWidget->topLevelItem(0)->child(3)->child(7)->child(5);
 

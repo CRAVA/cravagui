@@ -60,7 +60,7 @@ void SettingsDialog::updateFields()
 
 	QSettings settings("Statoil","CRAVA");
 	settings.beginGroup("crava");
-	cravaPathLineEdit->setText(settings.value(QString("executable"),QString("/project/res/x86_64_RH_5/bin/crava")).toString());
+	cravaPathLineEdit->setText(settings.value(QString("executable"),QString("/project/res/x86_64_RH_6/bin/crava")).toString());
 	textEditorLineEdit->setText(settings.value(QString("editor"),QString("emacs")).toString());
 	wikiPathLineEdit->setText(settings.value(QString("wiki"),QString()).toString());
 	manualPathLineEdit->setText(settings.value(QString("manual"),QString("manual/CRAVA_user_manual.pdf")).toString());

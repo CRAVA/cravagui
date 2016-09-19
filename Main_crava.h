@@ -215,7 +215,9 @@ private:
 		QTreeWidgetItem *survey_segy_start_timePointer;
 		QTreeWidgetItem *survey_wavelet_estimation_intervalPointer;
 			QTreeWidgetItem *survey_top_surface_filePointer;
+			QTreeWidgetItem *survey_top_surface_valuePointer;
 			QTreeWidgetItem *survey_base_surface_filePointer;
+			QTreeWidgetItem *survey_base_surface_valuePointer;
 
 
 	//well-data
@@ -299,7 +301,9 @@ private:
 			QTreeWidgetItem *facies_probabilities_use_absolute_elastic_parametersPointer;
 			QTreeWidgetItem *facies_probabilities_estimation_intervalPointer;
 				QTreeWidgetItem *facies_probabilities_top_surface_filePointer;
+				QTreeWidgetItem *facies_probabilities_top_surface_valuePointer;
 				QTreeWidgetItem *facies_probabilities_base_surface_filePointer;
+				QTreeWidgetItem *facies_probabilities_base_surface_valuePointer;
 			QTreeWidgetItem *prior_probabilitesPointer;
 			QTreeWidgetItem *uncertainty_levelPointer;
 
@@ -784,6 +788,17 @@ private slots:
         void deleteZone();//deletes current zone from list widget and xml-tree
 	void clearIntervalOneSurfaceTags();//clears all tags related to single surface inversion
 	void clearIntervalTwoSurfacesTags();//clears all tags related to inversion between two surfaces
+
+	void on_topTimeValueWaveletEstimationCheckBox_toggled(bool checked); //toggle whether to use time value or surface for top surface
+	void on_baseTimeValueWaveletEstimationCheckBox_toggled(bool checked); //toggle whether to use time value or surface for top surface
+	void on_waveletTopValueLineEdit_editingFinished();//updates time value for top surface
+	void on_waveletBaseValueLineEdit_editingFinished();//updates time value for base surface
+
+	void on_topValueFaciesEstimationCheckBox_toggled(bool checked); //toggle whether to use time value or surface for top surface
+	void on_baseValueFaciesEstimationCheckBox_toggled(bool checked); //toggle whether to use time value or surface for top surface
+	void on_topValueFaciesEstimationLineEdit_editingFinished();//updates time value for top surface
+	void on_baseValueFaciesEstimationLineEdit_editingFinished();//updates time value for base surface
+
 };
 
 #endif
