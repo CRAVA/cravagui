@@ -226,19 +226,39 @@
            </property>
            <item>
             <property name="text">
-             <string>top-surface-file</string>
+             <string>top-surface</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <item>
+             <property name="text">
+              <string>time-file</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>time-value</string>
+             </property>
+            </item>
            </item>
            <item>
             <property name="text">
-             <string>base-surface-file</string>
+             <string>base-surface</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <item>
+             <property name="text">
+              <string>time-file</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>time-value</string>
+             </property>
+            </item>
            </item>
           </item>
          </item>
@@ -839,19 +859,39 @@
             </property>
             <item>
              <property name="text">
-              <string>top-surface-file</string>
+              <string>top-surface</string>
              </property>
              <property name="text">
               <string/>
              </property>
+             <item>
+              <property name="text">
+               <string>time-file</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>time-value</string>
+              </property>
+             </item>
             </item>
             <item>
              <property name="text">
-              <string>base-surface-file</string>
+              <string>base-surface</string>
              </property>
              <property name="text">
               <string/>
              </property>
+             <item>
+              <property name="text">
+               <string>time-file</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>time-value</string>
+              </property>
+             </item>
             </item>
            </item>
            <item>
@@ -1982,7 +2022,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="surveyInformationTab">
        <property name="accessibleName">
@@ -3323,22 +3363,9 @@ p, li { white-space: pre-wrap; }
            <number>0</number>
           </property>
           <property name="spacing">
-           <number>3</number>
+           <number>4</number>
           </property>
-          <item row="2" column="0">
-           <widget class="QLabel" name="waveletBottomSurfaceLabel">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-            <property name="text">
-             <string>Time base surface</string>
-            </property>
-            <property name="buddy">
-             <cstring>waveletBottomLineEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" colspan="3">
+          <item row="0" column="0" colspan="5">
            <widget class="QLabel" name="waveletIntervalLabel">
             <property name="font">
              <font>
@@ -3358,39 +3385,31 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="waveletTopBrowsePushButton">
-            <property name="toolTip">
-             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
+          <item row="4" column="3">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="text">
-             <string>Browse...</string>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
             </property>
-           </widget>
+           </spacer>
           </item>
-          <item row="2" column="2">
-           <widget class="QPushButton" name="waveletBottomBrowsePushButton">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
+          <item row="2" column="3">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="text">
-             <string>Browse...</string>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
             </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="waveletTopLineEdit">
-            <property name="toolTip">
-             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="waveletBottomLineEdit">
-            <property name="toolTip">
-             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
-            </property>
-           </widget>
+           </spacer>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="waveletTopSurfaceLabel">
@@ -3402,6 +3421,87 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="buddy">
              <cstring>waveletTopLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="3">
+           <widget class="QLineEdit" name="waveletTopLineEdit">
+            <property name="toolTip">
+             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QPushButton" name="waveletTopBrowsePushButton">
+            <property name="toolTip">
+             <string>Top surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="waveletBottomSurfaceLabel">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Time base surface</string>
+            </property>
+            <property name="buddy">
+             <cstring>waveletBottomLineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="3">
+           <widget class="QLineEdit" name="waveletBottomLineEdit">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QPushButton" name="waveletBottomBrowsePushButton">
+            <property name="toolTip">
+             <string>Base surface file for limiting the region where wavelet and noise are estimated.</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QCheckBox" name="topTimeValueWaveletEstimationCheckBox">
+            <property name="toolTip">
+             <string>Set a time in milliseconds directly for the top of the wavelet estimation interval instead of using a surface file</string>
+            </property>
+            <property name="text">
+             <string>Use constant time value for top surface </string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLineEdit" name="waveletTopValueLineEdit">
+            <property name="toolTip">
+             <string>The constant time value for the top of the wavelet estimation interval</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="2">
+           <widget class="QCheckBox" name="baseTimeValueWaveletEstimationCheckBox">
+            <property name="toolTip">
+             <string>Set a time in milliseconds directly for the base of the wavelet estimation interval instead of using a surface file</string>
+            </property>
+            <property name="text">
+             <string>Use constant time value for base surface </string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLineEdit" name="waveletBaseValueLineEdit">
+            <property name="toolTip">
+             <string>The constant time value for the base of the wavelet estimation interval</string>
             </property>
            </widget>
           </item>
@@ -6330,7 +6430,7 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
+          <item row="3" column="4">
            <widget class="QPushButton" name="faciesBottomBrowsePushButton">
             <property name="toolTip">
              <string>Base surface file for limiting the region where facies are estimated.</string>
@@ -6340,7 +6440,7 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="faciesBottomLabel">
             <property name="toolTip">
              <string>Base surface file for limiting the region where facies are estimated.</string>
@@ -6353,7 +6453,7 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item row="0" column="0" colspan="3">
+          <item row="0" column="0" colspan="5">
            <widget class="QLabel" name="faciesIntervalLabel">
             <property name="font">
              <font>
@@ -6370,7 +6470,7 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
+          <item row="1" column="4">
            <widget class="QPushButton" name="faciesTopBrowsePushButton">
             <property name="toolTip">
              <string>Top surface file for limiting the region where facies are estimated.</string>
@@ -6380,19 +6480,79 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1" colspan="3">
            <widget class="QLineEdit" name="faciesBottomLineEdit">
             <property name="toolTip">
              <string>Base surface file for limiting the region where facies are estimated.</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="1" column="1" colspan="3">
            <widget class="QLineEdit" name="faciesTopLineEdit">
             <property name="toolTip">
              <string>Top surface file for limiting the region where facies are estimated.</string>
             </property>
            </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QCheckBox" name="topValueFaciesEstimationCheckBox">
+            <property name="toolTip">
+             <string>Set a time in milliseconds directly for the top of the facies estimation interval instead of using a surface file</string>
+            </property>
+            <property name="text">
+             <string>Use constant time value for top surface </string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLineEdit" name="topValueFaciesEstimationLineEdit">
+            <property name="toolTip">
+             <string>The constant time value for the top of the facies estimation volume</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="2">
+           <widget class="QCheckBox" name="baseValueFaciesEstimationCheckBox">
+            <property name="toolTip">
+             <string>Set a time in milliseconds directly for the base of the facies estimation interval instead of using a surface file</string>
+            </property>
+            <property name="text">
+             <string>Use constant time value for base surface </string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLineEdit" name="baseValueFaciesEstimationLineEdit">
+            <property name="toolTip">
+             <string>The constant time value for the base of the facies estimation volume</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="3">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
@@ -7824,8 +7984,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>541</width>
-               <height>84</height>
+               <width>530</width>
+               <height>80</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8017,8 +8177,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>312</width>
-               <height>163</height>
+               <width>306</width>
+               <height>153</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8140,8 +8300,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>550</width>
-               <height>47</height>
+               <width>880</width>
+               <height>72</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8207,8 +8367,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>379</width>
-               <height>49</height>
+               <width>370</width>
+               <height>47</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8294,8 +8454,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>494</width>
-               <height>49</height>
+               <width>475</width>
+               <height>47</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8391,8 +8551,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>636</width>
-               <height>167</height>
+               <width>626</width>
+               <height>157</height>
               </rect>
              </property>
              <attribute name="label">
@@ -8640,7 +8800,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1284</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
