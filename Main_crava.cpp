@@ -513,10 +513,13 @@ void Main_crava::updateGuiToTree()
 	defaultStartTimeLineEdit->setText(survey_segy_start_timePointer->text(1));//segy-start-time
 	//angle-gather already handled by the slot
 
-	//wavlet estimation interval set-up
+	//wavlet estimation interval gui set-up
 	waveletTopLineEdit->setText(survey_top_surface_filePointer->text(1));//wavelet estimation interval
 	waveletBottomLineEdit->setText(survey_base_surface_filePointer->text(1));
 	if(!survey_top_surface_valuePointer->text(1).isEmpty()){
+		waveletTopSurfaceLabel->setEnabled(false);
+		waveletTopLineEdit->setEnabled(false);
+		waveletTopBrowsePushButton->setEnabled(false);
 		topTimeValueWaveletEstimationCheckBox->setChecked(true);
 		waveletTopValueLineEdit->setText(survey_top_surface_valuePointer->text(1));
 		}
@@ -524,6 +527,9 @@ void Main_crava::updateGuiToTree()
 		waveletTopValueLineEdit->setVisible(false);
 	}
 	if(!survey_base_surface_valuePointer->text(1).isEmpty()){
+		waveletBottomSurfaceLabel->setEnabled(false);
+		waveletBottomLineEdit->setEnabled(false);
+		waveletBottomBrowsePushButton->setEnabled(false);
 		baseTimeValueWaveletEstimationCheckBox->setChecked(true);
 		waveletBaseValueLineEdit->setText(survey_base_surface_valuePointer->text(1));
 		}
@@ -1577,6 +1583,10 @@ void Main_crava::faciesGui(){
 	faciesBottomLineEdit->setVisible(faciesProbabilitiesOn());
 	faciesBottomBrowsePushButton->setVisible(faciesProbabilitiesOn());
 	faciesIntervalLabel->setEnabled(faciesProbabilitiesOn());
+	topValueFaciesEstimationCheckBox->setVisible(faciesProbabilitiesOn());
+	baseValueFaciesEstimationCheckBox->setVisible(faciesProbabilitiesOn());
+	topValueFaciesEstimationLineEdit->setVisible(faciesProbabilitiesOn());
+	baseValueFaciesEstimationLineEdit->setVisible(faciesProbabilitiesOn());
 	faciesTopLabel->setEnabled(faciesProbabilitiesOn());
 	faciesTopLineEdit->setEnabled(faciesProbabilitiesOn());
 	faciesTopBrowsePushButton->setEnabled(faciesProbabilitiesOn());
@@ -4372,7 +4382,6 @@ void Main_crava::on_topTimeValueWaveletEstimationCheckBox_toggled(bool checked)
                 survey_top_surface_valuePointer->setText(1, QString(""));
                 waveletTopValueLineEdit->clear();
         }
-        necessaryFieldGui();
 }
 void Main_crava::on_baseTimeValueWaveletEstimationCheckBox_toggled(bool checked)
 {//use constant time base surface instead of file
@@ -4388,7 +4397,6 @@ void Main_crava::on_baseTimeValueWaveletEstimationCheckBox_toggled(bool checked)
                 survey_base_surface_valuePointer->setText(1, QString(""));
                 waveletBaseValueLineEdit->clear();
         }
-        necessaryFieldGui();
 }
 void Main_crava::on_waveletTopValueLineEdit_editingFinished()
 {
@@ -4412,7 +4420,6 @@ void Main_crava::on_topValueFaciesEstimationCheckBox_toggled(bool checked)
                 facies_probabilities_top_surface_valuePointer->setText(1, QString(""));
                 topValueFaciesEstimationLineEdit->clear();
         }
-        necessaryFieldGui();
 }
 void Main_crava::on_baseValueFaciesEstimationCheckBox_toggled(bool checked)
 {
@@ -4428,7 +4435,6 @@ void Main_crava::on_baseValueFaciesEstimationCheckBox_toggled(bool checked)
                 facies_probabilities_base_surface_valuePointer->setText(1, QString(""));
                 baseValueFaciesEstimationLineEdit->clear();
         }
-        necessaryFieldGui();
 }
 void Main_crava::on_topValueFaciesEstimationLineEdit_editingFinished()
 {
