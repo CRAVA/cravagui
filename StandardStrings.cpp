@@ -65,7 +65,7 @@ const QString& StandardStrings::cravaVersion(){
 };
 
 const QString& StandardStrings::cravaGuiVersion(){
-	static QString* version = new QString("CRAVA GUI v.4.0 Beta");
+	static QString* version = new QString("CRAVA GUI v.4.0");
 	return *version;
 };
 const QString& StandardStrings::StandardStrings::inputPath(){
