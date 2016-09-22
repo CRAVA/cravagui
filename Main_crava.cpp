@@ -1589,6 +1589,8 @@ void Main_crava::faciesGui(){
 	baseValueFaciesEstimationLineEdit->setVisible(faciesProbabilitiesOn());
 	faciesTopLabel->setEnabled(faciesProbabilitiesOn());
 	faciesTopLineEdit->setEnabled(faciesProbabilitiesOn());
+        topValueFaciesEstimationCheckBox->setEnabled(faciesProbabilitiesOn());
+        baseValueFaciesEstimationCheckBox->setEnabled(faciesProbabilitiesOn());
 	faciesTopBrowsePushButton->setEnabled(faciesProbabilitiesOn());
 	faciesBottomLabel->setEnabled(faciesProbabilitiesOn());
 	faciesBottomLineEdit->setEnabled(faciesProbabilitiesOn());
